@@ -243,9 +243,7 @@ section {
     overflow: hidden;
 }
 
-/* YouTube IFrame API が生成する div と iframe に両方適用 */
-.hero-video,
-#hero-video-container {
+.hero-video {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -255,17 +253,6 @@ section {
     min-width: 177.78vh;
     transform: translateX(-50%) translateY(-50%);
     z-index: 0;
-    border: none;
-    pointer-events: none;
-}
-
-/* APIが生成する iframe を親コンテナに合わせる */
-#hero-video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
     border: none;
     pointer-events: none;
 }
