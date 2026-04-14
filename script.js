@@ -104,11 +104,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }, {
         root: null,
-        rootMargin: '0px 0px -15% 0px', // 画面下15%に入ったら発火
-        threshold: 0.1
+        rootMargin: '0px 0px 0px 0px', // 少しでも画面に入ったら即発火
+        threshold: 0.05
     });
 
     document.querySelectorAll('.story-line').forEach(function (el) {
         storyObs.observe(el);
     });
+
+    /* フォールバック: 300ms後に既に画面内にある story-line を強制表示 */
+    setTimeout(function () {
+        document.querySelectorAll('.story-line:not(.visible)').forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                el.classList.add('visible');
+            }
+        });
+    }, 300);
+
+    /* スクロール停止後にも再チェック（iOS Safari momentum scrolling対策） */
+    var scrollTimer;
+    window.addEventListener('scroll', function () {
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(function () {
+            document.querySelectorAll('.story-line:not(.visible)').forEach(function (el) {
+                var rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
+                    el.classList.add('visible');
+                }
+            });
+        }, 100);
+    }, { passive: true });
 });
