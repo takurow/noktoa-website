@@ -294,7 +294,7 @@ section {
     margin-bottom: 24px;
     letter-spacing: 0.06em;
     color: var(--text-primary);
-    white-space: normal;
+    white-space: nowrap;
     word-break: keep-all;
     text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 }
@@ -668,13 +668,14 @@ section {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 32px;
-    padding: 50px 40px 40px;
+    padding: 0;
     position: relative;
     overflow: hidden;
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
     transform: translateZ(0);
     /* Hardware acceleration for smooth scrolling over background */
 }
@@ -694,6 +695,105 @@ section {
 
 .service-card:nth-child(4) {
     grid-column: span 7;
+}
+
+/* min height for cards */
+.service-card { min-height: 320px; }
+
+/* Visual Left Layout */
+.sc-visual-left {
+    flex-direction: row;
+}
+
+/* Visual Right Layout */
+.sc-visual-right {
+    flex-direction: row-reverse;
+}
+
+/* Visual Panel */
+.sc-visual {
+    flex: 0 0 42%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 36px;
+    background: rgba(255,255,255,0.02);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+}
+
+.sc-visual-right .sc-visual {
+    border-right: none;
+    border-left: 1px solid rgba(255,255,255,0.06);
+}
+
+/* service-icon in sc-visual: large decorative display */
+.sc-visual .service-icon {
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.06);
+    letter-spacing: -0.04em;
+    line-height: 1;
+}
+
+/* infographic-area in sc-visual: expand to fill remaining space */
+.sc-visual .infographic-area {
+    flex: 1;
+    margin-top: 20px;
+    padding-top: 0;
+    border-top: none;
+    height: auto;
+    min-height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* PR Hub: needs more width in sc-visual */
+.sc-visual .info-pr-hub {
+    width: 160px;
+    height: 130px;
+}
+.sc-visual .pr-ring-1 { width: 96px;  height: 96px; }
+.sc-visual .pr-ring-2 { width: 140px; height: 140px; }
+
+/* SNS Cycle in sc-visual: vertical layout */
+.sc-visual .info-sns-cycle {
+    flex-direction: column;
+    gap: 8px;
+}
+.sc-visual .sns-arrow {
+    transform: rotate(90deg);
+    margin: 0;
+    margin-bottom: 0;
+}
+.sc-visual .sns-step {
+    width: 44px;
+    height: 44px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+.sc-visual .sns-label {
+    position: static;
+    transform: none;
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+    text-align: center;
+    display: block;
+    bottom: auto;
+    left: auto;
+}
+
+/* IP Growth in sc-visual: bigger height */
+.sc-visual .info-ip-growth {
+    height: 120px;
+    gap: 16px;
+}
+.sc-visual .ip-bar-wrap {
+    height: 80px;
 }
 
 .service-card::before {
@@ -720,13 +820,15 @@ section {
     opacity: 1;
 }
 
-.service-card>.service-content {
-    position: relative;
-    z-index: 2;
-    height: 100%;
+.service-card > .service-content {
+    flex: 1;
+    padding: 44px 40px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    height: auto;
 }
 
 .service-card h3 {
@@ -1621,8 +1723,65 @@ section {
     }
 
     /* ===== サービスカード ===== */
+    .service-card,
+    .sc-visual-left,
+    .sc-visual-right {
+        flex-direction: column !important;
+    }
+
+    .sc-visual {
+        flex: none;
+        width: 100%;
+        padding: 32px 24px 20px;
+        border-right: none !important;
+        border-left: none !important;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .service-card > .service-content {
+        padding: 24px 24px 32px;
+    }
+
+    .sc-visual .service-icon {
+        font-size: 3rem;
+    }
+
+    .sc-visual .info-pr-hub {
+        width: 130px;
+        height: 110px;
+    }
+
+    .sc-visual .info-sns-cycle {
+        flex-direction: row;
+        gap: 2px;
+    }
+    .sc-visual .sns-arrow {
+        transform: none;
+        margin-bottom: 18px;
+    }
+    .sc-visual .sns-step {
+        width: 32px;
+        height: 32px;
+        flex-direction: row;
+    }
+    .sc-visual .sns-label {
+        position: absolute;
+        bottom: -18px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: block;
+        margin-top: 0;
+        static: unset;
+    }
+
+    .sc-visual .info-ip-growth {
+        height: 90px;
+    }
+    .sc-visual .ip-bar-wrap {
+        height: 60px;
+    }
+
     .service-card {
-        padding: 32px 24px;
         min-height: auto;
     }
 
@@ -1658,11 +1817,9 @@ section {
 }
 
 /* Bento Box Mobile Fallback */
-.services-grid {
-    display: flex;
-    flex-direction: column;
-}
-
-.service-card {
-    min-height: 280px;
+@media (max-width: 768px) {
+    .services-grid {
+        display: flex;
+        flex-direction: column;
+    }
 }
