@@ -79,95 +79,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     /* ────────────────────────────────────────────────
-       Storytelling Scroll Animation
-       rAF ループで常時監視 (モバイル Chrome / iOS Safari 対応)
+       Storytelling: IntersectionObserver で確実に発火
+       スクロール計算なし・全ブラウザ・モバイル対応
     ──────────────────────────────────────────────── */
     var header = document.querySelector('.header');
-    var storyContainer = document.querySelector('.story-scroll-container');
-    var storyTexts = Array.from(document.querySelectorAll('.story-text'));
-    var N = storyTexts.length;
 
-    function easeOut(t) { return 1 - (1 - t) * (1 - t); }
-    function easeIn(t) { return t * t; }
+    /* ヘッダー背景 */
+    function updateHeader() {
+        if (!header) return;
+        var scrollY = window.pageYOffset || window.scrollY;
+        header.style.background = scrollY > 50 ? 'rgba(9,9,11,0.88)' : 'rgba(9,9,11,0.6)';
+        header.style.borderBottomColor = scrollY > 50 ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)';
+    }
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
 
-    function updateAll() {
-        var scrollY = window.pageYOffset !== undefined ? window.pageYOffset : window.scrollY;
-
-        /* ヘッダー */
-        if (header) {
-            header.style.background = scrollY > 50
-                ? 'rgba(9,9,11,0.88)' : 'rgba(9,9,11,0.6)';
-            header.style.borderBottomColor = scrollY > 50
-                ? 'rgba(255,255,255,0.12)' : 'rgba(255,255,255,0.08)';
-        }
-
-        /* ストーリーテキスト */
-        if (!storyContainer || N === 0) return;
-
-        var rect = storyContainer.getBoundingClientRect();
-        var wh = window.innerHeight;
-        var scrollableH = rect.height - wh;
-        if (scrollableH <= 0) return;
-
-        var progress = Math.max(0, Math.min(1, (-rect.top) / scrollableH));
-        var seg = 1 / N;
-
-        for (var i = 0; i < N; i++) {
-            var text = storyTexts[i];
-            var segStart = i * seg;
-            var segEnd = segStart + seg;
-            var isLast = (i === N - 1);
-            var opacity = 0;
-            var ty = 30;
-
-            if (progress < segStart) {
-                opacity = 0; ty = 30;
-            } else if (progress <= segEnd) {
-                var lp = (progress - segStart) / seg;
-                if (lp < 0.3) {
-                    var t = lp / 0.3;
-                    opacity = easeOut(t);
-                    ty = 28 * (1 - easeOut(t));
-                } else if (!isLast && lp > 0.72) {
-                    var t2 = (lp - 0.72) / 0.28;
-                    opacity = 1 - easeIn(t2);
-                    ty = -28 * easeIn(t2);
-                } else {
-                    opacity = 1; ty = 0;
-                }
-            } else {
-                if (isLast) { opacity = 1; ty = 0; }
-                else { opacity = 0; ty = -28; }
+    /* story-line を IntersectionObserver で表示 */
+    var storyObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                storyObs.unobserve(entry.target); // 一度表示したら監視終了
             }
+        });
+    }, {
+        root: null,
+        rootMargin: '0px 0px -15% 0px', // 画面下15%に入ったら発火
+        threshold: 0.1
+    });
 
-            text.style.opacity = opacity.toFixed(3);
-            text.style.transform = 'translateY(' + ty.toFixed(1) + 'px)';
-        }
-    }
-
-    /* rAF ループ — スクロールに関係なく毎フレーム監視 */
-    var lastY = -1;
-    function rafLoop() {
-        var y = window.pageYOffset !== undefined ? window.pageYOffset : window.scrollY;
-        if (y !== lastY) {
-            lastY = y;
-            updateAll();
-        }
-        requestAnimationFrame(rafLoop);
-    }
-
-    /* スクロールイベントでも補完（即時反応） */
-    window.addEventListener('scroll', updateAll, { passive: true });
-    window.addEventListener('touchmove', updateAll, { passive: true });
-    window.addEventListener('touchend', updateAll, { passive: true });
-
-    /* 起動 — DOMContentLoaded 内なのですぐ開始 */
-    rafLoop();
-    updateAll();
-
-    /* load後にも再計算（画像読み込みによるレイアウト変動対応） */
-    window.addEventListener('load', function () {
-        updateAll();
-        setTimeout(updateAll, 300);
+    document.querySelectorAll('.story-line').forEach(function (el) {
+        storyObs.observe(el);
     });
 });
