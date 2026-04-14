@@ -294,7 +294,8 @@ section {
     margin-bottom: 24px;
     letter-spacing: 0.06em;
     color: var(--text-primary);
-    white-space: nowrap;
+    white-space: normal;
+    word-break: keep-all;
     text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
 }
 
@@ -1250,21 +1251,102 @@ section {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+    /* ===== 共通 ===== */
+    body {
+        word-break: keep-all;
+        overflow-wrap: break-word;
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+
+    /* ===== ヘッダー ===== */
+    .nav-links {
+        display: none;
+    }
+
+    /* ===== ヒーロー ===== */
+    .hero-content {
+        padding: 0 24px;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: clamp(1.9rem, 7vw, 2.6rem);
+        white-space: normal;
+        letter-spacing: 0.04em;
+        line-height: 1.3;
+        margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+        letter-spacing: 0.1em;
+        line-height: 2;
+        margin-bottom: 32px;
+    }
+
+    .hero-actions {
+        margin-bottom: 40px;
+    }
+
+    /* ===== ストーリーセクション ===== */
+    .story-text {
+        font-size: clamp(1.5rem, 5.5vw, 2.2rem);
+        line-height: 1.6;
+        padding: 0 24px;
+        letter-spacing: 0;
+    }
+
+    /* ===== VISIONセクション ===== */
     .about .section-content {
         grid-template-columns: 1fr;
         gap: 40px;
     }
 
-    .hero-title {
-        font-size: clamp(2rem, 8vw, 3rem);
-        white-space: normal;
-        letter-spacing: 0.05em;
+    .about-text .section-subtitle {
+        font-size: clamp(1.3rem, 5vw, 1.6rem);
+        line-height: 1.6;
     }
 
-    .nav-links {
-        display: none;
+    .section-desc {
+        font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+        line-height: 2;
     }
 
+    .section-title {
+        font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+        letter-spacing: 0.1em;
+    }
+
+    /* ===== サービスカード ===== */
+    .service-card {
+        padding: 32px 24px;
+        min-height: auto;
+    }
+
+    .service-content h3 {
+        font-size: clamp(1.2rem, 5vw, 1.5rem);
+        margin-bottom: 8px;
+    }
+
+    .service-lead {
+        font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+    }
+
+    /* ===== メンバーセクション ===== */
+    .member-profile {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .ig-widget-header {
+        justify-content: center;
+    }
+
+    /* ===== フッター ===== */
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
@@ -1273,15 +1355,6 @@ section {
 
     .footer-right p {
         text-align: center;
-    }
-
-    .member-profile {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .ig-widget-header {
-        justify-content: center;
     }
 }
 
