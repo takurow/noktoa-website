@@ -653,13 +653,14 @@ section {
 }
 
 /* Services Enhanced (Bento Box) */
+/* =============================================
+   SERVICE ARCHITECTURE — Grid & Cards
+   ============================================= */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: minmax(320px, auto);
     gap: 24px;
     margin-top: 80px;
-    perspective: 1200px;
 }
 
 .service-card {
@@ -668,228 +669,153 @@ section {
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid var(--glass-border);
     border-radius: 32px;
-    padding: 0;
     position: relative;
     overflow: hidden;
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
     transform: translateZ(0);
-    /* Hardware acceleration for smooth scrolling over background */
-}
-
-/* Asymmetric Grid Placement */
-.service-card:nth-child(1) {
-    grid-column: span 7;
-}
-
-.service-card:nth-child(2) {
-    grid-column: span 5;
-}
-
-.service-card:nth-child(3) {
-    grid-column: span 5;
-}
-
-.service-card:nth-child(4) {
-    grid-column: span 7;
-}
-
-/* min height for cards */
-.service-card { min-height: 320px; }
-
-/* Visual Left Layout */
-.sc-visual-left {
-    flex-direction: row;
-}
-
-/* Visual Right Layout */
-.sc-visual-right {
-    flex-direction: row-reverse;
-}
-
-/* Visual Panel */
-.sc-visual {
-    flex: 0 0 42%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 40px 36px;
-    background: rgba(255,255,255,0.02);
-    border-right: 1px solid rgba(255,255,255,0.06);
-    position: relative;
-}
-
-.sc-visual-right .sc-visual {
-    border-right: none;
-    border-left: 1px solid rgba(255,255,255,0.06);
-}
-
-/* service-icon in sc-visual: large decorative display */
-.sc-visual .service-icon {
-    font-size: 4rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.06);
-    letter-spacing: -0.04em;
-    line-height: 1;
-}
-
-/* infographic-area in sc-visual: expand to fill remaining space */
-.sc-visual .infographic-area {
-    flex: 1;
-    margin-top: 20px;
-    padding-top: 0;
-    border-top: none;
-    height: auto;
-    min-height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* PR Hub: needs more width in sc-visual */
-.sc-visual .info-pr-hub {
-    width: 160px;
-    height: 130px;
-}
-.sc-visual .pr-ring-1 { width: 96px;  height: 96px; }
-.sc-visual .pr-ring-2 { width: 140px; height: 140px; }
-
-/* SNS Cycle in sc-visual: vertical layout */
-.sc-visual .info-sns-cycle {
-    flex-direction: column;
-    gap: 8px;
-}
-.sc-visual .sns-arrow {
-    transform: rotate(90deg);
-    margin: 0;
-    margin-bottom: 0;
-}
-.sc-visual .sns-step {
-    width: 44px;
-    height: 44px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-.sc-visual .sns-label {
-    position: static;
-    transform: none;
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-    text-align: center;
-    display: block;
-    bottom: auto;
-    left: auto;
-}
-
-/* IP Growth in sc-visual: bigger height */
-.sc-visual .info-ip-growth {
-    height: 120px;
-    gap: 16px;
-}
-.sc-visual .ip-bar-wrap {
-    height: 80px;
 }
 
 .service-card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(700px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06), transparent 40%);
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%), rgba(255,255,255,0.06), transparent 40%);
     opacity: 0;
     transition: opacity 0.5s ease;
     z-index: 0;
     pointer-events: none;
 }
+.service-card:hover { border-color: rgba(255,255,255,0.25); box-shadow: 0 40px 80px rgba(0,0,0,0.5); z-index: 10; }
+.service-card:hover::before { opacity: 1; }
 
-.service-card:hover {
-    border-color: rgba(255, 255, 255, 0.25);
-    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
-    z-index: 10;
+/* ---- Card-wide: full-width, internal 2-col ---- */
+.card-wide {
+    grid-column: span 12;
+    display: grid;
+    grid-template-columns: 55% 45%;
+    align-items: center;
+    padding: 56px 56px;
+    gap: 48px;
+    min-height: 340px;
 }
-
-.service-card:hover::before {
-    opacity: 1;
+.card-wide.card-reverse {
+    grid-template-columns: 42% 58%;
 }
+.card-wide.card-reverse .card-visual { order: 1; }
+.card-wide.card-reverse .card-text  { order: 2; }
 
-.service-card > .service-content {
-    flex: 1;
-    padding: 44px 40px;
+/* ---- Card-half: half-width, vertical stack ---- */
+.card-half {
+    grid-column: span 6;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding: 44px 40px;
+}
+
+/* ---- card-text ---- */
+.card-text {
     position: relative;
     z-index: 2;
-    height: auto;
 }
-
-.service-card h3 {
+.card-text h3 {
     font-size: 1.8rem;
-    margin-bottom: 15px;
-    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
     font-weight: 600;
 }
-
-.service-card .service-lead {
+.card-text .service-lead {
     color: var(--primary-accent);
     font-size: 1.05rem;
     font-weight: 500;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     line-height: 1.5;
 }
-
-.service-card p {
+.card-text p {
     color: var(--text-muted);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    margin-bottom: 20px;
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 18px;
 }
-
-.service-card .service-features {
+.service-features {
     list-style: none;
     padding: 0;
-    margin: 0 0 30px 0;
+    margin: 0;
 }
-
-.service-card .service-features li {
+.service-features li {
     position: relative;
     padding-left: 1.2rem;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 8px;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
     line-height: 1.5;
 }
-
-.service-card .service-features li::before {
+.service-features li::before {
     content: "・";
     position: absolute;
     left: 0;
     color: var(--primary-accent);
 }
 
-/* Infographics inside Service Cards */
-.infographic-area {
-    margin-top: auto;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    height: 120px;
+/* ---- service-num (decorative number) ---- */
+.service-num {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.05);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin-bottom: 16px;
+    font-family: var(--font-en);
+}
+
+/* ---- card-visual ---- */
+.card-visual {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.7;
-    transition: opacity 0.4s ease;
+    position: relative;
+    z-index: 2;
 }
 
-.service-card.active .infographic-area {
-    opacity: 1;
+/* Wide: visual has separator line */
+.card-wide .card-visual {
+    min-height: 200px;
+    padding-left: 48px;
+    border-left: 1px solid rgba(255,255,255,0.06);
+}
+.card-wide.card-reverse .card-visual {
+    padding-left: 0;
+    padding-right: 48px;
+    border-left: none;
+    border-right: 1px solid rgba(255,255,255,0.06);
+}
+
+/* Half: visual sits at bottom with natural spacing */
+.card-half .card-visual {
+    margin-top: auto;
+    padding-top: 28px;
+}
+
+/* ---- Infographic area ---- */
+.infographic-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: opacity 0.4s ease;
+}
+.service-card.active .infographic-area { opacity: 1; }
+
+/* Wide cards: infographic fills generously */
+.card-wide .infographic-area {
+    height: 200px;
+}
+/* Half cards: compact infographic */
+.card-half .infographic-area {
+    height: 130px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 24px;
 }
 
 /* 01: Timeline */
@@ -1145,12 +1071,24 @@ section {
 }
 
 .sns-arrow {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.15);
-    margin-bottom: 18px;
+    width: 20px;
+    height: 1px;
+    background: rgba(255,255,255,0.12);
     flex-shrink: 0;
-    transition: color 0.3s ease;
+    transition: background 0.3s ease;
+    position: relative;
 }
+.sns-arrow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: -3px;
+    border: 3px solid transparent;
+    border-left: 4px solid rgba(255,255,255,0.12);
+    transition: border-color 0.3s ease;
+}
+.service-card.active .sns-arrow { background: rgba(255,255,255,0.35); }
+.service-card.active .sns-arrow::after { border-left-color: rgba(255,255,255,0.35); }
 
 /* active state: steps light up sequentially */
 .service-card.active .sns-step[data-step="1"] {
@@ -1196,8 +1134,8 @@ section {
    ============================================= */
 .info-pr-hub {
     position: relative;
-    width: 130px;
-    height: 100px;
+    width: 160px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1286,9 +1224,9 @@ section {
 .info-ip-growth {
     display: flex;
     align-items: flex-end;
-    gap: 12px;
+    gap: 20px;
     width: 100%;
-    height: 90px;
+    height: 140px;
     padding-bottom: 4px;
     position: relative;
 }
@@ -1309,7 +1247,7 @@ section {
     flex-direction: column;
     justify-content: flex-end;
     gap: 2px;
-    height: 56px;
+    height: 90px;
 }
 
 .ip-bar {
@@ -1367,34 +1305,6 @@ section {
 .legend-ip { color: rgba(255,255,255,0.4); }
 .legend-ip::before { background: rgba(255,255,255,0.5); }
 
-/* infographic area height adjustment */
-.infographic-area {
-    height: 130px;
-}
-
-/* =============================================
-   Mobile infographic overrides
-   ============================================= */
-@media (max-width: 768px) {
-    .info-sns-cycle {
-        gap: 2px;
-    }
-    .sns-step {
-        width: 30px;
-        height: 30px;
-    }
-    .sns-label {
-        font-size: 0.55rem;
-        bottom: -16px;
-    }
-    .info-pr-hub {
-        width: 120px;
-        height: 90px;
-    }
-    .infographic-area {
-        height: 120px;
-    }
-}
 
 /* Process section */
 .process {
@@ -1723,75 +1633,82 @@ section {
     }
 
     /* ===== サービスカード ===== */
-    .service-card,
-    .sc-visual-left,
-    .sc-visual-right {
-        flex-direction: column !important;
+    .card-wide {
+        grid-column: span 12;
+        display: flex;
+        flex-direction: column;
+        padding: 36px 24px;
+        gap: 0;
     }
 
-    .sc-visual {
-        flex: none;
-        width: 100%;
-        padding: 32px 24px 20px;
-        border-right: none !important;
-        border-left: none !important;
-        border-bottom: 1px solid rgba(255,255,255,0.06);
+    .card-half {
+        grid-column: span 12;
+        padding: 36px 24px;
     }
 
-    .service-card > .service-content {
-        padding: 24px 24px 32px;
-    }
-
-    .sc-visual .service-icon {
-        font-size: 3rem;
-    }
-
-    .sc-visual .info-pr-hub {
-        width: 130px;
-        height: 110px;
-    }
-
-    .sc-visual .info-sns-cycle {
-        flex-direction: row;
-        gap: 2px;
-    }
-    .sc-visual .sns-arrow {
-        transform: none;
-        margin-bottom: 18px;
-    }
-    .sc-visual .sns-step {
-        width: 32px;
-        height: 32px;
-        flex-direction: row;
-    }
-    .sc-visual .sns-label {
-        position: absolute;
-        bottom: -18px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: block;
-        margin-top: 0;
-        static: unset;
-    }
-
-    .sc-visual .info-ip-growth {
-        height: 90px;
-    }
-    .sc-visual .ip-bar-wrap {
-        height: 60px;
-    }
-
-    .service-card {
+    .card-wide .card-visual {
         min-height: auto;
+        padding-left: 0;
+        border-left: none;
+        padding-top: 20px;
+        margin-top: 16px;
     }
 
-    .service-content h3 {
-        font-size: clamp(1.2rem, 5vw, 1.5rem);
+    .card-wide.card-reverse .card-visual {
+        padding-right: 0;
+        border-right: none;
+        order: 2;
+    }
+    .card-wide.card-reverse .card-text {
+        order: 1;
+    }
+
+    .service-num {
+        font-size: 2.8rem;
+        margin-bottom: 12px;
+    }
+
+    .card-text h3 {
+        font-size: clamp(1.3rem, 5.5vw, 1.6rem);
         margin-bottom: 8px;
     }
 
-    .service-lead {
-        font-size: clamp(0.85rem, 3.5vw, 0.95rem);
+    .card-text .service-lead {
+        font-size: clamp(0.8rem, 3.2vw, 0.9rem);
+    }
+
+    .card-text p {
+        font-size: 0.85rem;
+    }
+
+    .card-wide .infographic-area,
+    .card-half .infographic-area {
+        height: 110px;
+    }
+
+    .info-ip-growth {
+        height: 100px;
+        gap: 12px;
+    }
+    .ip-bar-wrap {
+        height: 60px;
+    }
+
+    .info-pr-hub {
+        width: 140px;
+        height: 100px;
+    }
+
+    .sns-step {
+        width: 30px;
+        height: 30px;
+    }
+    .sns-label {
+        font-size: 0.52rem;
+        bottom: -16px;
+    }
+    .sns-arrow {
+        width: 12px;
     }
 
     /* ===== メンバーセクション ===== */
