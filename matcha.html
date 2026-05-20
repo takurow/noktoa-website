@@ -50,6 +50,29 @@
             line-height: 1.8;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            /* 日本語の自然な改行・句読点処理 */
+            word-break: auto-phrase;
+            line-break: strict;
+            overflow-wrap: break-word;
+            text-spacing-trim: trim-start;
+        }
+
+        /* 句読点ぶら下げ */
+        h1, h2, h3, h4, p, span, div {
+            hanging-punctuation: allow-end;
+        }
+
+        /* 改行ユーティリティ */
+        .br-sp { display: none; }
+        .br-pc { display: inline; }
+        @media (max-width: 720px) {
+            .br-sp { display: inline; }
+            .br-pc { display: none; }
+        }
+
+        /* フレーズを行末で割らない */
+        .nobreak {
+            display: inline-block;
         }
         body::before {
             content: ''; position: fixed; inset: 0;
@@ -894,7 +917,7 @@
 
         /* ===== Responsive ===== */
         @media (max-width: 960px) {
-            .announce { font-size: 0.7rem; padding: 10px 12px; letter-spacing: 0.1em; }
+            .announce { font-size: 0.7rem; padding: 10px 12px; letter-spacing: 0.08em; }
             .nav { padding: 12px 18px; }
             .nav-brand .sub { display: none; }
             .nav-cta { padding: 10px 18px; font-size: 0.75rem; }
@@ -908,6 +931,88 @@
             .prod-visual { max-width: 360px; margin: 0 auto; width: 100%; }
             .flow-steps { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
             .flow-steps::before { display: none; }
+        }
+
+        /* ===== モバイル可読性チューニング ===== */
+        @media (max-width: 720px) {
+            /* 本文の読みやすさ */
+            body { line-height: 1.95; letter-spacing: 0.02em; }
+            .container { padding: 0 24px; }
+
+            /* 見出し */
+            .hero h1 {
+                font-size: 1.85rem;
+                line-height: 1.55;
+                letter-spacing: 0.02em;
+            }
+            .hero-lead {
+                font-size: 0.95rem;
+                line-height: 2.2;
+                letter-spacing: 0.04em;
+            }
+            .section-title {
+                font-size: 1.5rem;
+                line-height: 1.6;
+                letter-spacing: 0.04em;
+            }
+            .section-sub {
+                font-size: 0.9rem;
+                line-height: 2.1;
+                letter-spacing: 0.05em;
+                margin-bottom: 56px;
+            }
+
+            /* セクション余白圧縮 */
+            .why, .profit, .target, .prod, .flow, .faq, .cta {
+                padding-top: 90px; padding-bottom: 90px;
+            }
+
+            /* カード内テキスト */
+            .why-content { padding: 28px 24px; }
+            .why-content h3 { font-size: 1.15rem; }
+            .why-content p { font-size: 0.88rem; line-height: 2.05; }
+
+            .target-content { padding: 24px 24px 28px; }
+            .target-content h4 { font-size: 1.05rem; line-height: 1.55; }
+            .target-content p { font-size: 0.85rem; line-height: 2; }
+
+            /* PROFIT */
+            .profit-headline { font-size: 1.55rem; line-height: 1.6; letter-spacing: 0.02em; }
+            .profit-margin { padding: 36px 24px; }
+            .profit-margin-value { font-size: 3.2rem; }
+
+            /* PRODUCT */
+            .prod-spec-row { grid-template-columns: 100px 1fr; gap: 16px; padding: 16px 0; }
+            .prod-spec-label { font-size: 0.65rem; letter-spacing: 0.2em; }
+            .prod-spec-value { font-size: 0.92rem; }
+            .prod-spec-value .note { display: block; margin-left: 0; margin-top: 4px; }
+
+            /* FAQ */
+            .faq-q { font-size: 0.98rem; line-height: 1.7; }
+            .faq-a { font-size: 0.88rem; line-height: 2.1; padding-left: 28px; }
+
+            /* CTA */
+            .cta h2 { font-size: 1.65rem; line-height: 1.65; letter-spacing: 0.02em; }
+            .cta-sub { font-size: 0.93rem; line-height: 2.2; }
+
+            /* HERO seal 小さく */
+            .hero-seal { width: 90px; height: 90px; top: 16px; right: 16px; padding: 8px; font-size: 0.6rem; }
+            .hero-seal .big { font-size: 1.05rem; margin: 2px 0; }
+            .hero-seal .label { font-size: 0.5rem; }
+
+            /* ボタンサイズ */
+            .btn-primary, .btn-ghost { padding: 16px 28px; font-size: 0.9rem; letter-spacing: 0.08em; }
+            .hero-cta { gap: 12px; }
+
+            /* TARGET 大背景文字を控えめに */
+            .target-kanji-bg { font-size: 6.5rem; bottom: -10px; right: -5px; }
+            .target-num { font-size: 0.95rem; top: 18px; left: 22px; }
+
+            /* WHYビジュアル文字を控えめに */
+            .why-visual-text { font-size: 4.5rem; }
+
+            /* フォーム見出し */
+            .form-header h3 { font-size: 1.15rem; letter-spacing: 0.06em; }
         }
     </style>
 </head>
@@ -933,14 +1038,17 @@
             <div class="hero-text">
                 <div class="hero-deadline">2026年夏季限定 先行募集</div>
                 <h1>
-                    インバウンドが、<br>
-                    日本を求めている。<br>
-                    その答えが<span class="accent">「抹茶」</span>。
+                    <span class="nobreak">インバウンドが、</span><br class="br-pc">
+                    <span class="nobreak">日本を求めている。</span><br>
+                    <span class="nobreak">その答えが<span class="accent">「抹茶」</span>。</span>
                 </h1>
                 <p class="hero-lead">
-                    鹿児島産プレミアム抹茶パウダー 300g。<br>
-                    業界最高水準の粗利率と、確かな品質。<br>
-                    選ばれた取扱店様への、限定的なご案内です。
+                    <span class="nobreak">鹿児島産プレミアム抹茶パウダー</span>
+                    <span class="nobreak">300g。</span><br class="br-pc">
+                    <span class="nobreak">業界最高水準の粗利率と、</span><br class="br-sp">
+                    <span class="nobreak">確かな品質。</span><br>
+                    <span class="nobreak">選ばれた取扱店様への、</span><br class="br-sp">
+                    <span class="nobreak">限定的なご案内です。</span>
                 </p>
                 <div class="hero-points">
                     <span class="hero-point">✓ 業界最高水準の粗利率</span>
@@ -993,8 +1101,11 @@
     <section class="why" id="why">
         <div class="container why-head reveal">
             <div class="eyebrow">— Why Matcha</div>
-            <h2 class="section-title">なぜ、いま「抹茶」なのか。</h2>
-            <p class="section-sub">世界の抹茶ブーム、訪日客の最高更新、新産地としての鹿児島。<br>3つの構造変化が、御社の売場に新しい収益を生みます。</p>
+            <h2 class="section-title"><span class="nobreak">なぜ、いま</span><span class="nobreak">「抹茶」なのか。</span></h2>
+            <p class="section-sub">
+                <span class="nobreak">世界の抹茶ブーム、</span><span class="nobreak">訪日客の最高更新、</span><br class="br-pc"><span class="nobreak">新産地としての鹿児島。</span><br>
+                <span class="nobreak">3つの構造変化が、</span><br class="br-sp"><span class="nobreak">御社の売場に新しい収益を生みます。</span>
+            </p>
         </div>
         <div class="why-grid">
             <div class="why-card reveal">
@@ -1222,9 +1333,9 @@
             <div class="cta-deadline">● 申込締切：2026年7月31日</div>
             <h2>御社の売場で、<br><span class="gold">「次の主力商品」</span>を、共に。</h2>
             <p class="cta-sub">
-                資料請求・サンプル送付・取扱条件のご相談、<br>
-                どんな段階でもお気軽にご記入ください。<br>
-                担当者が48時間以内にご返信いたします。
+                <span class="nobreak">資料請求・サンプル送付・</span><br class="br-sp"><span class="nobreak">取扱条件のご相談、</span><br class="br-pc">
+                <span class="nobreak">どんな段階でも</span><span class="nobreak">お気軽にご記入ください。</span><br>
+                <span class="nobreak">担当者が48時間以内に</span><span class="nobreak">ご返信いたします。</span>
             </p>
 
             <div class="form-section reveal">
