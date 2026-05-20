@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Shippori+Mincho:wght@500;600;700;800&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;600;700;900&display=swap"
         rel="stylesheet">
 
     <style>
@@ -42,9 +42,9 @@
             --red: #c44b3a;
             --orange: #e89048;
             --ease: cubic-bezier(0.16, 1, 0.3, 1);
-            --serif-jp: 'Shippori Mincho', serif;
-            --serif-en: 'Cormorant Garamond', serif;
-            --sans: 'Inter', 'Shippori Mincho', sans-serif;
+            --serif-jp: 'Zen Old Mincho', serif;
+            --serif-en: 'Manrope', sans-serif;
+            --sans: 'Manrope', 'Zen Kaku Gothic New', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -715,6 +715,136 @@
         }
         .cta-meta a { color: var(--matcha); }
 
+        /* ===== INLINE FORM ===== */
+        .form-card {
+            max-width: 680px;
+            margin: 56px auto 0;
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid var(--line-gold);
+            border-radius: 16px;
+            padding: 48px 40px;
+            text-align: left;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+        }
+        .form-card h3 {
+            font-family: var(--serif-jp);
+            font-size: 1.3rem; font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px; letter-spacing: 0.08em;
+        }
+        .form-card .form-sub {
+            text-align: center;
+            color: var(--text-mute);
+            font-size: 0.82rem; letter-spacing: 0.1em;
+            margin-bottom: 36px; font-family: var(--sans);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        .form-field { margin-bottom: 16px; display: flex; flex-direction: column; }
+        .form-field label {
+            font-family: var(--sans);
+            font-size: 0.72rem;
+            color: var(--gold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .form-field label .req {
+            color: var(--red);
+            margin-left: 6px;
+        }
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--line);
+            color: var(--text);
+            padding: 14px 16px;
+            border-radius: 6px;
+            font-family: var(--sans);
+            font-size: 0.95rem;
+            letter-spacing: 0.04em;
+            transition: all 0.3s var(--ease);
+        }
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            outline: none;
+            border-color: var(--matcha);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 3px rgba(163, 198, 116, 0.15);
+        }
+        .form-field textarea { resize: vertical; min-height: 100px; }
+        .form-field select { cursor: pointer; }
+        .form-submit {
+            width: 100%;
+            padding: 20px;
+            background: var(--orange);
+            color: #0a0a08;
+            border: none;
+            border-radius: 100px;
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            margin-top: 12px;
+            transition: all 0.3s var(--ease);
+            box-shadow: 0 8px 28px rgba(232, 144, 72, 0.35);
+        }
+        .form-submit:hover {
+            background: var(--gold-bright);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 36px rgba(232, 144, 72, 0.5);
+        }
+        .form-note {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: var(--text-mute);
+            font-family: var(--sans);
+            letter-spacing: 0.08em;
+            line-height: 1.8;
+        }
+        .form-divider {
+            display: flex; align-items: center; gap: 16px;
+            margin: 48px auto 32px;
+            max-width: 680px;
+            color: var(--text-mute);
+            font-family: var(--sans);
+            font-size: 0.7rem; letter-spacing: 0.4em;
+        }
+        .form-divider::before, .form-divider::after {
+            content: ''; flex: 1; height: 1px; background: var(--line);
+        }
+        .alt-contacts {
+            display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+            font-family: var(--sans);
+        }
+        .alt-contact {
+            text-align: center;
+        }
+        .alt-contact .lbl {
+            font-size: 0.7rem; letter-spacing: 0.3em;
+            color: var(--gold); text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .alt-contact .val {
+            font-size: 1rem; color: var(--text);
+            font-weight: 500; letter-spacing: 0.05em;
+        }
+        .alt-contact .val a { color: var(--matcha); }
+        @media (max-width: 720px) {
+            .form-row { grid-template-columns: 1fr; }
+            .form-card { padding: 32px 24px; }
+        }
+
         /* ===== FOOTER ===== */
         .footer {
             background: #050503;
@@ -1093,16 +1223,44 @@
             <h2>御社の売場で、<br><span class="gold">「次の主力商品」</span>を、共に。</h2>
             <p class="cta-sub">
                 資料請求・サンプル送付・取扱条件のご相談、<br>
-                どんな段階でもお気軽にご連絡ください。<br>
+                どんな段階でもお気軽にご記入ください。<br>
                 担当者が48時間以内にご返信いたします。
             </p>
-            <a href="mailto:info@noktoa.com?subject=【業販】鹿児島抹茶のお問い合わせ&body=▼貴社情報%0A会社名：%0Aご担当者名：%0A部署・役職：%0ATEL：%0AEmail：%0A%0A▼想定店舗・業態%0A業態（例：量販店／土産店／ホテル等）：%0A店舗数：%0A想定発注数（月間）：%0A%0A▼ご質問・ご相談内容%0A" class="btn-primary">資料請求・お問い合わせ</a>
-            <div class="cta-meta">
-                またはお電話・メールでも承ります<br>
-                <a href="mailto:info@noktoa.com">info@noktoa.com</a>
+
+            <!-- ============================================================
+                 ★ FORM 差替ポイント（Tally埋込）
+                 フォームID: LZa2AO
+                 編集URL: https://tally.so/forms/LZa2AO/edit
+                 公開URL: https://tally.so/r/LZa2AO
+                 ============================================================ -->
+            <div class="form-card reveal" style="padding: 24px;">
+                <iframe data-tally-src="https://tally.so/embed/LZa2AO?alignLeft=1&hideTitle=0&transparentBackground=1&dynamicHeight=1"
+                    loading="lazy"
+                    width="100%"
+                    height="600"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0"
+                    title="業販お問い合わせ"
+                    style="border: none; background: transparent;"></iframe>
+            </div>
+
+            <div class="form-divider">OR</div>
+
+            <div class="alt-contacts reveal">
+                <div class="alt-contact">
+                    <div class="lbl">Email</div>
+                    <div class="val"><a href="mailto:info@noktoa.com">info@noktoa.com</a></div>
+                </div>
+                <div class="alt-contact">
+                    <div class="lbl">Web</div>
+                    <div class="val"><a href="/">noktoa.com</a></div>
+                </div>
             </div>
         </div>
     </section>
+
+    <script async src="https://tally.so/widgets/embed.js"></script>
 
     <!-- FOOTER -->
     <footer class="footer">
