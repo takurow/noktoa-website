@@ -4,13 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ============================================================
-         ★ META 差替ポイント
-         タイトル・descriptionをここで変更
-         ============================================================ -->
-    <title>【業販】鹿児島プレミアム抹茶 取扱店募集 | NOKTOA</title>
+    <!-- ★ META 差替ポイント -->
+    <title>【先行募集】鹿児島プレミアム抹茶 業販パートナー｜2026年夏季</title>
     <meta name="description"
-        content="インバウンド需要が急拡大する『抹茶』を、御社の売場で。業界最高水準の粗利率・販促物無償提供・SNS発信支援。鹿児島産プレミアム抹茶パウダー300g、業販・卸取扱店募集中。">
+        content="2026年夏季限定の業販パートナー先行募集。鹿児島産プレミアム抹茶パウダー300g。インバウンド需要に応える本物の一杯を、選定された取扱店様へ。">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,10 +16,6 @@
         rel="stylesheet">
 
     <style>
-        /* ============================================================
-           ★ 色・タイポ 差替ポイント
-           ブランド色・フォントを変更するならここ
-           ============================================================ */
         :root {
             --bg-black: #0a0a08;
             --bg-deep: #0e1410;
@@ -31,10 +24,11 @@
             --bg-green: #1d3924;
             --bg-green-mid: #244a2d;
             --line: rgba(255, 255, 255, 0.1);
+            --line-strong: rgba(255, 255, 255, 0.2);
             --line-gold: rgba(201, 169, 110, 0.3);
             --text: #f5f3ee;
-            --text-soft: #b8b5ac;
-            --text-mute: #7d7a72;
+            --text-soft: #c8c5bc;
+            --text-mute: #8a8780;
             --matcha: #a3c674;
             --matcha-deep: #5a7e3a;
             --gold: #c9a96e;
@@ -58,11 +52,9 @@
             -webkit-font-smoothing: antialiased;
         }
         body::before {
-            content: '';
-            position: fixed; inset: 0;
+            content: ''; position: fixed; inset: 0;
             background-image: radial-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px);
-            background-size: 4px 4px;
-            pointer-events: none; z-index: 1; opacity: 0.6;
+            background-size: 4px 4px; pointer-events: none; z-index: 1; opacity: 0.6;
         }
         a { color: inherit; text-decoration: none; }
         img { max-width: 100%; display: block; }
@@ -71,10 +63,8 @@
 
         .eyebrow {
             font-family: var(--serif-en);
-            font-size: 0.75rem;
-            letter-spacing: 0.55em;
-            color: var(--gold);
-            text-transform: uppercase;
+            font-size: 0.75rem; letter-spacing: 0.55em;
+            color: var(--gold); text-transform: uppercase;
             margin-bottom: 24px;
             display: inline-flex; align-items: center; gap: 16px;
         }
@@ -97,37 +87,67 @@
             line-height: 2; margin-bottom: 80px;
         }
 
+        /* ===== ANNOUNCE BAR ===== */
+        .announce {
+            background: linear-gradient(90deg, var(--bg-green-deep), var(--bg-green-mid), var(--bg-green-deep));
+            color: var(--gold-bright);
+            text-align: center;
+            padding: 12px 16px;
+            font-family: var(--sans);
+            font-size: 0.78rem;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            position: fixed; top: 0; left: 0; right: 0; z-index: 101;
+            border-bottom: 1px solid var(--line-gold);
+        }
+        .announce .dot {
+            display: inline-block; width: 6px; height: 6px;
+            background: var(--orange); border-radius: 50%;
+            margin-right: 10px; vertical-align: middle;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.3); }
+        }
+
         /* ===== NAV ===== */
         .nav {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-            padding: 18px 32px;
+            position: fixed; top: 42px; left: 0; right: 0; z-index: 100;
+            padding: 14px 32px;
             display: flex; justify-content: space-between; align-items: center;
             background: rgba(10, 10, 8, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--line);
         }
         .nav-brand {
+            font-family: var(--serif-jp);
+            font-size: 0.95rem; font-weight: 700;
+            letter-spacing: 0.3em;
+            color: var(--text);
+        }
+        .nav-brand .sub {
             font-family: var(--serif-en);
-            font-size: 1.35rem; letter-spacing: 0.25em;
-            font-weight: 500; color: var(--text);
+            font-size: 0.6rem; letter-spacing: 0.4em;
+            color: var(--gold); margin-left: 12px;
+            text-transform: uppercase;
         }
         .nav-cta {
-            padding: 12px 28px;
+            padding: 11px 24px;
             background: var(--orange); color: #0a0a08;
             font-family: var(--serif-jp);
-            font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em;
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em;
             border-radius: 50px;
             transition: all 0.3s var(--ease);
             box-shadow: 0 4px 20px rgba(232, 144, 72, 0.25);
         }
         .nav-cta:hover {
             background: var(--gold-bright); transform: translateY(-1px);
-            box-shadow: 0 6px 24px rgba(232, 144, 72, 0.35);
         }
 
         /* ===== HERO ===== */
         .hero {
-            min-height: 100vh; padding: 120px 32px 80px;
+            min-height: 100vh; padding: 160px 32px 80px;
             position: relative; display: flex; align-items: center;
             background:
                 radial-gradient(ellipse 90% 60% at 30% 30%, rgba(34, 70, 41, 0.7) 0%, transparent 60%),
@@ -140,10 +160,9 @@
             background-image:
                 radial-gradient(circle at 20% 80%, var(--gold) 1px, transparent 1px),
                 radial-gradient(circle at 80% 20%, var(--gold) 1px, transparent 1px),
-                radial-gradient(circle at 50% 50%, var(--gold) 1px, transparent 1px),
-                radial-gradient(circle at 10% 30%, var(--gold-bright) 1px, transparent 1px);
-            background-size: 250px 250px, 300px 300px, 400px 400px, 200px 200px;
-            opacity: 0.15; pointer-events: none;
+                radial-gradient(circle at 50% 50%, var(--gold) 1px, transparent 1px);
+            background-size: 250px 250px, 300px 300px, 400px 400px;
+            opacity: 0.12; pointer-events: none;
         }
         .hero-grid {
             max-width: 1280px; margin: 0 auto;
@@ -151,19 +170,23 @@
             gap: 64px; align-items: center;
             position: relative; z-index: 2;
         }
-        .hero-tag {
-            display: inline-block; padding: 10px 22px;
+        .hero-deadline {
+            display: inline-flex; align-items: center; gap: 12px;
+            padding: 10px 22px;
             background: rgba(196, 75, 58, 0.15); color: var(--red);
-            border: 1px solid rgba(196, 75, 58, 0.4);
-            font-family: var(--serif-jp);
-            font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+            border: 1px solid rgba(196, 75, 58, 0.5);
+            font-family: var(--sans);
+            font-size: 0.78rem; font-weight: 700; letter-spacing: 0.2em;
             border-radius: 4px; margin-bottom: 28px;
+        }
+        .hero-deadline::before {
+            content: '●'; font-size: 0.7em; animation: pulse 2s infinite;
         }
         .hero h1 {
             font-family: var(--serif-jp);
             font-size: clamp(2rem, 4.6vw, 3.8rem);
             font-weight: 800; line-height: 1.35;
-            letter-spacing: 0.04em; color: var(--text); margin-bottom: 32px;
+            letter-spacing: 0.04em; color: var(--text); margin-bottom: 28px;
         }
         .hero h1 .accent { color: var(--matcha); }
         .hero-lead {
@@ -203,7 +226,7 @@
             display: inline-flex; align-items: center;
             padding: 20px 36px;
             background: transparent; color: var(--text);
-            border: 1px solid var(--line);
+            border: 1px solid var(--line-strong);
             font-family: var(--serif-jp);
             font-size: 0.9rem; letter-spacing: 0.1em;
             border-radius: 100px;
@@ -212,11 +235,7 @@
         .btn-ghost:hover { border-color: var(--matcha); color: var(--matcha); }
 
         /* ===== HERO VISUAL ===== */
-        /* ============================================================
-           ★ HERO VISUAL 差替ポイント
-           .hero-visual の中身を <img src="..."> に置き換えて画像差替可
-           現状はCSSプレースホルダー（茶碗風シルエット）
-           ============================================================ */
+        /* ★ HERO IMAGE: .hero-visual内のhero-bowlを<img>に置換可 */
         .hero-visual {
             position: relative; aspect-ratio: 1;
             background:
@@ -228,8 +247,7 @@
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
         }
         .hero-visual::before {
-            content: '茶';
-            position: absolute;
+            content: '茶'; position: absolute;
             font-family: var(--serif-jp);
             font-size: 40rem; font-weight: 800;
             color: rgba(255, 255, 255, 0.03);
@@ -249,22 +267,17 @@
                     rgba(85, 115, 60, 1) 75%,
                     transparent 76%);
             border-radius: 50%;
-            box-shadow:
-                inset 0 -30px 60px rgba(0, 0, 0, 0.5),
-                0 40px 80px rgba(0, 0, 0, 0.6);
+            box-shadow: inset 0 -30px 60px rgba(0, 0, 0, 0.5), 0 40px 80px rgba(0, 0, 0, 0.6);
         }
         .hero-bowl::after {
-            content: '';
-            position: absolute; top: 8%; left: 50%;
-            transform: translateX(-50%);
-            width: 40%; height: 8%;
+            content: ''; position: absolute; top: 8%; left: 50%;
+            transform: translateX(-50%); width: 40%; height: 8%;
             background: radial-gradient(ellipse, rgba(180, 210, 140, 0.7) 0%, transparent 70%);
             border-radius: 50%;
         }
-        .hero-badge {
+        .hero-seal {
             position: absolute; top: 28px; right: 28px;
-            width: 120px; height: 120px;
-            border-radius: 50%;
+            width: 130px; height: 130px; border-radius: 50%;
             background: var(--gold); color: var(--bg-black);
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
@@ -272,15 +285,17 @@
             font-weight: 800; text-align: center;
             box-shadow: 0 12px 32px rgba(201, 169, 110, 0.4);
             transform: rotate(-8deg);
-            font-size: 0.72rem; line-height: 1.4;
+            font-size: 0.7rem; line-height: 1.4;
             letter-spacing: 0.05em; padding: 12px;
         }
-        .hero-badge .big {
+        .hero-seal .big {
+            font-family: var(--serif-jp);
+            font-size: 1.5rem; margin: 4px 0; font-weight: 800;
+        }
+        .hero-seal .label {
             font-family: var(--serif-en);
-            font-size: 1.8rem;
-            margin: 2px 0;
-            font-weight: 700;
-            letter-spacing: 0;
+            font-size: 0.55rem; letter-spacing: 0.25em;
+            text-transform: uppercase; opacity: 0.7;
         }
 
         /* ===== STAT BAR ===== */
@@ -319,50 +334,102 @@
         .why { padding: 140px 32px; background: linear-gradient(180deg, var(--bg-black) 0%, var(--bg-deep) 100%); }
         .why-head { text-align: center; }
         .why-grid {
-            max-width: 1080px; margin: 0 auto;
+            max-width: 1280px; margin: 0 auto;
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
         }
         .why-card {
-            background: linear-gradient(160deg, var(--bg-green-deep), var(--bg-black));
-            padding: 48px 36px;
-            border: 1px solid var(--line); border-top: 2px solid var(--gold);
-            border-radius: 4px; position: relative;
+            background: linear-gradient(180deg, var(--bg-green-deep), var(--bg-black));
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            overflow: hidden;
             transition: all 0.4s var(--ease);
+            display: flex; flex-direction: column;
         }
         .why-card:hover {
-            transform: translateY(-6px); border-top-color: var(--matcha);
+            transform: translateY(-6px);
+            border-color: var(--gold);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        /* ★ WHY IMAGE: 各.why-visualを<img>に置換可。現状はCSSアート */
+        .why-visual {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            overflow: hidden;
+        }
+        .why-visual-1 {
+            background:
+                radial-gradient(ellipse 60% 80% at 20% 100%, rgba(163, 198, 116, 0.7) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 60% at 80% 100%, rgba(122, 157, 74, 0.6) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 40% at 50% 60%, rgba(90, 126, 58, 0.5) 0%, transparent 60%),
+                linear-gradient(180deg, #1a2511 0%, #243815 50%, #1a2511 100%);
+        }
+        .why-visual-2 {
+            background:
+                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(232, 144, 72, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse 30% 30% at 30% 30%, rgba(201, 169, 110, 0.4) 0%, transparent 60%),
+                radial-gradient(ellipse 30% 30% at 70% 70%, rgba(201, 169, 110, 0.4) 0%, transparent 60%),
+                linear-gradient(135deg, #2a1f0e 0%, #15281b 100%);
+        }
+        .why-visual-3 {
+            background:
+                radial-gradient(ellipse 90% 70% at 50% 100%, rgba(74, 120, 60, 0.6) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 50% at 30% 30%, rgba(201, 169, 110, 0.3) 0%, transparent 60%),
+                linear-gradient(180deg, #0e1410 0%, #15281b 100%);
+        }
+        .why-visual-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--serif-jp);
+            font-size: clamp(5rem, 10vw, 8rem);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.12);
+            line-height: 1;
+            letter-spacing: -0.05em;
+            user-select: none;
+        }
+        .why-visual::after {
+            content: '';
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg, transparent 60%, var(--bg-green-deep) 100%);
+            pointer-events: none;
+        }
+        .why-content {
+            padding: 36px 32px;
         }
         .why-num {
             font-family: var(--serif-en);
-            font-size: 3rem; color: var(--gold);
-            font-weight: 600; line-height: 1; margin-bottom: 20px;
-            font-style: italic;
+            font-size: 0.7rem; letter-spacing: 0.4em;
+            color: var(--gold);
+            margin-bottom: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
         }
-        .why-card h3 {
+        .why-content h3 {
             font-family: var(--serif-jp);
-            font-size: 1.25rem; font-weight: 700;
-            margin-bottom: 20px; line-height: 1.6; letter-spacing: 0.06em;
+            font-size: 1.3rem; font-weight: 700;
+            margin-bottom: 18px; line-height: 1.5;
+            letter-spacing: 0.06em;
         }
-        .why-card p {
+        .why-content p {
             color: var(--text-soft);
             font-size: 0.92rem; line-height: 2;
             font-family: var(--serif-jp);
+            margin-bottom: 24px;
         }
-        .why-card .data {
-            margin-top: 24px; padding-top: 20px;
+        .why-content .data {
+            padding-top: 18px;
             border-top: 1px dashed var(--line-gold);
             font-family: var(--serif-en);
             color: var(--gold-bright);
-            font-size: 0.85rem; letter-spacing: 0.1em;
+            font-size: 0.82rem; letter-spacing: 0.08em;
+            font-weight: 500;
         }
 
         /* ===== PROFIT ===== */
         .profit {
             padding: 140px 32px;
-            background:
-                radial-gradient(ellipse at 50% 0%, rgba(36, 74, 45, 0.5) 0%, transparent 60%),
-                var(--bg-black);
+            background: radial-gradient(ellipse at 50% 0%, rgba(36, 74, 45, 0.5) 0%, transparent 60%), var(--bg-black);
         }
         .profit-head { text-align: center; margin-bottom: 80px; }
         .profit-tag {
@@ -378,9 +445,7 @@
             font-weight: 800; line-height: 1.45;
             letter-spacing: 0.04em;
         }
-        .profit-headline .gold {
-            color: var(--gold-bright);
-        }
+        .profit-headline .gold { color: var(--gold-bright); }
 
         .profit-margin {
             margin: 60px auto 0;
@@ -401,26 +466,21 @@
             font-size: clamp(3.5rem, 7vw, 5.5rem);
             font-weight: 700; line-height: 1; margin-bottom: 12px;
         }
-        .profit-margin-value sup {
-            font-size: 0.5em; vertical-align: super;
-        }
+        .profit-margin-value sup { font-size: 0.5em; vertical-align: super; }
         .profit-margin-note {
             font-family: var(--serif-jp);
             font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em;
         }
-
         .profit-three {
             margin-top: 80px;
             max-width: 1080px; margin-left: auto; margin-right: auto;
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
         }
         .profit-feature {
             background: var(--bg-green-deep);
             padding: 36px 28px;
             border: 1px solid var(--line);
-            border-radius: 8px;
-            text-align: center;
+            border-radius: 8px; text-align: center;
         }
         .profit-feature .label {
             font-family: var(--serif-en);
@@ -434,7 +494,6 @@
             color: var(--text); line-height: 1.6;
             letter-spacing: 0.06em;
         }
-
         .profit-cta {
             text-align: center; margin-top: 64px;
             font-family: var(--serif-jp);
@@ -443,59 +502,14 @@
         }
         .profit-cta a { color: var(--matcha); border-bottom: 1px solid var(--matcha); padding-bottom: 2px; }
 
-        /* ===== SUPPORT ===== */
-        .support { padding: 140px 32px; background: var(--bg-deep); }
-        .support-grid {
-            max-width: 1080px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-        }
-        .support-card {
-            background: linear-gradient(135deg, rgba(163, 198, 116, 0.06), rgba(255, 255, 255, 0.01));
-            padding: 44px 36px;
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            display: grid; grid-template-columns: 80px 1fr;
-            gap: 24px; align-items: start;
-            transition: all 0.4s var(--ease);
-        }
-        .support-card:hover {
-            border-color: var(--matcha); transform: translateY(-4px);
-        }
-        .support-icon {
-            width: 72px; height: 72px;
-            border-radius: 50%; background: var(--bg-green-deep);
-            border: 1px solid var(--gold);
-            display: flex; align-items: center; justify-content: center;
-            font-family: var(--serif-en);
-            color: var(--gold);
-            font-size: 1.5rem; font-weight: 700; font-style: italic;
-        }
-        .support-card h3 {
-            font-family: var(--serif-jp);
-            font-size: 1.2rem; font-weight: 700;
-            margin-bottom: 14px; line-height: 1.6; letter-spacing: 0.06em;
-        }
-        .support-card p {
-            color: var(--text-soft);
-            font-family: var(--serif-jp);
-            font-size: 0.9rem; line-height: 2;
-        }
-
         /* ===== PRODUCT ===== */
-        /* ============================================================
-           ★ PRODUCT VISUAL 差替ポイント
-           .prod-visual の中身を <img> に変更で画像差替可
-           現状はCSSプレースホルダー（茶筒風）
-           ============================================================ */
-        .prod {
-            padding: 140px 32px;
-            background: linear-gradient(180deg, var(--bg-black), var(--bg-deep));
-        }
+        .prod { padding: 140px 32px; background: linear-gradient(180deg, var(--bg-black), var(--bg-deep)); }
         .prod-grid {
             max-width: 1180px; margin: 0 auto;
             display: grid; grid-template-columns: 1fr 1.1fr;
             gap: 80px; align-items: center;
         }
+        /* ★ PRODUCT IMAGE: .prod-canを<img>に置換可 */
         .prod-visual {
             position: relative; aspect-ratio: 4 / 5;
             background:
@@ -509,10 +523,7 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             width: 38%; aspect-ratio: 3 / 5;
-            background:
-                linear-gradient(180deg,
-                    #14180f 0%, #1f2616 30%, #2a341e 50%,
-                    #1f2616 70%, #0e1209 100%);
+            background: linear-gradient(180deg, #14180f 0%, #1f2616 30%, #2a341e 50%, #1f2616 70%, #0e1209 100%);
             border-radius: 12px;
             box-shadow:
                 inset 0 2px 0 rgba(255,255,255,0.1),
@@ -542,7 +553,8 @@
         .prod-can-en {
             font-family: var(--serif-en);
             font-size: 0.65rem; letter-spacing: 0.4em;
-            color: var(--gold); margin-top: 32px; font-style: italic;
+            color: var(--gold); margin-top: 32px;
+            font-weight: 600;
         }
         .prod-text h2 { margin-bottom: 32px; }
         .prod-spec {
@@ -559,6 +571,7 @@
             font-family: var(--serif-en);
             font-size: 0.72rem; letter-spacing: 0.3em;
             text-transform: uppercase; color: var(--gold);
+            font-weight: 600;
         }
         .prod-spec-value {
             font-family: var(--serif-jp);
@@ -570,42 +583,115 @@
         }
         .prod-spec-value .request {
             color: var(--matcha);
-            font-family: var(--serif-en);
-            font-size: 0.85rem;
-            font-style: italic;
+            font-family: var(--sans);
+            font-size: 0.88rem;
+            font-weight: 600;
         }
 
         /* ===== TARGET ===== */
         .target { padding: 140px 32px; background: var(--bg-black); }
         .target-head { text-align: center; }
         .target-list {
-            max-width: 1080px; margin: 0 auto;
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            max-width: 1180px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
         }
         .target-item {
-            background: linear-gradient(160deg, var(--bg-green-deep), var(--bg-black));
-            padding: 32px 28px;
+            background: linear-gradient(180deg, var(--bg-green-deep), var(--bg-black));
             border: 1px solid var(--line);
-            border-radius: 6px;
-            text-align: center;
-            transition: all 0.3s var(--ease);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.4s var(--ease);
+            display: flex; flex-direction: column;
         }
-        .target-item:hover { border-color: var(--matcha); }
-        .target-item .icon {
+        .target-item:hover {
+            border-color: var(--matcha);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+        }
+        /* ★ TARGET IMAGE: .target-visualを<img>に置換可 */
+        .target-visual {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+            background: var(--bg-deep);
+        }
+        .target-v-1 {
+            background:
+                linear-gradient(135deg, rgba(232, 144, 72, 0.15), transparent),
+                repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0 20px, transparent 20px 40px),
+                linear-gradient(180deg, #1a1410 0%, #0a0a08 100%);
+        }
+        .target-v-2 {
+            background:
+                radial-gradient(ellipse 60% 40% at 50% 70%, rgba(163, 198, 116, 0.25), transparent 70%),
+                linear-gradient(180deg, #0e1814 0%, #0a0a08 100%);
+        }
+        .target-v-3 {
+            background:
+                linear-gradient(135deg, rgba(201, 169, 110, 0.2), transparent 60%),
+                linear-gradient(180deg, #1a1814 0%, #0a0a08 100%);
+        }
+        .target-v-4 {
+            background:
+                radial-gradient(ellipse 50% 50% at 30% 50%, rgba(163, 198, 116, 0.3), transparent 60%),
+                linear-gradient(180deg, #15281b 0%, #0a0a08 100%);
+        }
+        .target-v-5 {
+            background:
+                linear-gradient(180deg, rgba(201, 169, 110, 0.1), transparent 50%),
+                repeating-linear-gradient(180deg, rgba(255,255,255,0.025) 0 30px, transparent 30px 60px),
+                linear-gradient(180deg, #14140e 0%, #0a0a08 100%);
+        }
+        .target-v-6 {
+            background:
+                radial-gradient(ellipse 70% 50% at 50% 30%, rgba(232, 144, 72, 0.15), transparent 70%),
+                linear-gradient(180deg, #0e1414 0%, #0a0a08 100%);
+        }
+        .target-num {
+            position: absolute;
+            top: 24px; left: 28px;
+            font-family: var(--serif-en);
+            font-size: 1.1rem; letter-spacing: 0.3em;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .target-kanji-bg {
+            position: absolute;
+            bottom: -20px; right: -10px;
             font-family: var(--serif-jp);
-            font-size: 2rem; font-weight: 700;
+            font-size: 9rem; font-weight: 900;
+            color: rgba(255, 255, 255, 0.06);
+            line-height: 1;
+            letter-spacing: -0.05em;
+            user-select: none;
+        }
+        .target-content {
+            padding: 28px 32px 32px;
+            flex: 1;
+            display: flex; flex-direction: column;
+        }
+        .target-content h4 {
+            font-family: var(--serif-jp);
+            font-size: 1.15rem; font-weight: 700;
+            margin-bottom: 14px; letter-spacing: 0.06em;
+            line-height: 1.5;
+        }
+        .target-content p {
+            color: var(--text-soft);
+            font-family: var(--serif-jp);
+            font-size: 0.88rem; line-height: 1.9;
+            margin-bottom: 20px;
+            flex: 1;
+        }
+        .target-tag {
+            display: inline-block;
+            font-family: var(--sans);
+            font-size: 0.7rem;
             color: var(--matcha);
-            margin-bottom: 16px; letter-spacing: 0.1em;
-        }
-        .target-item h4 {
-            font-family: var(--serif-jp);
-            font-size: 1rem; font-weight: 700;
-            margin-bottom: 10px; letter-spacing: 0.06em;
-        }
-        .target-item p {
-            color: var(--text-mute);
-            font-family: var(--serif-jp);
-            font-size: 0.82rem; line-height: 1.8;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            padding-top: 16px;
+            border-top: 1px dashed var(--line);
         }
 
         /* ===== FLOW ===== */
@@ -633,8 +719,8 @@
             margin: 0 auto 24px;
             display: flex; align-items: center; justify-content: center;
             font-family: var(--serif-en);
-            font-size: 1.4rem; font-weight: 600;
-            color: var(--gold); font-style: italic;
+            font-size: 1.8rem; font-weight: 700;
+            color: var(--gold);
         }
         .flow-step h4 {
             font-family: var(--serif-jp);
@@ -664,7 +750,7 @@
         .faq-q::before {
             content: 'Q.';
             font-family: var(--serif-en);
-            font-style: italic; color: var(--gold);
+            color: var(--gold); font-weight: 700;
         }
         .faq-a {
             color: var(--text-soft);
@@ -686,10 +772,20 @@
             background-image:
                 radial-gradient(circle at 20% 30%, var(--gold) 1px, transparent 1px),
                 radial-gradient(circle at 70% 70%, var(--gold-bright) 1px, transparent 1px);
-            background-size: 250px 250px, 300px 300px;
-            opacity: 0.2;
+            background-size: 250px 250px, 300px 300px; opacity: 0.2;
         }
         .cta-inner { position: relative; z-index: 2; }
+        .cta-deadline {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(196, 75, 58, 0.2);
+            border: 1px solid var(--red);
+            color: var(--red);
+            font-family: var(--sans);
+            font-size: 0.78rem; font-weight: 700;
+            letter-spacing: 0.2em; margin-bottom: 28px;
+            border-radius: 4px;
+        }
         .cta h2 {
             font-family: var(--serif-jp);
             font-size: clamp(2rem, 4.6vw, 3.6rem);
@@ -706,112 +802,40 @@
             margin-left: auto; margin-right: auto;
             letter-spacing: 0.06em;
         }
-        .cta .btn-primary { font-size: 1.1rem; padding: 24px 56px; }
-        .cta-meta {
-            margin-top: 40px;
-            font-family: var(--serif-jp);
-            color: var(--text-mute);
-            font-size: 0.8rem; letter-spacing: 0.15em;
-        }
-        .cta-meta a { color: var(--matcha); }
 
-        /* ===== INLINE FORM ===== */
-        .form-card {
-            max-width: 680px;
+        /* ===== FORM ===== */
+        .form-section {
+            max-width: 760px;
             margin: 56px auto 0;
-            background: rgba(255, 255, 255, 0.025);
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .form-header h3 {
+            font-family: var(--serif-jp);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+        .form-header p {
+            font-family: var(--sans);
+            font-size: 0.85rem;
+            color: var(--gold-bright);
+            letter-spacing: 0.15em;
+            font-weight: 500;
+        }
+        .form-card {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--line-gold);
             border-radius: 16px;
-            padding: 48px 40px;
-            text-align: left;
+            padding: 24px;
             backdrop-filter: blur(20px);
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
         }
-        .form-card h3 {
-            font-family: var(--serif-jp);
-            font-size: 1.3rem; font-weight: 700;
-            text-align: center;
-            margin-bottom: 8px; letter-spacing: 0.08em;
-        }
-        .form-card .form-sub {
-            text-align: center;
-            color: var(--text-mute);
-            font-size: 0.82rem; letter-spacing: 0.1em;
-            margin-bottom: 36px; font-family: var(--sans);
-        }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-bottom: 16px;
-        }
-        .form-field { margin-bottom: 16px; display: flex; flex-direction: column; }
-        .form-field label {
-            font-family: var(--sans);
-            font-size: 0.72rem;
-            color: var(--gold);
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
-        .form-field label .req {
-            color: var(--red);
-            margin-left: 6px;
-        }
-        .form-field input,
-        .form-field select,
-        .form-field textarea {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--line);
-            color: var(--text);
-            padding: 14px 16px;
-            border-radius: 6px;
-            font-family: var(--sans);
-            font-size: 0.95rem;
-            letter-spacing: 0.04em;
-            transition: all 0.3s var(--ease);
-        }
-        .form-field input:focus,
-        .form-field select:focus,
-        .form-field textarea:focus {
-            outline: none;
-            border-color: var(--matcha);
-            background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 0 3px rgba(163, 198, 116, 0.15);
-        }
-        .form-field textarea { resize: vertical; min-height: 100px; }
-        .form-field select { cursor: pointer; }
-        .form-submit {
-            width: 100%;
-            padding: 20px;
-            background: var(--orange);
-            color: #0a0a08;
-            border: none;
-            border-radius: 100px;
-            font-family: var(--sans);
-            font-weight: 700;
-            font-size: 1rem;
-            letter-spacing: 0.15em;
-            cursor: pointer;
-            margin-top: 12px;
-            transition: all 0.3s var(--ease);
-            box-shadow: 0 8px 28px rgba(232, 144, 72, 0.35);
-        }
-        .form-submit:hover {
-            background: var(--gold-bright);
-            transform: translateY(-2px);
-            box-shadow: 0 12px 36px rgba(232, 144, 72, 0.5);
-        }
-        .form-note {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 0.75rem;
-            color: var(--text-mute);
-            font-family: var(--sans);
-            letter-spacing: 0.08em;
-            line-height: 1.8;
-        }
+
         .form-divider {
             display: flex; align-items: center; gap: 16px;
             margin: 48px auto 32px;
@@ -824,68 +848,44 @@
             content: ''; flex: 1; height: 1px; background: var(--line);
         }
         .alt-contacts {
-            display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+            display: flex; justify-content: center; gap: 48px; flex-wrap: wrap;
             font-family: var(--sans);
         }
-        .alt-contact {
-            text-align: center;
-        }
+        .alt-contact { text-align: center; }
         .alt-contact .lbl {
             font-size: 0.7rem; letter-spacing: 0.3em;
             color: var(--gold); text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 8px; font-weight: 600;
         }
         .alt-contact .val {
             font-size: 1rem; color: var(--text);
             font-weight: 500; letter-spacing: 0.05em;
         }
         .alt-contact .val a { color: var(--matcha); }
-        @media (max-width: 720px) {
-            .form-row { grid-template-columns: 1fr; }
-            .form-card { padding: 32px 24px; }
-        }
 
         /* ===== FOOTER ===== */
         .footer {
             background: #050503;
-            padding: 80px 32px 40px;
+            padding: 60px 32px 32px;
             border-top: 1px solid var(--line);
         }
-        .footer-inner { max-width: 1280px; margin: 0 auto; }
-        .footer-grid {
-            display: grid; grid-template-columns: 2fr 1fr 1fr;
-            gap: 64px; margin-bottom: 60px;
-            padding-bottom: 48px;
-            border-bottom: 1px solid var(--line);
+        .footer-inner {
+            max-width: 1080px; margin: 0 auto;
+            text-align: center;
         }
-        .footer-brand {
-            font-family: var(--serif-en);
-            font-size: 1.8rem; letter-spacing: 0.25em; margin-bottom: 12px;
-        }
-        .footer-tag {
+        .footer-info {
             font-family: var(--serif-jp);
-            color: var(--text-mute);
-            font-size: 0.85rem; letter-spacing: 0.2em;
-            margin-bottom: 20px;
-        }
-        .footer-col h5 {
-            font-family: var(--serif-en);
-            font-size: 0.7rem; letter-spacing: 0.4em;
-            color: var(--gold); text-transform: uppercase;
-            margin-bottom: 20px; font-weight: 600;
-        }
-        .footer-col p, .footer-col a {
-            display: block;
-            font-size: 0.85rem; color: var(--text-soft);
-            font-family: var(--serif-jp);
-            line-height: 2; letter-spacing: 0.05em;
+            font-size: 0.78rem; color: var(--text-mute);
+            line-height: 2; letter-spacing: 0.1em;
+            margin-bottom: 24px;
         }
         .footer-bottom {
-            display: flex; justify-content: space-between;
             font-size: 0.7rem; color: var(--text-mute);
             letter-spacing: 0.2em;
             font-family: var(--serif-en);
             text-transform: uppercase;
+            padding-top: 20px;
+            border-top: 1px solid var(--line);
         }
 
         /* ===== Reveal ===== */
@@ -894,77 +894,77 @@
 
         /* ===== Responsive ===== */
         @media (max-width: 960px) {
+            .announce { font-size: 0.7rem; padding: 10px 12px; letter-spacing: 0.1em; }
+            .nav { padding: 12px 18px; }
+            .nav-brand .sub { display: none; }
+            .nav-cta { padding: 10px 18px; font-size: 0.75rem; }
+            .hero { padding-top: 140px; }
             .hero-grid { grid-template-columns: 1fr; gap: 48px; }
             .hero-visual { max-width: 480px; margin: 0 auto; width: 100%; }
             .statbar-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
             .stat-item:not(:last-child)::after { display: none; }
-            .why-grid { grid-template-columns: 1fr; gap: 20px; }
-            .profit-three { grid-template-columns: 1fr; }
-            .support-grid { grid-template-columns: 1fr; }
+            .why-grid, .target-list, .profit-three { grid-template-columns: 1fr; gap: 20px; }
             .prod-grid { grid-template-columns: 1fr; gap: 48px; }
             .prod-visual { max-width: 360px; margin: 0 auto; width: 100%; }
             .flow-steps { grid-template-columns: repeat(2, 1fr); gap: 40px 24px; }
             .flow-steps::before { display: none; }
-            .target-list { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-            .footer-bottom { flex-direction: column; gap: 12px; }
-            .nav { padding: 14px 20px; }
-            .nav-cta { padding: 10px 20px; font-size: 0.78rem; }
         }
     </style>
 </head>
 
 <body>
+
+    <!-- ★ ANNOUNCE BAR：期間限定告知 -->
+    <div class="announce">
+        <span class="dot"></span>2026年 夏季限定・業販パートナー先行募集中／お申込締切：2026年7月31日
+    </div>
+
     <!-- NAV -->
     <nav class="nav">
-        <a href="/" class="nav-brand">NOKTOA</a>
-        <a href="#contact" class="nav-cta">資料請求・お問い合わせ</a>
+        <a href="#" class="nav-brand">鹿児島 厳選抹茶<span class="sub">Wholesale Program</span></a>
+        <a href="#contact" class="nav-cta">パートナー申込</a>
     </nav>
 
     <!-- ============================================================
-         ★ HERO セクション 差替ポイント
-         キャッチコピー・サブコピー・バッジ文言・CTAを編集
+         ★ HERO 差替ポイント
          ============================================================ -->
     <section class="hero">
         <div class="hero-grid">
             <div class="hero-text">
-                <div class="hero-tag">業販・取扱店募集</div>
+                <div class="hero-deadline">2026年夏季限定 先行募集</div>
                 <h1>
                     インバウンドが、<br>
                     日本を求めている。<br>
                     その答えが<span class="accent">「抹茶」</span>。
                 </h1>
                 <p class="hero-lead">
-                    鹿児島産プレミアム抹茶パウダー300g。<br>
-                    業界最高水準の粗利率と、大量陳列実績。<br>
-                    販促物・SNS発信は、NOKTOAが伴走します。
+                    鹿児島産プレミアム抹茶パウダー 300g。<br>
+                    業界最高水準の粗利率と、確かな品質。<br>
+                    選ばれた取扱店様への、限定的なご案内です。
                 </p>
                 <div class="hero-points">
                     <span class="hero-point">✓ 業界最高水準の粗利率</span>
-                    <span class="hero-point">✓ 販促物 無償提供</span>
                     <span class="hero-point">✓ 小ロット応相談</span>
+                    <span class="hero-point">✓ 最短10日納品</span>
                 </div>
                 <div class="hero-cta">
-                    <a href="#contact" class="btn-primary">資料請求・お問い合わせ</a>
-                    <a href="#why" class="btn-ghost">なぜ今、抹茶か</a>
+                    <a href="#contact" class="btn-primary">パートナー申込</a>
+                    <a href="#why" class="btn-ghost">詳しく見る</a>
                 </div>
             </div>
             <div class="hero-visual">
-                <!-- 画像差替時：以下の hero-bowl を <img src="..."> に置き換え -->
+                <!-- 画像差替時：hero-bowlを<img>に -->
                 <div class="hero-bowl"></div>
-                <div class="hero-badge">
-                    <span>粗利率</span>
-                    <span class="big">60<span style="font-size:0.6em;">%</span>+</span>
-                    <span>業界最高水準</span>
+                <div class="hero-seal">
+                    <span class="label">Origin</span>
+                    <span class="big">鹿児島</span>
+                    <span class="label">Premium</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ============================================================
-         ★ STATBAR 差替ポイント
-         市場データ・出典は公開情報。更新時は数字と注釈を更新
-         ============================================================ -->
+    <!-- STAT BAR -->
     <section class="statbar">
         <div class="statbar-grid">
             <div class="stat-item">
@@ -987,8 +987,8 @@
     </section>
 
     <!-- ============================================================
-         ★ WHY セクション 差替ポイント
-         3カードのタイトル・本文・サブデータを編集
+         ★ WHY 差替ポイント
+         各カードの.why-visualを<img>に置換可
          ============================================================ -->
     <section class="why" id="why">
         <div class="container why-head reveal">
@@ -998,30 +998,43 @@
         </div>
         <div class="why-grid">
             <div class="why-card reveal">
-                <div class="why-num">01</div>
-                <h3>世界が抹茶を求めている</h3>
-                <p>欧米・アジアで抹茶ブームが定着。グローバル飲食チェーンが次々に抹茶メニューを拡大。需要は今後10年伸び続けると予測されています。</p>
-                <div class="data">Market: $4.5B → $10.3B (2030)</div>
+                <div class="why-visual why-visual-1">
+                    <span class="why-visual-text">世界</span>
+                </div>
+                <div class="why-content">
+                    <div class="why-num">01 — Global Demand</div>
+                    <h3>世界が抹茶を求めている</h3>
+                    <p>欧米・アジアで抹茶ブームが定着。グローバル飲食チェーンが次々に抹茶メニューを拡大。需要は今後10年伸び続けると予測されています。</p>
+                    <div class="data">Market: $4.5B → $10.3B (2030)</div>
+                </div>
             </div>
             <div class="why-card reveal">
-                <div class="why-num">02</div>
-                <h3>訪日インバウンドの定番土産</h3>
-                <p>抹茶は訪日外国人が必ず買う「日本の象徴」。免税対象・軽量・常温保存・賞味期限長め、土産品としての条件をすべて満たす最強カテゴリです。</p>
-                <div class="data">訪日客: 3,500万人（2024）</div>
+                <div class="why-visual why-visual-2">
+                    <span class="why-visual-text">客</span>
+                </div>
+                <div class="why-content">
+                    <div class="why-num">02 — Inbound</div>
+                    <h3>訪日客の定番土産</h3>
+                    <p>抹茶は訪日外国人が必ず買う「日本の象徴」。免税対象・軽量・常温保存・賞味期限長め、土産品としての条件をすべて満たす最強カテゴリです。</p>
+                    <div class="data">訪日客: 3,500万人（2024）</div>
+                </div>
             </div>
             <div class="why-card reveal">
-                <div class="why-num">03</div>
-                <h3>鹿児島という新産地の力</h3>
-                <p>京都・静岡に並ぶ新産地、鹿児島。安定した品質と供給量を両立する稀有な拠点。信頼ある産地ラインに支えられた、海外戦略にも乗る商材です。</p>
-                <div class="data">産地: 鹿児島県</div>
+                <div class="why-visual why-visual-3">
+                    <span class="why-visual-text">産</span>
+                </div>
+                <div class="why-content">
+                    <div class="why-num">03 — Origin</div>
+                    <h3>鹿児島という新産地の力</h3>
+                    <p>京都・静岡に並ぶ新産地、鹿児島。安定した品質と供給量を両立する稀有な拠点。信頼ある産地ラインに支えられた、海外戦略にも乗る商材です。</p>
+                    <div class="data">産地: 鹿児島県</div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         ★ PROFIT セクション 差替ポイント
-         具体価格は伏せ、率・方向感のみ訴求
-         詳細数字は資料請求で開示
+         ★ PROFIT 差替ポイント
          ============================================================ -->
     <section class="profit" id="profit">
         <div class="profit-head reveal">
@@ -1055,105 +1068,96 @@
 
         <p class="profit-cta reveal">
             ※ 卸価格・想定上代・粗利シミュレーションの詳細は<br>
-            <a href="#contact">資料請求</a>にてご案内いたします。
+            <a href="#contact">パートナー申込</a>後にご案内いたします。
         </p>
     </section>
 
     <!-- ============================================================
-         ★ SUPPORT セクション 差替ポイント
-         NOKTOAが提供する4サポート。文言調整可
-         ============================================================ -->
-    <section class="support">
-        <div class="container why-head reveal">
-            <div class="eyebrow">— NOKTOA Support</div>
-            <h2 class="section-title">「並べるだけ」では、終わらせない。</h2>
-            <p class="section-sub">NOKTOAは映像・SNS運用・PR設計の会社です。<br>商品を仕入れていただいた後、御社の売場で確実に売れるよう、販促を全面サポートします。</p>
-        </div>
-        <div class="support-grid">
-            <div class="support-card reveal">
-                <div class="support-icon">i.</div>
-                <div>
-                    <h3>販促物・POPの無償提供</h3>
-                    <p>多言語対応の店頭POP・什器デザイン・ポスター素材を、取扱店様に無償でご提供します。インバウンド客の購買率を最大化。</p>
-                </div>
-            </div>
-            <div class="support-card reveal">
-                <div class="support-icon">ii.</div>
-                <div>
-                    <h3>動画コンテンツ制作</h3>
-                    <p>インバウンド訴求の動画を弊社で制作。御社の売場・SNS・サイネージで自由にご活用いただけます。多言語字幕対応。</p>
-                </div>
-            </div>
-            <div class="support-card reveal">
-                <div class="support-icon">iii.</div>
-                <div>
-                    <h3>SNS発信の同時運用</h3>
-                    <p>NOKTOAのSNSチャネルを通じ、御社の取扱開始情報を発信。集客と認知拡大を同時に支援します。</p>
-                </div>
-            </div>
-            <div class="support-card reveal">
-                <div class="support-icon">iv.</div>
-                <div>
-                    <h3>サンプル提供・試飲対応</h3>
-                    <p>店頭試飲・バイヤー試飲用のサンプルをご提供。お客様の購入意思決定を後押しする体験を、現場で実現できます。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         ★ TARGET セクション 差替ポイント
-         業態リスト編集可。特定店舗名は出さない方針
+         ★ TARGET 差替ポイント
          ============================================================ -->
     <section class="target">
-        <div class="container why-head reveal">
+        <div class="container target-head reveal">
             <div class="eyebrow">— Best Fit Partners</div>
             <h2 class="section-title">こんな業態に、最適です。</h2>
             <p class="section-sub">インバウンド客接点を多く持つ業態であれば、すぐに収益化が可能です。</p>
         </div>
         <div class="target-list">
             <div class="target-item reveal">
-                <div class="icon">流</div>
-                <h4>ディスカウントストア・量販店</h4>
-                <p>訪日客の集まる大型店舗。大量陳列・多店舗展開と相性◎。</p>
+                <div class="target-visual target-v-1">
+                    <div class="target-num">No. 01</div>
+                    <div class="target-kanji-bg">量販</div>
+                </div>
+                <div class="target-content">
+                    <h4>ディスカウントストア／量販店</h4>
+                    <p>訪日客の集まる大型店舗。大量陳列・多店舗展開と相性◎。</p>
+                    <span class="target-tag">— 高回転 ／ 大量陳列</span>
+                </div>
             </div>
             <div class="target-item reveal">
-                <div class="icon">空</div>
-                <h4>空港・駅・観光地の土産店</h4>
-                <p>羽田・成田・関空・各新幹線駅・観光地のお土産店。免税対応可。</p>
+                <div class="target-visual target-v-2">
+                    <div class="target-num">No. 02</div>
+                    <div class="target-kanji-bg">空港</div>
+                </div>
+                <div class="target-content">
+                    <h4>空港・駅・観光地の土産店</h4>
+                    <p>主要空港・新幹線駅・観光地の土産売場。免税対応にも適合。</p>
+                    <span class="target-tag">— 高単価 ／ 免税適合</span>
+                </div>
             </div>
             <div class="target-item reveal">
-                <div class="icon">宿</div>
-                <h4>ホテル・旅館・宿泊施設</h4>
-                <p>客室アメニティ、ロビー販売、ギフトコーナーでの展開。</p>
+                <div class="target-visual target-v-3">
+                    <div class="target-num">No. 03</div>
+                    <div class="target-kanji-bg">宿泊</div>
+                </div>
+                <div class="target-content">
+                    <h4>ホテル・旅館・宿泊施設</h4>
+                    <p>客室アメニティ、ロビー販売、ギフトコーナーで展開可能。</p>
+                    <span class="target-tag">— ブランド合致</span>
+                </div>
             </div>
             <div class="target-item reveal">
-                <div class="icon">茶</div>
-                <h4>カフェ・茶寮・専門店</h4>
-                <p>業務用としての利用、リテール販売との併用。</p>
+                <div class="target-visual target-v-4">
+                    <div class="target-num">No. 04</div>
+                    <div class="target-kanji-bg">茶寮</div>
+                </div>
+                <div class="target-content">
+                    <h4>カフェ・茶寮・専門店</h4>
+                    <p>業務用としての利用、リテール販売との併用で複合収益化。</p>
+                    <span class="target-tag">— 業務×小売 併用</span>
+                </div>
             </div>
             <div class="target-item reveal">
-                <div class="icon">百</div>
-                <h4>百貨店・モール・商業施設</h4>
-                <p>地下食品売場、催事、地方物産展。高単価帯と相性◎。</p>
+                <div class="target-visual target-v-5">
+                    <div class="target-num">No. 05</div>
+                    <div class="target-kanji-bg">百貨</div>
+                </div>
+                <div class="target-content">
+                    <h4>百貨店・モール・商業施設</h4>
+                    <p>地下食品売場、催事、地方物産展。高単価帯と相性◎。</p>
+                    <span class="target-tag">— 高単価適合</span>
+                </div>
             </div>
             <div class="target-item reveal">
-                <div class="icon">越</div>
-                <h4>越境EC・インバウンド通販</h4>
-                <p>海外向け越境ECサイトでの取扱。在庫リスクなしの受発注対応。</p>
+                <div class="target-visual target-v-6">
+                    <div class="target-num">No. 06</div>
+                    <div class="target-kanji-bg">越境</div>
+                </div>
+                <div class="target-content">
+                    <h4>越境EC／インバウンド通販</h4>
+                    <p>海外向け越境ECサイトでの取扱。在庫リスクなしの受発注対応。</p>
+                    <span class="target-tag">— グローバル展開</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         ★ PRODUCT セクション 差替ポイント
-         商品スペック。価格項目は「お問い合わせ」表記に
-         画像差替時：.prod-can を <img src="..."> に置き換え
+         ★ PRODUCT 差替ポイント
          ============================================================ -->
     <section class="prod">
         <div class="prod-grid">
             <div class="prod-visual reveal">
-                <!-- 画像差替時：以下の prod-can を <img src="..."> に置き換え -->
+                <!-- 画像差替時：prod-canを<img>に -->
                 <div class="prod-can">
                     <div class="prod-can-kanji">厳選<br>抹茶</div>
                     <div class="prod-can-en">300 G</div>
@@ -1167,8 +1171,8 @@
                     <div class="prod-spec-row"><div class="prod-spec-label">Origin</div><div class="prod-spec-value">鹿児島県</div></div>
                     <div class="prod-spec-row"><div class="prod-spec-label">Volume</div><div class="prod-spec-value">300g <span class="note">パウダー</span></div></div>
                     <div class="prod-spec-row"><div class="prod-spec-label">Category</div><div class="prod-spec-value">プレミアム帯</div></div>
-                    <div class="prod-spec-row"><div class="prod-spec-label">Wholesale</div><div class="prod-spec-value"><span class="request">資料請求にてご案内</span></div></div>
-                    <div class="prod-spec-row"><div class="prod-spec-label">MOQ</div><div class="prod-spec-value">1箱（50個）〜 <span class="note">小ロット応相談</span></div></div>
+                    <div class="prod-spec-row"><div class="prod-spec-label">Wholesale</div><div class="prod-spec-value"><span class="request">パートナー申込後にご案内</span></div></div>
+                    <div class="prod-spec-row"><div class="prod-spec-label">MOQ</div><div class="prod-spec-value">1箱（50個）〜 <span class="note">応相談</span></div></div>
                     <div class="prod-spec-row"><div class="prod-spec-label">Lead Time</div><div class="prod-spec-value">約10日</div></div>
                     <div class="prod-spec-row"><div class="prod-spec-label">Payment</div><div class="prod-spec-value">代引き ／ 事前振込</div></div>
                 </div>
@@ -1177,49 +1181,45 @@
     </section>
 
     <!-- ============================================================
-         ★ FLOW セクション 差替ポイント
-         取引フローのステップ文言調整可
+         ★ FLOW 差替ポイント
          ============================================================ -->
     <section class="flow">
         <div class="container flow-head reveal">
             <div class="eyebrow">— How It Works</div>
             <h2 class="section-title">お取引までの流れ</h2>
-            <p class="section-sub">お問い合わせから店頭並びまで、最短10日。</p>
+            <p class="section-sub">お申込みから店頭並びまで、最短10日。</p>
         </div>
         <div class="flow-steps">
-            <div class="flow-step reveal"><div class="flow-circle">i.</div><h4>お問い合わせ</h4><p>下記フォームよりご連絡ください。</p></div>
-            <div class="flow-step reveal"><div class="flow-circle">ii.</div><h4>商談・サンプル</h4><p>商品サンプル送付・条件すり合わせ。</p></div>
-            <div class="flow-step reveal"><div class="flow-circle">iii.</div><h4>ご発注・お支払い</h4><p>代引き／事前振込にて手続き。</p></div>
-            <div class="flow-step reveal"><div class="flow-circle">iv.</div><h4>納品・販促開始</h4><p>約10日で納品・販促物も同送。</p></div>
+            <div class="flow-step reveal"><div class="flow-circle">1</div><h4>パートナー申込</h4><p>下記フォームよりご連絡ください。</p></div>
+            <div class="flow-step reveal"><div class="flow-circle">2</div><h4>商談・サンプル</h4><p>商品サンプル送付・条件すり合わせ。</p></div>
+            <div class="flow-step reveal"><div class="flow-circle">3</div><h4>ご発注・お支払い</h4><p>代引き／事前振込にて手続き。</p></div>
+            <div class="flow-step reveal"><div class="flow-circle">4</div><h4>納品・販売開始</h4><p>約10日で納品・店頭展開へ。</p></div>
         </div>
     </section>
 
     <!-- ============================================================
-         ★ FAQ セクション 差替ポイント
-         質問・回答の追加・編集可
+         ★ FAQ 差替ポイント
          ============================================================ -->
     <section class="faq">
-        <div class="container why-head reveal">
+        <div class="container target-head reveal">
             <div class="eyebrow">— FAQ</div>
             <h2 class="section-title">よくあるご質問</h2>
             <p class="section-sub">お取引前によくいただくご質問にお答えします。</p>
         </div>
         <div class="faq-list">
-            <div class="faq-item reveal"><div class="faq-q">小ロットでの試験導入は可能ですか？</div><div class="faq-a">はい、可能です。標準MOQは1箱(50個)ですが、初回お試しの場合は小ロット単位でも対応しております。お気軽にご相談ください。</div></div>
-            <div class="faq-item reveal"><div class="faq-q">販促物（POP・動画）の言語対応は？</div><div class="faq-a">日本語・英語・中国語（簡体・繁体）・韓国語に対応しています。その他言語についてもご相談ください。</div></div>
             <div class="faq-item reveal"><div class="faq-q">他社との取扱重複はありますか？</div><div class="faq-a">エリア・業態に応じて柔軟に対応します。独占的取扱のご相談も承りますので、商談時にお申し付けください。</div></div>
             <div class="faq-item reveal"><div class="faq-q">継続発注の場合、価格条件は変わりますか？</div><div class="faq-a">継続取扱・大量発注のお客様には、別途条件をご相談させていただきます。長期パートナーとしての関係性を重視しています。</div></div>
             <div class="faq-item reveal"><div class="faq-q">海外への展開は可能ですか？</div><div class="faq-a">可能です。海外戦略にも対応するラインのため、越境EC・海外展開のご相談にもお応えできます。</div></div>
+            <div class="faq-item reveal"><div class="faq-q">募集期間後の申込は可能ですか？</div><div class="faq-a">2026年夏季の先行募集期間は7月31日までとなります。期間後の取扱については、別途お問い合わせください。</div></div>
         </div>
     </section>
 
     <!-- ============================================================
-         ★ CTA セクション 差替ポイント
-         メインのお問い合わせCTA。コピー・問合せ先・フォーム差替可
+         ★ CTA 差替ポイント
          ============================================================ -->
     <section class="cta" id="contact">
         <div class="cta-inner reveal">
-            <div class="eyebrow">— Get Started</div>
+            <div class="cta-deadline">● 申込締切：2026年7月31日</div>
             <h2>御社の売場で、<br><span class="gold">「次の主力商品」</span>を、共に。</h2>
             <p class="cta-sub">
                 資料請求・サンプル送付・取扱条件のご相談、<br>
@@ -1227,22 +1227,17 @@
                 担当者が48時間以内にご返信いたします。
             </p>
 
-            <!-- ============================================================
-                 ★ FORM 差替ポイント（Tally埋込）
-                 フォームID: LZa2AO
-                 編集URL: https://tally.so/forms/LZa2AO/edit
-                 公開URL: https://tally.so/r/LZa2AO
-                 ============================================================ -->
-            <div class="form-card reveal" style="padding: 24px;">
-                <iframe data-tally-src="https://tally.so/embed/LZa2AO?alignLeft=1&hideTitle=0&transparentBackground=1&dynamicHeight=1"
-                    loading="lazy"
-                    width="100%"
-                    height="600"
-                    frameborder="0"
-                    marginheight="0"
-                    marginwidth="0"
-                    title="業販お問い合わせ"
-                    style="border: none; background: transparent;"></iframe>
+            <div class="form-section reveal">
+                <div class="form-header">
+                    <h3>業販パートナー お申込フォーム</h3>
+                    <p>— 1分で送信完了 —</p>
+                </div>
+                <div class="form-card">
+                    <iframe data-tally-src="https://tally.so/embed/LZa2AO?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                        loading="lazy" width="100%" height="600" frameborder="0"
+                        marginheight="0" marginwidth="0" title="業販お問い合わせ"
+                        style="border: none; background: transparent;"></iframe>
+                </div>
             </div>
 
             <div class="form-divider">OR</div>
@@ -1252,43 +1247,24 @@
                     <div class="lbl">Email</div>
                     <div class="val"><a href="mailto:info@noktoa.com">info@noktoa.com</a></div>
                 </div>
-                <div class="alt-contact">
-                    <div class="lbl">Web</div>
-                    <div class="val"><a href="/">noktoa.com</a></div>
-                </div>
             </div>
         </div>
     </section>
 
-    <script async src="https://tally.so/widgets/embed.js"></script>
-
     <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-inner">
-            <div class="footer-grid">
-                <div>
-                    <div class="footer-brand">NOKTOA</div>
-                    <p class="footer-tag">「伝える」を「資産」へ。</p>
-                    <p style="font-family: var(--serif-jp); font-size: 0.82rem; color: var(--text-soft); line-height: 2; max-width: 480px;">株式会社NOKTOAは、映像制作・SNS運用・PR設計を通じて、企業の発信を永続的な資産へと変革する戦略的パートナーです。</p>
-                </div>
-                <div class="footer-col">
-                    <h5>Contact</h5>
-                    <a href="mailto:info@noktoa.com">info@noktoa.com</a>
-                    <a href="/">noktoa.com</a>
-                </div>
-                <div class="footer-col">
-                    <h5>Company</h5>
-                    <p>株式会社NOKTOA</p>
-                    <p>東京都世田谷区太子堂4-18-15<br>マガザン三軒茶屋 2-3F-3</p>
-                </div>
-            </div>
+            <p class="footer-info">
+                運営：株式会社NOKTOA／東京都世田谷区太子堂4-18-15 マガザン三軒茶屋 2-3F-3<br>
+                Contact: info@noktoa.com
+            </p>
             <div class="footer-bottom">
-                <span>© 2026 NOKTOA Inc.</span>
-                <span>Premium Matcha Wholesale</span>
+                © 2026 Premium Matcha Wholesale Program
             </div>
         </div>
     </footer>
 
+    <script async src="https://tally.so/widgets/embed.js"></script>
     <script>
         const io = new IntersectionObserver((entries) => {
             entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
