@@ -98,8 +98,10 @@
 
     <main>
         <section class="hero" id="home">
+            <div class="hero-poster" aria-hidden="true"></div>
             <iframe id="hero-video" class="hero-video"
-                src="https://www.youtube.com/embed/-uuhnRqTqQA?autoplay=1&mute=1&loop=1&playlist=-uuhnRqTqQA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=https://takurow.github.io"
+                data-src="https://www.youtube.com/embed/-uuhnRqTqQA?autoplay=1&mute=1&loop=1&playlist=-uuhnRqTqQA&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=https://noktoa.com"
+                title="NOKTOA ブランドムービー"
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen></iframe>
@@ -414,6 +416,16 @@
         </div>
     </footer>
 
+    <script>
+        // ヒーロー動画は初期表示後に読み込み（LCP最適化）。それまではポスター画像を表示。
+        (function () {
+            var f = document.getElementById('hero-video');
+            if (!f || !f.dataset.src) return;
+            function load() { if (f.dataset.src) { f.src = f.dataset.src; delete f.dataset.src; } }
+            if (document.readyState === 'complete') { setTimeout(load, 600); }
+            else { window.addEventListener('load', function () { setTimeout(load, 600); }); }
+        })();
+    </script>
     <script src="script.js"></script>
 </body>
 
