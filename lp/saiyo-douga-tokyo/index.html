@@ -14,7 +14,7 @@
     <meta property="og:description"
         content="東京で採用動画・求人動画をお探しなら株式会社NOKTOA。応募数と採用ミスマッチの課題を、戦略設計された採用動画で解決します。">
     <meta property="og:url" content="https://noktoa.com/lp/saiyo-douga-tokyo/">
-    <meta property="og:image" content="https://noktoa.com/assets/logo_wh.png">
+    <meta property="og:image" content="https://noktoa.com/assets/saiyo-douga-tokyo-hero.webp">
     <meta property="og:site_name" content="株式会社NOKTOA">
     <meta name="twitter:card" content="summary_large_image">
 
@@ -96,160 +96,106 @@
 
     <style>
         :root {
-            --bg: #0a0a0f;
-            --surface: #14141c;
-            --line: rgba(255, 255, 255, 0.1);
-            --text: #f2f2f5;
-            --muted: #a0a0aa;
-            --accent: #c9a86a;
+            --bg: #0a0a0f; --surface: #14141c; --line: rgba(255, 255, 255, 0.1);
+            --text: #f2f2f5; --muted: #a0a0aa; --accent: #c9a86a;
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: "Noto Sans JP", "Inter", sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.9;
-            font-weight: 300;
-            -webkit-font-smoothing: antialiased;
-        }
-
+        body { font-family: "Noto Sans JP", "Inter", sans-serif; background: var(--bg); color: var(--text); line-height: 1.9; font-weight: 300; -webkit-font-smoothing: antialiased; }
+        img { display: block; max-width: 100%; }
         a { color: inherit; }
+        .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+        .narrow { max-width: 760px; }
 
-        .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
-
-        header {
-            border-bottom: 1px solid var(--line);
-            padding: 18px 0;
-            position: sticky;
-            top: 0;
-            background: rgba(10, 10, 15, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 10;
-        }
+        header { border-bottom: 1px solid var(--line); padding: 16px 0; position: sticky; top: 0; background: rgba(10,10,15,0.85); backdrop-filter: blur(12px); z-index: 20; }
         header .wrap { display: flex; align-items: center; justify-content: space-between; }
-        header img { height: 26px; }
-        .cta-btn {
-            display: inline-block;
-            background: var(--accent);
-            color: #14141c;
-            padding: 10px 22px;
-            border-radius: 6px;
-            font-weight: 700;
-            text-decoration: none;
-            font-size: 14px;
-        }
+        header img { height: 24px; }
+        .cta-btn { display: inline-block; background: var(--accent); color: #14141c; padding: 11px 24px; border-radius: 6px; font-weight: 700; text-decoration: none; font-size: 14px; transition: transform .15s ease; }
+        .cta-btn:hover { transform: translateY(-1px); }
 
-        .hero { padding: 72px 0 56px; }
-        .hero .eyebrow {
-            color: var(--accent);
-            letter-spacing: 0.12em;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 20px;
-        }
-        .hero h1 {
-            font-size: clamp(28px, 6vw, 44px);
-            font-weight: 700;
-            line-height: 1.4;
-            letter-spacing: 0.01em;
-            margin-bottom: 24px;
-        }
+        /* HERO */
+        .hero { position: relative; min-height: 92vh; display: flex; align-items: center; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; background-image: url('../../assets/saiyo-douga-tokyo-hero.webp'); background-size: cover; background-position: center; }
+        .hero-bg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,10,15,0.92) 0%, rgba(10,10,15,0.78) 45%, rgba(10,10,15,0.45) 100%); }
+        .hero-inner { position: relative; z-index: 2; padding: 80px 0; }
+        .hero .eyebrow { color: var(--accent); letter-spacing: 0.14em; font-size: 13px; font-weight: 500; margin-bottom: 22px; }
+        .hero h1 { font-size: clamp(30px, 6.4vw, 52px); font-weight: 700; line-height: 1.38; letter-spacing: 0.01em; margin-bottom: 26px; }
         .hero h1 .hl { color: var(--accent); }
-        .hero .lead { color: var(--muted); font-size: 17px; margin-bottom: 36px; }
-        .hero .actions { display: flex; gap: 14px; flex-wrap: wrap; }
-        .hero .actions .ghost {
-            border: 1px solid var(--line);
-            padding: 10px 22px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
+        .hero .lead { color: #d8d8de; font-size: 17px; max-width: 620px; margin-bottom: 34px; }
+        .actions { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+        .ghost { border: 1px solid rgba(255,255,255,0.25); padding: 11px 24px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 500; }
+        .trust { margin-top: 18px; font-size: 13px; color: var(--muted); }
+        .trust b { color: var(--accent); font-weight: 500; }
 
-        .video-frame {
-            margin: 8px 0 0;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--line);
-            aspect-ratio: 16 / 9;
-            background: var(--surface);
-        }
-        .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        section { padding: 48px 0; border-top: 1px solid var(--line); }
-        h2 {
-            font-size: clamp(22px, 4.5vw, 30px);
-            font-weight: 700;
-            margin-bottom: 24px;
-            line-height: 1.5;
-        }
-        h3 { font-size: 19px; font-weight: 500; margin: 32px 0 12px; color: var(--text); }
+        section { padding: 64px 0; border-top: 1px solid var(--line); }
+        .eyebrow-sm { color: var(--accent); letter-spacing: 0.12em; font-size: 12px; font-weight: 500; margin-bottom: 14px; }
+        h2 { font-size: clamp(23px, 4.6vw, 32px); font-weight: 700; margin-bottom: 22px; line-height: 1.5; }
+        h3 { font-size: 19px; font-weight: 500; margin: 30px 0 12px; }
         p { margin-bottom: 18px; color: #d8d8de; }
         .muted { color: var(--muted); }
+        .lead-conclusion { color: var(--accent); font-weight: 500; }
+
+        /* SPLIT (text + image) */
+        .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .split.rev .split-media { order: -1; }
+        .split-media img { width: 100%; border-radius: 14px; border: 1px solid var(--line); }
+        @media (max-width: 720px) { .split { grid-template-columns: 1fr; gap: 24px; } .split.rev .split-media { order: 0; } }
+
+        /* FULL-BLEED BAND */
+        .band { position: relative; height: 360px; margin: 0; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+        .band img { width: 100%; height: 100%; object-fit: cover; }
+        .band .band-cap { position: absolute; inset: 0; display: flex; align-items: center; background: linear-gradient(90deg, rgba(10,10,15,0.85), rgba(10,10,15,0.25)); }
+        .band .band-cap .wrap { width: 100%; }
+        .band .band-cap p { font-size: clamp(18px, 3vw, 26px); font-weight: 500; color: #fff; margin: 0; max-width: 600px; line-height: 1.6; }
+        .band .band-cap .hl { color: var(--accent); }
+
+        /* VALUE CARDS */
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 8px; }
+        .stat { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px 22px; }
+        .stat .ic { color: var(--accent); font-size: 26px; margin-bottom: 12px; }
+        .stat h4 { font-size: 16px; font-weight: 500; margin-bottom: 8px; }
+        .stat p { font-size: 14px; color: var(--muted); margin: 0; }
+        @media (max-width: 720px) { .stats { grid-template-columns: 1fr; } }
+
+        /* GALLERY */
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); aspect-ratio: 4/3; }
+        @media (max-width: 720px) { .gallery { grid-template-columns: 1fr; } }
 
         ul.checks { list-style: none; margin: 18px 0; }
-        ul.checks li {
-            padding: 10px 0 10px 28px;
-            position: relative;
-            border-bottom: 1px solid var(--line);
-            color: #d8d8de;
-        }
-        ul.checks li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
+        ul.checks li { padding: 12px 0 12px 30px; position: relative; border-bottom: 1px solid var(--line); color: #d8d8de; }
+        ul.checks li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
 
-        .steps { counter-reset: step; margin-top: 24px; }
-        .step {
-            display: flex;
-            gap: 18px;
-            padding: 18px 0;
-            border-bottom: 1px solid var(--line);
-        }
-        .step .num {
-            flex: none;
-            width: 38px; height: 38px;
-            border-radius: 50%;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 700;
-        }
+        .steps { margin-top: 24px; }
+        .step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+        .step .num { flex: none; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--accent); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 700; }
         .step h4 { font-size: 16px; font-weight: 500; margin-bottom: 4px; }
         .step p { margin: 0; font-size: 15px; color: var(--muted); }
 
-        .price-card {
-            background: var(--surface);
-            border: 1px solid var(--line);
-            border-radius: 12px;
-            padding: 28px;
-            margin-top: 20px;
-        }
-        .price-card .amt { font-size: 34px; font-weight: 700; color: var(--accent); }
-        .price-card .amt small { font-size: 15px; color: var(--muted); font-weight: 400; }
+        /* QUOTE */
+        .quote { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 0 14px 14px 0; padding: 32px 34px; }
+        .quote p { font-size: 19px; font-weight: 400; color: #f2f2f5; line-height: 1.8; margin: 0 0 14px; }
+        .quote .by { font-size: 13px; color: var(--muted); margin: 0; }
+
+        .tiers { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin: 24px 0; }
+        .tier { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+        .tier .t { color: var(--accent); font-weight: 500; margin-bottom: 8px; }
+        .tier p { font-size: 14px; color: var(--muted); margin: 0; }
+        @media (max-width: 720px) { .tiers { grid-template-columns: 1fr; } }
 
         .faq-item { border-bottom: 1px solid var(--line); padding: 18px 0; }
         .faq-item .q { font-weight: 500; margin-bottom: 8px; }
         .faq-item .q::before { content: "Q. "; color: var(--accent); }
         .faq-item .a { color: var(--muted); font-size: 15px; margin: 0; }
 
-        .final-cta { text-align: center; padding: 64px 0; }
-        .final-cta h2 { margin-bottom: 16px; }
-        .final-cta p { margin-bottom: 28px; }
+        .final { position: relative; overflow: hidden; border-top: 1px solid var(--line); }
+        .final-bg { position: absolute; inset: 0; background-image: url('../../assets/saiyo-team.webp'); background-size: cover; background-position: center; }
+        .final-bg::after { content: ""; position: absolute; inset: 0; background: rgba(10,10,15,0.84); }
+        .final-inner { position: relative; z-index: 2; text-align: center; padding: 84px 0; }
+        .final h2 { margin-bottom: 16px; }
+        .final p { margin-bottom: 28px; }
 
-        .related { font-size: 14px; }
+        footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
         .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
-
-        footer {
-            border-top: 1px solid var(--line);
-            padding: 32px 0;
-            font-size: 13px;
-            color: var(--muted);
-        }
         footer a { color: var(--muted); }
     </style>
 </head>
@@ -263,112 +209,171 @@
     </header>
 
     <main>
+        <!-- HERO -->
         <section class="hero">
-            <div class="wrap">
-                <p class="eyebrow">採用動画制作 ｜ 東京 ｜ 求人</p>
-                <h1>応募が集まらないのは、<br><span class="hl">「伝え方」</span>の問題かもしれません。</h1>
-                <p class="lead">東京で採用動画・求人動画をお探しの企業さまへ。株式会社NOKTOAは、御社のビジネスモデルと採用課題を解読したうえで、応募とミスマッチ防止の両方に効く採用動画を、企画から撮影・編集まで自社完結で制作します。</p>
-                <div class="actions">
-                    <a href="#contact" class="cta-btn">無料で相談・見積もり</a>
-                    <a href="#flow" class="ghost">制作の流れを見る</a>
-                </div>
-                <div class="video-frame">
-                    <img src="../../assets/saiyo-douga-tokyo-hero.webp" alt="東京のオフィスで採用動画を撮影する映像クルー" width="760" height="428" fetchpriority="high">
+            <div class="hero-bg" role="img" aria-label="東京のオフィスで採用動画を撮影する映像クルー"></div>
+            <div class="hero-inner">
+                <div class="wrap">
+                    <p class="eyebrow">採用動画制作 ｜ 東京 ｜ 求人</p>
+                    <h1>応募が集まらないのは、<br><span class="hl">「伝え方」</span>の問題かもしれません。</h1>
+                    <p class="lead">東京で採用動画・求人動画をお探しの企業さまへ。NOKTOAは、御社のビジネスモデルと採用課題を解読したうえで、応募とミスマッチ防止の両方に効く採用動画を、企画から撮影・編集まで自社完結で制作します。</p>
+                    <div class="actions">
+                        <a href="#contact" class="cta-btn">無料で相談・見積もり</a>
+                        <a href="#flow" class="ghost">制作の流れを見る</a>
+                    </div>
+                    <p class="trust">企画・撮影・編集まで<b>自社完結</b>　／　東京23区を中心に出張撮影対応　／　ご相談・お見積もりは<b>無料</b></p>
                 </div>
             </div>
         </section>
 
+        <!-- PROBLEM (split with seeker image) -->
         <section id="problem">
             <div class="wrap">
-                <h2>求人広告にお金をかけても、なぜ「欲しい人」が来ないのか</h2>
-                <p>採用がうまくいかない原因を「予算が足りないから」だと考えている企業は少なくありません。しかし実際には、求人媒体への出稿額を増やしても、応募が思うように伸びない、あるいは応募は来ても自社に合わない人ばかり——という相談を東京の企業さまから数多くいただきます。</p>
-                <p>その背景にあるのは、求職者が「文字情報だけでは、その会社で働く実感を持てない」という構造的な問題です。給与や勤務地、業務内容といった条件は他社と横並びで比較され、最後は条件の優劣だけで決められてしまう。御社が本当に伝えたい「どんな人が、どんな想いで、どんな空気の中で働いているのか」という、条件では測れない価値が、求人票の文字の中には収まりきらないのです。</p>
-                <p>採用動画は、この「文字に収まらない価値」を求職者に届けるための手段です。働く現場の温度、社員の表情、経営者の言葉のトーン——こうした非言語の情報は、動画でしか正確には伝わりません。そして非言語の情報こそが、求職者が「この会社で働きたい」と感じる入社意欲の源泉であり、入社後のミスマッチを防ぐ最大の予防線になります。</p>
-                <p>とりわけ東京は、求人数も企業数も全国で最も多く、求職者一人をめぐる競争が激しいエリアです。条件面では大企業に見劣りする中小企業ほど、「うちで働く意味」を言語と映像の両方で明確に伝えなければ、候補者の選択肢にすら残れません。採用動画は、規模では勝てない企業が「らしさ」で選ばれるための、東京の採用市場における現実的な打ち手なのです。</p>
+                <p class="eyebrow-sm">なぜ応募が集まらないのか</p>
+                <div class="split">
+                    <div>
+                        <h2>求人広告にお金をかけても、<br>「欲しい人」が来ない理由</h2>
+                        <p>採用がうまくいかない原因を「予算不足」だと考える企業は少なくありません。しかし実際には、求人媒体への出稿を増やしても応募が伸びない、来ても自社に合わない人ばかり——という相談を東京の企業さまから数多くいただきます。</p>
+                        <p>背景にあるのは、求職者が「文字情報だけでは、その会社で働く実感を持てない」という構造的な問題です。給与や勤務地は他社と横並びで比較され、最後は条件の優劣だけで決められてしまいます。</p>
+                    </div>
+                    <div class="split-media">
+                        <img src="../../assets/saiyo-seeker.webp" alt="採用動画をスマートフォンで見る求職者" width="640" height="360" loading="lazy">
+                    </div>
+                </div>
+                <p style="margin-top:32px;">御社が本当に伝えたい「どんな人が、どんな想いで、どんな空気の中で働いているのか」という、条件では測れない価値は、求人票の文字には収まりきりません。そして、その非言語の情報こそが、求職者の入社意欲の源泉であり、入社後のミスマッチを防ぐ最大の予防線になります。採用動画は、それを届けるための手段です。</p>
             </div>
         </section>
 
+        <!-- BAND -->
+        <div class="band">
+            <img src="../../assets/saiyo-team.webp" alt="東京のオフィスで活気をもって働くチーム" loading="lazy" width="1600" height="360">
+            <div class="band-cap">
+                <div class="wrap">
+                    <p>働く現場の<span class="hl">温度</span>は、<br>動画でしか正確に伝わらない。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- VALUE -->
+        <section id="value">
+            <div class="wrap">
+                <p class="eyebrow-sm">採用動画がもたらす3つの価値</p>
+                <h2>「会社紹介ビデオ」では、<br>応募は動きません。</h2>
+                <p>世の中の採用動画の多くは、オフィスや社員インタビューを並べただけの「会社紹介ビデオ」にとどまります。きれいでも視聴者の心が動かず、応募につながらない。これは、動画を「制作物」として捉え、「採用という経営課題を解決する装置」として設計していないことが原因です。NOKTOAは、応募につながる動画を次の3つの視点から設計します。</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="ic">◎</div>
+                        <h4>応募を増やす</h4>
+                        <p>働く魅力を具体的に伝え、「ここで働きたい」という応募の動機をつくります。</p>
+                    </div>
+                    <div class="stat">
+                        <div class="ic">◎</div>
+                        <h4>ミスマッチを防ぐ</h4>
+                        <p>リアルな現場を見せることで、価値観の合う人材だけが集まり、早期離職を減らします。</p>
+                    </div>
+                    <div class="stat">
+                        <div class="ic">◎</div>
+                        <h4>資産として残る</h4>
+                        <p>採用サイト・求人媒体・SNS広告へ展開でき、一度の制作が長く働き続けます。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WHY (split rev with bts image) + gallery -->
         <section id="why">
             <div class="wrap">
-                <h2>NOKTOAの採用動画が、ただの「会社紹介ビデオ」と違う理由</h2>
-                <p>世の中の採用動画の多くは、オフィスの様子や社員インタビューを並べただけの「会社紹介ビデオ」にとどまっています。きれいに撮れていても、視聴者の心が動かず、応募という行動につながらない。これは、動画を「制作物」として捉え、「採用という経営課題を解決する装置」として設計していないことが原因です。</p>
-                <p>NOKTOAは、株式会社の経営理念に「『伝える』を『資産』へ。」を掲げ、企業のビジネスモデルそのものを解読することから制作を始めます。採用動画においても、まず御社の事業構造・採用ターゲット・競合との違いを徹底的にヒアリングし、「どんな人材に、何を感じてもらい、どの一次行動（応募・エントリー・問い合わせ）を取ってもらうのか」を一本の戦略線として設計します。映像はその戦略を実現するための表現にすぎません。</p>
-                <h3>NOKTOAが選ばれる4つの理由</h3>
+                <p class="eyebrow-sm">NOKTOAが選ばれる理由</p>
+                <div class="split rev">
+                    <div class="split-media">
+                        <img src="../../assets/saiyo-bts.webp" alt="採用動画の撮影現場でディレクションするNOKTOAのクルー" width="560" height="420" loading="lazy">
+                    </div>
+                    <div>
+                        <h2>戦略と表現を、<br>一社で完結させる。</h2>
+                        <p>NOKTOAは経営理念に「『伝える』を『資産』へ。」を掲げ、御社の事業構造・採用ターゲット・競合との違いを徹底的に解読することから制作を始めます。「誰に、何を感じてもらい、どの一次行動を取ってもらうか」を一本の戦略線として設計し、映像はその戦略を実現する表現として組み立てます。</p>
+                    </div>
+                </div>
                 <ul class="checks">
                     <li>経営・事業の視点から採用課題を解読し、応募につながる動画を設計する戦略性</li>
                     <li>企画・撮影・編集をすべて自社で完結。中間マージンがなく、意図がブレない一貫制作</li>
                     <li>クリエイティブ統括は業界20年のキャリア。ブランドの世界観を損なわない映像品質</li>
                     <li>採用サイト・求人媒体・SNS広告など、配信先に合わせた最適なフォーマットで納品</li>
                 </ul>
-                <p>私たちが目指すのは、一度作って終わりの動画ではありません。求職者の心を動かし、応募という行動を生み、入社後の定着にまで貢献する——そんな「採用の資産」となる動画です。東京で採用に本気で向き合う企業さまの、戦略的パートナーでありたいと考えています。</p>
             </div>
         </section>
 
-        <section id="usage">
+        <!-- GALLERY -->
+        <section id="works">
             <div class="wrap">
-                <h2>作った採用動画は、どこで活きるのか</h2>
-                <p>採用動画は「作ること」がゴールではなく、「求職者の目に触れる場所で使い続けること」で初めて成果を生みます。NOKTOAでは、1本の動画を複数の接点で活用できるよう、配信先を想定した設計を最初から行います。</p>
-                <h3>採用サイト・コーポレートサイト</h3>
-                <p>採用ページのファーストビューに動画を置くと、求職者が文字を読む前に会社の雰囲気を感じ取れます。離脱を防ぎ、エントリーへの心理的なハードルを下げる効果があります。</p>
-                <h3>求人媒体・スカウト</h3>
-                <p>求人媒体の文章だけでは伝わらない情報を動画で補強できます。スカウトメールに動画リンクを添えるだけで開封後の返信率が変わるという声も、東京の採用担当者から多く届いています。</p>
-                <h3>SNS・採用広告</h3>
-                <p>InstagramやTikTok、YouTubeの採用広告として配信すれば、転職を今すぐ考えていない潜在層にもリーチできます。NOKTOAはSNS運用支援も手がけているため、媒体ごとの最適な尺・縦横比・冒頭の作り方まで踏まえて編集します。</p>
-                <p>このように、戦略的に設計された採用動画は一度の制作で何度も働き続ける「採用の資産」になります。だからこそ、目先の見栄えではなく、御社の採用活動全体のどこにどう効かせるかを最初に設計することが重要なのです。</p>
+                <p class="eyebrow-sm">私たちが大切にする一瞬</p>
+                <h2>言葉にならない「らしさ」を、<br>切り取る。</h2>
+                <p>採用動画の主役は、立派な設備でも美しい映像でもなく、そこで働く人の表情と言葉です。私たちは、社員が自分の言葉で語る瞬間や、現場に流れる自然な空気を丁寧に捉えます。作り込みすぎず、しかし最も魅力的に——その絶妙なバランスを設計します。</p>
+                <div class="gallery">
+                    <img src="../../assets/saiyo-interview.webp" alt="社員インタビューの撮影カット" width="600" height="450" loading="lazy">
+                    <img src="../../assets/saiyo-bts.webp" alt="撮影現場のディレクション風景" width="600" height="450" loading="lazy">
+                </div>
             </div>
         </section>
 
+        <!-- USE -->
+        <section id="use">
+            <div class="wrap narrow">
+                <p class="eyebrow-sm">作った動画は、どこで活きるのか</p>
+                <h2 class="lead-conclusion" style="color:inherit;">撮影前に「どこで使うか」を決めることが、成果を分けます。</h2>
+                <p>採用動画は「作ること」ではなく、「求職者の目に触れる場所で使い続けること」で成果を生みます。NOKTOAは、配信先を想定した設計を最初から行います。</p>
+                <ul class="checks">
+                    <li><strong>採用サイト</strong>：ファーストビューに置き、エントリーへの心理的ハードルを下げる</li>
+                    <li><strong>求人媒体・スカウト</strong>：文章では伝わらない情報を補強し、返信率を高める</li>
+                    <li><strong>SNS・採用広告</strong>：転職潜在層にもリーチ。媒体ごとの尺・縦横比に最適化</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- QUOTE -->
+        <section id="philosophy">
+            <div class="wrap narrow">
+                <div class="quote">
+                    <p>採用動画は、一度作って終わりではありません。求職者の心を動かし、応募という行動を生み、入社後の定着にまで貢献する——そんな「採用の資産」を、私たちはつくります。</p>
+                    <p class="by">— 株式会社NOKTOA</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FLOW -->
         <section id="flow">
-            <div class="wrap">
-                <h2>制作の流れ</h2>
-                <p class="muted">ヒアリングから納品まで、目安は約4〜6週間です。すべての工程を自社で担当します。</p>
+            <div class="wrap narrow">
+                <p class="eyebrow-sm">制作の流れ</p>
+                <h2>ヒアリングから納品まで、約4〜6週間。</h2>
+                <p class="muted">すべての工程を自社で担当します。</p>
                 <div class="steps">
-                    <div class="step">
-                        <div class="num">1</div>
-                        <div><h4>ヒアリング・課題解読</h4><p>事業内容・採用ターゲット・現状の課題を伺い、動画で解決すべきゴールを定義します。</p></div>
-                    </div>
-                    <div class="step">
-                        <div class="num">2</div>
-                        <div><h4>企画・構成設計</h4><p>誰に何を伝え、どの行動を取ってもらうか。応募につながるストーリーと構成を設計します。</p></div>
-                    </div>
-                    <div class="step">
-                        <div class="num">3</div>
-                        <div><h4>撮影</h4><p>東京都内の御社オフィスや現場へ伺い、働く空気感をそのまま映像に収めます。</p></div>
-                    </div>
-                    <div class="step">
-                        <div class="num">4</div>
-                        <div><h4>編集・納品</h4><p>採用サイト・求人媒体・SNSなど、配信先に最適化したフォーマットで仕上げてお渡しします。</p></div>
-                    </div>
+                    <div class="step"><div class="num">1</div><div><h4>ヒアリング・課題解読</h4><p>事業内容・採用ターゲット・現状の課題を伺い、動画で解決すべきゴールを定義します。</p></div></div>
+                    <div class="step"><div class="num">2</div><div><h4>企画・構成設計</h4><p>誰に何を伝え、どの行動を取ってもらうか。応募につながるストーリーと構成を設計します。</p></div></div>
+                    <div class="step"><div class="num">3</div><div><h4>撮影</h4><p>東京都内の御社オフィスや現場へ伺い、働く空気感をそのまま映像に収めます。</p></div></div>
+                    <div class="step"><div class="num">4</div><div><h4>編集・納品</h4><p>採用サイト・求人媒体・SNSなど、配信先に最適化したフォーマットで仕上げてお渡しします。</p></div></div>
                 </div>
             </div>
         </section>
 
+        <!-- PRICE -->
         <section id="price">
-            <div class="wrap">
-                <h2>料金は、御社の採用課題に合わせて設計します</h2>
-                <p>採用動画の費用は「一律いくら」ではありません。採用したい人物像、撮影の規模、動画を使う場面は会社ごとに違い、必要な工程もそのつど変わるからです。だからNOKTOAは、決まったパッケージを売るのではなく、御社のご予算と目的を伺ったうえで、その範囲で最も成果が出る構成を逆算してご提案します。</p>
-                <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin:24px 0;">
-                    <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px;">
-                        <p style="color:var(--accent); font-weight:500; margin:0 0 8px;">スモールスタート</p>
-                        <p style="font-size:14px; color:var(--muted); margin:0;">既存素材や最小限の撮影を活かし、費用を抑えて着手。まず社内・現場の反応を見たい方に。</p>
-                    </div>
-                    <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px;">
-                        <p style="color:var(--accent); font-weight:500; margin:0 0 8px;">スタンダード</p>
-                        <p style="font-size:14px; color:var(--muted); margin:0;">企画から入り、1日の撮影でしっかり作り込む。多くの企業が選ぶバランス型の構成です。</p>
-                    </div>
-                    <div style="background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px;">
-                        <p style="color:var(--accent); font-weight:500; margin:0 0 8px;">フラッグシップ</p>
-                        <p style="font-size:14px; color:var(--muted); margin:0;">複数日撮影やキャスティングで、妥協なく世界観を表現。採用の柱となる一本に。</p>
-                    </div>
+            <div class="wrap narrow">
+                <p class="eyebrow-sm">料金</p>
+                <h2>御社の採用課題に合わせて設計します</h2>
+                <p>採用動画の費用は「一律いくら」ではありません。採用したい人物像、撮影の規模、動画を使う場面は会社ごとに違い、必要な工程も変わるからです。NOKTOAは決まったパッケージを売るのではなく、ご予算と目的を伺ったうえで、その範囲で最も成果が出る構成を逆算してご提案します。</p>
+                <div class="tiers">
+                    <div class="tier"><p class="t">スモールスタート</p><p>既存素材や最小限の撮影を活かし、費用を抑えて着手。まず社内・現場の反応を見たい方に。</p></div>
+                    <div class="tier"><p class="t">スタンダード</p><p>企画から入り、1日の撮影でしっかり作り込む。多くの企業が選ぶバランス型の構成です。</p></div>
+                    <div class="tier"><p class="t">フラッグシップ</p><p>複数日撮影やキャスティングで、妥協なく世界観を表現。採用の柱となる一本に。</p></div>
                 </div>
-                <p>「まず1本、小さく試したい」も「採用の柱として本格的に作りたい」も、どちらも歓迎です。最初から大きく投資する必要はありません。成果を見ながら段階的に広げていける、柔軟な進め方をご提案します。企画・撮影・編集を自社で完結するため中間マージンがなく、同じ品質でもコストを抑えられるのも私たちの強みです。</p>
-                <p class="muted">ご予算がまだ固まっていなくても大丈夫です。「これくらいでどこまでできる？」というご相談から、相場感の整理もご一緒します。まずはお気軽にお問い合わせください。</p>
+                <p>「まず1本、小さく試したい」も「採用の柱として本格的に作りたい」も歓迎です。最初から大きく投資する必要はありません。成果を見ながら段階的に広げていける、柔軟な進め方をご提案します。企画・撮影・編集を自社で完結するため中間マージンがなく、同じ品質でもコストを抑えられるのも私たちの強みです。</p>
+                <p class="muted">ご予算がまだ固まっていなくても大丈夫です。「これくらいでどこまでできる？」というご相談から、相場感の整理もご一緒します。</p>
             </div>
         </section>
 
+        <!-- FAQ -->
         <section id="faq">
-            <div class="wrap">
-                <h2>よくあるご質問</h2>
+            <div class="wrap narrow">
+                <p class="eyebrow-sm">よくあるご質問</p>
                 <div class="faq-item">
                     <p class="q">東京で採用動画を作る場合の料金はいくらですか？</p>
                     <p class="a">映像制作は1件60万円〜（税別）です。企画・撮影・編集まで自社完結のため中間マージンがありません。撮影日数・出演者数・尺によって変動するため、まずは無料でお見積もりいたします。</p>
@@ -383,16 +388,20 @@
                 </div>
                 <div class="faq-item">
                     <p class="q">小規模な会社でも依頼できますか？</p>
-                    <p class="a">もちろんです。むしろ採用予算が限られる企業ほど、1本の動画を戦略的に活用する効果が大きくなります。スタートアップや少人数の企業さまの実績も多く、ご予算に合わせた最適な構成をご提案しますので、まずはお気軽にご相談ください。</p>
+                    <p class="a">もちろんです。むしろ採用予算が限られる企業ほど、1本の動画を戦略的に活用する効果が大きくなります。スタートアップや少人数の企業さまの実績も多く、ご予算に合わせた最適な構成をご提案します。</p>
                 </div>
             </div>
         </section>
 
-        <section class="final-cta" id="contact">
-            <div class="wrap">
-                <h2>採用の「伝え方」を、一緒に設計しませんか</h2>
-                <p class="muted">ご相談・お見積もりは無料です。御社の採用課題をお聞かせください。</p>
-                <a href="mailto:info@noktoa.com?subject=採用動画の相談（東京）" class="cta-btn">無料で相談・見積もり</a>
+        <!-- FINAL CTA -->
+        <section class="final" id="contact">
+            <div class="final-bg" aria-hidden="true"></div>
+            <div class="final-inner">
+                <div class="wrap">
+                    <h2>採用の「伝え方」を、<br>一緒に設計しませんか。</h2>
+                    <p class="muted">ご相談・お見積もりは無料です。御社の採用課題をお聞かせください。</p>
+                    <a href="mailto:info@noktoa.com?subject=採用動画の相談（東京）" class="cta-btn">無料で相談・見積もり</a>
+                </div>
             </div>
         </section>
     </main>
@@ -403,6 +412,7 @@
                 関連ページ：
                 <a href="/lp/douga-seisaku-tokyo-ryokin/">動画制作 東京 料金</a>
                 <a href="/lp/pr-douga-tokyo-seisaku-gaisha/">PR動画 東京 制作会社</a>
+                <a href="/lp/interview-douga-tokyo-satsuei/">インタビュー動画 東京 撮影</a>
                 <a href="/">NOKTOA トップ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
