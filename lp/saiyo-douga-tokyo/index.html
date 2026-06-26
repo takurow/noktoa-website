@@ -137,7 +137,7 @@
         /* SPLIT (text + image) */
         .split { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .split.rev .split-media { order: -1; }
-        .split-media img { width: 100%; border-radius: 14px; border: 1px solid var(--line); }
+        .split-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--line); }
         @media (max-width: 720px) { .split { grid-template-columns: 1fr; gap: 24px; } .split.rev .split-media { order: 0; } }
 
         /* FULL-BLEED BAND */
@@ -237,7 +237,7 @@
                         <p>背景にあるのは、求職者が「文字情報だけでは、その会社で働く実感を持てない」という構造的な問題です。給与や勤務地は他社と横並びで比較され、最後は条件の優劣だけで決められてしまいます。</p>
                     </div>
                     <div class="split-media">
-                        <img src="../../assets/saiyo-seeker.webp" alt="採用動画をスマートフォンで見る求職者" width="640" height="360" loading="lazy">
+                        <img src="../../assets/saiyo-problem.webp" alt="応募が集まらず悩む採用担当者" width="640" height="480" loading="lazy">
                     </div>
                 </div>
                 <p style="margin-top:32px;">御社が本当に伝えたい「どんな人が、どんな想いで、どんな空気の中で働いているのか」という、条件では測れない価値は、求人票の文字には収まりきりません。そして、その非言語の情報こそが、求職者の入社意欲の源泉であり、入社後のミスマッチを防ぐ最大の予防線になります。採用動画は、それを届けるための手段です。</p>
@@ -286,7 +286,7 @@
                 <p class="eyebrow-sm">NOKTOAが選ばれる理由</p>
                 <div class="split rev">
                     <div class="split-media">
-                        <img src="../../assets/saiyo-bts.webp" alt="採用動画の撮影現場でディレクションするNOKTOAのクルー" width="560" height="420" loading="lazy">
+                        <img src="../../assets/saiyo-why.webp" alt="クライアントと戦略を一緒に設計するNOKTOAのディレクター" width="560" height="420" loading="lazy">
                     </div>
                     <div>
                         <h2>戦略と表現を、<br>一社で完結させる。</h2>
