@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>制作実績｜株式会社NOKTOA｜東京の映像制作・SNS運用</title>
+    <meta name="description"
+        content="株式会社NOKTOAの制作実績。高級輸入ヨットブランドのSNS運用・映像制作、自社IP「ニートlegend」のTikTok運用まで、質感と高級感を伝える映像を企画から撮影・編集まで自社完結で手がけています。">
+    <link rel="canonical" href="https://noktoa.com/works/">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="制作実績｜株式会社NOKTOA">
+    <meta property="og:description" content="質感と高級感を、映像で伝える。株式会社NOKTOAの制作実績。">
+    <meta property="og:url" content="https://noktoa.com/works/">
+    <meta property="og:image" content="https://noktoa.com/assets/works/002.jpg">
+    <meta property="og:site_name" content="株式会社NOKTOA">
+    <meta property="og:locale" content="ja_JP">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="制作実績｜株式会社NOKTOA">
+    <meta name="twitter:description" content="質感と高級感を、映像で伝える。株式会社NOKTOAの制作実績。">
+    <meta name="twitter:image" content="https://noktoa.com/assets/works/002.jpg">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "制作実績｜株式会社NOKTOA",
+      "url": "https://noktoa.com/works/",
+      "description": "株式会社NOKTOAの制作実績一覧。",
+      "isPartOf": { "@type": "WebSite", "name": "株式会社NOKTOA", "url": "https://noktoa.com/" },
+      "publisher": { "@id": "https://noktoa.com/#organization" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "ホーム", "item": "https://noktoa.com/" },
+          { "@type": "ListItem", "position": 2, "name": "制作実績", "item": "https://noktoa.com/works/" }
+        ]
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+
+    <style>
+        .works-main {
+            padding-top: 140px;
+        }
+
+        .works-wrap {
+            width: min(1180px, calc(100% - 48px));
+            margin-inline: auto;
+        }
+
+        .works-lead {
+            padding-bottom: 96px;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .works-eyebrow {
+            font-family: 'Inter', sans-serif;
+            font-size: .75rem;
+            letter-spacing: .32em;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        .works-lead h1 {
+            font-size: clamp(2.1rem, 5.2vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.35;
+            letter-spacing: .01em;
+            margin-bottom: 28px;
+        }
+
+        .works-lead p {
+            max-width: 62ch;
+            color: var(--text-muted);
+            line-height: 2;
+            font-size: 1rem;
+        }
+
+        .case {
+            padding: 96px 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .case-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 12px 20px;
+            margin-bottom: 18px;
+        }
+
+        .case-num {
+            font-family: 'Inter', sans-serif;
+            font-size: .78rem;
+            letter-spacing: .28em;
+            color: var(--text-muted);
+        }
+
+        .case-tag {
+            font-size: .72rem;
+            letter-spacing: .12em;
+            color: var(--text-muted);
+            border: 1px solid var(--glass-border);
+            border-radius: 999px;
+            padding: 5px 14px;
+        }
+
+        .case h2 {
+            font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+            font-weight: 700;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .case-client {
+            font-size: .78rem;
+            letter-spacing: .06em;
+            color: var(--text-muted);
+            margin: -8px 0 22px;
+        }
+
+        .case-body {
+            max-width: 64ch;
+            color: var(--text-muted);
+            line-height: 2.05;
+            margin-bottom: 40px;
+        }
+
+        .case-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+            gap: 1px;
+            background: var(--glass-border);
+            border: 1px solid var(--glass-border);
+            margin-bottom: 48px;
+        }
+
+        .fact {
+            background: var(--bg);
+            padding: 24px 22px;
+        }
+
+        .fact dt {
+            font-size: .72rem;
+            letter-spacing: .16em;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .fact dd {
+            font-size: 1.02rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .reel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 28px;
+        }
+
+        .reel {
+            min-width: 0;
+        }
+
+        .reel video {
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            display: block;
+            background: #000;
+            border: 1px solid var(--glass-border);
+            object-fit: cover;
+        }
+
+        .reel-caption {
+            margin-top: 14px;
+            font-size: .84rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .reel-caption strong {
+            display: block;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: .92rem;
+            margin-bottom: 4px;
+        }
+
+        .media-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 14px;
+        }
+
+        .media-list li {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 16px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .media-list li span:first-child {
+            color: var(--text-main);
+            font-weight: 600;
+            min-width: 12ch;
+        }
+
+        .works-cta {
+            padding: 104px 0 128px;
+            text-align: center;
+        }
+
+        .works-cta h2 {
+            font-size: clamp(1.4rem, 3.4vw, 2rem);
+            font-weight: 700;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .works-cta p {
+            color: var(--text-muted);
+            line-height: 2;
+            margin-bottom: 36px;
+        }
+
+        .works-cta a {
+            display: inline-block;
+            padding: 17px 44px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            font-size: .9rem;
+            letter-spacing: .12em;
+            transition: background .35s var(--ease-premium), color .35s var(--ease-premium);
+        }
+
+        .works-cta a:hover,
+        .works-cta a:focus-visible {
+            background: var(--primary);
+            color: var(--bg);
+        }
+
+        .works-note {
+            margin-top: 28px;
+            font-size: .78rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 600px) {
+            .works-main {
+                padding-top: 108px;
+            }
+
+            .case {
+                padding: 68px 0;
+            }
+
+            .reel-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header blur-effect">
+        <div class="header-container">
+            <a href="/" class="logo">
+                <img src="/assets/logo_wh.png" alt="NOKTOA Logo">
+            </a>
+            <nav class="nav">
+                <ul class="nav-links">
+                    <li><a href="/#vision">VISION</a></li>
+                    <li><a href="/#services">SERVICES</a></li>
+                    <li><a href="/works/">WORKS</a></li>
+                    <li><a href="/#members">MEMBERS</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="works-main">
+        <section class="works-wrap works-lead">
+            <p class="works-eyebrow">WORKS</p>
+            <h1>質感と高級感を、映像で伝える。</h1>
+            <p>
+                私たちが最も注力してきたのは、素材の艶や光をどう見せるかという領域です。
+                高級輸入ヨットの内装や水面の反射、店舗の空気感、商品の手ざわり——
+                言葉で説明しづらいものほど、映像の役割は大きくなります。
+                企画から撮影・編集・カラーグレーディングまで自社で完結させ、
+                発信したあとの数字までを見る体制で制作しています。
+            </p>
+        </section>
+
+        <section class="works-wrap case" id="seabreeze">
+            <div class="case-head">
+                <span class="case-num">CASE 01</span>
+                <span class="case-tag">映像制作</span>
+                <span class="case-tag">SNS運用</span>
+                <span class="case-tag">イベント</span>
+            </div>
+            <h2>高級輸入ヨットの販売会社様<br>SNS運用・映像制作</h2>
+            <p class="case-client">シーブリーズボートサービス様</p>
+            <p class="case-body">
+                Azimut・Sea Ray・Bertram など高級輸入ヨットを取り扱う販売会社様の発信を、
+                設計から運用まで一貫してお預かりしています。
+                数千万円から十数億円という商材において、映像に求められるのは情報量ではなく「所有したときの体験」。
+                艇内装の革やウッドの質感、水面に落ちる光、乗り込む瞬間の高揚——
+                そこに絞って画を組み立てています。
+                横浜ベイサイドマリーナで開催されたプライベートボートショーでは、
+                告知から当日の記録、事後の配信までを担当しました。
+            </p>
+
+            <dl class="case-facts">
+                <div class="fact">
+                    <dt>ご支援内容</dt>
+                    <dd>SNS運用再設計<br>企画・撮影・編集・分析</dd>
+                </div>
+                <div class="fact">
+                    <dt>制作ボリューム</dt>
+                    <dd>TikTok 月4本<br>Instagram 月8本</dd>
+                </div>
+                <div class="fact">
+                    <dt>ステータス</dt>
+                    <dd>継続受託中</dd>
+                </div>
+                <div class="fact">
+                    <dt>付帯</dt>
+                    <dd>イベント撮影<br>ボートショー運営支援</dd>
+                </div>
+            </dl>
+
+            <div class="reel-grid">
+                <figure class="reel">
+                    <video src="/assets/works/SBSBSB.mp4" poster="/assets/works/SBSBSB.jpg" controls preload="none"
+                        playsinline></video>
+                    <figcaption class="reel-caption">
+                        <strong>プライベートボートショー 開催告知</strong>
+                        縦型 1080×1920／32秒
+                    </figcaption>
+                </figure>
+                <figure class="reel">
+                    <video src="/assets/works/002.mp4" poster="/assets/works/002.jpg" controls preload="none"
+                        playsinline></video>
+                    <figcaption class="reel-caption">
+                        <strong>会場ダイジェスト</strong>
+                        縦型 1080×1920／50秒
+                    </figcaption>
+                </figure>
+                <figure class="reel">
+                    <video src="/assets/works/003.mp4" poster="/assets/works/003.jpg" controls preload="none"
+                        playsinline></video>
+                    <figcaption class="reel-caption">
+                        <strong>マリーナの一日</strong>
+                        縦型 1080×1920／46秒
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <section class="works-wrap case">
+            <div class="case-head">
+                <span class="case-num">CASE 02</span>
+                <span class="case-tag">自社IP</span>
+                <span class="case-tag">TikTok運用</span>
+            </div>
+            <h2>自社IP「ニートlegend」<br>4ヶ月でフォロワー1万人</h2>
+            <p class="case-body">
+                受託だけでなく、自分たちの手でゼロから伸ばす検証を続けています。
+                AIツールとクリエイター歴20年の分業体制でTikTokアカウントを立ち上げ、
+                4ヶ月でフォロワー1万人に到達しました。
+                何が伸びて何が伸びないかを自社の失敗で確かめているので、
+                クライアントワークでは根拠のある提案ができます。
+            </p>
+
+            <dl class="case-facts">
+                <div class="fact">
+                    <dt>フォロワー</dt>
+                    <dd>10,000人（4ヶ月）</dd>
+                </div>
+                <div class="fact">
+                    <dt>最高再生数</dt>
+                    <dd>360,000回</dd>
+                </div>
+                <div class="fact">
+                    <dt>総いいね</dt>
+                    <dd>128,000</dd>
+                </div>
+                <div class="fact">
+                    <dt>投稿数</dt>
+                    <dd>99本</dd>
+                </div>
+            </dl>
+            <p class="case-body" style="margin-bottom:0">
+                <a href="https://www.tiktok.com/@neet.legend" target="_blank" rel="noopener"
+                    style="color:var(--text-main)">TikTok @neet.legend を見る →</a>
+            </p>
+        </section>
+
+        <section class="works-wrap case">
+            <div class="case-head">
+                <span class="case-num">MEDIA</span>
+                <span class="case-tag">PR</span>
+            </div>
+            <h2>メディア掲載</h2>
+            <p class="case-body">
+                自社発のプレスリリースが、編集判断を経て大手6媒体に転載されました。
+                「配信したら終わり」ではなく、どう書けば拾われるかを設計しています。
+            </p>
+            <ul class="media-list">
+                <li><span>毎日新聞デジタル</span><span>AI×クリエイターの分業による TikTok 運用の成果について</span></li>
+                <li><span>PRESIDENT Online</span><span>同上</span></li>
+                <li><span>JBpress</span><span>同上</span></li>
+                <li><span>Web担当者Forum</span><span>同上</span></li>
+                <li><span>東京新聞 TOKYO Web</span><span>同上</span></li>
+                <li><span>ASCII STARTUP</span><span>同上</span></li>
+            </ul>
+        </section>
+
+        <section class="works-wrap works-cta">
+            <h2>「こういう画が撮れますか」から、お話しさせてください。</h2>
+            <p>
+                企画が固まっていない段階でも、撮影日だけ決まっている状態でも構いません。<br>
+                予算と目的をお聞かせいただければ、実現できる形をご提案します。
+            </p>
+            <a href="mailto:info@noktoa.com?subject=制作実績を見てのご相談（東京）&amp;body=お名前：%0A会社名：%0Aご相談内容：%0Aご希望時期：%0Aご予算：%0A">
+                無料で相談する
+            </a>
+            <p class="works-note">info@noktoa.com ／ 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-left">
+                <img src="/assets/logo_wh.png" alt="NOKTOA Logo" class="footer-logo">
+                <p>株式会社NOKTOA</p>
+            </div>
+            <div class="footer-center">
+                <ul>
+                    <li><a href="/#vision">Vision</a></li>
+                    <li><a href="/#services">Services</a></li>
+                    <li><a href="/works/">Works</a></li>
+                    <li><a href="/#members">Members</a></li>
+                    <li><a href="/lp/salon-biyoushitsu-douga-tokyo/">美容室・サロンの動画制作（東京）</a></li>
+                    <li><a href="/lp/douga-seisaku-tokyo-ryokin/">動画制作の料金（東京）</a></li>
+                    <li><a href="/lp/pr-douga-tokyo-seisaku-gaisha/">PR動画の制作会社（東京）</a></li>
+                </ul>
+            </div>
+            <div class="footer-right">
+                <p>&copy; 2026 NOKTOA Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
