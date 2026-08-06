@@ -65,7 +65,7 @@ ul {
 .blob-1 {
     width: 60vw;
     height: 60vw;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(201, 168, 106, 0.10) 0%, rgba(0, 0, 0, 0) 70%);
     top: -20vh;
     left: -10vw;
 }
@@ -73,7 +73,7 @@ ul {
 .blob-2 {
     width: 50vw;
     height: 50vw;
-    background: radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(146, 109, 62, 0.10) 0%, rgba(0, 0, 0, 0) 70%);
     bottom: -10vh;
     right: -10vw;
     animation-delay: -5s;
@@ -82,7 +82,7 @@ ul {
 .blob-3 {
     width: 40vw;
     height: 40vw;
-    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(38, 52, 58, 0.30) 0%, rgba(0, 0, 0, 0) 70%);
     top: 40vh;
     left: 20vw;
     animation-delay: -10s;
@@ -617,17 +617,6 @@ section {
     transform: translateY(-4px);
 }
 
-.challenge-num {
-    display: block;
-    font-size: 2.4rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.06);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 16px;
-    font-family: 'Inter', sans-serif;
-}
-
 .challenge-card h4 {
     font-size: 1.05rem;
     font-weight: 600;
@@ -831,18 +820,6 @@ section {
     position: absolute;
     left: 0;
     color: var(--primary-accent);
-}
-
-/* ---- service-num (decorative number) ---- */
-.service-num {
-    display: block;
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.05);
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin-bottom: 16px;
-    font-family: var(--font-en);
 }
 
 /* ---- card-visual ---- */
@@ -1853,11 +1830,6 @@ section {
         order: 1;
     }
 
-    .service-num {
-        font-size: 2.8rem;
-        margin-bottom: 12px;
-    }
-
     .card-text h3 {
         font-size: clamp(1.3rem, 5.5vw, 1.6rem);
         margin-bottom: 8px;
@@ -1909,25 +1881,12 @@ section {
 
     .challenge-card {
         padding: 20px 20px;
-        display: grid;
-        grid-template-columns: 44px 1fr;
-        grid-template-rows: auto auto;
-        gap: 0 10px;
-        align-items: start;
         overflow: hidden;
-    }
-
-    .challenge-num {
-        grid-row: 1 / 3;
-        font-size: 1.8rem;
-        margin-bottom: 0;
-        padding-top: 2px;
     }
 
     .challenge-card h4 {
         font-size: 0.88rem;
         margin-bottom: 6px;
-        word-break: break-all;
         overflow-wrap: break-word;
         min-width: 0;
     }
@@ -2178,5 +2137,54 @@ section {
     .index-list {
         grid-template-columns: 1fr;
         gap: 0;
+    }
+}
+
+/* ---- WORKS teaser (top page) ---- */
+.works-teaser-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 8px;
+}
+
+.works-teaser-item {
+    min-width: 0;
+    margin: 0;
+}
+
+.works-teaser-item video {
+    width: 100%;
+    aspect-ratio: 9 / 16;
+    display: block;
+    background: #000;
+    border: 1px solid var(--glass-border);
+    object-fit: cover;
+}
+
+.works-teaser-link {
+    display: inline-block;
+    margin-top: 44px;
+    padding-bottom: 4px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--glass-border);
+    transition: color 0.3s var(--ease-premium), border-color 0.3s var(--ease-premium);
+}
+
+.works-teaser-link:hover {
+    color: var(--primary);
+    border-bottom-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .works-teaser-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .works-teaser-link {
+        margin-top: 32px;
     }
 }
