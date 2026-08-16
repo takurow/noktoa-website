@@ -172,6 +172,22 @@
         .breadcrumb a:hover { color: var(--accent); }
         .breadcrumb span { color: rgba(255,255,255,0.28); }
         .breadcrumb .current { color: var(--text); }
+            
+        /* スマホ用 固定CTA（長尺LPでCTAが画面外に消えるのを防ぐ） */
+        .sticky-cta { display: none; }
+        @media (max-width: 767px) {
+          .sticky-cta {
+            display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+            background: rgba(10,10,15,0.92); backdrop-filter: blur(10px);
+            border-top: 1px solid var(--line); padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+          }
+          .sticky-cta a {
+            display: block; text-align: center; background: var(--accent); color: #14141c;
+            padding: 14px; border-radius: 8px; font-weight: 700; font-size: 15px; text-decoration: none;
+          }
+          .sticky-cta .note { display: block; text-align: center; color: var(--muted); font-size: 11px; margin-top: 6px; }
+          body { padding-bottom: 96px; }
+        }
     </style>
 </head>
 
@@ -328,6 +344,10 @@
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>
         </div>
     </footer>
+    <div class="sticky-cta">
+        <a href="/contact/?s=shigyou-douga-tokyo">無料で相談・見積もりする</a>
+        <span class="note">ご相談・お見積もりは無料です</span>
+    </div>
 </body>
 
 </html>
