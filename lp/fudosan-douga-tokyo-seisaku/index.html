@@ -24,6 +24,29 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "不動産の動画制作（東京）",
+              "item": "https://noktoa.com/lp/fudosan-douga-tokyo-seisaku/"
+            }
+          ]
+        },
+        {
           "@type": "LocalBusiness",
           "@id": "https://noktoa.com/#organization",
           "name": "株式会社NOKTOA",
@@ -65,6 +88,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">不動産の動画制作（東京）</span>
+            </div>
+        </nav>
         <section class="hero">
             <div class="wrap">
                 <p class="eyebrow">不動産の動画制作 ｜ 東京</p>
@@ -72,6 +100,7 @@
                 <p class="lead">東京で不動産の動画制作・物件動画をお探しの方へ。株式会社NOKTOAは、物件の広さや動線、暮らしのイメージを映像で伝え、内見前の候補に残してもらえる動画を、企画から撮影・編集まで自社完結で制作します。写真と間取り図だけでは伝わらない実感を、お客様に届けます。</p>
                 <div class="actions">
                     <a href="#contact" class="cta-btn">無料で相談する</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                     <a href="#what" class="ghost">不動産動画とは</a>
                 </div>
                 <div class="video-frame">
@@ -174,7 +203,7 @@
             <div class="wrap">
                 <h2>その物件の魅力を　動画で正しく伝えませんか</h2>
                 <p class="muted">ご相談・お見積もりは無料です。まずは扱う物件と、動画でやりたいことをお聞かせください。</p>
-                <a href="mailto:info@noktoa.com?subject=不動産の動画制作の相談（東京）" class="cta-btn">無料で相談する</a>
+                <a href="/contact/?s=fudosan-douga-tokyo-seisaku" class="cta-btn">無料で相談する</a>
             </div>
         </section>
     </main>
@@ -187,7 +216,9 @@
                 <a href="/lp/koujou-douga-tokyo/">工場・製造業動画 東京</a>
                 <a href="/lp/douga-seisaku-tokyo-ryokin/">動画制作の料金 東京</a>
                 <a href="/lp/drone-kuusatsu-tokyo/">ドローン空撮 東京</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>

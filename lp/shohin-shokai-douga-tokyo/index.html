@@ -28,6 +28,29 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "商品紹介動画の制作（東京）",
+              "item": "https://noktoa.com/lp/shohin-shokai-douga-tokyo/"
+            }
+          ]
+        },
+        {
           "@type": "LocalBusiness",
           "@id": "https://noktoa.com/#organization",
           "name": "株式会社NOKTOA",
@@ -128,6 +151,14 @@
         .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
         footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
         footer a { color: var(--muted); }
+    
+        /* パンくずリスト */
+        .breadcrumb { border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 12.5px; color: var(--muted); }
+        .breadcrumb .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb span { color: rgba(255,255,255,0.28); }
+        .breadcrumb .current { color: var(--text); }
     </style>
 </head>
 
@@ -140,6 +171,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">商品紹介動画の制作（東京）</span>
+            </div>
+        </nav>
         <section class="hero">
             <div class="wrap">
                 <p class="eyebrow">商品紹介動画 ｜ 東京 ｜ 制作</p>
@@ -147,6 +183,7 @@
                 <p class="lead">東京で商品紹介動画の制作をお探しの方へ。株式会社NOKTOAは、商品の質感・使い方・使うシーンを映像で伝え、見た人が「欲しい」と感じる商品紹介動画を、企画から撮影・編集まで自社完結で制作します。EC・店頭・広告・展示会に対応します。</p>
                 <div class="actions">
                     <a href="#contact" class="cta-btn">無料で相談する</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                     <a href="#what" class="ghost">商品紹介動画とは</a>
                 </div>
                 <div class="video-frame">
@@ -259,7 +296,7 @@
             <div class="wrap">
                 <h2>その商品の魅力を　「見ればわかる」に変えませんか</h2>
                 <p class="muted">ご相談・お見積もりは無料です。まずは商品と、売りたい場所をお聞かせください。無理な営業は一切いたしません。</p>
-                <a href="mailto:info@noktoa.com?subject=商品紹介動画の相談（東京）" class="cta-btn">無料で相談する</a>
+                <a href="/contact/?s=shohin-shokai-douga-tokyo" class="cta-btn">無料で相談する</a>
             </div>
         </section>
     </main>
@@ -273,7 +310,9 @@
                 <a href="/lp/inshokuten-douga-tokyo-seisaku/">飲食店動画 東京 制作</a>
                 <a href="/lp/salon-biyoushitsu-douga-tokyo/">美容室・サロン動画 東京</a>
                 <a href="/lp/tiktok-unyo-daiko-tokyo-hiyo/">TikTok運用代行 東京 費用</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>

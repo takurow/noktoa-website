@@ -24,6 +24,29 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "アニメーション動画の制作（東京）",
+              "item": "https://noktoa.com/lp/animation-douga-tokyo-seisaku/"
+            }
+          ]
+        },
+        {
           "@type": "LocalBusiness",
           "@id": "https://noktoa.com/#organization",
           "name": "株式会社NOKTOA",
@@ -65,6 +88,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">アニメーション動画の制作（東京）</span>
+            </div>
+        </nav>
         <section class="hero">
             <div class="wrap">
                 <p class="eyebrow">アニメーション動画制作 ｜ 東京</p>
@@ -72,6 +100,7 @@
                 <p class="lead">東京でアニメーション動画・説明動画の制作をお探しの方へ。株式会社NOKTOAは、複雑なサービスや目に見えない商材を、イラストや図解の動きでわかりやすく魅力的に伝えるアニメーション動画を、企画から制作まで自社完結でつくります。「説明が難しい」を「すぐ伝わる」に変えます。</p>
                 <div class="actions">
                     <a href="#contact" class="cta-btn">無料で相談する</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                     <a href="#what" class="ghost">アニメーション動画とは</a>
                 </div>
                 <div class="video-frame">
@@ -175,7 +204,7 @@
             <div class="wrap">
                 <h2>その「説明が難しい」を　私たちに任せませんか</h2>
                 <p class="muted">ご相談・お見積もりは無料です。まずは伝えたいサービスと、難しいと感じている点をお聞かせください。</p>
-                <a href="mailto:info@noktoa.com?subject=アニメーション動画制作の相談（東京）" class="cta-btn">無料で相談する</a>
+                <a href="/contact/?s=animation-douga-tokyo-seisaku" class="cta-btn">無料で相談する</a>
             </div>
         </section>
     </main>
@@ -189,7 +218,9 @@
                 <a href="/lp/shigyou-douga-tokyo/">士業・事務所動画 東京</a>
                 <a href="/lp/clinic-douga-tokyo-seisaku/">クリニック動画 東京 制作</a>
                 <a href="/lp/sns-unyo-daiko-tokyo-hiyo/">SNS運用代行 東京 費用</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>

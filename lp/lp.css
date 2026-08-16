@@ -47,3 +47,11 @@ ul.checks li::before { content: "—"; position: absolute; left: 0; color: var(-
 .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
 footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
 footer a { color: var(--muted); }
+
+/* パンくずリスト（検索結果表示＋回遊導線） */
+.breadcrumb { border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 12.5px; color: var(--muted); }
+.breadcrumb .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.breadcrumb a { color: var(--muted); text-decoration: none; }
+.breadcrumb a:hover { color: var(--accent); }
+.breadcrumb span { color: rgba(255,255,255,0.28); }
+.breadcrumb .current { color: var(--text); }

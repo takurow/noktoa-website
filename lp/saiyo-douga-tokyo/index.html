@@ -29,6 +29,29 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "採用動画の制作（東京）",
+              "item": "https://noktoa.com/lp/saiyo-douga-tokyo/"
+            }
+          ]
+        },
+        {
           "@type": "LocalBusiness",
           "@id": "https://noktoa.com/#organization",
           "name": "株式会社NOKTOA",
@@ -197,6 +220,14 @@
         footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
         .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
         footer a { color: var(--muted); }
+    
+        /* パンくずリスト */
+        .breadcrumb { border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 12.5px; color: var(--muted); }
+        .breadcrumb .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb span { color: rgba(255,255,255,0.28); }
+        .breadcrumb .current { color: var(--text); }
     </style>
 </head>
 
@@ -209,6 +240,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">採用動画の制作（東京）</span>
+            </div>
+        </nav>
         <!-- HERO -->
         <section class="hero">
             <div class="hero-bg" role="img" aria-label="東京のオフィスで採用動画を撮影する映像クルー"></div>
@@ -220,6 +256,7 @@
                     <div class="actions">
                         <a href="#contact" class="cta-btn">無料で相談・見積もり</a>
                         <a href="#flow" class="ghost">制作の流れを見る</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                     </div>
                     <p class="trust">企画・撮影・編集まで<b>自社完結</b>　／　東京23区を中心に出張撮影対応　／　ご相談・お見積もりは<b>無料</b></p>
                 </div>
@@ -400,7 +437,7 @@
                 <div class="wrap">
                     <h2>採用の「伝え方」を<br>一緒に設計しませんか</h2>
                     <p class="muted">ご相談・お見積もりは無料です。御社の採用課題をお聞かせください。</p>
-                    <a href="mailto:info@noktoa.com?subject=採用動画の相談（東京）" class="cta-btn">無料で相談・見積もり</a>
+                    <a href="/contact/?s=saiyo-douga-tokyo" class="cta-btn">無料で相談・見積もり</a>
                 </div>
             </div>
         </section>
@@ -415,7 +452,9 @@
                 <a href="/lp/koujou-douga-tokyo/">工場・製造業動画 東京</a>
                 <a href="/lp/inshokuten-douga-tokyo-seisaku/">飲食店動画 東京 制作</a>
                 <a href="/lp/tiktok-unyo-daiko-tokyo-hiyo/">TikTok運用代行 東京 費用</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>

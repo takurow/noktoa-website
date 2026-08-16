@@ -28,6 +28,29 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "動画制作の料金｜東京の相場と見積もりの考え方",
+              "item": "https://noktoa.com/lp/douga-seisaku-tokyo-ryokin/"
+            }
+          ]
+        },
+        {
           "@type": "LocalBusiness",
           "@id": "https://noktoa.com/#organization",
           "name": "株式会社NOKTOA",
@@ -141,6 +164,14 @@
         .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
         footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
         footer a { color: var(--muted); }
+    
+        /* パンくずリスト */
+        .breadcrumb { border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 12.5px; color: var(--muted); }
+        .breadcrumb .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb span { color: rgba(255,255,255,0.28); }
+        .breadcrumb .current { color: var(--text); }
     </style>
 </head>
 
@@ -153,6 +184,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">動画制作の料金｜東京の相場と見積もりの考え方</span>
+            </div>
+        </nav>
         <section class="hero">
             <div class="wrap">
                 <p class="eyebrow">動画制作 ｜ 東京 ｜ 料金</p>
@@ -161,6 +197,7 @@
                 <div class="actions">
                     <a href="#contact" class="cta-btn">無料で見積もり</a>
                     <a href="#table" class="ghost">料金の目安を見る</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                 </div>
                 <div class="video-frame">
                     <img src="../../assets/douga-seisaku-tokyo-ryokin-hero.webp" alt="東京のスタジオで動画編集・カラーグレーディングを行う様子" width="760" height="428" fetchpriority="high">
@@ -279,7 +316,7 @@
             <div class="wrap">
                 <h2>まずは　目的とご予算をお聞かせください</h2>
                 <p class="muted">お見積もり・ご提案は無料です。無理な営業はいたしません。</p>
-                <a href="mailto:info@noktoa.com?subject=動画制作の見積もり相談（東京）" class="cta-btn">無料で見積もり・相談</a>
+                <a href="/contact/?s=douga-seisaku-tokyo-ryokin" class="cta-btn">無料で見積もり・相談</a>
             </div>
         </section>
     </main>
@@ -292,7 +329,9 @@
                 <a href="/lp/tiktok-unyo-daiko-tokyo-hiyo/">TikTok運用代行 東京 費用</a>
                 <a href="/lp/pr-douga-tokyo-seisaku-gaisha/">PR動画 東京 制作会社</a>
                 <a href="/lp/saiyo-douga-tokyo/">採用動画 東京 制作</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>

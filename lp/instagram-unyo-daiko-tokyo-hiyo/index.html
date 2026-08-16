@@ -24,6 +24,29 @@
 {
   "@context": "https://schema.org",
   "@graph": [
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "ホーム",
+              "item": "https://noktoa.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "サービス一覧",
+              "item": "https://noktoa.com/#service-index"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "Instagram運用代行の費用｜東京の相場と選び方",
+              "item": "https://noktoa.com/lp/instagram-unyo-daiko-tokyo-hiyo/"
+            }
+          ]
+        },
     {
       "@type": "LocalBusiness",
       "@id": "https://noktoa.com/#organization",
@@ -147,6 +170,14 @@
         .related a { color: var(--accent); text-decoration: none; margin-right: 20px; }
         footer { border-top: 1px solid var(--line); padding: 32px 0; font-size: 13px; color: var(--muted); }
         footer a { color: var(--muted); }
+    
+        /* パンくずリスト */
+        .breadcrumb { border-bottom: 1px solid var(--line); padding: 12px 0; font-size: 12.5px; color: var(--muted); }
+        .breadcrumb .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+        .breadcrumb a { color: var(--muted); text-decoration: none; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb span { color: rgba(255,255,255,0.28); }
+        .breadcrumb .current { color: var(--text); }
     </style>
 </head>
 
@@ -159,6 +190,11 @@
     </header>
 
     <main>
+        <nav class="breadcrumb" aria-label="パンくずリスト">
+            <div class="wrap">
+                <a href="/">ホーム</a> <span>›</span> <a href="/#service-index">サービス一覧</a> <span>›</span> <span class="current">Instagram運用代行の費用｜東京の相場と選び方</span>
+            </div>
+        </nav>
         <section class="hero">
             <div class="wrap">
                 <p class="eyebrow">Instagram運用代行 ｜ 東京 ｜ 費用</p>
@@ -166,6 +202,7 @@
                 <p class="lead">東京でInstagram運用代行の費用・相場をお調べの方へ。Instagram運用代行とは何か、料金は何で決まり、費用で失敗しないためにどこを見ればいいのか。株式会社NOKTOAが、企画・撮影・編集・分析まで一貫対応する立場から正直に解説します。</p>
                 <div class="actions">
                     <a href="#contact" class="cta-btn">無料で相談する</a>
+                    <a href="/works/" class="ghost">制作実績を見る</a>
                     <a href="#what" class="ghost">Instagram運用代行とは</a>
                 </div>
                 <div class="video-frame">
@@ -275,7 +312,7 @@
             <div class="wrap">
                 <h2>Instagramを「なんとなく投稿」から「成果の出る運用」へ</h2>
                 <p class="muted">ご相談・お見積もりは無料です。まずはアカウントの目的と現状をお聞かせください。無理な営業は一切いたしません。</p>
-                <a href="mailto:info@noktoa.com?subject=Instagram運用代行の相談（東京）" class="cta-btn">無料で相談する</a>
+                <a href="/contact/?s=instagram-unyo-daiko-tokyo-hiyo" class="cta-btn">無料で相談する</a>
             </div>
         </section>
     </main>
@@ -288,7 +325,9 @@
                 <a href="/lp/sns-unyo-daiko-tokyo-hiyo/">SNS運用代行 東京 費用</a>
                 <a href="/lp/shohin-shokai-douga-tokyo/">商品紹介動画 東京 制作</a>
                 <a href="/lp/branding-douga-tokyo/">ブランディング動画 東京</a>
+                <a href="/works/">制作実績</a>
                 <a href="/">NOKTOA トップ</a>
+                <a href="/contact/">無料相談・お問い合わせ</a>
             </p>
             <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
             <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>
