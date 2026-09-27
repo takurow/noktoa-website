@@ -80,10 +80,39 @@
         .form-msg.ok { display: block; background: rgba(201, 168, 106, 0.12); border: 1px solid var(--accent); }
         .form-msg.ng { display: block; background: rgba(220, 90, 90, 0.12); border: 1px solid rgba(220, 90, 90, 0.5); }
         .alt-contact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; margin-top: 40px; }
+        .alt-contact.top { margin-top: 0; margin-bottom: 36px; border-color: var(--accent); }
+        .relay { display: none; background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 26px 24px; }
+        .relay h2 { font-size: 20px; margin: 0 0 10px; }
+        .relay p { font-size: 15px; margin: 0 0 18px; line-height: 1.8; }
+        .relay .ways { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+        .relay .way {
+            flex: 1 1 200px; text-align: center; text-decoration: none; cursor: pointer;
+            background: var(--accent); color: #14141c; border: none; border-radius: 8px;
+            padding: 15px 16px; font-size: 15px; font-weight: 700; font-family: inherit;
+        }
+        .relay .way.sub { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+        .relay textarea {
+            width: 100%; min-height: 190px; background: #14141c; border: 1px solid var(--line);
+            border-radius: 8px; color: var(--text); padding: 14px; font-size: 14px;
+            font-family: inherit; line-height: 1.8; resize: vertical;
+        }
+        .relay .addr { font-size: 17px; font-weight: 700; margin: 16px 0 0; }
+        .relay .addr a { color: var(--accent); }
+        .relay .copied { color: var(--accent); font-size: 14px; margin: 10px 0 0; display: none; }
+        .alt-contact .direct { font-size: 18px; font-weight: 700; }
+        .alt-contact .direct a { text-decoration: none; }
         .alt-contact p { margin: 0 0 8px; font-size: 15px; }
         .alt-contact p:last-child { margin: 0; }
         .alt-contact a { color: var(--accent); }
     </style>
+<!-- analytics:start -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';
+if(h.indexOf('/contact/')>-1)gtag('event','cta_click',{cta_target:h,page:location.pathname});
+else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.pathname});});</script>
+<script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yorl0bpxds");</script>
+<!-- analytics:end -->
 </head>
 
 <body>
@@ -104,13 +133,19 @@
             <div class="wrap">
                 <p class="eyebrow">CONTACT</p>
                 <h1>ご相談・お見積もりは<br><span class="hl">無料</span>です</h1>
-                <p class="lead">「何をどう発信すべきか決まっていない」段階のご相談も歓迎です。<br>いただいた内容は代表の松本が直接確認し、通常1営業日以内にご返信します。</p>
+                <p class="lead">「何をどう発信すべきか決まっていない」段階のご相談も歓迎です。<br>いただいた内容は代表の松本が直接確認し、通常1営業日以内にご返信します。<br>お急ぎの方、フォーム入力が煩わしい方は、下記メールアドレスへ直接ご連絡ください。</p>
             </div>
         </section>
 
         <section>
             <div class="wrap form-wrap">
                 <div class="form-msg" id="form-msg" role="status" aria-live="polite"></div>
+
+                <div class="alt-contact top">
+                    <p>メールでのご相談も歓迎です。フォームと同じ窓口につながります。</p>
+                    <p class="direct">Email：<a href="mailto:info@noktoa.com?subject=NOKTOA%E3%81%B8%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">info@noktoa.com</a></p>
+                    <p>ご相談内容が固まっていない場合は、一行だけでも構いません。こちらから伺います。</p>
+                </div>
 
                 <form id="contact-form" method="POST" novalidate>
                     <div class="field">
@@ -172,13 +207,28 @@
                     <input type="hidden" name="流入元ページ" id="f-source" value="">
                     <input type="hidden" name="_subject" value="【HP】お問い合わせ">
 
+                    <p class="form-note" style="margin: 0 0 14px; text-align: left;">送信ボタンを押すと、ご入力内容の送信方法をご案内します（Gmail・メールソフト・コピーからお選びいただけます）。</p>
                     <button type="submit" class="submit-btn" id="submit-btn">この内容で送信する</button>
                     <p class="form-note">送信いただいた個人情報は、ご連絡およびご提案の目的以外には使用しません。</p>
                 </form>
 
+                <div class="relay" id="relay" role="region" aria-live="polite">
+                    <h2>あと一歩です</h2>
+                    <p>ご入力ありがとうございます。下記いずれかの方法で、この内容をお送りください。<br>ご入力内容はすべて保持していますので、書き直しは不要です。</p>
+                    <div class="ways">
+                        <a class="way" id="relay-gmail" href="#" target="_blank" rel="noopener">Gmailで開く</a>
+                        <a class="way" id="relay-mailto" href="#">メールソフトで開く</a>
+                        <button type="button" class="way sub" id="relay-copy">内容をコピー</button>
+                    </div>
+                    <textarea id="relay-text" readonly aria-label="送信内容"></textarea>
+                    <p class="copied" id="relay-copied">コピーしました。info@noktoa.com 宛に貼り付けてお送りください。</p>
+                    <p class="addr">送信先：<a href="mailto:info@noktoa.com?subject=NOKTOA%E3%81%B8%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">info@noktoa.com</a></p>
+                </div>
+
                 <div class="alt-contact">
-                    <p>フォームがうまく動作しない場合は、こちらへ直接ご連絡ください。</p>
-                    <p>Email：<a href="mailto:info@noktoa.com?subject=NOKTOAへのご相談">info@noktoa.com</a></p>
+                    <p>送信がうまくいかなかった場合でも、そのままにせずご一報ください。確実にお受けします。</p>
+                    <p class="direct">Email：<a href="mailto:info@noktoa.com?subject=NOKTOA%E3%81%B8%E3%81%AE%E3%81%94%E7%9B%B8%E8%AB%87">info@noktoa.com</a></p>
+                    <p>いただいたご連絡には、代表の松本が必ず目を通します。</p>
                 </div>
             </div>
         </section>
@@ -198,7 +248,7 @@
 
     <script>
         // 送信先エンドポイント。Formspree のフォームIDに差し替えると本番稼働する。
-        var ENDPOINT = 'https://formspree.io/f/REPLACE_ME';
+        var ENDPOINT = 'https://formspree.io/f/xwlprdoa';
 
         (function () {
             var form = document.getElementById('contact-form');
@@ -216,12 +266,28 @@
                 msg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
+            var copyBtn = document.getElementById('relay-copy');
+            if (copyBtn) {
+                copyBtn.addEventListener('click', function () {
+                    var ta = document.getElementById('relay-text');
+                    var done = function () { document.getElementById('relay-copied').style.display = 'block'; };
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(ta.value).then(done, function () {
+                            ta.select(); document.execCommand('copy'); done();
+                        });
+                    } else {
+                        ta.select(); document.execCommand('copy'); done();
+                    }
+                });
+            }
+
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 if (!form.reportValidity()) return;
 
-                // エンドポイント未設定の間は、入力内容をそのままメール本文に流し込んで送信する
-                // （フォームの入力体験は保ったまま、問い合わせを取りこぼさないための暫定動作）
+                // エンドポイント未設定の間は、入力内容を本文に組み立てて「送る手段」を提示する。
+                // 自動でメーラーを起動すると、起動しない環境では無反応のまま入力が失われるため、
+                // 必ず画面上に内容を残し、Gmail / メールソフト / コピー の3経路を用意する。
                 if (ENDPOINT.indexOf('REPLACE_ME') !== -1) {
                     var lines = [];
                     ['お名前', '会社名', 'email', '電話番号', 'ご相談種別', 'ご予算', 'ご相談内容'].forEach(function (k) {
@@ -229,10 +295,22 @@
                         if (el && el.value) lines.push((k === 'email' ? 'メールアドレス' : k) + '：' + el.value);
                     });
                     lines.push('流入元：' + document.getElementById('f-source').value);
-                    location.href = 'mailto:info@noktoa.com'
-                        + '?subject=' + encodeURIComponent('【HP】お問い合わせ')
-                        + '&body=' + encodeURIComponent(lines.join('\n'));
-                    show('ok', 'メールソフトが起動します。内容をご確認のうえ送信してください。起動しない場合は info@noktoa.com まで直接ご連絡ください。');
+
+                    var subject = 'NOKTOAへのご相談';
+                    var bodyText = lines.join('\n');
+                    var enc = encodeURIComponent;
+
+                    document.getElementById('relay-text').value = bodyText;
+                    document.getElementById('relay-mailto').href =
+                        'mailto:info@noktoa.com?subject=' + enc(subject) + '&body=' + enc(bodyText);
+                    document.getElementById('relay-gmail').href =
+                        'https://mail.google.com/mail/?view=cm&fs=1&to=' + enc('info@noktoa.com')
+                        + '&su=' + enc(subject) + '&body=' + enc(bodyText);
+
+                    form.style.display = 'none';
+                    var relay = document.getElementById('relay');
+                    relay.style.display = 'block';
+                    relay.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     return;
                 }
 
@@ -246,6 +324,7 @@
                 }).then(function (res) {
                     if (!res.ok) throw new Error('failed');
                     form.style.display = 'none';
+                    if (window.gtag) gtag('event', 'generate_lead', { source: document.getElementById('f-source').value });
                     show('ok', 'お問い合わせありがとうございます。内容を確認のうえ、通常1営業日以内にご返信いたします。');
                 }).catch(function () {
                     btn.disabled = false;
