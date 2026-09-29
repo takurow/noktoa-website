@@ -120,7 +120,8 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .mech{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:84px 20px 30px}
 #mechSvg{width:min(340px,64vw,34vh);height:auto;margin:clamp(10px,2.5vh,28px) 0;overflow:visible}
 .steps{display:grid;min-height:6.4em;width:min(560px,100%)}
-.steps p{grid-area:1/1;font-size:15px;line-height:2;color:#d6ddc9;opacity:0}
+.steps p{grid-area:1/1;font-size:15px;line-height:2;color:#d6ddc9;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease,visibility 0s .25s}
+.steps p.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s var(--ease) .2s,transform .6s var(--ease) .2s,visibility 0s}
 .steps b{display:block;color:var(--cream);font-family:var(--mincho);font-weight:700;font-size:18px;margin-bottom:4px;letter-spacing:.08em}
 .dots{display:flex;gap:10px;justify-content:center;margin-top:12px}
 .dots i{width:28px;height:2px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
@@ -132,7 +133,8 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .spin::after{content:"";position:absolute;left:50%;bottom:10%;width:min(300px,50vw);height:36px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(22,40,24,.26),transparent);filter:blur(6px)}
 #gl2{position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .spin .head{position:absolute;top:clamp(84px,12vh,120px);left:0;right:0;text-align:center;z-index:2;padding:0 20px}
-.call{position:absolute;z-index:2;width:min(260px,30vw);opacity:0}
+.call{position:absolute;z-index:2;width:min(260px,30vw);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease,visibility 0s .25s}
+.call.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s var(--ease) .2s,transform .6s var(--ease) .2s,visibility 0s}
 .call .n{font-family:var(--en);font-weight:600;color:var(--gold);font-size:15px;letter-spacing:.2em}
 .call b{display:block;font-family:var(--mincho);font-size:clamp(18px,1.7vw,22px);font-weight:700;margin:2px 0 6px;letter-spacing:.06em}
 .call p{font-size:14px;line-height:1.9;color:var(--body)}
@@ -207,14 +209,27 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 
 /* quiz */
 .quiz{background:var(--matcha);color:var(--cream);overflow:hidden}
-.qbox{width:min(760px,100%);margin:44px auto 0;position:relative;min-height:320px}
+.qbox{width:min(760px,100%);margin:30px auto 0;position:relative;min-height:320px}
 .qstep{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;opacity:0;pointer-events:none;visibility:hidden}
 .qstep.on{position:relative;opacity:1;pointer-events:auto;visibility:visible}
 .qn{font-family:var(--mincho);font-size:14px;letter-spacing:.3em;color:#c8d3b5}
 .qq{font-family:var(--mincho);font-weight:700;font-size:clamp(22px,2.6vw,30px);margin:8px 0 26px;letter-spacing:.08em}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;width:100%}
-.opt{padding:22px 16px;border-radius:14px;border:1px solid rgba(250,248,242,.25);background:rgba(250,248,242,.04);font-family:var(--mincho);font-weight:600;font-size:17px;letter-spacing:.06em;transition:background .4s var(--ease),border-color .4s,transform .4s var(--ease)}
-.opt:hover{background:rgba(250,248,242,.12);border-color:rgba(250,248,242,.6);transform:translateY(-3px)}
+.opt{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:18px 20px 18px 22px;border-radius:16px;border:0;background:var(--cream);color:var(--deep);font-family:var(--mincho);font-weight:700;font-size:18px;letter-spacing:.06em;text-align:left;box-shadow:0 10px 24px rgba(0,0,0,.22);transition:transform .35s var(--ease),box-shadow .35s var(--ease),background .3s}
+.opt::after{content:"";flex:0 0 30px;height:30px;border-radius:50%;background:var(--matcha) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M5 3l5 5-5 5' fill='none' stroke='%23f2ede1' stroke-width='1.8'/%3E%3C/svg%3E") center/14px no-repeat}
+.opt:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(0,0,0,.28);background:#fff}
+.opt:active{transform:scale(.97)}
+.opt.pick{background:var(--leaf);color:#fff}
+.opts .opt:first-child{animation:nudge 2.6s var(--ease) 1.2s infinite}
+@keyframes nudge{0%,70%,100%{transform:none}78%{transform:translateY(-4px)}86%{transform:none}92%{transform:translateY(-2px)}}
+.qbadges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.qbadges span{padding:5px 14px;border-radius:99px;background:rgba(250,248,242,.12);border:1px solid rgba(250,248,242,.3);font-size:13px;letter-spacing:.1em;color:var(--cream)}
+.qhint{display:flex;align-items:center;gap:8px;font-size:13px;letter-spacing:.12em;color:#e3d9b6;margin:-12px 0 18px}
+.qhint i{width:8px;height:8px;border-radius:50%;background:#e3d9b6;animation:blink 1.4s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+.quiz .qbox{background:rgba(0,0,0,.14);border:1px solid rgba(250,248,242,.18);border-radius:24px;padding:34px clamp(16px,4vw,40px) 30px}
+.quiz .qn{display:inline-block;padding:3px 14px;border-radius:99px;background:rgba(250,248,242,.14);color:var(--cream)}
+.qentry{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font-family:var(--mincho);font-weight:700;font-size:15px;letter-spacing:.1em;color:var(--matcha);border-bottom:1px solid currentColor;padding-bottom:4px}
 .res{text-align:center}
 .res .cup{width:110px;height:154px;margin:0 auto 16px}
 .res h3{font-size:clamp(22px,3vw,32px)}
@@ -293,7 +308,7 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
 .rv{opacity:0;transform:translateY(36px)}
 
 @media (prefers-reduced-motion:reduce){
-  .rv,.lit .w,.steps p,.call{opacity:1!important;transform:none!important;filter:none!important}
+  .rv,.lit .w{opacity:1!important;transform:none!important;filter:none!important}
 }
 /* スマホ */
 @media (max-width:900px){
@@ -329,6 +344,8 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
   .pour li b{font-size:13px}
   .pour li span.t{display:none}
   .pan{flex-basis:78vw}
+  .opts{grid-template-columns:1fr}
+  .opt{font-size:17px}
   .tl{grid-template-columns:1fr;row-gap:28px}
   .tl .ln{display:none}
   .pl{grid-template-columns:1fr;border:0}
@@ -489,6 +506,7 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
     <li><span class="q">30<small>mL</small></span><b>お湯で溶かす</b><span class="t">なめらかになるまで混ぜる。</span></li>
     <li><span class="q">150<small>mL</small></span><b>牛乳を注ぐ</b><span class="t">アイスは氷と、ホットは温めて。</span></li>
   </ol>
+  <a href="#quiz" class="qentry">自分に合う一杯を診断する　→</a>
 </section>
 
 <section class="rec dark" id="rec">
@@ -526,12 +544,14 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
   <div class="wrap c">
     <div class="chap rv" style="color:#d6c89f"><span class="kn">九</span>一杯診断</div>
     <h2 class="h2 rv"><span class="ph">三つ選べば、</span><br><span class="ph">あなたの一杯がわかる。</span></h2>
+    <p class="lead rv">質問に答えて、ボタンをタップするだけ。<br>あなたに合うラテのつくり方がわかります。</p>
+    <div class="qbadges rv"><span>所要30秒</span><span>3タップ</span><span>その場で結果</span></div>
     <div class="qbox" id="qbox">
-      <div class="qstep on" data-q="0"><span class="qn">問一</span><p class="qq">いつ飲みたい？</p>
+      <div class="qstep on" data-q="0"><span class="qn">問一 ／ 三</span><p class="qq">いつ飲みたい？</p><p class="qhint"><i></i>ひとつ選んでタップ</p>
         <div class="opts"><button class="opt" data-v="morning">朝の一杯に</button><button class="opt" data-v="break">午後のひと息に</button><button class="opt" data-v="night">夜のご褒美に</button></div></div>
-      <div class="qstep" data-q="1"><span class="qn">問二</span><p class="qq">温度は？</p>
+      <div class="qstep" data-q="1"><span class="qn">問二 ／ 三</span><p class="qq">温度は？</p><p class="qhint"><i></i>ひとつ選んでタップ</p>
         <div class="opts"><button class="opt" data-v="ice">冷たく</button><button class="opt" data-v="hot">あたたかく</button></div></div>
-      <div class="qstep" data-q="2"><span class="qn">問三</span><p class="qq">合わせるミルクは？</p>
+      <div class="qstep" data-q="2"><span class="qn">問三 ／ 三</span><p class="qq">合わせるミルクは？</p><p class="qhint"><i></i>これで最後です</p>
         <div class="opts"><button class="opt" data-v="milk">牛乳</button><button class="opt" data-v="oat">オーツミルク</button><button class="opt" data-v="soy">豆乳</button></div></div>
       <div class="qstep res" data-q="3">
         <svg class="cup" viewBox="0 0 200 280" aria-hidden="true"><defs><clipPath id="qc"><path d="M30 10 L170 10 L156 262 Q155 272 145 272 L55 272 Q45 272 44 262 Z"/></clipPath></defs><g clip-path="url(#qc)"><rect id="qm" x="0" y="60" width="200" height="230" fill="#faf8f2"/><rect id="qt" x="0" y="60" width="200" height="90" fill="#7aa244"/></g><path d="M30 10 L170 10 L156 262 Q155 272 145 272 L55 272 Q45 272 44 262 Z" fill="none" stroke="#faf8f2" stroke-opacity=".5" stroke-width="2"/></svg>
@@ -739,7 +759,7 @@ const G=$('#mechG'), NS='http://www.w3.org/2000/svg', parts=[];
   const n=9, sp=[], sm=[]; for(let k=0;k<n*2;k++){ const a=k/(n*2)*6.283; const rr=k%2?r*.6:r; sp.push([Math.cos(a)*rr,Math.sin(a)*rr]); sm.push([Math.cos(a)*r*.8,Math.sin(a)*r*.8]); }
   g.append(silk,tea); G.append(g); parts.push({g,silk,tea,sp,sm,i});
 });
-const mSteps=$$('.steps p'), mDots=$$('.dots b');
+const mSteps=$$('.steps p'), mDots=$$('.dots b'); let mIdx=-1;
 function mechDraw(p){
   const wrap=ease(clamp((p-.3)/.4)), show=ease(clamp(p/.15+.4));
   parts.forEach(o=>{
@@ -748,7 +768,7 @@ function mechDraw(p){
     o.silk.setAttribute('opacity',(w*.9).toFixed(3)); o.silk.setAttribute('transform',`scale(${(.45+w*.55).toFixed(3)}) rotate(${(p*90).toFixed(1)})`);
     o.g.style.opacity=clamp(show*1.3-o.i*.04).toFixed(3);
   });
-  mSteps.forEach((s,k)=>{ const c=(k+.5)/3, d=Math.abs(p-c)*3; const o=clamp(1-(d-.28)/.2); s.style.opacity=o.toFixed(3); s.style.transform=`translateY(${((1-o)*10*(p<c?1:-1)).toFixed(1)}px)`; });
+  const si=Math.min(2,Math.floor(p*3)); if(si!==mIdx){ mSteps.forEach((s,k)=>s.classList.toggle('on',k===si)); mIdx=si; }
   mDots.forEach((d,k)=>d.style.transform=`scaleX(${clamp(p*3-k)})`);
 }
 
@@ -781,11 +801,9 @@ gsap.timeline({scrollTrigger:{trigger:'#emp',start:'top top',end:'+=150%',pin:tr
 ScrollTrigger.create({trigger:'#mech',start:'top top',end:'+=200%',pin:true,scrub:.6,onUpdate:s=>mechDraw(s.progress)}); mechDraw(0);
 
 { const cnt=$('#count');
-  const tl=gsap.timeline({scrollTrigger:{trigger:'#spin',start:'top top',end:'+=240%',pin:true,scrub:.8,onUpdate:s=>{ spinP=s.progress; cnt.textContent='0'+Math.min(4,1+Math.floor(s.progress*4.2))+' / 04'; }}});
-  [['.c1',.04,.26],['.c2',.26,.48],['.c3',.52,.74],['.c4',.74,.98]].forEach(([c,a,b])=>{
-    tl.fromTo(c,{opacity:0,y:18},{opacity:1,y:0,duration:.06,ease:'power2.out'},a).to(c,{opacity:0,y:-14,duration:.05,ease:'power2.in'},b-.05);
-  });
-  tl.to({},{duration:.02},.98); }
+  const calls=$$('.call'); let ci=-1;
+  const setC=p=>{ const i=Math.min(3,Math.floor(p*4)); if(i===ci) return; ci=i; calls.forEach((c,k)=>c.classList.toggle('on',k===i)); cnt.textContent='0'+(i+1)+' / 04'; };
+  ScrollTrigger.create({trigger:'#spin',start:'top top',end:'+=240%',pin:true,scrub:.8,onUpdate:s=>{ spinP=s.progress; setC(s.progress); }}); setC(0); }
 
 ScrollTrigger.create({trigger:'#pour',start:'top top',end:'+=180%',pin:true,scrub:.6,onUpdate:s=>pourDraw(s.progress)}); pourDraw(0);
 
@@ -806,9 +824,9 @@ gsap.fromTo('#huge',{xPercent:10},{xPercent:-10,ease:'none',scrollTrigger:{trigg
   ScrollTrigger.create({trigger:'.hero',start:'bottom 64px',onEnter:()=>hd.classList.add('solid'),onLeaveBack:()=>hd.classList.remove('solid')});
   ScrollTrigger.create({start:0,end:'max',onUpdate:s=>{
     bar.style.transform=`scaleX(${s.progress.toFixed(4)})`;
-    const y=s.scroll(), pr=$('#plans').getBoundingClientRect(), ct=$('#contact').getBoundingClientRect();
+    const y=s.scroll(), pr=$('#plans').getBoundingClientRect(), ct=$('#contact').getBoundingClientRect(), qz=$('#quiz').getBoundingClientRect();
     const inPin=pins.some(el=>{const b=el.getBoundingClientRect(); return b.top<=1&&b.bottom>=innerHeight-1;});
-    sb.classList.toggle('show',y>innerHeight*.9 && !inPin && !(pr.top<innerHeight&&pr.bottom>0) && !(ct.top<innerHeight&&ct.bottom>0));
+    sb.classList.toggle('show',y>innerHeight*.9 && !inPin && !(pr.top<innerHeight&&pr.bottom>0) && !(ct.top<innerHeight&&ct.bottom>0) && !(qz.top<innerHeight*.6&&qz.bottom>innerHeight*.4));
   }}); }
 
 if(!TOUCH && !RM){
@@ -824,7 +842,7 @@ if(!TOUCH && !RM){
   const go=n=>{ if(busy) return; busy=true; const a=steps[cur], b=steps[n];
     gsap.to(a,{opacity:0,y:-16,duration:.3,ease:'power2.in',onComplete(){ a.classList.remove('on'); b.classList.add('on'); gsap.fromTo(b,{opacity:0,y:20},{opacity:1,y:0,duration:.6,ease:'expo.out',onComplete(){busy=false;}}); gsap.fromTo(b.querySelectorAll('.opt'),{opacity:0,y:16},{opacity:1,y:0,stagger:.06,duration:.5,ease:'expo.out'}); ScrollTrigger.refresh(); }});
     cur=n; prog.forEach((p,k)=>p.classList.toggle('on',k<=Math.min(n,2))); };
-  $$('.opt').forEach(o=>o.addEventListener('click',()=>{ if(busy) return; ans[cur]=o.dataset.v; if(cur<2) go(cur+1); else { result(); go(3);} }));
+  $$('.opt').forEach(o=>o.addEventListener('click',()=>{ if(busy) return; o.classList.add('pick'); setTimeout(()=>o.classList.remove('pick'),900); ans[cur]=o.dataset.v; if(cur<2) go(cur+1); else { result(); go(3);} }));
   $('#again').addEventListener('click',()=>{ ans.length=0; go(0); });
   function result(){
     const time={morning:'朝の',break:'午後の',night:'夜の'}[ans[0]], temp=ans[1]==='ice'?'アイス':'ホット', mk={milk:'牛乳',oat:'オーツミルク',soy:'豆乳'}[ans[2]], mkS={milk:'',oat:'オーツ',soy:'豆乳'}[ans[2]];
