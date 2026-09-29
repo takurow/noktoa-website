@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>シルク抹茶　アフィリエイト連動のご提案｜NOKTOA</title>
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="シルク抹茶　アフィリエイト連動のご提案">
+<meta property="og:description" content="LPを売れる受け皿にして、紹介者ごとの売上を自動で記録する仕組み。">
+<meta property="og:image" content="https://noktoa.com/p/sm-d1888c64/og.jpg">
+<meta name="theme-color" content="#122818">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Noto+Sans+JP:wght@400;500;700&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --deep:#122818; --matcha:#24472b; --leaf:#7aa244; --pale:#dfe6cf;
+  --cream:#f2ede1; --silk:#faf8f2; --ink:#161a15; --body:#3a3e36; --mute:#6b6d63; --line:rgba(22,26,21,.14);
+  --gold:#a3864d; --ease:cubic-bezier(.22,1,.36,1);
+  --mincho:"Shippori Mincho B1",serif; --sans:"Noto Sans JP",sans-serif; --en:"Cormorant Garamond",serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+body{background:var(--silk);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.9;letter-spacing:.04em;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.06em;font-feature-settings:"palt" 1}
+b{font-weight:700}
+.ph{display:inline-block}
+
+/* スライド（1枚1メッセージ） */
+.s{min-height:100svh;scroll-snap-align:start;display:flex;flex-direction:column;justify-content:center;padding:84px clamp(22px,7vw,120px) 70px;position:relative}
+.s:nth-child(even){background:var(--cream)}
+.s.dark{background:var(--deep);color:var(--cream)}
+.no{position:absolute;top:28px;left:clamp(22px,7vw,120px);font-family:var(--en);font-size:15px;letter-spacing:.3em;color:var(--gold)}
+.brand{position:absolute;top:28px;right:clamp(22px,7vw,120px);font-family:var(--mincho);font-size:13px;letter-spacing:.2em;color:var(--mute)}
+.dark .brand{color:#9fae8e}
+.kick{font-family:var(--mincho);font-size:15px;letter-spacing:.3em;color:var(--gold);margin-bottom:14px}
+.t{font-size:clamp(28px,3.6vw,50px);line-height:1.5;margin-bottom:28px}
+.t em{font-style:normal;color:var(--leaf)}
+.lead{font-size:clamp(16px,1.4vw,20px);color:var(--body);max-width:44em}
+.dark .lead{color:#d2dac4}
+.w{width:min(1200px,100%);margin:0 auto}
+.note{font-size:13px;color:var(--mute);margin-top:22px}
+.dark .note{color:#9fae8e}
+
+/* 表紙 */
+.cover{background:radial-gradient(90% 80% at 70% 50%,#2d5935 0%,var(--matcha) 45%,var(--deep) 100%);color:var(--cream)}
+.cover .w{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:40px}
+.cover h1{font-size:clamp(32px,4vw,58px);line-height:1.4}
+.cover .sub{font-family:var(--mincho);font-size:clamp(16px,1.5vw,21px);color:#d8dfcb;margin-top:22px;letter-spacing:.1em}
+.cover .by{margin-top:50px;font-size:14px;color:#b9c3a8;letter-spacing:.14em;line-height:2}
+.cover img{width:min(300px,60vw);justify-self:center;filter:drop-shadow(0 30px 40px rgba(0,0,0,.4));transform:rotate(-4deg)}
+
+/* 図・カード */
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px}
+.s:nth-child(even) .card{background:var(--silk)}
+.dark .card{background:rgba(250,248,242,.06);border-color:rgba(250,248,242,.18)}
+.card h3{font-size:20px;margin-bottom:8px}
+.card p{font-size:15px;color:var(--body);line-height:1.85}
+.dark .card p{color:#d2dac4}
+.card .n{font-family:var(--en);font-size:30px;color:var(--leaf);line-height:1;margin-bottom:10px;display:block}
+.card.hi{border:2px solid var(--matcha);position:relative}
+.tag{display:inline-block;font-size:12px;letter-spacing:.12em;padding:3px 12px;border-radius:99px;background:var(--gold);color:#fff;margin-bottom:10px}
+.tag.g{background:var(--matcha)}
+
+/* 流れ図 */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;align-items:stretch;margin-top:10px}
+.step{position:relative;text-align:center;padding:24px 14px;background:#fff;border:1px solid var(--line);border-radius:16px;margin:0 14px}
+.step:not(:last-child)::after{content:"";position:absolute;right:-24px;top:50%;width:20px;height:20px;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M4 10h11M11 5l5 5-5 5' fill='none' stroke='%237aa244' stroke-width='2'/%3E%3C/svg%3E") center/contain no-repeat}
+.step .ic{font-family:var(--en);font-size:15px;letter-spacing:.2em;color:var(--gold)}
+.step h3{font-size:17px;margin:6px 0 6px}
+.step p{font-size:13px;color:var(--body);line-height:1.7}
+.step.key{background:var(--matcha);color:var(--cream);border-color:var(--matcha)}
+.step.key p{color:#dbe3cf}
+.url{display:inline-block;margin-top:8px;font-size:12px;background:var(--cream);padding:3px 8px;border-radius:6px;color:var(--matcha);word-break:break-all}
+.step.key .url{background:rgba(255,255,255,.14);color:var(--cream)}
+
+/* 2ルート */
+.route{border-radius:20px;padding:30px 28px}
+.route.a{background:#fff;border:1px solid var(--line)}
+.route.b{background:var(--matcha);color:var(--cream)}
+.route .who{font-size:14px;letter-spacing:.14em;opacity:.8}
+.route h3{font-size:24px;margin:6px 0 14px}
+.route ul{list-style:none;font-size:15px;line-height:2}
+.route li::before{content:"";display:inline-block;width:14px;height:1px;background:currentColor;vertical-align:middle;margin-right:10px;opacity:.6}
+.route .arrow{font-family:var(--mincho);font-size:18px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(127,127,127,.3)}
+
+/* 表 */
+table{width:100%;border-collapse:collapse;font-size:15px;background:#fff;border-radius:16px;overflow:hidden}
+.s:nth-child(even) table{background:var(--silk)}
+th,td{padding:14px 16px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;line-height:1.7}
+thead th{background:var(--matcha);color:var(--cream);font-weight:500;font-size:14px;letter-spacing:.06em}
+tbody tr:last-child td{border-bottom:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.total td{font-weight:700;background:rgba(122,162,68,.1)}
+
+/* 大きな一言 */
+.big{font-family:var(--mincho);font-weight:800;font-size:clamp(30px,4.4vw,62px);line-height:1.55}
+.big em{font-style:normal;color:var(--leaf)}
+
+/* スケジュール */
+.sched{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink)}
+.sched div{padding:22px 18px 10px;border-right:1px solid var(--line)}
+.sched div:last-child{border-right:0}
+.sched .wk{font-family:var(--en);font-size:22px;color:var(--leaf)}
+.sched h3{font-size:17px;margin:4px 0 8px}
+.sched p{font-size:14px;color:var(--body);line-height:1.8}
+
+/* 操作 */
+.ctrl{position:fixed;right:20px;bottom:20px;z-index:10;display:flex;align-items:center;gap:10px;background:rgba(18,40,24,.92);color:var(--cream);padding:8px 10px 8px 16px;border-radius:99px;font-family:var(--en);font-size:14px;letter-spacing:.12em}
+.ctrl button{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;color:inherit;cursor:pointer;font-size:14px}
+.ctrl button:hover{background:rgba(255,255,255,.12)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.in .rv{opacity:1;transform:none}
+.in .rv:nth-child(2){transition-delay:.08s}.in .rv:nth-child(3){transition-delay:.16s}.in .rv:nth-child(4){transition-delay:.24s}.in .rv:nth-child(5){transition-delay:.32s}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+@media (max-width:900px){
+  html{scroll-snap-type:none}
+  body{font-size:15px}
+  .s{min-height:auto;padding:72px 20px 56px}
+  .cover{min-height:100svh}
+  .cover .w{grid-template-columns:1fr;text-align:center}
+  .cover img{width:52vw;order:-1}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .flow{grid-template-columns:1fr;gap:26px}
+  .step{margin:0}
+  .step:not(:last-child)::after{right:50%;top:auto;bottom:-24px;transform:translateX(50%) rotate(90deg)}
+  .sched{grid-template-columns:1fr}
+  .sched div{border-right:0;border-bottom:1px solid var(--line)}
+  table{font-size:13px}
+  th,td{padding:11px 10px}
+  .ctrl{display:none}
+}
+@media print{
+  html{scroll-snap-type:none}
+  .s{min-height:auto;page-break-after:always;padding:50px 60px}
+  .ctrl{display:none}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- 1 表紙 -->
+<section class="s cover">
+  <span class="brand" style="color:#b9c3a8">株式会社NOKTOA</span>
+  <div class="w">
+    <div>
+      <p class="kick" style="color:#d6c89f">ご提案</p>
+      <h1><span class="ph">シルク抹茶</span><br><span class="ph">アフィリエイト</span><br><span class="ph">連動のしくみ</span></h1>
+      <p class="sub">LPを「売れる受け皿」にして、<br>紹介者ごとの売上を自動で記録する。</p>
+      <p class="by">AMASOU 御中<br>2026年9月　株式会社NOKTOA</p>
+    </div>
+    <img src="../pouch_cut.webp" alt="シルク抹茶 パッケージ" width="530" height="886">
+  </div>
+</section>
+
+<!-- 2 結論 -->
+<section class="s dark">
+  <span class="no">01</span><span class="brand">結論</span>
+  <div class="w">
+    <p class="kick rv">この資料でお伝えしたいこと</p>
+    <p class="big rv"><span class="ph">紹介してくれた人に、</span><br><span class="ph"><em>売れた分だけ</em>お礼を払う。</span><br><span class="ph">その記録を、</span><span class="ph">LPが自動でつける。</span></p>
+    <p class="lead rv" style="margin-top:30px">先日お見せしたLPに「カート」と「紹介の記録」を足すだけで、<br>アフィリエイトの受け皿になります。広告費は、売れた分しかかかりません。</p>
+  </div>
+</section>
+
+<!-- 3 アフィリエイトとは -->
+<section class="s">
+  <span class="no">02</span><span class="brand">アフィリエイトとは</span>
+  <div class="w">
+    <p class="kick rv">しくみを、ひとことで</p>
+    <h2 class="t rv"><span class="ph">広告費を、</span><span class="ph"><em>先に払わない</em>宣伝です。</span></h2>
+    <div class="grid g2">
+      <div class="card rv"><span class="tag" style="background:#9a9a90">いつもの広告</span><h3>出した時点で払う</h3><p>売れても、売れなくても費用がかかる。<br>会社が自分で宣伝する。</p></div>
+      <div class="card hi rv"><span class="tag g">アフィリエイト</span><h3>売れたときだけ払う</h3><p>紹介してくれた人に、売れた分だけお礼を払う。<br>「この人が使っているなら」と信頼されやすい。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 入口は2つ -->
+<section class="s">
+  <span class="no">03</span><span class="brand">入口は2つ</span>
+  <div class="w">
+    <p class="kick rv">お客さんの来かたで、受け皿を分けます</p>
+    <h2 class="t rv"><span class="ph">TikTokは、TikTok Shopへ。</span><br><span class="ph">それ以外は、<em>このLP</em>へ。</span></h2>
+    <div class="grid g2">
+      <div class="route a rv"><span class="who">入口 A</span><h3>TikTok</h3><ul><li>動画に商品カードを直接貼る</li><li>見て、その場で買う（勢いの売上）</li><li>記録はTikTok Shopが自動で行う</li></ul><p class="arrow">→ TikTok Shopで購入</p></div>
+      <div class="route b rv"><span class="who">入口 B</span><h3>Instagram・ブログ・YouTube・店頭QR</h3><ul><li>リンクやQRからLPに来る</li><li>じっくり読んで買う・定期便に申し込む</li><li>記録はLPと紹介管理ツールで行う</li></ul><p class="arrow">→ このLPで購入　<b>＝ 定期便の本丸</b></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 流れ -->
+<section class="s">
+  <span class="no">04</span><span class="brand">連動の流れ</span>
+  <div class="w">
+    <p class="kick rv">入口 B の場合</p>
+    <h2 class="t rv"><span class="ph">リンクを踏んでから、</span><span class="ph">報酬が決まるまで。</span></h2>
+    <div class="flow rv">
+      <div class="step"><span class="ic">01</span><h3>紹介者が投稿</h3><p>自分専用のリンクを貼る</p><span class="url">〜/?ref=hanako</span></div>
+      <div class="step"><span class="ic">02</span><h3>LPを見る</h3><p>誰のリンクから来たかを記録</p></div>
+      <div class="step"><span class="ic">03</span><h3>カートで購入</h3><p>1袋・定期便・ギフト</p></div>
+      <div class="step key"><span class="ic">04</span><h3>自動で記録</h3><p>「hanakoさん経由で1件」</p><span class="url">売上・件数・報酬</span></div>
+      <div class="step"><span class="ic">05</span><h3>月末にお支払い</h3><p>集計どおりに報酬を支払う</p></div>
+    </div>
+    <p class="note rv">リンクを踏まずに「HANAKO10」のような割引コードを入れて買った場合も、同じ紹介者の実績として記録できます。</p>
+  </div>
+</section>
+
+<!-- 6 計測方法 -->
+<section class="s">
+  <span class="no">05</span><span class="brand">記録のしかた</span>
+  <div class="w">
+    <p class="kick rv">3つの方法を、段階的に使います</p>
+    <h2 class="t rv"><span class="ph">まずは①と③で始め、</span><span class="ph">慣れたら②を足す。</span></h2>
+    <div class="grid g3">
+      <div class="card hi rv"><span class="tag g">おすすめ・軸</span><span class="n">01</span><h3>紹介リンク</h3><p>Shopifyの紹介管理アプリで、紹介者ごとの専用リンクを発行。売上と報酬を自動で集計。<br><b>お客さんの情報と定期便が自社に残る。</b></p></div>
+      <div class="card rv"><span class="tag">あとから</span><span class="n">02</span><h3>ASP（仲介サービス）</h3><p>A8.netなどに掲載し、ブロガーや比較サイトに紹介してもらう。募集・計測・支払いを代行してくれる。<br>手数料がかかる。</p></div>
+      <div class="card hi rv"><span class="tag g">同時に</span><span class="n">03</span><h3>割引コード</h3><p>紹介者ごとのコードを配る。リンクを使わない人（ストーリーズ・口コミ）の分も取りこぼさない。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 LPでやること -->
+<section class="s">
+  <span class="no">06</span><span class="brand">LPでやること</span>
+  <div class="w">
+    <p class="kick rv">デザインは完成済み。残りは「つなぐ」作業です</p>
+    <h2 class="t rv"><span class="ph">LPを、</span><span class="ph">本番の売り場にする4つの作業。</span></h2>
+    <div class="grid g4">
+      <div class="card rv"><span class="n">01</span><h3>Shopifyに載せる</h3><p>今のデザインのまま、ブランドの独自ドメインで公開する。</p></div>
+      <div class="card rv"><span class="n">02</span><h3>カートをつなぐ</h3><p>1袋・定期便・ギフトのボタンを、実際の商品と決済に接続する。</p></div>
+      <div class="card rv"><span class="n">03</span><h3>紹介を記録する</h3><p>リンクで来た人が、LPを回ってから買っても記録が消えないようにする。</p></div>
+      <div class="card rv"><span class="n">04</span><h3>表示を整える</h3><p>特定商取引法の表記・定期便の条件・プライバシーポリシーを載せる。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 お金の流れ -->
+<section class="s">
+  <span class="no">07</span><span class="brand">1件売れたとき</span>
+  <div class="w">
+    <p class="kick rv">お金の流れ（仮の数字）</p>
+    <h2 class="t rv"><span class="ph">初回はお礼を払っても黒字。</span><br><span class="ph"><em>定期便の2回目から</em>が利益の本体。</span></h2>
+    <div class="grid g2">
+      <table class="rv"><thead><tr><th>初回（紹介経由）</th><th class="num">金額</th></tr></thead><tbody>
+        <tr><td>売上（税抜）</td><td class="num">3,222円</td></tr>
+        <tr><td>原価・送料・手数料など</td><td class="num">▲1,820円</td></tr>
+        <tr><td>紹介者へのお礼（20%）＋ツール手数料</td><td class="num">▲840円</td></tr>
+        <tr class="total"><td>手元に残る</td><td class="num">約560円</td></tr>
+      </tbody></table>
+      <table class="rv"><thead><tr><th>定期便 2回目以降</th><th class="num">金額</th></tr></thead><tbody>
+        <tr><td>売上（税抜）</td><td class="num">3,222円</td></tr>
+        <tr><td>原価・送料・手数料など</td><td class="num">▲1,820円</td></tr>
+        <tr><td>紹介者へのお礼</td><td class="num">0円</td></tr>
+        <tr class="total"><td>手元に残る</td><td class="num">約1,400円</td></tr>
+      </tbody></table>
+    </div>
+    <p class="note rv">※税込3,480円・原価約1,100円・お礼は初回のみ20%と仮定した試算です。原価と価格が決まり次第、計算し直します。</p>
+  </div>
+</section>
+
+<!-- 9 ルール -->
+<section class="s dark">
+  <span class="no">08</span><span class="brand">守るルール</span>
+  <div class="w">
+    <p class="kick rv">紹介してもらううえで、必ず守ること</p>
+    <h2 class="t rv"><span class="ph">処分を受けるのは、</span><span class="ph">紹介者ではなく<em>売る側</em>です。</span></h2>
+    <div class="grid g3">
+      <div class="card rv"><span class="n">01</span><h3>「PR」表記は必須</h3><p>お礼を払う投稿には、必ず「PR」か「広告」と入れてもらう（ステルスマーケティング規制）。</p></div>
+      <div class="card rv"><span class="n">02</span><h3>効き目は言わない</h3><p>食品なので「美肌」「痩せる」「健康に良い」はNG。「なめらか」「苦くない」で語ってもらう。</p></div>
+      <div class="card rv"><span class="n">03</span><h3>店頭より安くしない</h3><p>ネットの値下げやクーポン乱発で、ドン・キホーテ店頭との関係を崩さない。</p></div>
+    </div>
+    <p class="note rv">NOKTOAが、紹介者向けのルール資料と「言ってはいけない表現」一覧を用意し、投稿もチェックします。</p>
+  </div>
+</section>
+
+<!-- 10 役割分担 -->
+<section class="s">
+  <span class="no">09</span><span class="brand">役割分担</span>
+  <div class="w">
+    <p class="kick rv">在庫と発送はAMASOU様、それ以外はNOKTOAが担います</p>
+    <h2 class="t rv"><span class="ph">売るための仕組みは、</span><span class="ph">まとめてお任せください。</span></h2>
+    <table class="rv"><thead><tr><th style="width:50%">AMASOU様</th><th>NOKTOA</th></tr></thead><tbody>
+      <tr><td>Shopifyの契約名義</td><td>LPのShopify化・カート接続・紹介の記録設定</td></tr>
+      <tr><td>在庫・発送・お問い合わせ対応</td><td>紹介者の募集・専用リンクと割引コードの発行</td></tr>
+      <tr><td>紹介者へのお礼のお支払い</td><td>投稿の台本・お手本動画・投稿チェック</td></tr>
+      <tr><td>価格・定期便の条件のご決定</td><td>売れた動画の広告化・毎月の結果レポート</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+<!-- 11 スケジュール -->
+<section class="s">
+  <span class="no">10</span><span class="brand">スケジュール</span>
+  <div class="w">
+    <p class="kick rv">ご依頼から紹介スタートまで</p>
+    <h2 class="t rv"><span class="ph">約3週間で、</span><span class="ph">紹介を始められます。</span></h2>
+    <div class="sched rv">
+      <div><span class="wk">1週目</span><h3>準備</h3><p>Shopify開設・商品登録・定期便の条件決め</p></div>
+      <div><span class="wk">2週目</span><h3>つなぐ</h3><p>LPのShopify化・カート接続・紹介の記録設定・表示の整備</p></div>
+      <div><span class="wk">3週目</span><h3>試す</h3><p>テスト購入で記録を確認・紹介者10名に先行でお願い</p></div>
+      <div><span class="wk">4週目〜</span><h3>広げる</h3><p>紹介者を毎月30〜50名に拡大・売れた投稿を広告に回す</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 次の一歩 -->
+<section class="s dark">
+  <span class="no">11</span><span class="brand">次の一歩</span>
+  <div class="w">
+    <p class="kick rv">進めるために、確認させてください</p>
+    <h2 class="t rv"><span class="ph">決めていただきたいことは、</span><span class="ph">5つです。</span></h2>
+    <div class="grid g2">
+      <div class="card rv"><h3>01　販売の名義</h3><p>Shopifyを、AMASOU様と古賀製茶本舗様のどちらの名義で開くか。</p></div>
+      <div class="card rv"><h3>02　価格と定期便</h3><p>販売価格・定期便の割引率・送料の考え方。</p></div>
+      <div class="card rv"><h3>03　ドン・キホーテとの取り決め</h3><p>ネット販売の価格や販路に制限があるか。</p></div>
+      <div class="card rv"><h3>04　在庫と発送</h3><p>在庫を置く場所と、発送する方（自社・倉庫・製造元から直送）。</p></div>
+      <div class="card rv"><h3>05　紹介者へのお礼の率</h3><p>初回購入の何%をお礼にするか（目安15〜20%）。</p></div>
+      <div class="card rv" style="background:var(--leaf);border-color:var(--leaf)"><h3 style="color:#fff">LPのデモはこちら</h3><p style="color:#f3f6ea">実際に触れる形でご確認いただけます。<br><a href="../" style="color:#fff;font-weight:700">シルク抹茶 LP（デモ）を開く →</a></p></div>
+    </div>
+    <p class="note rv">株式会社NOKTOA　松本 拓郎　info@noktoa.com</p>
+  </div>
+</section>
+
+<div class="ctrl" aria-label="ページ送り"><button id="prev" aria-label="前へ">↑</button><span id="pg">1 / 12</span><button id="next" aria-label="次へ">↓</button></div>
+
+<script>
+(()=>{
+const ss=[...document.querySelectorAll('.s')], pg=document.getElementById('pg'); let cur=0;
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); cur=ss.indexOf(e.target); pg.textContent=(cur+1)+' / '+ss.length; } }),{threshold:.45});
+ss.forEach(s=>io.observe(s)); ss[0].classList.add('in');
+const go=d=>{ const n=Math.max(0,Math.min(ss.length-1,cur+d)); ss[n].scrollIntoView({behavior:'smooth'}); };
+document.getElementById('prev').onclick=()=>go(-1); document.getElementById('next').onclick=()=>go(1);
+addEventListener('keydown',e=>{ if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(1);} if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(-1);} });
+})();
+</script>
+</body>
+</html>
