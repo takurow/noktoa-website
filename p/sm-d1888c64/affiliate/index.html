@@ -48,17 +48,18 @@ b{font-weight:700}
 .cover h1{font-size:clamp(32px,4vw,58px);line-height:1.4}
 .cover .sub{font-family:var(--mincho);font-size:clamp(16px,1.5vw,21px);color:#d8dfcb;margin-top:22px;letter-spacing:.1em}
 .cover .by{margin-top:50px;font-size:14px;color:#b9c3a8;letter-spacing:.14em;line-height:2}
-.cover img{width:min(260px,60vw,38vh);justify-self:center;filter:drop-shadow(0 30px 40px rgba(0,0,0,.4));transform:rotate(-4deg)}
+.cover img{height:auto;width:min(260px,60vw,38vh);justify-self:center;filter:drop-shadow(0 30px 40px rgba(0,0,0,.4));transform:rotate(-4deg)}
 
 /* 図・カード */
 .grid{display:grid;gap:18px}
 .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
 .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 24px}
 .s:nth-child(even) .card{background:var(--silk)}
-.dark .card{background:rgba(250,248,242,.06);border-color:rgba(250,248,242,.18)}
+.s.dark .card{background:rgba(250,248,242,.07);border-color:rgba(250,248,242,.22);color:var(--cream)}
+.s.dark .card h3{color:var(--cream)}
 .card h3{font-size:20px;margin-bottom:8px}
 .card p{font-size:15px;color:var(--body);line-height:1.85}
-.dark .card p{color:#d2dac4}
+.s.dark .card p{color:#dfe5d4}
 .card .n{font-family:var(--en);font-size:30px;color:var(--leaf);line-height:1;margin-bottom:10px;display:block}
 .card.hi{border:2px solid var(--matcha);position:relative}
 .tag{display:inline-block;font-size:12px;letter-spacing:.12em;padding:3px 12px;border-radius:99px;background:var(--gold);color:#fff;margin-bottom:10px}
@@ -153,7 +154,7 @@ tr.total td{font-weight:700;background:rgba(122,162,68,.1)}
       <p class="sub">LPを「売れる受け皿」にして、<br>紹介者ごとの売上を自動で記録する。</p>
       <p class="by">AMASOU 御中<br>2026年9月　株式会社NOKTOA</p>
     </div>
-    <img src="../pouch_cut.webp" alt="シルク抹茶 パッケージ" width="720" height="994">
+    <img src="../pouch_cut.webp?v=2" alt="シルク抹茶 パッケージ" width="720" height="994">
   </div>
 </section>
 

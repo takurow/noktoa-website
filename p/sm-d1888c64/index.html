@@ -380,11 +380,11 @@ footer .huge{font-family:"Marcellus",serif;font-size:clamp(50px,12vw,190px);line
 <div class="cur" aria-hidden="true"></div><div class="cur-r" aria-hidden="true"></div>
 
 <div id="loader" aria-hidden="true">
-  <div class="lwrap"><img class="ldlogo" src="logo_oval.png" alt="" width="458" height="600"><div class="lbar"><i id="ldc"></i></div><div class="pc"><span id="ldn">0</span>%</div></div>
+  <div class="lwrap"><img class="ldlogo" src="logo_oval.png?v=2" alt="" width="458" height="600"><div class="lbar"><i id="ldc"></i></div><div class="pc"><span id="ldn">0</span>%</div></div>
 </div>
 
 <header class="hd" id="hd">
-  <a href="#top" class="brand"><img class="blogo" src="logo_oval.png" alt="" width="458" height="600"><span class="en">SILK MATCHA</span><span class="ja">シルク抹茶</span></a>
+  <a href="#top" class="brand"><img class="blogo" src="logo_oval.png?v=2" alt="" width="458" height="600"><span class="en">SILK MATCHA</span><span class="ja">シルク抹茶</span></a>
   <nav>
     <a href="#mech">しくみ</a>
     <a href="#spin">一袋</a>
@@ -638,7 +638,7 @@ footer .huge{font-family:"Marcellus",serif;font-size:clamp(50px,12vw,190px);line
 </main>
 
 <footer>
-  <img class="flogo" src="logo_oval.png" alt="SILK MATCHA シルク抹茶" width="458" height="600">
+  <img class="flogo" src="logo_oval.png?v=2" alt="SILK MATCHA シルク抹茶" width="458" height="600">
   <div class="huge" id="huge">SILK MATCHA</div>
   販売者：AMASOU（仮）　製造者：株式会社古賀製茶本舗<br>
   企画・制作　株式会社NOKTOA<br>
@@ -659,7 +659,7 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const ease=t=>1-Math.pow(1-t,3);
 const isMob=()=>innerWidth<=900;
-const FRONT="pouch_cut.webp", BACK="pouch_back_cut.webp";
+const FRONT="pouch_cut.webp?v=2", BACK="pouch_back_cut.webp?v=2";
 gsap.registerPlugin(ScrollTrigger);
 ScrollTrigger.config({ignoreMobileResize:true});
 
