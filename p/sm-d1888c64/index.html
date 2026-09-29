@@ -59,8 +59,10 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 #bar{position:fixed;left:0;top:0;height:2px;width:100%;background:var(--leaf);transform-origin:left;transform:scaleX(0);z-index:99}
 .cur,.cur-r{position:fixed;left:0;top:0;pointer-events:none;z-index:98;border-radius:50%;transform:translate(-50%,-50%)}
 .cur{width:6px;height:6px;background:var(--leaf)}
-.cur-r{width:36px;height:36px;border:1px solid rgba(122,162,68,.7);display:grid;place-items:center;font-family:var(--mincho);font-size:12px;letter-spacing:.1em;color:#fff;transition:width .45s var(--ease),height .45s var(--ease),background .35s,border-color .35s}
-.cur-r.big{width:84px;height:84px;background:rgba(36,71,43,.9);border-color:transparent}
+.cur{transition:opacity .3s,transform .3s}
+.cur.hide{opacity:0}
+.cur-r{width:34px;height:34px;border:1px solid rgba(122,162,68,.6);font-size:0;transition:width .5s var(--ease),height .5s var(--ease),background-color .4s,border-color .4s}
+.cur-r.big{width:54px;height:54px;background:rgba(122,162,68,.12);border-color:rgba(122,162,68,.95)}
 @media (hover:none),(max-width:900px){.cur,.cur-r{display:none}}
 
 /* loader */
@@ -848,7 +850,7 @@ gsap.fromTo('#huge',{xPercent:10},{xPercent:-10,ease:'none',scrollTrigger:{trigg
 if(!TOUCH && !RM){
   const c=$('.cur'), r=$('.cur-r'); const cx=gsap.quickTo(c,'x',{duration:.12}), cy=gsap.quickTo(c,'y',{duration:.12}), rx=gsap.quickTo(r,'x',{duration:.45,ease:'power3'}), ry=gsap.quickTo(r,'y',{duration:.45,ease:'power3'});
   addEventListener('pointermove',e=>{cx(e.clientX);cy(e.clientY);rx(e.clientX);ry(e.clientY);});
-  $$('[data-cur]').forEach(el=>{ el.addEventListener('pointerenter',()=>{r.classList.add('big');r.textContent=el.dataset.cur;}); el.addEventListener('pointerleave',()=>{r.classList.remove('big');r.textContent='';}); });
+  $$('a,button').forEach(el=>{ el.addEventListener('pointerenter',()=>{r.classList.add('big');c.classList.add('hide');}); el.addEventListener('pointerleave',()=>{r.classList.remove('big');c.classList.remove('hide');}); });
   $$('.mag').forEach(el=>{ const qx=gsap.quickTo(el,'x',{duration:.6,ease:'elastic.out(1,.4)'}), qy=gsap.quickTo(el,'y',{duration:.6,ease:'elastic.out(1,.4)'});
     el.addEventListener('pointermove',e=>{ const b=el.getBoundingClientRect(); qx((e.clientX-b.left-b.width/2)*.3); qy((e.clientY-b.top-b.height/2)*.3); });
     el.addEventListener('pointerleave',()=>{qx(0);qy(0);}); });
