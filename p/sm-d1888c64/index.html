@@ -111,17 +111,17 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .vmark.l{left:var(--gut)}.vmark.r{right:var(--gut)}
 
 /* empathy */
-.emp{height:100svh;display:grid;place-items:center;background:var(--silk);padding:0 20px}
+.emp{display:grid;place-items:center;background:var(--silk);padding:clamp(130px,20vh,220px) 20px}
 .lit{font-family:var(--mincho);font-weight:700;font-size:clamp(21px,3.2vw,40px);line-height:2.05;letter-spacing:.08em}
 .lit .w{display:inline-block;opacity:.12;filter:blur(3px)}
 .lit .g{color:var(--leaf)}
 
 /* mechanism */
-.mech{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:84px 20px 30px}
+.mech{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(120px,16vh,170px) 20px}
 #mechSvg{width:min(340px,64vw,34vh);height:auto;margin:clamp(10px,2.5vh,28px) 0;overflow:visible}
-.steps{display:grid;min-height:6.4em;width:min(560px,100%)}
-.steps p{grid-area:1/1;font-size:15px;line-height:2;color:#d6ddc9;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .25s ease,transform .25s ease,visibility 0s .25s}
-.steps p.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s var(--ease) .2s,transform .6s var(--ease) .2s,visibility 0s}
+.steps{display:grid;gap:20px;width:min(560px,100%)}
+.steps p{font-size:15px;line-height:2;color:#d6ddc9;opacity:.28;transition:opacity .7s var(--ease)}
+.steps p.on{opacity:1}
 .steps b{display:block;color:var(--cream);font-family:var(--mincho);font-weight:700;font-size:18px;margin-bottom:4px;letter-spacing:.08em}
 .dots{display:flex;gap:10px;justify-content:center;margin-top:12px}
 .dots i{width:28px;height:2px;background:rgba(255,255,255,.18);position:relative;overflow:hidden}
@@ -129,17 +129,18 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .note{font-size:12px;color:#8e9a82;margin-top:10px}
 
 /* spin */
-.spin{height:100svh;position:relative;overflow:hidden;background:radial-gradient(60% 55% at 50% 58%,#ece6d6 0%,#ddd5c1 100%)}
+.spin{height:100svh;min-height:640px;position:relative;overflow:hidden;background:radial-gradient(60% 55% at 50% 58%,#ece6d6 0%,#ddd5c1 100%)}
 .spin::after{content:"";position:absolute;left:50%;bottom:10%;width:min(300px,50vw);height:36px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(22,40,24,.26),transparent);filter:blur(6px)}
 #gl2{position:absolute;inset:0;width:100%;height:100%;z-index:1}
 .spin .head{position:absolute;top:clamp(84px,12vh,120px);left:0;right:0;text-align:center;z-index:2;padding:0 20px}
-.call{position:absolute;z-index:2;width:min(260px,30vw);opacity:0;visibility:hidden;transform:translateY(12px);transition:opacity .25s ease,transform .25s ease,visibility 0s .25s}
-.call.on{opacity:1;visibility:visible;transform:none;transition:opacity .6s var(--ease) .2s,transform .6s var(--ease) .2s,visibility 0s}
+.call{position:absolute;z-index:2;width:min(260px,30vw);opacity:.3;transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.call.on{opacity:1}
 .call .n{font-family:var(--en);font-weight:600;color:var(--gold);font-size:15px;letter-spacing:.2em}
 .call b{display:block;font-family:var(--mincho);font-size:clamp(18px,1.7vw,22px);font-weight:700;margin:2px 0 6px;letter-spacing:.06em}
 .call p{font-size:14px;line-height:1.9;color:var(--body)}
-.call.l{left:clamp(24px,9vw,160px);top:46%;text-align:right}
-.call.r{right:clamp(24px,9vw,160px);top:46%;text-align:left}
+.call.l{left:clamp(24px,9vw,160px);text-align:right}
+.call.r{right:clamp(24px,9vw,160px);text-align:left}
+.c1,.c2{top:36%}.c3,.c4{top:60%}
 .call.l::after,.call.r::after{content:"";position:absolute;top:1.2em;width:clamp(30px,5vw,80px);height:1px;background:var(--leaf)}
 .call.l::after{left:calc(100% + 18px)}.call.r::after{right:calc(100% + 18px)}
 .spin .count{position:absolute;left:0;right:0;bottom:4%;text-align:center;z-index:2;font-family:var(--en);font-size:13px;letter-spacing:.3em;color:var(--mute)}
@@ -170,7 +171,7 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .mid{margin-top:50px}
 
 /* pour */
-.pour{height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:84px 20px 26px;background:linear-gradient(180deg,var(--silk),var(--cream))}
+.pour{display:flex;flex-direction:column;align-items:center;text-align:center;padding:clamp(120px,16vh,170px) 20px;background:linear-gradient(180deg,var(--silk),var(--cream))}
 #glass{height:clamp(150px,30vh,290px);width:auto;margin:clamp(12px,2.5vh,28px) 0 clamp(14px,2.5vh,26px);overflow:visible}
 .pour ol{list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,210px));gap:clamp(10px,3vw,40px);justify-content:center}
 .pour li{opacity:.25}
@@ -180,10 +181,15 @@ h1,h2,h3{font-family:var(--mincho);font-weight:700;letter-spacing:.08em;font-fea
 .pour li span.t{display:block;font-size:13px;color:var(--mute);line-height:1.8}
 
 /* arrange */
-.rec{height:100svh;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+.rec{padding:clamp(120px,16vh,170px) 0;overflow:hidden}
 .rec .head{text-align:center;padding:0 20px;margin-bottom:clamp(20px,4vh,44px)}
-.track{display:flex;width:max-content;will-change:transform;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
-.pan{flex:0 0 clamp(280px,30vw,380px);padding:clamp(22px,3.5vh,40px) clamp(22px,2.4vw,36px);border-right:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;text-align:center}
+.track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab;border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
+.track::-webkit-scrollbar{display:none}
+.track.drag{cursor:grabbing;scroll-snap-type:none}
+.rnav{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:26px;font-family:var(--mincho);font-size:13px;letter-spacing:.2em;color:#b7c3a4}
+.rnav button{width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.3);color:var(--cream);transition:background .3s}
+.rnav button:hover{background:rgba(255,255,255,.1)}
+.pan{scroll-snap-align:center;flex:0 0 clamp(280px,30vw,380px);padding:clamp(22px,3.5vh,40px) clamp(22px,2.4vw,36px);border-right:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;align-items:center;text-align:center}
 .pan:first-child{border-left:1px solid rgba(255,255,255,.14);margin-left:max(20px,calc((100vw - 1120px)/2))}
 .pan:last-child{margin-right:max(20px,calc((100vw - 1120px)/2))}
 .pan .no{font-family:var(--en);font-weight:600;font-size:14px;letter-spacing:.3em;color:#b7c3a4}
@@ -330,7 +336,8 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
   .steps p{font-size:14px}
   .steps b{font-size:16px}
   .spin .head{top:80px}
-  .call{width:84vw;left:8vw!important;right:auto!important;top:auto!important;bottom:7%;text-align:center!important}
+  .call{width:84vw;left:8vw!important;right:auto!important;top:auto!important;bottom:7%;text-align:center!important;opacity:0;visibility:hidden;transition:opacity .25s,visibility 0s .25s}
+  .call.on{opacity:1;visibility:visible;transition:opacity .6s var(--ease) .15s,visibility 0s}
   .call::after{display:none}
   .call p{font-size:13px}
   .spin::after{bottom:24%}
@@ -522,6 +529,7 @@ footer .huge{font-family:var(--mincho);font-weight:800;font-size:clamp(60px,14vw
     <article class="pan"><span class="no">05</span><div class="drop" style="background:conic-gradient(from 40deg,#faf8f2 0 30%,#8fb04f 30% 38%,#faf8f2 38% 70%,#8fb04f 70% 76%,#faf8f2 76%)"></div><h3>ヨーグルトに</h3><div class="ratio">1<small>g ＋ ヨーグルト ＋ はちみつ</small></div><p>はちみつと一緒に、<br>ひとふり。</p></article>
     <article class="pan"><span class="no">06</span><div class="drop" style="background:radial-gradient(circle at 35% 30%,#d8c28c,#a3864d 70%)"></div><h3>贈りものに</h3><div class="ratio">2<small>袋 ＋ 化粧箱 ＋ のし</small></div><p>200年の物語ごと、<br>大切な人へ。</p></article>
   </div>
+  <div class="rnav"><button aria-label="前へ" data-d="-1">←</button>横にスワイプ<button aria-label="次へ" data-d="1">→</button></div>
 </section>
 
 <section class="story sec" id="story">
@@ -795,20 +803,25 @@ gsap.to(lp,{v:1,duration:RM?.01:1.5,ease:'power2.inOut',onUpdate(){ ldc.style.st
 gsap.to('.hero .ui, .vmark',{yPercent:-14,opacity:0,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
 gsap.to(heroState,{y:.6,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
 
-gsap.timeline({scrollTrigger:{trigger:'#emp',start:'top top',end:'+=150%',pin:true,scrub:.8}})
+gsap.timeline({scrollTrigger:{trigger:'#emp .lit',start:'top 80%',end:'bottom 45%',scrub:1}})
   .to('.lit .w',{opacity:1,filter:'blur(0px)',stagger:.5,duration:1,ease:'none'});
 
-ScrollTrigger.create({trigger:'#mech',start:'top top',end:'+=200%',pin:true,scrub:.6,onUpdate:s=>mechDraw(s.progress)}); mechDraw(0);
+{ const o={p:0}; gsap.to(o,{p:1,ease:'none',scrollTrigger:{trigger:'#mechSvg',start:'top 85%',end:'bottom 25%',scrub:1.2},onUpdate:()=>mechDraw(o.p)}); mechDraw(0); }
 
 { const cnt=$('#count');
   const calls=$$('.call'); let ci=-1;
   const setC=p=>{ const i=Math.min(3,Math.floor(p*4)); if(i===ci) return; ci=i; calls.forEach((c,k)=>c.classList.toggle('on',k===i)); cnt.textContent='0'+(i+1)+' / 04'; };
-  ScrollTrigger.create({trigger:'#spin',start:'top top',end:'+=240%',pin:true,scrub:.8,onUpdate:s=>{ spinP=s.progress; setC(s.progress); }}); setC(0); }
+  const o={p:0}; gsap.to(o,{p:1,ease:'none',scrollTrigger:{trigger:'#spin',start:'top 75%',end:'bottom 25%',scrub:1.2},onUpdate:()=>{ spinP=o.p; setC(o.p); }}); setC(0); }
 
-ScrollTrigger.create({trigger:'#pour',start:'top top',end:'+=180%',pin:true,scrub:.6,onUpdate:s=>pourDraw(s.progress)}); pourDraw(0);
+{ const o={p:0}; gsap.to(o,{p:1,ease:'none',scrollTrigger:{trigger:'#glass',start:'top 80%',end:'bottom 30%',scrub:1.2},onUpdate:()=>pourDraw(o.p)}); pourDraw(0); }
 
 { const tr=$('#track');
-  gsap.to(tr,{x:()=>-(tr.scrollWidth-innerWidth),ease:'none',scrollTrigger:{trigger:'#rec',start:'top top',end:()=>'+='+(tr.scrollWidth-innerWidth),pin:true,scrub:.8,invalidateOnRefresh:true}}); }
+  let down=false,sx=0,sl=0;
+  $$('.rnav button').forEach(b=>b.onclick=()=>tr.scrollBy({left:+b.dataset.d*tr.querySelector('.pan').offsetWidth,behavior:'smooth'}));
+  tr.addEventListener('pointerdown',e=>{ if(e.pointerType!=='mouse') return; down=true; sx=e.clientX; sl=tr.scrollLeft; tr.classList.add('drag'); });
+  addEventListener('pointermove',e=>{ if(down) tr.scrollLeft=sl-(e.clientX-sx); });
+  addEventListener('pointerup',()=>{ if(!down) return; down=false; tr.classList.remove('drag'); });
+  gsap.fromTo(tr,{x:120},{x:0,ease:'none',scrollTrigger:{trigger:'#rec',start:'top bottom',end:'top 30%',scrub:1}}); }
 
 gsap.fromTo('#yr span',{yPercent:120,rotate:8,opacity:0},{yPercent:0,rotate:0,opacity:1,stagger:.08,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:'#yr',start:'top 85%'}});
 gsap.to('#tl .ln b',{scaleX:1,duration:2.2,ease:'expo.out',scrollTrigger:{trigger:'#tl',start:'top 80%'}});
@@ -820,7 +833,7 @@ $$('.row').forEach(r=>gsap.to(r.querySelector('.fill'),{scaleX:+r.dataset.w,dura
 gsap.fromTo('#huge',{xPercent:10},{xPercent:-10,ease:'none',scrollTrigger:{trigger:'footer',start:'top bottom',end:'bottom bottom',scrub:true}});
 
 /* ヘッダーは隠さない。背景の切り替えは1回だけ */
-{ const hd=$('#hd'), sb=$('#sbuy'), bar=$('#bar'), pins=['#emp','#mech','#spin','#pour','#rec'].map(s=>$(s));
+{ const hd=$('#hd'), sb=$('#sbuy'), bar=$('#bar'), pins=[];
   ScrollTrigger.create({trigger:'.hero',start:'bottom 64px',onEnter:()=>hd.classList.add('solid'),onLeaveBack:()=>hd.classList.remove('solid')});
   ScrollTrigger.create({start:0,end:'max',onUpdate:s=>{
     bar.style.transform=`scaleX(${s.progress.toFixed(4)})`;
