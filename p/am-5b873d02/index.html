@@ -3,243 +3,772 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Project Amulet｜Closed Beta</title>
+<title>Project Amulet｜180日実運用レポート</title>
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="description" content="自己口座で完結する、現物のみの自律型トレード基盤。クローズド・ベータのご案内。">
+<meta name="description" content="自己口座で完結する現物グリッド売買システム Project Amulet の180日実運用を、監査レベルで開示するレポート。">
 <meta name="theme-color" content="#09090b">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='34' fill='%23c9a86a'/></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#09090b; --primary:#fff; --primary-accent:rgba(255,255,255,.85);
-  --text-main:#fcfcfc; --text-muted:#a1a1aa; --accent:#c9a86a;
-  --glass-bg:rgba(255,255,255,.03); --glass-border:rgba(255,255,255,.08);
-  --ease-premium:cubic-bezier(.19,1,.22,1); --ease-premium-slow:cubic-bezier(.16,1,.3,1);
+  --bg:#09090b; --panel:#111113; --panel-2:#141416;
+  --primary:#fff; --primary-accent:rgba(255,255,255,.86);
+  --text-main:#fcfcfc; --text-muted:#a1a1aa; --text-faint:#71717a;
+  --accent:#c9a86a;
+  --glass-bg:rgba(255,255,255,.03); --glass-border:rgba(255,255,255,.08); --rule:rgba(255,255,255,.1);
+  --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s-ref:#a1a1aa;
+  --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --critical:#d03b3b;
+  --ease-premium:cubic-bezier(.19,1,.22,1);
   --gut:clamp(16px,5vw,48px);
+  --mono:'JetBrains Mono',ui-monospace,monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
-body{background:var(--bg);color:var(--text-main);font-family:'Inter','Noto Sans JP',sans-serif;font-weight:400;line-height:1.9;letter-spacing:.02em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-a{color:inherit}
-.wrap{max-width:960px;margin:0 auto;padding:0 var(--gut)}
-section{padding:clamp(72px,12vw,128px) 0}
-.label{font-size:.72rem;font-weight:600;letter-spacing:.14em;color:var(--text-muted);text-transform:uppercase;margin-bottom:14px}
-h1{font-size:clamp(2.2rem,8vw,3.4rem);font-weight:700;letter-spacing:.02em;line-height:1.15;color:var(--primary)}
-h2{font-size:clamp(1.4rem,5.5vw,2rem);font-weight:700;line-height:1.5;color:var(--primary);margin-bottom:20px}
-h3{font-size:clamp(1rem,4vw,1.15rem);font-weight:700;color:var(--primary);margin-bottom:8px}
-p{font-size:clamp(.9rem,3.5vw,1rem);color:var(--primary-accent)}
-.muted{color:var(--text-muted)}
-.small{font-size:.8rem;line-height:1.8}
-.panel{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(20px,4vw,32px)}
-.grid{display:grid;gap:16px}
-@media(min-width:720px){.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}}
+body{background:var(--bg);color:var(--text-main);font-family:'Inter','Noto Sans JP',sans-serif;line-height:1.95;letter-spacing:.02em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-underline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 var(--gut)}
+.narrow{max-width:760px}
+section{padding:clamp(64px,10vw,112px) 0;border-top:1px solid var(--glass-border)}
+.label{font-size:.7rem;font-weight:600;letter-spacing:.16em;color:var(--text-muted);text-transform:uppercase;margin-bottom:12px;display:flex;gap:12px;align-items:center}
+.label .no{font-family:var(--mono);color:var(--text-faint)}
+h1{font-size:clamp(2.1rem,7.5vw,3.5rem);font-weight:700;line-height:1.18;color:var(--primary);letter-spacing:.01em}
+h2{font-size:clamp(1.4rem,5vw,2rem);font-weight:700;line-height:1.5;color:var(--primary);margin-bottom:18px}
+h3{font-size:clamp(1.02rem,3.8vw,1.18rem);font-weight:700;color:var(--primary);margin:36px 0 10px;line-height:1.6}
+h4{font-size:.95rem;font-weight:700;color:var(--primary);margin-bottom:6px}
+p{font-size:clamp(.92rem,3.4vw,1rem);color:var(--primary-accent)}
+p+p{margin-top:14px}
+.muted{color:var(--text-muted)} .small{font-size:.82rem;line-height:1.85}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:0}
+strong{color:var(--primary);font-weight:700}
+.panel{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:20px;padding:clamp(18px,3.5vw,30px)}
+.grid{display:grid;gap:14px}
+.grid>*{min-width:0}
+@media(min-width:760px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}}
+ul.dots{list-style:none;margin-top:10px}
+ul.dots li{position:relative;padding-left:18px;font-size:clamp(.9rem,3.3vw,.98rem);color:var(--primary-accent);margin:6px 0}
+ul.dots li::before{content:"";position:absolute;left:2px;top:.8em;width:6px;height:6px;border-radius:50%;background:var(--text-faint)}
+
+/* header / nav */
+.top{position:sticky;top:0;z-index:20;background:rgba(9,9,11,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--glass-border)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
+.brand{font-weight:700;letter-spacing:.12em;font-size:.8rem;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+.toc{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.toc::-webkit-scrollbar{display:none}
+.toc a{font-size:.74rem;color:var(--text-muted);text-decoration:none;padding:8px 10px;border-radius:8px;white-space:nowrap;min-height:40px;display:flex;align-items:center}
+.toc a:hover,.toc a.on{color:var(--primary);background:rgba(255,255,255,.06)}
+@media(max-width:759px){.toc{display:none}}
 
 /* hero */
-.hero{min-height:92svh;display:flex;align-items:center;position:relative;padding:96px 0 64px;overflow:hidden}
-.orb{position:absolute;right:calc(var(--gut) * -1 + 4vw);top:12%;width:min(56vw,420px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 38% 34%,rgba(255,244,220,.9) 0%,rgba(201,168,106,.75) 22%,rgba(201,168,106,.18) 55%,rgba(201,168,106,0) 70%);
-  filter:blur(2px);animation:breathe 7s var(--ease-premium-slow) infinite alternate;pointer-events:none;opacity:.55}
-@keyframes breathe{from{transform:scale(.96);opacity:.45}to{transform:scale(1.04);opacity:.7}}
+.hero{padding:clamp(72px,12vw,120px) 0 clamp(56px,8vw,88px);position:relative;overflow:hidden;border-top:0}
+.orb{position:absolute;right:-8vw;top:-4%;width:min(64vw,520px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 38% 34%,rgba(255,244,220,.85) 0%,rgba(201,168,106,.7) 20%,rgba(201,168,106,.16) 52%,rgba(201,168,106,0) 70%);
+  opacity:.42;filter:blur(2px);pointer-events:none;animation:breathe 8s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(.97)}to{transform:scale(1.03)}}
 @media (prefers-reduced-motion:reduce){.orb{animation:none}}
-.hero .wrap{position:relative;z-index:1;width:100%}
-.badge{display:inline-block;background:var(--accent);color:#141008;font-size:.72rem;font-weight:700;letter-spacing:.12em;padding:6px 14px;border-radius:100px;margin-bottom:28px}
-.lead{margin-top:24px;max-width:34em;font-size:clamp(1rem,4vw,1.15rem);color:var(--primary-accent)}
-.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:100px;font-size:.95rem;font-weight:600;text-decoration:none;transition:transform .5s var(--ease-premium),background .3s,border-color .3s}
+.hero .wrap{position:relative}
+.badge{display:inline-block;background:var(--accent);color:#141008;font-size:.7rem;font-weight:700;letter-spacing:.12em;padding:6px 14px;border-radius:100px;margin-bottom:26px}
+.lead{margin-top:22px;max-width:40em;font-size:clamp(1rem,3.8vw,1.12rem)}
+.meta-line{margin-top:20px;font-size:.78rem;color:var(--text-muted)}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 24px;border-radius:100px;font-size:.92rem;font-weight:600;text-decoration:none;transition:transform .5s var(--ease-premium),border-color .3s}
 .btn-primary{background:var(--primary);color:#09090b}
-.btn-primary:hover{transform:translateY(-2px)}
 .btn-ghost{border:1px solid rgba(255,255,255,.25);color:var(--primary)}
-.btn-ghost:hover{border-color:var(--primary);transform:translateY(-2px)}
-.btn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
-.btn svg{width:14px;height:14px}
-.note{margin-top:14px}
+.btn:hover{transform:translateY(-2px)} .btn:focus-visible,.toc a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+.btn svg{width:13px;height:13px}
 
-/* stats */
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:32px}
-@media(min-width:720px){.stats{grid-template-columns:repeat(3,1fr)}}
-.stat{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:20px}
-.stat b{display:block;font-size:clamp(1.35rem,5.5vw,1.9rem);font-weight:700;color:var(--primary);letter-spacing:0;line-height:1.3;font-variant-numeric:tabular-nums}
-.stat span{font-size:.78rem;color:var(--text-muted)}
+/* stat tiles */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:40px}
+@media(min-width:760px){.tiles{grid-template-columns:repeat(4,1fr)}}
+.tile{background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:18px}
+.tile b{display:block;font-family:var(--mono);font-size:clamp(1.3rem,5vw,1.75rem);font-weight:600;color:var(--primary);line-height:1.25;letter-spacing:-.01em}
+.tile span{display:block;font-size:.76rem;color:var(--text-muted);margin-top:4px;line-height:1.6}
 
-/* chart */
-.chart{margin-top:24px}
-.chart svg{width:100%;height:auto;display:block}
-.chart .axis{fill:var(--text-muted);font-size:11px;font-family:Inter,sans-serif}
-@media(max-width:600px){.chart .axis{font-size:21px}}
-.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px;font-size:.78rem;color:var(--text-muted)}
-.legend i{display:inline-block;width:18px;height:2px;vertical-align:middle;margin-right:6px}
+/* verdict */
+.verdict{border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin-top:8px}
+.verdict p{font-size:clamp(1rem,3.8vw,1.1rem);color:var(--primary)}
+.findings{counter-reset:f;list-style:none;margin-top:28px;display:grid;gap:12px}
+.findings li{counter-increment:f;background:var(--glass-bg);border:1px solid var(--glass-border);border-radius:16px;padding:18px 20px 18px 56px;position:relative;font-size:clamp(.9rem,3.3vw,.98rem);color:var(--primary-accent)}
+.findings li::before{content:counter(f,decimal-leading-zero);position:absolute;left:18px;top:18px;font-family:var(--mono);font-size:.8rem;color:var(--text-faint)}
+.findings li b{color:var(--primary)}
 
-/* honest table */
-.rows{margin-top:24px;border-top:1px solid var(--glass-border)}
-.row{display:grid;gap:6px;padding:20px 0;border-bottom:1px solid var(--glass-border)}
-@media(min-width:720px){.row{grid-template-columns:200px 1fr;gap:24px}}
-.row dt{font-weight:700;color:var(--primary);font-size:.95rem}
-.row dd{font-size:.92rem;color:var(--primary-accent)}
+/* tables */
+.tbl-wrap{overflow-x:auto;margin-top:18px;border:1px solid var(--glass-border);border-radius:14px}
+table{border-collapse:collapse;width:100%;font-size:.85rem;min-width:560px}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--glass-border);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--panel)}
+thead th{font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--text-muted);background:var(--panel)}
+tbody tr:last-child td{border-bottom:0}
+td{font-family:var(--mono);font-variant-numeric:tabular-nums;color:var(--primary-accent)}
+td:first-child{font-family:'Inter','Noto Sans JP',sans-serif;color:var(--primary-accent)}
+td.hl,th.hl{background:rgba(57,135,229,.08)}
+td:first-child.hl{background:var(--panel)}
+.neg{color:#f19a9a}.pos{color:#8fd19e}
+caption{caption-side:bottom;text-align:left;padding:10px 14px;font-size:.76rem;color:var(--text-muted)}
 
-.mode .tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--text-muted);margin-bottom:10px}
-.mode .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--accent);margin-right:8px;vertical-align:middle}
-.mode.bear .dot{background:#52525b}.mode.range .dot{background:#a1a1aa}
+/* charts */
+.chart{position:relative;margin-top:18px}
+.chart .cv{position:relative;height:clamp(260px,52vw,380px)}
+.chart .cv.sm{height:clamp(200px,40vw,280px)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:10px;font-size:.78rem;color:var(--text-muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.legend i{display:inline-block;width:18px;height:3px;border-radius:2px}
+.legend i.dash{background:repeating-linear-gradient(90deg,currentColor 0 4px,transparent 4px 7px)!important;height:2px}
+.figcap{font-size:.78rem;color:var(--text-muted);margin-top:10px;line-height:1.8}
+.chart-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.chart-head h4{margin:0}
+.seg{display:inline-flex;border:1px solid var(--glass-border);border-radius:10px;padding:3px;gap:2px}
+.seg button{font:inherit;font-size:.74rem;color:var(--text-muted);background:none;border:0;border-radius:7px;padding:6px 12px;min-height:34px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:rgba(255,255,255,.1);color:var(--primary)}
 
-.terms li{list-style:none;padding:14px 0;border-bottom:1px solid var(--glass-border);display:grid;grid-template-columns:7.5em 1fr;gap:16px;font-size:.93rem}
-.terms li b{color:var(--primary);font-weight:600}
-.terms li span{color:var(--primary-accent)}
+/* coverage strip */
+.strip{display:grid;grid-template-columns:repeat(183,1fr);gap:1px;height:34px;margin-top:14px;border-radius:6px;overflow:hidden}
+.strip i{display:block}
+.strip i.obs{background:var(--s1)} .strip i.mtm{background:rgba(57,135,229,.45)}
+.strip i.interp{background:repeating-linear-gradient(135deg,#3f3f46 0 3px,#27272a 3px 6px)}
+.strip-axis{display:flex;justify-content:space-between;font-size:.7rem;color:var(--text-faint);margin-top:6px;font-family:var(--mono)}
+.sw{display:inline-block;width:14px;height:10px;border-radius:2px;vertical-align:middle;margin-right:6px}
 
-footer{padding:48px 0 64px;border-top:1px solid var(--glass-border)}
-.fade{opacity:0;transform:translateY(24px);transition:opacity 1.2s var(--ease-premium),transform 1.2s var(--ease-premium)}
+/* timeline */
+.tl{list-style:none;margin-top:18px;border-left:1px solid var(--rule);padding-left:22px}
+.tl li{position:relative;padding:0 0 22px}
+.tl li::before{content:"";position:absolute;left:-27px;top:.55em;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--text-muted)}
+.tl li.crit::before{border-color:var(--critical)} .tl li.warn::before{border-color:var(--warn)} .tl li.ok::before{border-color:var(--good)}
+.tl .d{font-family:var(--mono);font-size:.78rem;color:var(--text-muted)}
+.tl .t{font-size:.94rem;color:var(--primary-accent)}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;font-weight:700;letter-spacing:.08em;padding:2px 8px;border-radius:100px;border:1px solid currentColor;margin-left:8px;vertical-align:1px}
+.tag.crit{color:#f19a9a}.tag.warn{color:#f6c860}.tag.ok{color:#8fd19e}
+
+/* formula */
+.formula{font-family:var(--mono);font-size:clamp(.85rem,3.2vw,1rem);color:var(--primary);background:var(--panel-2);border:1px solid var(--glass-border);border-radius:12px;padding:16px 18px;margin-top:14px;overflow-x:auto;white-space:nowrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;font-size:.88rem;margin-top:10px}
+.kv dt{color:var(--text-muted)} .kv dd{color:var(--primary-accent)}
+
+details{border:1px solid var(--glass-border);border-radius:14px;padding:0 18px;margin-top:12px;background:var(--glass-bg)}
+summary{cursor:pointer;padding:16px 0;font-weight:600;font-size:.95rem;color:var(--primary);list-style:none;display:flex;justify-content:space-between;gap:12px;min-height:48px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-family:var(--mono);color:var(--text-muted)}
+details[open] summary::after{content:"−"}
+details>div{padding:0 0 18px}
+
+.callout{border:1px solid var(--glass-border);border-radius:16px;padding:18px 20px;margin-top:22px;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.015))}
+.callout h4{display:flex;gap:8px;align-items:center}
+.callout.warn h4::before{content:"!";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--warn);color:#1a1300;font-size:.7rem;font-weight:800}
+.callout.info h4::before{content:"i";display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:var(--s1);color:#fff;font-size:.7rem;font-weight:800;font-family:var(--mono)}
+
+.terms li{list-style:none;padding:14px 0;border-bottom:1px solid var(--glass-border);display:grid;grid-template-columns:7em 1fr;gap:16px;font-size:.93rem}
+.terms li b{color:var(--primary);font-weight:600} .terms li span{color:var(--primary-accent)}
+footer{padding:48px 0 72px;border-top:1px solid var(--glass-border)}
+.fade{opacity:0;transform:translateY(18px);transition:opacity 1s var(--ease-premium),transform 1s var(--ease-premium)}
 .fade.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="orb" aria-hidden="true"></div>
+<header class="top">
   <div class="wrap">
-    <span class="badge">CLOSED BETA</span>
-    <p class="label">Project Amulet</p>
-    <h1>時間を売らなくても<br>現金が少しずつ残る</h1>
-    <p class="lead">自分の取引所口座の中だけで完結する 現物のみの自律型トレード基盤です 実資金で180日間動かした結果と 実際に稼働中の画面をご覧ください</p>
-    <div class="cta">
-      <a class="btn btn-primary" href="http://34.180.106.245:5003/view" target="_blank" rel="noopener noreferrer">守り石画面を開く
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-      <a class="btn btn-ghost" href="http://34.180.106.245:5003/view/pro" target="_blank" rel="noopener noreferrer">PRO画面を開く
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-    </div>
-    <p class="note small muted">稼働中の実機画面が別タブで開きます（閲覧専用・ログイン不要・操作不可）</p>
+    <div class="brand"><i></i>PROJECT AMULET</div>
+    <nav class="toc" aria-label="目次">
+      <a href="#summary">要旨</a><a href="#essence">仕組みの本質</a><a href="#rules">実装ルール</a><a href="#data">データと方法</a><a href="#perf">実績</a><a href="#attrib">リターンの正体</a><a href="#stats">確からしさ</a><a href="#ops">運用の実態</a><a href="#regime">相場判定の検証</a><a href="#risk">リスク設計</a><a href="#income">月30万の算数</a><a href="#beta">ベータ</a>
+    </nav>
   </div>
 </header>
 
+<div class="hero">
+  <div class="orb" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="badge">CLOSED BETA ／ 180-DAY LIVE REPORT</span>
+    <p class="label">Project Amulet</p>
+    <h1>相場の揺れを<br>現金に変える装置を<br>正直に検証する</h1>
+    <p class="lead">自分の取引所口座の中だけで完結する 現物のみのグリッド売買システムです。2026年4月1日から9月30日まで 実資金27.2万円で動かした記録を 口座残高の生データと取引所の公開価格から再計算し 良い結果も悪い結果もすべて開示します。</p>
+    <p class="meta-line num">DATA: 2,371 account snapshots ・ 2,078 fills ・ 4,551 hourly bars × 5 pairs ・ as of 2026-09-30 23:00 JST</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="#summary">要旨から読む</a>
+      <a class="btn btn-ghost" href="http://34.180.106.245:5003/view/pro" target="_blank" rel="noopener noreferrer">稼働中の実機画面
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
+    </div>
+    <div class="tiles">
+      <div class="tile"><b id="k-total">—</b><span>期間リターン（時価総資産）</span></div>
+      <div class="tile"><b id="k-ann">—</b><span>年率換算（複利）</span></div>
+      <div class="tile"><b id="k-mdd">—</b><span>最大ドローダウン</span></div>
+      <div class="tile"><b id="k-sharpe">—</b><span>シャープレシオ（年率）</span></div>
+    </div>
+  </div>
+</div>
+
 <main>
-<section id="design">
-  <div class="wrap">
-    <p class="label fade">Design Principles</p>
-    <h2 class="fade">退場の原因を 構造でなくす</h2>
-    <div class="grid g3" style="margin-top:28px">
-      <div class="panel fade">
-        <h3>レバレッジゼロ</h3>
-        <p class="small">現物取引のみ 強制ロスカットや追証が構造上起きません</p>
-      </div>
-      <div class="panel fade">
-        <h3>資金を預からない</h3>
-        <p class="small">資金は本人のBinance Japan口座の中だけ 出金権限をOFFにしたAPIで接続するため 開発者を含め誰も口座外へ資金を動かせません</p>
-      </div>
-      <div class="panel fade">
-        <h3>損切りの売りを出さない</h3>
-        <p class="small">加重平均の取得単価に手数料と利幅を足した価格以上でしか売りません 約定した売りは1件ごとに必ずプラスです</p>
-      </div>
+
+<!-- 01 SUMMARY -->
+<section id="summary">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">01</span>Executive Summary</p>
+    <h2 class="fade">要旨　結論から先に</h2>
+    <div class="verdict fade">
+      <p>半年間で資産は+11.1%増えました。ただしその中身は ほぼ暗号資産の値動きそのもの（β）であり 売買の工夫による上乗せ（α）は 現時点では統計的に確認できていません。一方で リスクがどこから来るのか 何を直せば良くなるのかは データからはっきり特定できました。</p>
     </div>
+    <ol class="findings">
+      <li class="fade"><b>リターンは市場並み リスクは市場並み。</b>期間+11.1%（年率23.5%）に対し 開始時の保有をそのまま持っていた場合は+10.8%。ほぼ同じ結果を 約2倍の変動率（年率39.8%対18.6%）と約2.7倍の最大下落（−31.8%対−12.0%）で得ています。</li>
+      <li class="fade"><b>最大下落は−31.8%。</b>5月11日の高値30.6万円から6月6日の20.8万円まで。以前の資料にあった「−5.6%」は8月中旬だけを切り取った値で 期間全体では誤りでした。9月30日時点でも5月の高値を回復していません（水面下142日）。</li>
+      <li class="fade"><b>損切りしない設計の最大下落は「保有比率×コインの下落率」で決まる。</b>5月下旬から6月末まで 現金比率は0.7%まで下がり ほぼ全額がSOLとETHでした。SOLが−34%下げた局面で −32%を被ったのは設計上の必然です。</li>
+      <li class="fade"><b>「下落モード（BEAR）」判定は暴落の大半を見逃していた。</b>実装どおりの判定を過去データに当てはめると 5〜6月の暴落のうちBEAR判定中に起きた下げはSOLで17%だけ。残りの83%は「横ばい（RANGE）」と判定された時間に じわじわ進んでいました。</li>
+      <li class="fade"><b>実口座は ロジックの理論値を大きく下回った。</b>同じ価格データで同じ売買ルールを再現すると+25〜39%。実口座は+11.1%。差の主因は運用面で 2台の同時稼働 20日間の停止と全額現金化 記録の欠落などが確認できます。</li>
+      <li class="fade"><b>だから今 ベータが必要。</b>課題は戦略より運用基盤と検証基盤にあります。単一稼働の保証 取引台帳の完全化 監視 そして多時間軸のリスク制御を エンジニアの目で一緒に固めたい というのがこのページの目的です。</li>
+    </ol>
   </div>
 </section>
 
-<section id="engine">
-  <div class="wrap">
-    <p class="label fade">V6 Hybrid Engine</p>
-    <h2 class="fade">相場に合わせて 守る 稼ぐ 伸ばす</h2>
-    <div class="grid g3" style="margin-top:28px">
-      <div class="panel mode bear fade">
-        <span class="tag"><span class="dot"></span>BEAR</span>
-        <h3>守り</h3>
-        <p class="small">RSI 40未満やデッドクロスで新規の買いを全面停止 落ちてくる相場を拾わず現金を温存します</p>
-      </div>
-      <div class="panel mode range fade">
-        <span class="tag"><span class="dot"></span>RANGE</span>
-        <h3>収穫</h3>
-        <p class="small">RSI 40〜60の横ばい相場で高密度のグリッド注文を展開 値動きの幅に応じてレンジを3.5〜8.0%で自動調整します</p>
-      </div>
-      <div class="panel mode fade">
-        <span class="tag"><span class="dot"></span>BULL</span>
-        <h3>攻め</h3>
-        <p class="small">上昇トレンドでは細かい利確を止めて保有し 高値からの反落で利益を確定します</p>
-      </div>
-    </div>
-    <p class="small muted fade" style="margin-top:20px">常に資産の40〜50%を日本円で保持し 急落時も買い余力を残します</p>
-  </div>
-</section>
-
-<section id="results">
-  <div class="wrap">
-    <p class="label fade">180-Day Live Results</p>
-    <h2 class="fade">実資金27万円 180日間の実績</h2>
-    <p class="fade">バックテストではなく 実口座の稼働ログ3,334行から集計した数値です（2026年4月1日〜9月28日）</p>
-
-    <div class="stats">
-      <div class="stat fade"><b>+11.4%</b><span>総資産 272,217円 → 303,300円</span></div>
-      <div class="stat fade"><b>+49,161円</b><span>確定利益（手数料控除後）</span></div>
-      <div class="stat fade"><b>21.0%</b><span>年率換算（単利）</span></div>
-      <div class="stat fade"><b>−5.6%</b><span>最大ドローダウン</span></div>
-      <div class="stat fade"><b>42.5%</b><span>待機現金の比率</span></div>
-      <div class="stat fade"><b>+6,267円</b><span>単純保有との差</span></div>
-    </div>
-
-    <div class="panel chart fade">
-      <svg viewBox="0 -6 600 226" role="img" aria-label="総資産の推移。4月から8月中旬までは元本付近で推移し、8月下旬に上昇して9月27日に305,457円の最高値">
-        <line x1="40" y1="136.8" x2="560" y2="136.8" stroke="rgba(255,255,255,.28)" stroke-dasharray="4 5"/>
-        <polyline fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-          points="40,136.8 80.4,151.7 242.2,158.8 438.7,161.4 470.4,58.5 557.1,34 560,40.7"/>
-        <circle cx="557.1" cy="34" r="4.5" fill="#c9a86a"/>
-        <text class="axis" x="40" y="206">4/1</text>
-        <text class="axis" x="232" y="206">6/10</text>
-        <text class="axis" x="424" y="206">8/17</text>
-        <text class="axis" x="560" y="206" text-anchor="end">9/28</text>
-        <text class="axis" x="44" y="128">元本 272,217</text>
-        <text class="axis" x="548" y="22" text-anchor="end">最高 305,457</text>
+<!-- 02 ESSENCE -->
+<section id="essence">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">02</span>Mechanism</p>
+    <h2 class="fade">仕組みの本質　揺れを現金に 変動を在庫に</h2>
+    <p class="fade">グリッド売買は 今の価格の上下に細かい指値を並べ 下がったら少し買い 上がったら少し売ることを繰り返します。価格が行って戻るたびに 小さな利ざやが現金として確定します。つまり<strong>「値動きの往復」を現金に変える装置</strong>です。</p>
+    <p class="fade">その裏返しとして 価格が一方向に下がり続けると 買いだけが約定して在庫（コイン）が積み上がります。Amuletは取得単価より上でしか売らない（損切りしない）ため 下落は<strong>売却損ではなく 在庫の含み損</strong>として残ります。損は消えるのではなく 形を変えて口座に残るのです。</p>
+    <div class="panel fade" style="margin-top:26px">
+      <div class="chart-head"><h4>損益の形（模式図）</h4></div>
+      <div class="legend" style="margin-top:12px"><span><i style="background:var(--s-ref)"></i>コインをそのまま保有</span><span><i style="background:var(--s1)"></i>グリッド売買</span></div>
+      <svg viewBox="0 0 640 300" role="img" aria-label="横軸が期末の価格、縦軸が損益。保有は直線、グリッドは価格が元の水準付近で最も有利で、上昇時は利益が頭打ち、下落時は保有に近い損失になる凹型の曲線" style="width:100%;height:auto;display:block">
+        <line x1="40" y1="150" x2="620" y2="150" stroke="rgba(255,255,255,.12)"/>
+        <line x1="330" y1="20" x2="330" y2="280" stroke="rgba(255,255,255,.12)" stroke-dasharray="3 5"/>
+        <path d="M60 272 L600 28" stroke="#a1a1aa" stroke-width="2" fill="none"/>
+        <path d="M60 250 C170 210 250 150 330 128 C410 110 500 104 600 100" stroke="#3987e5" stroke-width="2.4" fill="none"/>
+        <circle cx="330" cy="128" r="5" fill="#3987e5" stroke="#09090b" stroke-width="2"/>
+        <text x="336" y="40" fill="#a1a1aa" font-size="12">開始時の価格</text>
+        <text x="600" y="170" fill="#a1a1aa" font-size="12" text-anchor="end">期末価格 →</text>
+        <text x="46" y="142" fill="#a1a1aa" font-size="12">損益 0</text>
+        <text x="350" y="118" fill="#fcfcfc" font-size="12">行って戻る相場では利ざやが積み上がる</text>
+        <text x="600" y="92" fill="#fcfcfc" font-size="12" text-anchor="end">上昇では途中で売るので利益は頭打ち</text>
+        <text x="70" y="236" fill="#fcfcfc" font-size="12">下落では在庫が増え 保有に近い損</text>
       </svg>
-      <div class="legend"><span><i style="background:#fff"></i>総資産</span><span><i style="background:rgba(255,255,255,.35)"></i>元本</span></div>
+      <p class="figcap">プロの言葉では グリッドは「ボラティリティの売り手（ショート・ガンマ）」に近い損益の形です。往復の多い相場で稼ぎ 一方向の大相場では保有に負けます。実データでも SOLの上昇日の値動きの62%しか取れず 下落日の値動きは69%を受けていました（第06章）。</p>
+    </div>
+    <h3 class="fade">この仕組みで最も大事な式</h3>
+    <div class="formula fade">最大ドローダウン ≈ 最大保有比率 × 保有コインの最大下落率</div>
+    <p class="fade" style="margin-top:14px">損切りをしない以上 下落の深さを抑える手段は「どれだけ持つか」の上限しかありません。今回の−31.8%は 保有比率ほぼ100% × SOL・ETHの約−34%でほぼ説明できます。第10章では この上限を変えたときのリターンと下落の関係を実データで描きます。</p>
+  </div>
+</section>
+
+<!-- 03 RULES -->
+<section id="rules">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">03</span>Implementation</p>
+    <h2 class="fade">実装されているルール　コードそのままに</h2>
+    <p class="fade">以前の資料の説明と 実際のコード（grid_bot.py／trend_analyzer.py）には差がありました。検証はすべて<strong>コードの実装どおり</strong>に行っています。</p>
+    <div class="tbl-wrap fade">
+      <table>
+        <thead><tr><th>項目</th><th style="text-align:left">実装（2026-09-28版）</th><th style="text-align:left">以前の資料の記載</th></tr></thead>
+        <tbody>
+          <tr><td>判定の足と期間</td><td style="text-align:left">1時間足・直近60本</td><td style="text-align:left">記載なし</td></tr>
+          <tr><td>BEAR（買い停止）</td><td style="text-align:left">価格&lt;EMA12&lt;EMA26 かつ RSI14≤48 かつ EMA12の2本傾き&lt;−0.2%</td><td style="text-align:left">RSI&lt;40 または デッドクロス</td></tr>
+          <tr><td>BULL（保有して伸ばす）</td><td style="text-align:left">価格&gt;EMA12&gt;EMA26 かつ RSI14≥52 かつ 傾き&gt;+0.2%</td><td style="text-align:left">ゴールデンクロス</td></tr>
+          <tr><td>RANGE（グリッド）</td><td style="text-align:left">上記以外すべて</td><td style="text-align:left">RSI 40〜60</td></tr>
+          <tr><td>グリッド幅</td><td style="text-align:left">±max(3.5%, min(8.0%, ATR%×2))・20本</td><td style="text-align:left">同じ</td></tr>
+          <tr><td>売りの条件</td><td style="text-align:left">加重平均取得単価＋手数料＋目標利幅以上のみ</td><td style="text-align:left">同じ</td></tr>
+          <tr><td>BULL時の利確</td><td style="text-align:left">高値から3.5%反落で保有の60%を成行売却</td><td style="text-align:left">トレーリング</td></tr>
+          <tr><td>現金の下限</td><td style="text-align:left">25%（下回ると買い予算を10%に縮小）</td><td style="text-align:left">40〜50%を常時温存</td></tr>
+        </tbody>
+        <caption>V6の3モード判定が実際にログに初めて現れたのは 2026-09-28 11:16 JST。それ以前の約178日は V5系（グリッド＋取得単価保護）で運用されていました。</caption>
+      </table>
+    </div>
+    <div class="callout warn fade">
+      <h4>「約定した売りは100%利益」の正しい読み方</h4>
+      <p class="small" style="margin-top:6px">記録上 売りの99.9%がプラスでした。しかしこれは<strong>ルールの定義から自動的にそうなる数字</strong>で 成績の証拠ではありません。取得単価を下回っている在庫は売らずに持ち続けるので 損失は「売り」の側には一件も現れず 在庫の含み損として総資産にだけ現れます。成績は必ず時価の総資産で見る必要があります。</p>
     </div>
   </div>
 </section>
 
-<section id="honest">
+<!-- 04 DATA -->
+<section id="data">
   <div class="wrap">
-    <p class="label fade">How to Read</p>
-    <h2 class="fade">良い数字も 弱い数字も</h2>
-    <dl class="rows">
-      <div class="row fade"><dt>確定利益と総資産の差</dt><dd>確定利益は+49,161円ですが 総資産の増加は+31,083円です 差の約1.8万円は保有コインの含み損です</dd></div>
-      <div class="row fade"><dt>利益が出た時期</dt><dd>4月〜8月中旬は元本をやや下回って推移し（最大−2.9%） 利益の大半は8月下旬の反発局面で生まれました</dd></div>
-      <div class="row fade"><dt>コイン枚数の増加</dt><dd>SOLは1.615枚から6.588枚に増えましたが 下落中に円をSOLへ換えた結果で 枚数増がそのまま利益ではありません</dd></div>
-      <div class="row fade"><dt>検証の規模</dt><dd>1口座 約27万円 180日 主にSOLの1相場サイクルでの実績です 別の相場環境での再現性をベータで確かめたいと考えています</dd></div>
-    </dl>
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">04</span>Data &amp; Method</p>
+      <h2 class="fade">データと方法　何を正として どう補ったか</h2>
+      <p class="fade">ボットが記録する「確定利益」は データ元によって大きく食い違いました。そこで 口座全体の時価（現金＋全コイン×その時点の価格）を唯一の正とし すべての指標をそこから計算しています。</p>
+    </div>
+    <div class="grid g3" style="margin-top:26px">
+      <div class="panel fade"><h4>記録上の確定利益は3通り</h4>
+        <dl class="kv num"><dt>以前の資料</dt><dd>¥49,161</dd><dt>Mac側DB</dt><dd>¥77,939</dd><dt>本番側DB</dt><dd>¥144,768</dd><dt style="color:var(--primary)">時価の増加</dt><dd style="color:var(--primary)">¥30,249</dd></dl>
+        <p class="small muted" style="margin-top:10px">再起動のたびに取得単価がリセットされる 2台がそれぞれ別の単価で計算する などで 確定利益は実態より大きく出ます。</p></div>
+      <div class="panel fade"><h4>使ったデータ</h4>
+        <ul class="dots small"><li>口座残高スナップショット 2,371件（15分〜1時間間隔）</li><li>約定記録 2,078件（本番とMacの2系統を統合・重複35件除去）</li><li>取引所の公開1時間足 5通貨×4,551本</li></ul></div>
+      <div class="panel fade"><h4>検算</h4>
+        <ul class="dots small"><li>時刻帯は約定価格と1時間足の高値安値の照合で1件ずつ判定（JST／UTC混在を解消）</li><li>残高の時価再計算とボット記録の差は最大¥1未満</li><li>価格変動で説明できない残高変化を検査し 外部からの入出金がないことを確認</li></ul></div>
+    </div>
+    <div class="panel fade" style="margin-top:14px">
+      <div class="chart-head"><h4>データの網羅状況（1マス＝1日）</h4><span class="small muted num" id="cov-sum"></span></div>
+      <div class="strip" id="strip" role="img" aria-label="日ごとのデータ網羅状況"></div>
+      <div class="strip-axis"><span>4/1</span><span>5/1</span><span>6/1</span><span>7/1</span><span>8/1</span><span>9/1</span><span>9/30</span></div>
+      <div class="legend" style="margin-top:12px">
+        <span><span class="sw" style="background:var(--s1)"></span>残高の実測あり</span>
+        <span><span class="sw" style="background:rgba(57,135,229,.45)"></span>保有量は既知・価格で時価を復元</span>
+        <span><span class="sw" style="background:repeating-linear-gradient(135deg,#3f3f46 0 3px,#27272a 3px 6px)"></span>保有量が途中で変化・前後から補間</span>
+      </div>
+      <p class="figcap">記録の空白は 5/24〜6/24（保有はほぼ不変のため時価の復元精度は高い） 6/28〜8/17（7月の売買で保有が変化） 8/29〜9/21（ボット停止と全額現金化）の3区間です。補間区間は 前後の実測値との差を時間に比例して配分しています。グラフでは補間区間を破線で表示しています。</p>
+    </div>
   </div>
 </section>
 
+<!-- 05 PERFORMANCE -->
+<section id="perf">
+  <div class="wrap">
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">05</span>Performance</p>
+      <h2 class="fade">実績　比較対象と並べて見る</h2>
+      <p class="fade">「ボットを使わなかったらどうだったか」を3通り用意しました。<strong>開始時の保有をそのまま持つ</strong>（最も素朴な比較） <strong>SOL単体</strong>（主力通貨の市場） そして<strong>同じ保有比率で売買しない</strong>です。最後のものは Amuletが日々持っていたコインの比率を前日の終値でそのまま再現した「売買をしなかった双子」で 売買そのものの価値だけを取り出せる 最も厳密な比較です。</p>
+    </div>
+    <div class="panel fade" style="margin-top:26px">
+      <div class="chart-head">
+        <h4>時価総資産の推移（円）</h4>
+        <div class="seg" role="group" aria-label="表示の切り替え"><button type="button" data-view="yen" aria-pressed="true">金額</button><button type="button" data-view="idx" aria-pressed="false">指数(=100)</button></div>
+      </div>
+      <div class="chart"><div class="legend" id="lg-nav"></div><div class="cv"><canvas id="c-nav" aria-label="時価総資産の推移と比較対象"></canvas></div></div>
+      <p class="figcap">Amuletの線の破線部分は補間区間です。</p>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="panel fade">
+        <h4>ドローダウン（高値からの下落率）</h4>
+        <div class="chart"><div class="legend" id="lg-dd"></div><div class="cv sm"><canvas id="c-dd" aria-label="ドローダウン"></canvas></div></div>
+      </div>
+      <div class="panel fade">
+        <h4>保有比率（総資産に占める暗号資産の割合）</h4>
+        <div class="chart"><div class="legend"><span><i style="background:var(--s1)"></i>暗号資産の比率</span></div><div class="cv sm"><canvas id="c-exp" aria-label="暗号資産の保有比率"></canvas></div></div>
+        <p class="figcap">5月下旬〜6月末はほぼ100%。現金の緩衝が機能し始めたのは8月中旬以降です。</p>
+      </div>
+    </div>
+
+    <h3 class="fade">指標一覧</h3>
+    <div class="tbl-wrap fade"><table id="t-kpi"><thead></thead><tbody></tbody><caption>日次（JST 0時）の時価から計算。年率化は365日。シャープ・ソルティノは無リスク金利0.5%。VaR/CVaRは日次95%のヒストリカル値。</caption></table></div>
+
+    <h3 class="fade">月次リターン</h3>
+    <div class="panel fade">
+      <div class="chart"><div class="legend" id="lg-mo"></div><div class="cv sm"><canvas id="c-mo" aria-label="月次リターン"></canvas></div></div>
+      <div class="tbl-wrap"><table id="t-mo"><thead></thead><tbody></tbody><caption>7月は補間区間を含むため参考値です。</caption></table></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 ATTRIBUTION -->
+<section id="attrib">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">06</span>Attribution</p>
+    <h2 class="fade">リターンの正体　βとαに分ける</h2>
+    <p class="fade">日次リターンをSOLとETHの日次リターンで回帰し 市場の動きで説明できる部分（β）と 説明できない上乗せ（α）に分解しました。</p>
+    <div class="formula fade">r<sub>Amulet</sub> = α + β<sub>SOL</sub>·r<sub>SOL</sub> + β<sub>ETH</sub>·r<sub>ETH</sub> + ε</div>
+    <div class="tbl-wrap fade"><table id="t-reg"><thead><tr><th>項目</th><th>推定値</th><th>t値</th><th style="text-align:left">読み方</th></tr></thead><tbody></tbody></table></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="panel fade"><h4>上昇・下落の取り込み率（対SOL）</h4>
+        <dl class="kv num" id="capture"></dl>
+        <p class="small muted" style="margin-top:10px">上昇の取り込みより下落の取り込みの方が大きい 不利な非対称です。グリッドの損益の形（第02章）がそのまま数字に出ています。</p></div>
+      <div class="panel fade"><h4>売買しなかった双子との差</h4>
+        <dl class="kv num" id="vsexp"></dl>
+        <p class="small muted" style="margin-top:10px">同じ日に同じ比率でコインを持っていた場合と比べ 売買は年率でマイナスでした。ただしt値は有意水準に届かず「売買が有害」とまでは言えません。</p></div>
+    </div>
+    <div class="callout info fade">
+      <h4>ここから言えること</h4>
+      <p class="small" style="margin-top:6px">日々の値動きの約82%（R²）は SOLとETHの値動きで説明できます。Amuletの半年は「約70%を暗号資産で持っていた口座」の成績とほぼ同じで グリッド売買による上乗せは 運用上の損失（第08章）に打ち消されて観測できていません。逆に言えば 運用の穴を塞げば 第08章の理論値との差（十数ポイント）は取り戻せる余地があります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 07 STATS -->
+<section id="stats">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">07</span>Statistical Confidence</p>
+    <h2 class="fade">確からしさ　半年で何が言えて 何が言えないか</h2>
+    <p class="fade">183日分の日次リターンは 暗号資産の値動きの大きさに比べて短すぎます。年率23.5%という数字が「たまたま」なのか「実力」なのかを 3つの方法で確かめました。</p>
+    <div class="grid g3" style="margin-top:22px">
+      <div class="tile fade"><b id="s-psr">—</b><span>確率的シャープレシオ（PSR）<br>真のシャープが0より大きい確率</span></div>
+      <div class="tile fade"><b id="s-mintrl">—</b><span>最小必要記録期間（MinTRL）<br>95%の確信に必要な日数</span></div>
+      <div class="tile fade"><b id="s-boot">—</b><span>年率リターンの90%信頼区間<br>7日ブロック・ブートストラップ2万回</span></div>
+    </div>
+    <p class="fade" style="margin-top:22px">PSR（Bailey &amp; López de Prado, 2012）はリターン分布の歪みと裾の厚さを補正した上で シャープレシオが0を超えている確率を出す指標です。約70%は「どちらかといえばプラス寄り」ですが 一般的な判断基準の95%には遠く届きません。同じ質のリターンが続くと仮定しても 確信を持って「優位性がある」と言うには約5年分の記録が必要です。</p>
+    <div class="callout warn fade">
+      <h4>年率21%という数字の扱い</h4>
+      <p class="small" style="margin-top:6px">90%信頼区間は年率−55%〜+207%と非常に広く 年率21〜24%という点推定は将来の見込みとして使えません。料金設計や「月30万円」の計画には この幅を前提にした保守的な想定（第11章）を使うべきです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 OPS -->
+<section id="ops">
+  <div class="wrap">
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">08</span>Operations</p>
+      <h2 class="fade">運用の実態　ロジックより運用が効いた</h2>
+      <p class="fade">取引所の同じ1時間足で 同じ資金27.2万円（全額現金から開始）に同じ売買ルールを当てはめると 半年の理論値は+25〜39%でした。実口座の+11.1%との差は 主に次の運用上の出来事に由来すると考えられます。</p>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="panel fade">
+        <h4>運用タイムライン（口座データから再構成）</h4>
+        <ul class="tl">
+          <li class="ok"><div class="d">04/01</div><div class="t">運用開始。現金57%＋BTC・ETH・SOL・BNB・XRP 43%</div></li>
+          <li><div class="d">04/上旬〜中旬</div><div class="t">BTC・BNB・XRPを売却し SOL・ETHに集約</div></li>
+          <li class="warn"><div class="d">05/22〜06/26</div><div class="t">現金比率0.7%。ほぼ全額が暗号資産<span class="tag warn">緩衝なし</span></div></li>
+          <li class="crit"><div class="d">06/06</div><div class="t">最大下落 −31.8%（20.8万円）<span class="tag crit">MDD</span></div></li>
+          <li class="warn"><div class="d">05/24〜06/24・06/28〜08/17</div><div class="t">残高の記録が途切れる（売買は継続）</div></li>
+          <li><div class="d">08/17</div><div class="t">Mac側でV5 PRO（現金配分つき）を起動</div></li>
+          <li class="crit"><div class="d">08/18〜08/28</div><div class="t">本番サーバーとMacの2台が同じ口座で同時に売買<span class="tag crit">二重稼働</span></div></li>
+          <li class="crit"><div class="d">09/01〜09/20</div><div class="t">売買ゼロ。9/21時点で全保有が現金化されていた<span class="tag crit">停止</span></div></li>
+          <li><div class="d">09/21</div><div class="t">Macで再稼働</div></li>
+          <li class="ok"><div class="d">09/28</div><div class="t">V6の3モード判定が初めて稼働</div></li>
+          <li class="crit"><div class="d">09/30</div><div class="t">本番サーバーも再稼働し 再び2台が同時稼働<span class="tag crit">二重稼働</span></div></li>
+          <li class="ok"><div class="d">10/01</div><div class="t">Mac側を停止し自動起動も無効化。本番サーバー1台の稼働に一本化<span class="tag ok">解消</span></div></li>
+        </ul>
+      </div>
+      <div class="panel fade">
+        <h4>同じ価格で同じルールを回した理論値との比較</h4>
+        <div class="chart"><div class="legend" id="lg-sim"></div><div class="cv sm"><canvas id="c-sim" aria-label="理論値と実口座の比較"></canvas></div></div>
+        <div class="tbl-wrap"><table id="t-sim"><thead></thead><tbody></tbody></table></div>
+        <p class="figcap">理論値は 1時間足の高値安値で指値の約定を判定する簡易モデルです（手数料0.1%／利幅0.3%／各通貨に資金の半分）。足の中の値動きの順序や約定の取りこぼしを楽観的に扱うため 上限寄りの目安として見てください。</p>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="tile fade"><b class="num">¥10.97M</b><span>半年の約定総額（平均資産の約20倍の回転）</span></div>
+      <div class="tile fade"><b class="num">≈ ¥11,000</b><span>推定手数料（0.1%想定） 時価増加3.0万円の約1/3</span></div>
+      <div class="tile fade"><b class="num">2 台</b><span>同じ口座を同時に操作していた実行環境の数</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 REGIME -->
+<section id="regime">
+  <div class="wrap">
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">09</span>Signal Validation</p>
+      <h2 class="fade">相場判定の検証　BEARは下落を止められるか</h2>
+      <p class="fade">V6の中核は「下落中は買わない」ことです。そこで 実装どおりの判定をSOL・ETHの1時間足（4/1〜9/30）に当てはめ 判定が出た<strong>次の1時間以降</strong>の値動きを調べました。判定に使った足の値動きを含めると 下落を「当てた」ように見えてしまうため（先読みバイアス） 必ず判定の後ろだけを数えています。</p>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="panel fade">
+        <h4>5/11〜6/6の暴落は どの判定中に起きたか</h4>
+        <div class="chart"><div class="legend"><span><i style="background:var(--s2)"></i>BEAR（買い停止）</span><span><i style="background:var(--s1)"></i>RANGE（グリッド）</span><span><i style="background:var(--s3)"></i>BULL</span></div><div class="cv sm"><canvas id="c-crash" aria-label="暴落期間の判定別下落"></canvas></div></div>
+        <p class="figcap">判定直後の1時間ごとの対数リターンを判定別に合計。SOLの下落の83% ETHの76%が BEARではない時間に起きています。</p>
+      </div>
+      <div class="panel fade">
+        <h4>判定の後に何が起きたか（SOL・全期間）</h4>
+        <div class="tbl-wrap" style="margin-top:6px"><table id="t-reg-fwd"><thead></thead><tbody></tbody></table></div>
+        <p class="figcap">BEAR判定の後の24時間は 平均でむしろプラス。判定は「今下がっている」ことを描写していても 「この先下がる」ことは予測できていません（BEARとそれ以外の差のt値≈0）。判定は1日平均3.3回切り替わり BEARの継続は中央値4時間と短く ノイズに振られています。</p>
+      </div>
+    </div>
+    <h3 class="fade">改善仮説　時間軸を伸ばすと何が変わるか</h3>
+    <p class="fade narrow">同じ暴落に対して 候補となるフィルターを4つ比較しました。「避けられた下落」が大きく 「止めていた時間」が短いほど良いフィルターです。</p>
+    <div class="panel fade" style="margin-top:16px">
+      <div class="chart"><div class="legend"><span><i style="background:var(--s1)"></i>SOL</span><span><i style="background:var(--s2)"></i>ETH</span></div><div class="cv sm"><canvas id="c-filter" aria-label="フィルター比較"></canvas></div></div>
+      <div class="tbl-wrap"><table id="t-filter"><thead></thead><tbody></tbody><caption>F3（20日EMAを下回る間は買わない）は暴落の82〜93%を避けつつ 止める時間は4割強。F4（7日高値から−8%で停止）は止める時間が1割強と短い。ただし暴落は1回しか観測されておらず これは仮説です。</caption></table></div>
+    </div>
+    <div class="callout warn fade narrow">
+      <h4>フィルターだけでは最大下落はほとんど減らない</h4>
+      <p class="small" style="margin-top:6px">買いを止めても すでに持っている在庫の値下がりは止まりません。理論値では 現行V6に改善フィルターを足しても最大下落は−26.2%→−25.5%とわずかな改善でした。下落を浅くする本当のレバーは 次章の「保有比率の上限」です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 RISK -->
+<section id="risk">
+  <div class="wrap">
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">10</span>Risk Design</p>
+      <h2 class="fade">リスクの設計図　保有比率の上限で決まる</h2>
+      <p class="fade">現金の下限（=保有比率の上限）を0%から75%まで変えて 同じ期間を理論値で回しました。最大下落は 上限の比率にほぼ比例して浅くなります。一方で シャープレシオは1.4〜1.6の範囲でほとんど変わりません。<strong>現金の下限は「儲け方」ではなく「揺れの大きさ」を選ぶダイヤル</strong>です。</p>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="panel fade">
+        <h4>リターンと最大下落の関係（理論値）</h4>
+        <div class="chart"><div class="legend"><span><i style="background:var(--s1)"></i>現行V6</span><span><i style="background:var(--s2)"></i>V6＋改善フィルター</span><span><i style="background:var(--s-ref)"></i>単純保有（SOL・ETH半々）</span></div><div class="cv sm"><canvas id="c-front" aria-label="現金下限ごとのリターンと最大下落"></canvas></div></div>
+        <p class="figcap">点のラベルは現金の下限。右上ほど良い。</p>
+      </div>
+      <div class="panel fade">
+        <h4>現金下限ごとの数値（現行V6）</h4>
+        <div class="tbl-wrap" style="margin-top:6px"><table id="t-front"><thead></thead><tbody></tbody></table></div>
+      </div>
+    </div>
+    <div class="callout info fade narrow">
+      <h4>設計への示唆</h4>
+      <p class="small" style="margin-top:6px">「ベーシックインカム」を名乗るなら 利用者が耐えられる最大下落から逆算して保有比率の上限を決めるべきです。たとえば最大下落を−15%程度に収めたいなら 現金の下限は約60%。その代わり 期待できるリターンも下がります。この交換条件を 利用者が自分で選べる形にするのが 正式版の設計方針です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 INCOME -->
+<section id="income">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">11</span>The Math of ¥300k / month</p>
+    <h2 class="fade">月30万円の算数　必要な元本と揺れの大きさ</h2>
+    <p class="fade">年間360万円（税引前）を運用益だけで得るのに必要な元本は 想定する年率で大きく変わります。同時に その元本が下落局面でどれだけ揺れるかも並べました。</p>
+    <div class="tbl-wrap fade"><table id="t-cap"><thead></thead><tbody></tbody><caption>必要元本＝360万円÷年率。税金（雑所得・総合課税）と 取り崩しによる元本の減少は含みません。</caption></table></div>
+    <p class="fade" style="margin-top:18px">年率23.5%の実績値を前提にしても 元本約1,530万円が 今回と同じ保有比率なら一時的に約490万円目減りします。毎月の取り崩しを 下落局面の底値で行えば 元本の回復はさらに遅れます（順序リスク）。<strong>月30万円は目指す価値のある目標ですが 今の実績から約束できる数字ではありません。</strong>ステップ1（少額での実証）の完了条件を「単月の利益」ではなく「1年以上の時価ベースの記録と 下落の上限が設計どおりに守られること」に置き直すことを提案します。</p>
+  </div>
+</section>
+
+<!-- 12 BETA -->
 <section id="beta">
   <div class="wrap">
-    <p class="label fade">Closed Beta</p>
-    <h2 class="fade">最初のテスターとして 一緒に磨いてほしい</h2>
-    <p class="fade">お金を増やす話ではなく 仕組みを一緒に強くする話です 特にエンジニア目線でのセキュリティ 監視 UIへの指摘を歓迎します</p>
-    <ul class="terms fade" style="margin-top:24px">
+    <div class="narrow" style="padding:0">
+      <p class="label fade"><span class="no">12</span>Closed Beta</p>
+      <h2 class="fade">ベータで一緒に固めたいこと</h2>
+      <p class="fade">この半年で分かったのは 戦略のアイデアよりも それを<strong>確実に 1台で 記録を欠かさず</strong>動かす基盤の方が 成績を左右するということです。ここはまさにエンジニアの領域です。</p>
+    </div>
+    <div class="grid g2" style="margin-top:22px">
+      <div class="panel fade"><h4>P0　今すぐ直すこと</h4><ul class="dots small">
+        <li>単一稼働の保証（起動時にロックを取り 別の実行環境が動いていたら起動しない）</li>
+        <li>死活監視と停止時の通知（9月の20日間停止を検知できる仕組み）</li>
+        <li>取引所の約定履歴APIから台帳を毎回同期し 自前記録と突き合わせる</li>
+        <li>時刻をすべてUTCで保存（今はJSTとUTCが混在）</li></ul></div>
+      <div class="panel fade"><h4>P1　検証基盤</h4><ul class="dots small">
+        <li>時価の総資産を15分ごとに欠かさず保存（空白ゼロ）</li>
+        <li>このページの指標を毎日自動で再計算して公開</li>
+        <li>本番と同じコードで過去データを回すバックテスト環境</li>
+        <li>設定変更の履歴（いつ 何を変えたか）を記録</li></ul></div>
+      <div class="panel fade"><h4>P2　リスク制御</h4><ul class="dots small">
+        <li>保有比率の上限を利用者が選べる設計（最大下落からの逆算）</li>
+        <li>多時間軸の下落フィルター（20日EMA・高値からの下落率）の検証</li>
+        <li>在庫の上限と 長期の含み損に対する扱いの明文化</li></ul></div>
+      <div class="panel fade"><h4>P3　セキュリティ</h4><ul class="dots small">
+        <li>APIキーの保管方式と鍵管理のレビュー</li>
+        <li>取引所側のIP制限の必須化 出金権限OFFの自動確認</li>
+        <li>管理画面の認証強化と公開画面のHTTPS化</li></ul></div>
+    </div>
+    <h3 class="fade">参加条件</h3>
+    <ul class="terms fade narrow" style="padding:0">
       <li><b>利用料</b><span>ベータ期間（3ヶ月）は無料</span></li>
-      <li><b>運用額</b><span>1万〜3万円程度の少額から 目的は利益ではなく動作と安全性の検証です</span></li>
-      <li><b>資金</b><span>ご自身のBinance Japan口座＋出金権限なしAPI いつでも停止・現金化できます</span></li>
-      <li><b>協業</b><span>インフラ監視 セキュリティ UIのフィードバックを最優先で反映</span></li>
-      <li><b>ローンチ後</b><span>正式公開後も初期参加者向けの永久割引を適用</span></li>
+      <li><b>運用額</b><span>1万〜3万円程度の少額から。目的は利益ではなく 動作と安全性と記録の検証です</span></li>
+      <li><b>資金</b><span>ご自身のBinance Japan口座＋出金権限なしのAPIキー。いつでも停止・現金化できます</span></li>
+      <li><b>協業</b><span>インフラ監視 セキュリティ 検証基盤へのフィードバックを最優先で反映</span></li>
+      <li><b>ローンチ後</b><span>正式公開後も 初期参加者向けの永久割引を適用</span></li>
     </ul>
     <div class="cta fade">
-      <a class="btn btn-primary" href="http://34.180.106.245:5003/view/pro" target="_blank" rel="noopener noreferrer">稼働中の画面を見る
+      <a class="btn btn-primary" href="mailto:info@noktoa.com?subject=Project%20Amulet%20%E3%83%99%E3%83%BC%E3%82%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">話を聞いてみる</a>
+      <a class="btn btn-ghost" href="http://34.180.106.245:5003/view" target="_blank" rel="noopener noreferrer">守り石画面（スマホ向け）
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"/></svg></a>
-      <a class="btn btn-ghost" href="mailto:info@noktoa.com?subject=Project%20Amulet%20%E3%83%99%E3%83%BC%E3%82%BF%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6">話を聞いてみる</a>
     </div>
+  </div>
+</section>
+
+<!-- APPENDIX -->
+<section id="appendix">
+  <div class="wrap narrow">
+    <p class="label fade"><span class="no">A</span>Appendix</p>
+    <h2 class="fade">付録　定義と注記</h2>
+    <details class="fade"><summary>指標の定義</summary><div><dl class="kv small">
+      <dt>期間リターン</dt><dd>最終時価÷開始時価−1（入出金なしを確認済み）</dd>
+      <dt>年率（複利）</dt><dd>(1+期間リターン)^(365/日数)−1</dd>
+      <dt>変動率</dt><dd>日次リターンの標準偏差×√365</dd>
+      <dt>シャープ</dt><dd>(日次平均−無リスク0.5%/365)÷日次標準偏差×√365</dd>
+      <dt>ソルティノ</dt><dd>分母を下方偏差（負のリターンのみの二乗平均平方根）に置換</dd>
+      <dt>最大ドローダウン</dt><dd>それまでの最高値からの最大下落率</dd>
+      <dt>カルマー</dt><dd>年率リターン÷|最大ドローダウン|</dd>
+      <dt>VaR / CVaR 95%</dt><dd>日次リターンの下位5%点 と それ以下の平均</dd>
+      <dt>取り込み率</dt><dd>SOLの上昇日（下落日）だけでの幾何平均リターンの比</dd>
+      <dt>PSR</dt><dd>Φ[(SR−0)√(n−1) / √(1−γ₃SR+(γ₄−1)/4·SR²)]（γ₃歪度 γ₄尖度）</dd>
+      <dt>MinTRL</dt><dd>1+(1−γ₃SR+(γ₄−1)/4·SR²)(z₀.₉₅/SR)²</dd>
+      <dt>ブートストラップ</dt><dd>7日ブロックで復元抽出 20,000回 乱数種42</dd></dl></div></details>
+    <details class="fade"><summary>比較対象の作り方</summary><div><dl class="kv small">
+      <dt>開始時の保有をそのまま</dt><dd>4/1時点の現金¥156,917と各コインの数量を 以後売買せず時価評価</dd>
+      <dt>同じ保有比率で売買しない</dt><dd>毎日 前日のAmuletの通貨別保有比率で持ち 当日の値動きだけを受ける（売買コストなし）</dd>
+      <dt>理論値（シミュレーション）</dt><dd>全額現金から開始 SOL・ETHに半分ずつ 1時間足の高値安値で指値の約定を判定 手数料0.1% 目標利幅0.3% グリッド10段 ATR連動幅</dd></dl></div></details>
+    <details class="fade"><summary>限界と注意</summary><div><ul class="dots small">
+      <li>183日・1口座・主にSOLとETHの1相場サイクルの記録であり 他の相場環境での再現性は未検証です</li>
+      <li>183日のうち73日は保有量が途中で変わる空白区間を補間しています。月次の7月は参考値です</li>
+      <li>理論値は簡易モデルで 実際の約定の取りこぼしやスリッページを考慮していません</li>
+      <li>相場判定の検証とフィルター比較は 同じデータで作って同じデータで測っているため 過剰適合の余地があります</li>
+      <li>手数料は0.1%で推計しています。実際の手数料率は口座の条件により異なります</li></ul></div></details>
+    <details class="fade"><summary>以前の資料からの訂正</summary><div><ul class="dots small">
+      <li>最大ドローダウン −5.6% → <strong>−31.8%</strong>（5/11〜6/6）</li>
+      <li>最高到達資産 305,457円（9/27） → 5月中旬に約30.6万円を記録済み。9/30時点で未回復</li>
+      <li>待機現金 常時40〜50% → 5/22〜6/26は<strong>0.7%</strong>。コードの下限設定は25%</li>
+      <li>単純保有に+6,267円勝利 → 開始時保有との差は<strong>ほぼゼロ</strong>（9/30時点）</li>
+      <li>V6 Hybrid Engineでの180日実証 → V6の判定が稼働したのは<strong>9/28以降</strong></li>
+      <li>累計確定利益 49,161円 → 記録方法に依存し不正確。成績は時価で評価</li></ul></div></details>
   </div>
 </section>
 </main>
 
 <footer>
-  <div class="wrap">
-    <p class="small muted">ご注意 暗号資産は価格変動が大きく 元本を下回る可能性があります 掲載の数値は過去の実績であり 将来の成果を保証するものではありません Amuletは自動売買ソフトウェアの提供であり 投資助言や資産運用の受託ではありません 利益は原則として雑所得（総合課税）の対象です</p>
-    <p class="small muted" style="margin-top:16px">本ページは限定公開です 転送や公開はご遠慮ください</p>
-    <p class="small muted" style="margin-top:24px">© 2026 NOKTOA Inc.</p>
+  <div class="wrap narrow">
+    <p class="small muted">暗号資産は価格変動が大きく 元本を下回る可能性があります。掲載の数値は過去の記録と理論値であり 将来の成果を保証するものではありません。Amuletは自動売買ソフトウェアの提供を予定するもので 投資助言や資産運用の受託ではありません。利益は原則として雑所得（総合課税）の対象です。</p>
+    <p class="small muted" style="margin-top:14px">本ページは限定公開です。転送や公開はご遠慮ください。</p>
+    <p class="small muted" style="margin-top:22px">© 2026 NOKTOA Inc.</p>
   </div>
 </footer>
 
+<script id="amulet-data" type="application/json">{"meta":{"start":"2026-04-01 14:10:00+00:00","end":"2026-09-30 14:00:00+00:00","days":181.99305555555554,"nav0":272217.0,"navEnd":302466.03184096,"avg_crypto_w":0.7485342480554336,"sol_share":0.4929225313613371},"strategy":{"total":0.11112102418643932,"ann":0.23531486763561515,"vol":0.39827566692333616,"sharpe":0.7129125054756015,"sortino":1.0274987620162301,"mdd":-0.31796214579000803,"calmar":0.7400719574682463,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":null,"longest_uw_days":141.95833333333334,"var95":0.03446511678934743,"cvar95":0.04681012002975665,"skew":0.21147214789153687,"kurt":5.233105274719984,"best":0.1109268478361567,"worst":-0.08454368701050319,"pos_days":0.5846994535519126,"n":183,"final":302466.03184096,"peak":305660.76647206,"peak_date":"2026-05-11"},"bench":{"basket":{"total":0.10758921475917238,"ann":0.2274524340150048,"vol":0.1857303972724735,"sharpe":1.1626897199403596,"sortino":1.8570265061606455,"mdd":-0.11972382965694583,"calmar":1.8998092081312656,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":"2026-08-23","longest_uw_days":103.0,"var95":0.013664641437104542,"cvar95":0.01713810948727912,"skew":0.6358945787660529,"kurt":1.7766155811562423,"best":0.03725933658249314,"worst":-0.027462372258193923,"pos_days":0.5300546448087432,"n":183,"final":302558.16099002,"peak":304876.32657224,"peak_date":"2026-09-22"},"sol":{"total":0.42426525998492837,"ann":1.0325321418556772,"vol":0.5650035657627304,"sharpe":1.5172554007545487,"sortino":2.503715646244715,"mdd":-0.3436450997169749,"calmar":3.004646778627333,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":"2026-08-24","longest_uw_days":104.0,"var95":0.039677609621852225,"cvar95":0.051962442399768806,"skew":0.8106373788015796,"kurt":2.5581054966270904,"best":0.11675060501013812,"worst":-0.07496857604596874,"pos_days":0.5519125683060109,"n":183,"final":387709.21627731726,"peak":393576.1388093444,"peak_date":"2026-09-26"},"eth":{"total":0.2513428959329438,"ann":0.5678162133600075,"vol":0.5057875896606554,"sharpe":1.1232962428650297,"sortino":1.8302263261734888,"mdd":-0.35224653558318875,"calmar":1.6119852319339802,"mdd_peak":"2026-04-17","mdd_trough":"2026-06-06","recovered":"2026-08-23","longest_uw_days":127.0,"var95":0.03197976092158872,"cvar95":0.04553090191407934,"skew":0.731215489125376,"kurt":3.9945228184454042,"best":0.1179075920779371,"worst":-0.10598862660642139,"pos_days":0.5081967213114754,"n":183,"final":340636.80910217814,"peak":348493.5178059146,"peak_date":"2026-09-21"},"btc":{"total":0.2094572241338164,"ann":0.4643373510269293,"vol":0.38596254468991675,"sharpe":1.1609413766020895,"sortino":1.8355950040131532,"mdd":-0.26245049557497757,"calmar":1.769237851921968,"mdd_peak":"2026-05-05","mdd_trough":"2026-06-30","recovered":"2026-09-21","longest_uw_days":138.0,"var95":0.03204580955310007,"cvar95":0.038881622742035146,"skew":0.4677465547842608,"kurt":1.2603747209574085,"best":0.06630623371707411,"worst":-0.052442868445479296,"pos_days":0.5245901639344263,"n":183,"final":329234.81718203507,"peak":338548.852744603,"peak_date":"2026-09-22"},"solEth":{"total":0.33780407795893597,"ann":0.7926238387863727,"vol":0.5124186705575182,"sharpe":1.3759728945285343,"sortino":2.2090877276942744,"mdd":-0.3304876283554361,"calmar":2.398346475874473,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":"2026-08-22","longest_uw_days":102.0,"var95":0.03579347581672286,"cvar95":0.048487690975732155,"skew":0.6037356221592384,"kurt":2.4182820269088823,"best":0.11100533317551031,"worst":-0.0904728149928462,"pos_days":0.5355191256830601,"n":183,"final":364173.0126897477,"peak":367141.82472608174,"peak_date":"2026-09-26"},"expMatched":{"total":0.20756192272040042,"ann":0.45973876148322734,"vol":0.4025528829450888,"sharpe":1.121883672322111,"sortino":1.68236421687004,"mdd":-0.31918234962959224,"calmar":1.4403639863443243,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":"2026-08-27","longest_uw_days":107.0,"var95":0.03101400420354449,"cvar95":0.04642936910985811,"skew":0.3249979548077643,"kurt":5.17177032967815,"best":0.11092784359602655,"worst":-0.0845427307137944,"pos_days":0.546448087431694,"n":183,"final":328718.88391717925,"peak":329579.5505524683,"peak_date":"2026-09-26"},"constMix":{"total":0.26148242117107223,"ann":0.5933985522316509,"vol":0.3823767438318925,"sharpe":1.387879722658494,"sortino":2.229071435941062,"mdd":-0.2571653600170336,"calmar":2.307459107993186,"mdd_peak":"2026-05-11","mdd_trough":"2026-06-06","recovered":"2026-08-21","longest_uw_days":101.0,"var95":0.02671820354784512,"cvar95":0.036147834328775816,"skew":0.6010930746206227,"kurt":2.43794247326081,"best":0.08302966472346836,"worst":-0.06789066758885254,"pos_days":0.5355191256830601,"n":183,"final":343396.96024392574,"peak":345303.37655532185,"peak_date":"2026-09-26"}},"reg":{"alpha_d":-0.0006176013518321853,"alpha_ann":-0.22542449341874762,"alpha_t":-0.9282882205928354,"beta_sol":0.3958473433395144,"beta_eth":0.30190904949565145,"t_sol":9.99366175270502,"t_eth":6.823230186215682,"r2":0.8168550896216948,"te_ann":0.1699774656649713},"reg1":{"alpha_ann":-0.24423747738687285,"beta":0.6183476573579599,"corr":0.8772030538223368},"capture":{"up":0.013235104184026847,"up_b":0.02140182876699015,"dn":-0.015022994423773084,"dn_b":-0.021797475021564594,"up_ratio":0.6184099652474777,"dn_ratio":0.6892080118871838},"vsExp":{"ann_excess":-0.1676818030460073,"t":-1.3928115002278634,"ir":-1.9670401809369584},"psr":{"sr_daily":0.03797265861370635,"psr":0.6962599746605633,"mintrl_days":1867.5013541156086},"boot":{"p05":-0.5454244938608355,"p50":0.27443721798518417,"p95":2.065625679146834,"p_pos":0.6597},"monthly":[{"m":"2026-04","ret":0.042937871136850214,"sol":0.005877920120572755,"basket":0.028725518240998893,"expm":0.06319134201876353,"nav":283905.41846725997},{"m":"2026-05","ret":-0.040696576672181295,"sol":-0.0143092598142045,"basket":-0.014708547739450406,"expm":-0.03769664553700858,"nav":272351.4398369594},{"m":"2026-06","ret":-0.1404974013949244,"sol":-0.09227027437865776,"basket":-0.07575668357886589,"expm":-0.13627699145734795,"nav":234086.77027370053},{"m":"2026-07","ret":0.12708698646786387,"sol":-0.003935359624884893,"basket":0.03070762241941316,"expm":0.10421062642955192,"nav":263836.15247978026},{"m":"2026-08","ret":0.11279816959780509,"sol":0.430312710154674,"basket":0.1141562445940314,"expm":0.17888637518076433,"nav":293596.3875532269},{"m":"2026-09","ret":0.03021033181522048,"sol":0.11078460182192185,"basket":0.03314551557369039,"expm":0.04975419706189044,"nav":302466.03184096}],"series":{"date":["04/01","04/02","04/03","04/04","04/05","04/06","04/07","04/08","04/09","04/10","04/11","04/12","04/13","04/14","04/15","04/16","04/17","04/18","04/19","04/20","04/21","04/22","04/23","04/24","04/25","04/26","04/27","04/28","04/29","04/30","05/01","05/02","05/03","05/04","05/05","05/06","05/07","05/08","05/09","05/10","05/11","05/12","05/13","05/14","05/15","05/16","05/17","05/18","05/19","05/20","05/21","05/22","05/23","05/24","05/25","05/26","05/27","05/28","05/29","05/30","05/31","06/01","06/02","06/03","06/04","06/05","06/06","06/07","06/08","06/09","06/10","06/11","06/12","06/13","06/14","06/15","06/16","06/17","06/18","06/19","06/20","06/21","06/22","06/23","06/24","06/25","06/26","06/27","06/28","06/29","06/30","07/01","07/02","07/03","07/04","07/05","07/06","07/07","07/08","07/09","07/10","07/11","07/12","07/13","07/14","07/15","07/16","07/17","07/18","07/19","07/20","07/21","07/22","07/23","07/24","07/25","07/26","07/27","07/28","07/29","07/30","07/31","08/01","08/02","08/03","08/04","08/05","08/06","08/07","08/08","08/09","08/10","08/11","08/12","08/13","08/14","08/15","08/16","08/17","08/18","08/19","08/20","08/21","08/22","08/23","08/24","08/25","08/26","08/27","08/28","08/29","08/30","08/31","09/01","09/02","09/03","09/04","09/05","09/06","09/07","09/08","09/09","09/10","09/11","09/12","09/13","09/14","09/15","09/16","09/17","09/18","09/19","09/20","09/21","09/22","09/23","09/24","09/25","09/26","09/27","09/28","09/29","09/30","09/30"],"nav":[272217.0,273168.208,267600.1601,269842.6561,270334.7965,270705.3933,272925.5354,271196.388,271941.9937,273470.2546,274206.2768,275137.584,268659.9358,272342.2519,278086.7586,276311.7603,279465.2629,285129.7883,282270.3716,281420.0883,280663.2341,281883.7404,288259.205,287459.5185,288026.6006,287557.523,288523.4275,282715.0727,281868.6302,283905.4185,279751.8461,283155.6171,282950.8807,283612.3214,285603.5842,288817.2515,293584.6825,291304.274,294221.9408,299522.8499,302227.9894,305660.7665,301312.7565,295821.4266,302868.9502,293537.4444,286760.9676,286885.8917,278565.0523,279316.0824,283564.2197,285408.3943,285630.6636,276723.3261,280899.4353,284110.3421,279135.7086,278385.506,267392.0031,272292.7552,272351.4398,269856.1454,263535.8202,254356.9742,244329.2819,233836.9485,214067.5107,208472.2133,217750.0098,224796.7772,216436.2378,219865.3241,219704.7387,224218.571,227964.9738,224569.7091,249480.519,242916.6431,243246.5535,228850.8725,232018.0315,239478.7031,243710.0308,242453.3928,229234.884,224261.1083,219568.6246,231770.6289,234154.5414,231898.6702,234086.7703,233155.9204,242275.6325,250311.3167,254328.2194,260386.1778,258148.2561,260718.5879,261926.3457,251362.4927,253393.3943,257007.6757,259863.4795,259420.7036,255070.2313,264373.6587,269925.4144,264942.2594,259081.691,260703.4579,264110.6382,268510.8064,272386.0319,273846.8218,269077.4411,263984.3379,264946.5408,270091.494,270935.7527,269253.8809,266165.7016,263836.1525,257612.6443,255769.5601,254910.1879,255378.6462,257524.8528,258063.5749,261583.2817,261664.5038,265272.418,266752.3401,263245.1501,261672.1428,264971.4145,264250.2391,264281.3317,264726.4944,264812.3276,267240.3315,267926.3695,274739.9428,282470.1214,289465.7652,279147.3439,282773.8889,288357.6671,289094.7112,284421.3895,296489.2062,292652.6927,291849.9488,293596.3876,291520.6662,290345.6829,285259.1282,289377.988,285813.3043,286440.643,287703.5864,284574.1182,285579.24,283926.2947,280968.4401,286652.9955,285176.4536,282185.2993,283831.9691,279376.3322,277006.2921,282002.4355,290474.5793,293001.9288,290776.0138,298403.3367,298500.482,294489.3726,297406.9021,300980.2947,303212.8796,304021.6698,301296.4677,301528.9224,302466.0318],"basket":[273168.208,273168.208,268839.4883,269788.1277,270359.3836,269714.7904,274402.5891,270746.279,275157.7769,276048.9736,276585.9524,277527.7989,274016.4871,275967.2357,281113.0858,279372.8375,281332.7754,285502.6787,282483.3352,281483.508,280963.8766,281724.386,286037.4142,283630.0765,283500.8136,282519.9817,283534.0934,280401.5644,280001.2236,280036.5744,277607.4785,279867.8152,279989.4762,280388.0376,281684.2585,283843.9828,283988.8954,281586.0886,282250.2306,283868.1149,285559.9851,286784.0683,284249.9469,282586.1365,286456.4712,283242.8755,280950.7179,280840.7635,277423.2009,277699.9038,279109.6449,279374.8876,279101.6094,276315.4833,277867.0351,279485.606,277843.2853,276861.4404,272677.1694,274367.5544,275917.6431,275821.0279,272041.6118,267690.0611,264482.3691,260404.9291,253253.592,252449.1814,255638.1155,258449.4727,254823.4455,256524.8475,256298.5158,257703.4522,259101.9724,258102.8951,266259.7861,263124.9403,262898.7219,257578.175,258773.5709,260786.3443,261231.1109,261731.7941,257194.3097,254461.8453,252575.2943,255012.439,256213.8929,254660.4301,255015.0375,253981.0141,257247.9959,259680.5965,261142.5184,263635.0023,262930.1795,264142.8841,264308.4464,260016.1276,261260.9337,262442.2408,263419.9409,263159.3784,261029.2951,264540.543,266162.3101,264675.6377,262076.6852,262968.2225,263936.9627,265584.3109,267564.718,267429.1687,265615.4516,263669.8201,264113.0812,265608.4877,265291.7854,264432.0668,263721.1994,262845.943,260007.9081,258948.8797,259116.5535,259485.3417,260272.9747,260588.9828,261320.4991,260945.3573,262385.2125,262789.3287,261625.7539,261013.6266,261701.9715,261388.9102,261087.5208,261318.1581,261193.0545,262374.0556,263104.9151,268835.4986,278852.1309,285367.7701,286491.9895,288272.5746,290869.3696,291273.7412,288367.9772,294727.0202,292246.9255,291306.9063,292851.4487,290876.71,290304.9217,286936.6418,291594.2365,288636.3189,290917.2045,291273.2506,287916.0158,289353.0152,287629.0167,284555.5697,287468.7468,287134.6712,285193.6345,287882.1843,285329.8845,282636.4271,286542.106,294944.8066,296902.4399,294961.9573,304609.5732,304876.3266,301064.5018,303313.4438,303054.3009,303737.3966,303399.5007,301490.9026,301145.7051,302558.161],"sol":[272217.0,272217.0,258329.2148,263314.0476,265775.6934,260790.8607,269755.3542,258862.5714,271068.232,273201.6583,275129.9476,277201.8328,266678.2969,271273.3691,280360.9449,274124.7755,282966.1867,292053.7625,282740.5359,281448.1718,279581.4237,281653.309,288525.4035,282555.9124,283232.865,282555.9124,283335.4336,275376.1121,273263.1995,273817.0698,268298.8804,271724.6708,271088.7457,271252.8554,272504.192,276668.4762,285489.3737,283622.6256,288033.0744,298884.8297,303705.5528,311664.8742,303890.1762,293017.9072,302084.9693,290145.987,282002.0421,281796.905,274268.3715,274924.8104,279766.0472,282371.289,283520.057,274288.8852,278268.546,281119.9524,276012.0373,275868.4413,264914.1174,269529.7033,269898.9502,267252.6809,260401.1001,250123.7288,240195.0907,228481.7593,211352.8072,204562.7674,213814.453,220481.4104,211557.9443,215147.8445,215722.2285,221466.0687,225589.3255,221814.8019,247005.6441,241159.2353,242410.5719,226286.7918,229302.3079,238205.2603,245097.8686,242184.921,228174.0536,223353.3305,219681.3755,238882.2129,241466.941,239025.8089,244995.3,243702.9359,257754.8308,266637.2695,268750.1821,272155.4589,269119.429,270698.9851,272381.1097,255970.1376,258370.2423,258698.4617,260113.9081,256954.7959,252380.2375,257159.9331,259498.4966,255170.1027,249077.5293,249898.0779,253836.7112,258944.6263,261262.6761,262226.8207,256729.1451,248790.3373,249508.3173,253570.0329,252769.998,249364.7213,245672.2526,244031.1554,238677.0757,235374.3676,235723.1008,236748.7865,238882.2129,239169.4049,238348.8563,238820.6717,247231.295,250492.9757,247682.5967,244831.1903,247374.891,247292.8361,247046.6715,246759.4795,246862.0481,248564.6864,252626.402,265857.7483,284320.0919,297571.9519,303151.6824,310495.5925,314639.3629,321388.3752,313634.1909,350251.1724,345840.7237,345081.7162,349040.8632,337101.881,335112.0506,323706.425,335071.0232,325121.8714,330434.9236,339419.9308,327398.8937,330147.7316,324650.0559,315193.2332,320567.8266,321942.2455,316198.4053,323132.041,316280.4601,309305.797,323501.2879,356959.1573,358518.1996,349574.2198,380898.6628,378970.3736,369862.2841,378826.7776,387442.538,393576.1388,393124.8371,383421.8498,381493.5606,387709.2163],"eth":[272217.0,272217.0,263981.8774,263467.6843,264038.1172,263559.275,277883.5678,267492.8516,282124.0534,283283.398,284832.4044,288526.5599,279837.5013,283857.0446,302083.5804,298250.4321,299365.5882,310583.0303,301781.492,297573.1434,295172.5048,296119.7447,307902.7992,299117.3294,297846.3085,296206.5148,300966.014,291377.1175,292285.793,292768.6524,285529.7787,290825.1634,291693.6676,293978.6128,296760.8791,301712.3973,296480.4833,288640.6465,288812.5798,291708.1293,295473.7897,294364.2576,286775.09,283950.242,292008.6108,283669.8462,278326.2559,279156.1955,268749.4108,269703.8816,272594.6105,272832.4248,271175.7591,263327.8881,267709.7768,271497.9332,267019.6333,265082.5718,254513.4949,259766.298,259194.2583,257117.4005,252163.4721,245630.007,235857.1259,228311.3433,204112.9376,201181.2339,210089.628,217580.7776,210743.6173,213688.9792,212052.3992,213876.981,216691.3844,214216.8304,237427.8249,229717.3398,228173.1539,217927.0545,221255.6509,225465.6063,224133.525,226276.2637,215262.0885,210265.5784,203761.8401,205142.127,208535.801,205267.4616,205316.4706,204216.5796,211207.1944,219239.8535,224380.9803,232158.1498,229866.7772,232929.4393,233707.9597,225074.3375,226807.3287,232260.9884,235882.0321,236595.4749,231685.735,244025.5641,251556.0816,245474.9457,238919.7881,240843.9948,243993.427,248130.2706,252925.924,254511.0846,249417.36,245123.0448,246024.4895,251951.3675,253487.5191,252308.0889,248981.0994,245781.0512,238231.2515,236731.254,234852.0392,234777.3205,236845.3406,237288.0286,243213.2998,242807.5694,243850.4171,244214.3693,239722.4112,238419.2533,242152.7767,240734.7287,240638.3176,241240.8875,241043.2446,244855.5038,245824.4362,265386.2671,296677.3228,305395.3048,307612.7622,311087.5822,318047.6669,317732.7236,313576.5978,322771.0118,318096.6759,314636.3175,319129.0791,316771.8254,314985.0047,305032.9594,314188.8089,307787.1058,309262.197,311706.2207,306739.4375,309589.1916,307202.2112,302229.804,316305.838,313200.5942,307517.1544,311256.3018,302110.8969,298186.9614,309058.1267,325344.3872,332187.975,328952.5761,348493.5178,346841.6727,337770.183,342483.0834,339585.1237,340707.5106,340219.0273,338917.4762,338451.4888,340636.8091],"btc":[272217.0,272217.0,265438.8995,265898.6187,268056.2295,267513.9207,278326.6919,271603.3276,281394.7303,285500.3166,287458.8461,289439.2302,281218.8726,286121.556,298266.6141,292672.9208,296128.4435,306496.0321,301331.566,300122.6906,299187.2472,301212.1868,314776.4775,311398.9395,310015.7995,307495.1228,310073.1244,304825.3467,302357.5892,303081.1571,298411.9549,306474.75,307138.006,307709.4128,313131.1813,320096.0668,317994.9346,311453.5512,312742.6516,314092.3625,317371.0567,318357.9506,315590.5754,310074.2943,319809.9651,312969.3624,309579.9263,308761.2484,302127.3936,303037.174,306261.0574,306209.4824,304293.7164,299101.7203,302305.0185,306960.3064,303247.556,298615.7657,288877.6057,292426.1226,292887.1112,291704.4216,282299.1839,267494.605,262853.107,254323.1005,241347.9393,242753.0336,248010.021,254190.1058,243875.1873,250184.1597,250474.8912,253757.0204,256583.463,255518.3852,268274.751,262899.4299,262117.5912,250288.9027,253804.8617,257507.7053,257679.7546,260551.7235,251128.6885,242630.543,239539.9032,242588.4766,244797.1894,241031.8435,240731.0062,236086.6954,242869.0026,246560.2219,248656.102,252746.7535,251840.0098,256464.6813,257516.6662,249719.8606,253939.2503,257331.7729,258400.4102,258335.1947,252958.2557,261082.2088,263894.1895,261510.6893,256537.2646,259434.7969,260935.4741,265084.4959,270498.1249,268025.3393,264874.6863,261374.5583,261908.7026,263970.6061,262987.7943,260302.5855,260717.8486,256818.9853,248514.0966,247044.1603,247138.1004,248695.9531,251235.8211,252779.9835,254804.8485,254620.8762,255717.1678,256157.173,254411.5894,252227.0461,251447.7962,251577.555,249547.1641,250211.59,250257.0666,254520.8128,257540.8357,270199.0548,286312.3236,305296.6155,304262.9257,304910.9731,313382.4848,315219.0216,309438.817,318466.5518,312345.0614,310526.1726,314141.8963,312439.3251,310504.6167,305437.1025,314578.6158,308892.6501,310840.0282,310370.701,303178.7313,302874.1851,300362.6685,296121.6232,297642.6616,296119.3581,294987.2229,302167.4438,295570.0051,292694.4269,297626.756,314887.5678,317973.0799,315735.9162,336626.6896,338548.8527,331018.7086,333732.2189,328089.8878,329850.3564,330946.5734,326872.3253,325763.4636,329234.8172],"solEth":[272217.0,272217.0,261155.5461,263390.866,264906.9053,262175.0678,273819.461,263177.7115,276596.1427,278242.5281,279981.176,282864.1964,273257.8991,277565.2068,291222.2626,286187.6038,291165.8875,301318.3964,292261.0139,289510.6576,287376.9643,288886.5268,298214.1014,290836.6209,290539.5868,289381.2136,292150.7238,283376.6148,282774.4962,283292.8611,276914.3296,281274.9171,281391.2066,282615.7341,284632.5356,289190.4367,290984.9285,286131.6361,288422.8271,295296.4795,299589.6712,303014.5659,295332.6331,288484.0746,297046.79,286907.9166,280164.149,280476.5503,271508.8912,272314.346,276180.3288,277601.8569,277347.9081,268808.3867,272989.1614,276308.9428,271515.8353,270475.5066,259713.8062,264648.0007,264546.6042,262185.0407,256282.2861,247876.8679,238026.1083,228396.5513,207732.8724,202872.0007,211952.0405,219031.094,211150.7808,214418.4118,213887.3138,217671.5249,221140.3549,218015.8162,242216.7345,235438.2875,235291.8629,222106.9231,225278.9794,231835.4333,234615.6968,234230.5924,221718.071,216809.4545,211721.6078,222012.17,225001.371,222146.6352,225155.8853,223959.7578,234481.0126,242938.5615,246565.5812,252156.8043,249493.1031,251814.2122,253044.5347,240522.2376,242588.7855,245479.7251,247997.9701,246775.1354,242032.9862,250592.7486,255527.2891,250322.5242,243998.6587,245371.0363,248915.0691,253537.4484,257094.3,258368.9527,253073.2525,246956.6911,247766.4034,252760.7002,253128.7586,250836.4051,247326.676,244906.1033,238454.1636,236052.8108,235287.57,235763.0535,237863.7767,238228.7168,240781.078,240814.1206,245540.856,247353.6725,243702.504,241625.2218,244763.8338,244013.7824,243842.4945,244000.1835,243952.6463,246710.0951,249225.4191,265622.0077,290498.7074,301483.6284,305382.2223,310791.5874,316343.5149,319560.5494,313605.3944,336511.0921,331968.6998,329859.0169,334084.9711,326936.8532,325048.5277,314369.6922,324629.9161,316454.4886,319848.5603,325563.0758,317069.1656,319868.4616,315926.1336,308711.5186,318436.8323,317571.4199,311857.7799,317194.1714,309195.6785,303746.3792,316279.7073,341151.7723,345353.0873,339263.398,364696.0903,362906.0232,353816.2335,360654.9305,363513.8308,367141.8247,366671.9322,361169.663,359972.5247,364173.0127],"expMatched":[272217.0,272217.0,267903.3535,270025.2844,270637.2931,270572.6442,272248.4452,271956.391,275256.3789,275440.5345,275930.7569,276336.0038,272346.9978,275942.5744,287932.6851,285977.8754,288647.4335,292349.8705,289031.684,287364.7279,285995.7189,287405.6861,294488.6901,293189.1239,293196.0781,292718.5815,293701.8219,289709.7832,288940.0533,289418.7576,285250.6753,288721.3511,288512.5905,289157.2707,290667.5901,293926.9497,300257.109,297825.995,300682.8243,308587.7026,310792.9356,313132.0344,308523.5855,302503.0738,308918.7342,299812.8082,293161.9069,293289.6196,284877.8342,285649.6716,289978.1886,291860.7642,292088.0585,282979.3484,287249.8695,290533.3696,285446.2747,284679.1146,273437.0785,278448.6272,278508.6412,275956.937,269493.7273,260107.3725,249852.9809,239123.5471,218907.3895,213185.8159,222673.6142,229879.9466,221330.585,224837.443,224673.4547,229289.5979,233120.9598,229649.1314,255123.6144,248411.4964,248749.0981,234027.9973,237267.0332,244896.7182,249224.0049,247939.164,234421.8008,229354.1153,224555.0645,238397.7625,241024.4532,238481.446,240554.3215,239420.547,248608.2199,256676.9912,260619.2207,266650.3199,264181.9699,266635.9059,267694.7195,256721.9804,258620.0657,262132.8991,264869.7723,264242.7023,259635.7182,268930.1387,274402.165,269161.0618,263031.985,264503.4083,267785.2954,272071.8435,275823.7341,277128.342,272127.3012,266802.0738,267600.2647,272622.581,273300.6935,271430.1939,268143.2179,265622.638,259183.3797,257155.5644,256118.1591,256415.5782,258397.3571,258764.8784,262121.2397,262029.8323,265470.1011,266778.5556,263098.5621,261354.0849,264477.1141,263585.1639,263444.1703,263716.0272,263629.7491,266513.3829,267820.1028,276541.1663,288485.2779,292058.0446,293814.9591,298820.2896,304299.905,304311.6789,299788.9392,313906.2923,312175.7475,310933.4998,313138.9089,311270.1762,310361.1289,305269.8464,310023.9558,306551.6479,307571.6002,309275.1985,306258.9646,307688.9507,306256.7011,303415.2804,309903.4476,308657.0048,305769.8267,307904.7826,303422.3072,301199.744,306984.123,316559.0679,319666.0459,317590.6288,328467.1213,327778.5841,323279.175,326985.0628,327209.0824,329579.5506,329394.0587,327529.386,326744.9589,328718.8839],"constMix":[272217.0,272217.0,263967.0692,265651.3016,266785.9465,264756.0613,273575.6626,265616.8308,275752.3934,276983.2732,278279.4737,280422.5999,273289.1955,276516.6421,286673.7406,282940.2652,286708.9298,294184.0538,287558.3325,285551.3071,283978.1067,285100.4944,291973.1249,286582.1123,286373.2289,285522.2519,287554.267,281096.3745,280633.3122,281019.1549,276292.2054,279538.7909,279614.2668,280508.0921,281993.2113,285369.1047,286847.8172,283276.7219,284966.1049,290011.8478,293158.7438,295575.6655,289962.6923,285050.878,291375.914,283968.7144,278997.4462,279238.3389,272534.5494,273142.6102,276028.5076,277068.3232,276845.6485,270478.7527,273635.1052,276139.3443,272559.2063,271756.3928,263662.1801,267422.5893,267334.2393,265554.0663,261100.0747,254730.1008,247152.4018,239704.08,223430.41,219563.843,226918.0338,232599.8264,226352.0921,228970.0374,228529.9732,231521.4621,234268.2702,231806.5656,251053.387,245766.3082,245609.7662,235395.8163,237917.93,243044.5611,245094.3563,244908.9516,235156.38,231251.4789,227133.7584,235042.614,237456.84,235158.5016,237346.7359,236402.1711,244503.1483,251141.5655,254111.198,258642.2705,256608.7483,258462.1809,259382.6674,249979.4552,251574.8628,253988.8456,256004.5914,255151.2892,251465.5427,258306.3471,262198.6455,258179.1452,253287.7875,254369.9457,257111.7351,260675.3378,263448.6347,264434.0542,260379.727,255707.2868,256336.4954,260220.084,260519.3588,258764.3074,256055.4228,254175.1795,249154.0612,247286.5207,246676.617,247042.8607,248690.2127,248976.9605,251021.6009,251045.9972,254717.3757,256101.5762,253253.4346,251655.1374,254115.6299,253519.6978,253388.0458,253520.1931,253480.2378,255646.9612,257572.2919,270329.6528,289354.4947,297557.9667,300436.6889,304410.2509,308494.3088,310819.9028,306509.7309,323124.6006,319847.1569,318267.497,321339.7657,316383.3236,315016.8782,307283.0772,314764.3976,308881.625,311305.9404,315363.0115,309334.6494,311383.744,308559.2929,303347.2667,310618.3196,309952.2504,305777.0173,309662.2171,303786.0783,299816.6559,309042.535,327017.0937,330155.0215,325895.5132,344018.5248,342757.0022,336314.8575,341103.6154,342870.4776,345303.3766,344969.3714,341326.8869,340515.3889,343396.9602],"dd":[0.0,0.0,-0.0204,-0.0122,-0.0104,-0.009,-0.0009,-0.0072,-0.0045,0.0,0.0,0.0,-0.0235,-0.0102,0.0,-0.0064,0.0,0.0,-0.01,-0.013,-0.0157,-0.0114,0.0,-0.0028,-0.0008,-0.0024,0.0,-0.0201,-0.0231,-0.016,-0.0304,-0.0186,-0.0193,-0.017,-0.0101,0.0,0.0,-0.0078,0.0,0.0,0.0,0.0,-0.0142,-0.0322,-0.0091,-0.0397,-0.0618,-0.0614,-0.0886,-0.0862,-0.0723,-0.0663,-0.0655,-0.0947,-0.081,-0.0705,-0.0868,-0.0892,-0.1252,-0.1092,-0.109,-0.1171,-0.1378,-0.1678,-0.2007,-0.235,-0.2997,-0.318,-0.2876,-0.2646,-0.2919,-0.2807,-0.2812,-0.2664,-0.2542,-0.2653,-0.1838,-0.2053,-0.2042,-0.2513,-0.2409,-0.2165,-0.2027,-0.2068,-0.25,-0.2663,-0.2817,-0.2417,-0.2339,-0.2413,-0.2342,-0.2372,-0.2074,-0.1811,-0.1679,-0.1481,-0.1554,-0.147,-0.1431,-0.1776,-0.171,-0.1592,-0.1498,-0.1513,-0.1655,-0.1351,-0.1169,-0.1332,-0.1524,-0.1471,-0.1359,-0.1215,-0.1089,-0.1041,-0.1197,-0.1363,-0.1332,-0.1164,-0.1136,-0.1191,-0.1292,-0.1368,-0.1572,-0.1632,-0.166,-0.1645,-0.1575,-0.1557,-0.1442,-0.1439,-0.1321,-0.1273,-0.1388,-0.1439,-0.1331,-0.1355,-0.1354,-0.1339,-0.1336,-0.1257,-0.1235,-0.1012,-0.0759,-0.053,-0.0867,-0.0749,-0.0566,-0.0542,-0.0695,-0.03,-0.0426,-0.0452,-0.0395,-0.0463,-0.0501,-0.0667,-0.0533,-0.0649,-0.0629,-0.0587,-0.069,-0.0657,-0.0711,-0.0808,-0.0622,-0.067,-0.0768,-0.0714,-0.086,-0.0937,-0.0774,-0.0497,-0.0414,-0.0487,-0.0237,-0.0234,-0.0365,-0.027,-0.0153,-0.008,-0.0054,-0.0143,-0.0135,-0.0105],"crypto_w":[0.4256,0.4256,0.5707,0.4699,0.2876,0.1705,0.0353,0.249,0.095,0.3145,0.1675,0.4307,0.8388,0.8738,0.4798,0.7559,0.368,0.3873,0.5659,0.6268,0.9516,0.6894,0.1949,0.3198,0.4627,0.4618,0.4636,0.7603,0.8996,0.6759,0.847,0.8489,0.8487,0.8632,0.7295,0.6966,0.6844,0.8379,0.8806,0.4923,0.5696,0.5853,0.6698,0.7025,0.8176,0.8756,0.9529,0.9529,0.9786,0.987,0.9905,0.9934,0.9934,0.9932,0.9933,0.9934,0.9933,0.9933,0.993,0.9931,0.9931,0.9931,0.9929,0.9926,0.9923,0.992,0.9913,0.991,0.9914,0.9917,0.9913,0.9915,0.9915,0.9916,0.9918,0.9917,0.9925,0.9923,0.9923,0.9918,0.9919,0.9922,0.9923,0.9923,0.9918,0.9943,0.9941,0.7756,0.7802,0.8842,0.8853,0.8848,0.8892,0.8927,0.8944,0.8969,0.896,0.897,0.8975,0.8932,0.894,0.8955,0.8967,0.8965,0.8947,0.8984,0.9005,0.8987,0.8964,0.897,0.8983,0.9,0.9014,0.902,0.9002,0.8983,0.8987,0.9006,0.9009,0.9003,0.8991,0.8982,0.8958,0.895,0.8947,0.8949,0.8957,0.896,0.8974,0.8974,0.8988,0.8993,0.898,0.8974,0.8987,0.8984,0.8984,0.8986,0.8986,0.6841,0.4357,0.4422,0.4208,0.4984,0.9873,0.837,0.6607,0.8495,0.5864,0.3989,0.6634,0.5124,0.5153,0.5119,0.5099,0.5012,0.5083,0.5021,0.5032,0.5054,0.5,0.5017,0.4988,0.4935,0.5036,0.501,0.4957,0.4986,0.4906,0.4863,0.4954,0.5101,0.5143,0.5106,0.4314,0.5552,0.5492,0.2782,0.5094,0.4749,0.2843,0.6557,0.4901,0.5849],"sol_w":[0.0785,0.0785,0.1492,0.0213,0.0094,0.0399,0.0,0.1347,0.075,0.0809,0.119,0.1911,0.3798,0.4034,0.0772,0.2267,0.1643,0.1293,0.2255,0.1729,0.4398,0.1782,0.1401,0.2064,0.3024,0.3022,0.302,0.4659,0.4989,0.5034,0.6095,0.6099,0.6089,0.6078,0.6789,0.6816,0.5014,0.6078,0.6317,0.246,0.3224,0.44,0.4981,0.4958,0.5592,0.6166,0.648,0.6473,0.6609,0.6638,0.6669,0.6717,0.6739,0.6729,0.6725,0.6718,0.6713,0.6728,0.6726,0.672,0.6728,0.6724,0.6708,0.6676,0.6674,0.6634,0.6703,0.6662,0.6666,0.6659,0.6636,0.6643,0.6666,0.6706,0.6718,0.6706,0.6722,0.674,0.6766,0.6713,0.671,0.6753,0.6828,0.6781,0.6758,0.6779,0.681,0.3163,0.3016,0.3429,0.3482,0.3477,0.3539,0.3544,0.3515,0.3477,0.3468,0.3454,0.3459,0.3388,0.3392,0.3349,0.333,0.3295,0.3292,0.3236,0.3198,0.3204,0.3198,0.3189,0.3197,0.3208,0.3191,0.3185,0.3174,0.3135,0.3133,0.3123,0.3104,0.3081,0.307,0.3077,0.3082,0.3061,0.3076,0.3084,0.3086,0.3083,0.3031,0.3036,0.31,0.3124,0.313,0.3113,0.3106,0.3113,0.311,0.3101,0.3101,0.1771,0.0769,0.1945,0.0002,0.2088,0.4552,0.0432,0.0308,0.3391,0.3419,0.1409,0.3727,0.0798,0.0803,0.0781,0.0779,0.0766,0.0782,0.0768,0.0779,0.0797,0.0777,0.0781,0.0772,0.0757,0.0755,0.0762,0.0757,0.0769,0.0764,0.0754,0.0774,0.083,0.0826,0.0812,0.1778,0.3742,0.3702,0.0974,0.444,0.4097,0.2192,0.4087,0.2924,0.5753],"eth_w":[0.1199,0.1199,0.118,0.1668,0.1013,0.0433,0.0185,0.1052,0.0108,0.2238,0.0403,0.2317,0.4516,0.463,0.3961,0.523,0.1978,0.2531,0.3357,0.4494,0.5079,0.5073,0.0515,0.1103,0.1572,0.1566,0.1586,0.2918,0.3982,0.1702,0.2352,0.2367,0.2376,0.2532,0.0485,0.0129,0.1816,0.2289,0.2477,0.2458,0.2467,0.1449,0.1714,0.2063,0.2581,0.2587,0.3045,0.3053,0.3173,0.3228,0.3232,0.3214,0.3192,0.3199,0.3204,0.3213,0.3216,0.3202,0.32,0.3208,0.32,0.3203,0.3217,0.3247,0.3246,0.3283,0.3206,0.3245,0.3244,0.3254,0.3274,0.3268,0.3245,0.3207,0.3196,0.3207,0.32,0.318,0.3154,0.3202,0.3206,0.3165,0.3092,0.3138,0.3157,0.316,0.3128,0.4589,0.4783,0.5407,0.5358,0.5351,0.5326,0.5351,0.539,0.5447,0.544,0.5458,0.5451,0.547,0.5468,0.5521,0.5545,0.5571,0.5549,0.5639,0.5693,0.566,0.5634,0.5644,0.5644,0.5645,0.5672,0.5678,0.5663,0.5672,0.5673,0.5699,0.5716,0.5724,0.5715,0.5691,0.5649,0.5654,0.5628,0.5616,0.5618,0.5617,0.568,0.5669,0.5616,0.5593,0.5563,0.5566,0.5583,0.5565,0.5562,0.5567,0.5561,0.507,0.3584,0.2515,0.4203,0.2893,0.5318,0.7934,0.6295,0.51,0.2441,0.2576,0.2904,0.4323,0.4359,0.4358,0.435,0.4288,0.4354,0.4318,0.433,0.4345,0.4323,0.4347,0.4339,0.4314,0.4425,0.4404,0.437,0.4398,0.4336,0.4317,0.4395,0.4492,0.4546,0.4537,0.2532,0.1806,0.1783,0.1804,0.0651,0.0648,0.0646,0.2466,0.1973,0.0093],"sol_px":[13270.0,13270.0,12593.0,12836.0,12956.0,12713.0,13150.0,12619.0,13214.0,13318.0,13412.0,13513.0,13000.0,13224.0,13667.0,13363.0,13794.0,14237.0,13783.0,13720.0,13629.0,13730.0,14065.0,13774.0,13807.0,13774.0,13812.0,13424.0,13321.0,13348.0,13079.0,13246.0,13215.0,13223.0,13284.0,13487.0,13917.0,13826.0,14041.0,14570.0,14805.0,15193.0,14814.0,14284.0,14726.0,14144.0,13747.0,13737.0,13370.0,13402.0,13638.0,13765.0,13821.0,13371.0,13565.0,13704.0,13455.0,13448.0,12914.0,13139.0,13157.0,13028.0,12694.0,12193.0,11709.0,11138.0,10303.0,9972.0,10423.0,10748.0,10313.0,10488.0,10516.0,10796.0,10997.0,10813.0,12041.0,11756.0,11817.0,11031.0,11178.0,11612.0,11948.0,11806.0,11123.0,10888.0,10709.0,11645.0,11771.0,11652.0,11943.0,11880.0,12565.0,12998.0,13101.0,13267.0,13119.0,13196.0,13278.0,12478.0,12595.0,12611.0,12680.0,12526.0,12303.0,12536.0,12650.0,12439.0,12142.0,12182.0,12374.0,12623.0,12736.0,12783.0,12515.0,12128.0,12163.0,12361.0,12322.0,12156.0,11976.0,11896.0,11635.0,11474.0,11491.0,11541.0,11645.0,11659.0,11619.0,11642.0,12052.0,12211.0,12074.0,11935.0,12059.0,12055.0,12043.0,12029.0,12034.0,12117.0,12315.0,12960.0,13860.0,14506.0,14778.0,15136.0,15338.0,15667.0,15289.0,17074.0,16859.0,16822.0,17015.0,16433.0,16336.0,15780.0,16334.0,15849.0,16108.0,16546.0,15960.0,16094.0,15826.0,15365.0,15627.0,15694.0,15414.0,15752.0,15418.0,15078.0,15770.0,17401.0,17477.0,17041.0,18568.0,18474.0,18030.0,18467.0,18887.0,19186.0,19164.0,18691.0,18597.0,18900.0],"est":[0.0,0.0,1.0,0.0,1.0,1.0,0.0,1.0,1.0,1.0,0.0,1.0,0.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,0.0,1.0,1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0]},"coverage":{"days":["obs","mtm","mtm","mtm","mtm","obs","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","obs","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","mtm","obs","obs","obs","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","mtm","obs","mtm","obs","obs","obs","obs","obs","obs","obs","obs","obs","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","interp","mtm","obs","mtm","obs","obs","obs","obs","obs","obs","obs"],"summary":{"obs":62,"mtm":47,"interp":73},"hours_obs":1519,"hours_total":4368},"nav6h":{"t":["04/02 00時","04/02 06時","04/02 12時","04/02 18時","04/03 00時","04/03 06時","04/03 12時","04/03 18時","04/04 00時","04/04 06時","04/04 12時","04/04 18時","04/05 00時","04/05 06時","04/05 12時","04/05 18時","04/06 00時","04/06 06時","04/06 12時","04/06 18時","04/07 00時","04/07 06時","04/07 12時","04/07 18時","04/08 00時","04/08 06時","04/08 12時","04/08 18時","04/09 00時","04/09 06時","04/09 12時","04/09 18時","04/10 00時","04/10 06時","04/10 12時","04/10 18時","04/11 00時","04/11 06時","04/11 12時","04/11 18時","04/12 00時","04/12 06時","04/12 12時","04/12 18時","04/13 00時","04/13 06時","04/13 12時","04/13 18時","04/14 00時","04/14 06時","04/14 12時","04/14 18時","04/15 00時","04/15 06時","04/15 12時","04/15 18時","04/16 00時","04/16 06時","04/16 12時","04/16 18時","04/17 00時","04/17 06時","04/17 12時","04/17 18時","04/18 00時","04/18 06時","04/18 12時","04/18 18時","04/19 00時","04/19 06時","04/19 12時","04/19 18時","04/20 00時","04/20 06時","04/20 12時","04/20 18時","04/21 00時","04/21 06時","04/21 12時","04/21 18時","04/22 00時","04/22 06時","04/22 12時","04/22 18時","04/23 00時","04/23 06時","04/23 12時","04/23 18時","04/24 00時","04/24 06時","04/24 12時","04/24 18時","04/25 00時","04/25 06時","04/25 12時","04/25 18時","04/26 00時","04/26 06時","04/26 12時","04/26 18時","04/27 00時","04/27 06時","04/27 12時","04/27 18時","04/28 00時","04/28 06時","04/28 12時","04/28 18時","04/29 00時","04/29 06時","04/29 12時","04/29 18時","04/30 00時","04/30 06時","04/30 12時","04/30 18時","05/01 00時","05/01 06時","05/01 12時","05/01 18時","05/02 00時","05/02 06時","05/02 12時","05/02 18時","05/03 00時","05/03 06時","05/03 12時","05/03 18時","05/04 00時","05/04 06時","05/04 12時","05/04 18時","05/05 00時","05/05 06時","05/05 12時","05/05 18時","05/06 00時","05/06 06時","05/06 12時","05/06 18時","05/07 00時","05/07 06時","05/07 12時","05/07 18時","05/08 00時","05/08 06時","05/08 12時","05/08 18時","05/09 00時","05/09 06時","05/09 12時","05/09 18時","05/10 00時","05/10 06時","05/10 12時","05/10 18時","05/11 00時","05/11 06時","05/11 12時","05/11 18時","05/12 00時","05/12 06時","05/12 12時","05/12 18時","05/13 00時","05/13 06時","05/13 12時","05/13 18時","05/14 00時","05/14 06時","05/14 12時","05/14 18時","05/15 00時","05/15 06時","05/15 12時","05/15 18時","05/16 00時","05/16 06時","05/16 12時","05/16 18時","05/17 00時","05/17 06時","05/17 12時","05/17 18時","05/18 00時","05/18 06時","05/18 12時","05/18 18時","05/19 00時","05/19 06時","05/19 12時","05/19 18時","05/20 00時","05/20 06時","05/20 12時","05/20 18時","05/21 00時","05/21 06時","05/21 12時","05/21 18時","05/22 00時","05/22 06時","05/22 12時","05/22 18時","05/23 00時","05/23 06時","05/23 12時","05/23 18時","05/24 00時","05/24 06時","05/24 12時","05/24 18時","05/25 00時","05/25 06時","05/25 12時","05/25 18時","05/26 00時","05/26 06時","05/26 12時","05/26 18時","05/27 00時","05/27 06時","05/27 12時","05/27 18時","05/28 00時","05/28 06時","05/28 12時","05/28 18時","05/29 00時","05/29 06時","05/29 12時","05/29 18時","05/30 00時","05/30 06時","05/30 12時","05/30 18時","05/31 00時","05/31 06時","05/31 12時","05/31 18時","06/01 00時","06/01 06時","06/01 12時","06/01 18時","06/02 00時","06/02 06時","06/02 12時","06/02 18時","06/03 00時","06/03 06時","06/03 12時","06/03 18時","06/04 00時","06/04 06時","06/04 12時","06/04 18時","06/05 00時","06/05 06時","06/05 12時","06/05 18時","06/06 00時","06/06 06時","06/06 12時","06/06 18時","06/07 00時","06/07 06時","06/07 12時","06/07 18時","06/08 00時","06/08 06時","06/08 12時","06/08 18時","06/09 00時","06/09 06時","06/09 12時","06/09 18時","06/10 00時","06/10 06時","06/10 12時","06/10 18時","06/11 00時","06/11 06時","06/11 12時","06/11 18時","06/12 00時","06/12 06時","06/12 12時","06/12 18時","06/13 00時","06/13 06時","06/13 12時","06/13 18時","06/14 00時","06/14 06時","06/14 12時","06/14 18時","06/15 00時","06/15 06時","06/15 12時","06/15 18時","06/16 00時","06/16 06時","06/16 12時","06/16 18時","06/17 00時","06/17 06時","06/17 12時","06/17 18時","06/18 00時","06/18 06時","06/18 12時","06/18 18時","06/19 00時","06/19 06時","06/19 12時","06/19 18時","06/20 00時","06/20 06時","06/20 12時","06/20 18時","06/21 00時","06/21 06時","06/21 12時","06/21 18時","06/22 00時","06/22 06時","06/22 12時","06/22 18時","06/23 00時","06/23 06時","06/23 12時","06/23 18時","06/24 00時","06/24 06時","06/24 12時","06/24 18時","06/25 00時","06/25 06時","06/25 12時","06/25 18時","06/26 00時","06/26 06時","06/26 12時","06/26 18時","06/27 00時","06/27 06時","06/27 12時","06/27 18時","06/28 00時","06/28 06時","06/28 12時","06/28 18時","06/29 00時","06/29 06時","06/29 12時","06/29 18時","06/30 00時","06/30 06時","06/30 12時","06/30 18時","07/01 00時","07/01 06時","07/01 12時","07/01 18時","07/02 00時","07/02 06時","07/02 12時","07/02 18時","07/03 00時","07/03 06時","07/03 12時","07/03 18時","07/04 00時","07/04 06時","07/04 12時","07/04 18時","07/05 00時","07/05 06時","07/05 12時","07/05 18時","07/06 00時","07/06 06時","07/06 12時","07/06 18時","07/07 00時","07/07 06時","07/07 12時","07/07 18時","07/08 00時","07/08 06時","07/08 12時","07/08 18時","07/09 00時","07/09 06時","07/09 12時","07/09 18時","07/10 00時","07/10 06時","07/10 12時","07/10 18時","07/11 00時","07/11 06時","07/11 12時","07/11 18時","07/12 00時","07/12 06時","07/12 12時","07/12 18時","07/13 00時","07/13 06時","07/13 12時","07/13 18時","07/14 00時","07/14 06時","07/14 12時","07/14 18時","07/15 00時","07/15 06時","07/15 12時","07/15 18時","07/16 00時","07/16 06時","07/16 12時","07/16 18時","07/17 00時","07/17 06時","07/17 12時","07/17 18時","07/18 00時","07/18 06時","07/18 12時","07/18 18時","07/19 00時","07/19 06時","07/19 12時","07/19 18時","07/20 00時","07/20 06時","07/20 12時","07/20 18時","07/21 00時","07/21 06時","07/21 12時","07/21 18時","07/22 00時","07/22 06時","07/22 12時","07/22 18時","07/23 00時","07/23 06時","07/23 12時","07/23 18時","07/24 00時","07/24 06時","07/24 12時","07/24 18時","07/25 00時","07/25 06時","07/25 12時","07/25 18時","07/26 00時","07/26 06時","07/26 12時","07/26 18時","07/27 00時","07/27 06時","07/27 12時","07/27 18時","07/28 00時","07/28 06時","07/28 12時","07/28 18時","07/29 00時","07/29 06時","07/29 12時","07/29 18時","07/30 00時","07/30 06時","07/30 12時","07/30 18時","07/31 00時","07/31 06時","07/31 12時","07/31 18時","08/01 00時","08/01 06時","08/01 12時","08/01 18時","08/02 00時","08/02 06時","08/02 12時","08/02 18時","08/03 00時","08/03 06時","08/03 12時","08/03 18時","08/04 00時","08/04 06時","08/04 12時","08/04 18時","08/05 00時","08/05 06時","08/05 12時","08/05 18時","08/06 00時","08/06 06時","08/06 12時","08/06 18時","08/07 00時","08/07 06時","08/07 12時","08/07 18時","08/08 00時","08/08 06時","08/08 12時","08/08 18時","08/09 00時","08/09 06時","08/09 12時","08/09 18時","08/10 00時","08/10 06時","08/10 12時","08/10 18時","08/11 00時","08/11 06時","08/11 12時","08/11 18時","08/12 00時","08/12 06時","08/12 12時","08/12 18時","08/13 00時","08/13 06時","08/13 12時","08/13 18時","08/14 00時","08/14 06時","08/14 12時","08/14 18時","08/15 00時","08/15 06時","08/15 12時","08/15 18時","08/16 00時","08/16 06時","08/16 12時","08/16 18時","08/17 00時","08/17 06時","08/17 12時","08/17 18時","08/18 00時","08/18 06時","08/18 12時","08/18 18時","08/19 00時","08/19 06時","08/19 12時","08/19 18時","08/20 00時","08/20 06時","08/20 12時","08/20 18時","08/21 00時","08/21 06時","08/21 12時","08/21 18時","08/22 00時","08/22 06時","08/22 12時","08/22 18時","08/23 00時","08/23 06時","08/23 12時","08/23 18時","08/24 00時","08/24 06時","08/24 12時","08/24 18時","08/25 00時","08/25 06時","08/25 12時","08/25 18時","08/26 00時","08/26 06時","08/26 12時","08/26 18時","08/27 00時","08/27 06時","08/27 12時","08/27 18時","08/28 00時","08/28 06時","08/28 12時","08/28 18時","08/29 00時","08/29 06時","08/29 12時","08/29 18時","08/30 00時","08/30 06時","08/30 12時","08/30 18時","08/31 00時","08/31 06時","08/31 12時","08/31 18時","09/01 00時","09/01 06時","09/01 12時","09/01 18時","09/02 00時","09/02 06時","09/02 12時","09/02 18時","09/03 00時","09/03 06時","09/03 12時","09/03 18時","09/04 00時","09/04 06時","09/04 12時","09/04 18時","09/05 00時","09/05 06時","09/05 12時","09/05 18時","09/06 00時","09/06 06時","09/06 12時","09/06 18時","09/07 00時","09/07 06時","09/07 12時","09/07 18時","09/08 00時","09/08 06時","09/08 12時","09/08 18時","09/09 00時","09/09 06時","09/09 12時","09/09 18時","09/10 00時","09/10 06時","09/10 12時","09/10 18時","09/11 00時","09/11 06時","09/11 12時","09/11 18時","09/12 00時","09/12 06時","09/12 12時","09/12 18時","09/13 00時","09/13 06時","09/13 12時","09/13 18時","09/14 00時","09/14 06時","09/14 12時","09/14 18時","09/15 00時","09/15 06時","09/15 12時","09/15 18時","09/16 00時","09/16 06時","09/16 12時","09/16 18時","09/17 00時","09/17 06時","09/17 12時","09/17 18時","09/18 00時","09/18 06時","09/18 12時","09/18 18時","09/19 00時","09/19 06時","09/19 12時","09/19 18時","09/20 00時","09/20 06時","09/20 12時","09/20 18時","09/21 00時","09/21 06時","09/21 12時","09/21 18時","09/22 00時","09/22 06時","09/22 12時","09/22 18時","09/23 00時","09/23 06時","09/23 12時","09/23 18時","09/24 00時","09/24 06時","09/24 12時","09/24 18時","09/25 00時","09/25 06時","09/25 12時","09/25 18時","09/26 00時","09/26 06時","09/26 12時","09/26 18時","09/27 00時","09/27 06時","09/27 12時","09/27 18時","09/28 00時","09/28 06時","09/28 12時","09/28 18時","09/29 00時","09/29 06時","09/29 12時","09/29 18時","09/30 00時","09/30 06時","09/30 12時","09/30 18時"],"v":[273168,272279,269248,268560,267600,269079,269299,269471,269843,270137,270007,270090,270335,270803,270687,270601,270705,270862,272097,272621,272926,272225,271985,272484,271196,273357,272231,272281,271942,272099,271750,272305,273470,273858,273249,273722,274206,275067,274595,274856,275138,276835,273079,271421,268660,271892,270504,270101,272342,274716,280037,279381,278087,275554,275745,274951,276312,278607,278792,278592,279465,281754,281865,283222,285130,284842,284013,283045,282270,281586,280436,278191,281420,277194,277819,279891,280663,281209,280439,282430,281884,281733,286724,288064,288259,288075,287021,286880,287460,287509,287248,287050,288027,287893,287978,288069,287558,287340,287329,288253,288523,289167,290622,286457,282715,283706,283051,282447,281869,283135,285690,288365,283905,283368,283818,282824,279752,278211,282113,281344,283156,281758,282330,282761,282951,284426,281915,283179,283612,283074,286171,286530,285604,285551,286454,286187,288817,291597,292528,294544,293585,294746,290983,294461,291304,291123,291402,291807,294222,299411,300044,299681,299523,300572,300486,301447,302228,302748,303186,303818,305661,306880,305415,304640,301313,302973,305154,306071,295821,297084,295232,297116,302869,302228,300853,298542,293537,293526,294053,285617,286761,287041,286856,287932,286886,288024,281063,279912,278565,282866,281988,280801,279316,280011,278826,281650,283564,283741,286483,285048,285408,287044,286472,286728,285631,280261,278554,270914,276723,284056,283024,284785,280899,276579,279857,283037,284110,281596,278387,279404,279136,276535,276299,277394,278386,271940,266777,267972,267392,271540,269279,271593,272293,269734,272175,271221,272351,273161,273763,272095,269856,270840,271729,267446,263536,267024,268121,262806,254357,252311,242649,249641,244329,243925,239213,231226,233837,229310,225990,222919,214068,216728,210022,209891,208472,207919,213708,218021,217750,216972,222927,222056,224797,226596,221723,221919,216436,218448,216787,214543,219865,211639,219684,220092,219705,223293,224005,224540,224219,222632,223467,224807,227965,229629,228847,227549,224570,232718,235317,235086,249481,246676,243558,246598,242917,244980,244092,240302,243247,237388,237918,238555,228851,232718,230944,229056,232018,231107,233682,238242,239479,240111,242931,243640,243710,240939,242787,244334,242453,241075,239286,228672,229235,230458,231096,230808,224261,226046,225063,229015,219569,222383,223352,226559,231771,231237,231938,231696,234155,230222,230165,231200,231899,228886,232959,232740,234087,239104,235614,235197,233156,233986,238446,237406,242276,244477,245511,244907,250311,250772,251520,253419,254328,258467,257893,257305,260386,259942,256135,255357,258148,259614,258726,257111,260719,264106,258782,259733,261926,259187,255387,252676,251362,253107,252548,255321,253393,254634,256780,258951,257008,257625,257767,257750,259863,260388,258055,257199,259421,258468,255085,256281,255070,252568,254936,254956,264374,264480,265242,265526,269925,268570,267823,264175,264942,264016,261276,259320,259082,260127,261166,260566,260703,262510,263475,263435,264111,263001,265350,264031,268511,268581,271102,272995,272386,272061,272260,271455,273847,273262,271389,272088,269077,267664,267412,267723,263984,263348,264050,263912,264947,265509,266953,267137,270091,271053,273743,275068,270936,272562,265114,264939,269254,269632,265767,269227,266166,265978,267825,268564,263836,264104,264378,260872,257613,254929,255869,255867,255770,252660,256594,256376,254910,258472,253637,253831,255379,256053,256772,256342,257525,258216,257084,258119,258064,261143,259721,260545,261583,260842,259796,262104,261665,261674,263285,263352,265272,264924,264238,265271,266752,266671,265932,266784,263245,264061,264166,264363,261672,264999,265390,266771,264971,263810,265291,265403,264250,265690,264684,263438,264281,263801,264389,264010,264726,264910,264712,264262,264812,262985,265858,265387,267240,266813,266231,266546,267926,267720,267773,267999,274740,281233,276426,279445,282470,282091,284099,289493,289466,295200,295848,280885,279147,279670,281078,280010,282774,285764,282089,285618,288358,288532,292781,290082,289095,285546,285970,284304,284421,287995,290080,293471,296489,296985,294111,293497,292653,290499,291276,291065,291850,292103,292350,291971,293596,293191,289225,290613,291521,292120,291809,290684,290346,288101,288257,285377,285259,285182,285120,283172,289378,289496,289323,290325,285813,286018,286022,286388,286441,287917,289432,288920,287704,288877,288116,285857,284574,285607,284278,284986,285579,284110,284184,284405,283926,282278,282758,282449,280968,282095,281352,282245,286653,284443,284180,284977,285176,284407,284192,281967,282185,283181,283664,284808,283832,285847,283465,282193,279376,277120,278009,277810,277006,278817,280527,280354,282002,280881,284251,286905,290475,292981,292326,293179,293002,292044,289732,289139,290776,291862,294052,296773,298403,299503,297536,298210,298500,299279,300969,298786,294489,295665,295432,294661,297407,297489,297173,299135,300980,302092,301891,301130,303213,302443,301939,305514,304022,304664,302012,298768,301296,300268,300071,303693,301529,302058,301802,302647],"est":[false,true,false,true,true,true,false,false,false,true,true,true,true,true,true,true,true,true,true,true,false,true,false,false,true,true,false,false,true,true,false,false,true,true,false,true,false,true,false,true,true,true,false,true,false,true,false,true,true,true,true,true,true,true,false,true,true,true,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,true,true,true,false,true,true,true,true,false,true,true,false,false,false,true,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,false,false,false,false,false,true,true,true,true,true,true,false,false,false,false,false,false,false,false,false,false,false,false,false,false,true,false,false,false,false,true,false,false,false,false,false,false]},"trades":{"n":2078,"buys":1041,"sells":1037,"notional":10970439.169999998,"fee_est":10970.439169999998,"by_month":{"2026-03":{"both":35,"gcp":16,"local":14},"2026-04":{"both":0,"gcp":316,"local":0},"2026-05":{"both":0,"gcp":248,"local":0},"2026-06":{"both":0,"gcp":68,"local":16},"2026-07":{"both":0,"gcp":74,"local":0},"2026-08":{"both":0,"gcp":274,"local":628},"2026-09":{"both":0,"gcp":35,"local":354}},"sell_profit_pos":0.9990356798457087,"median_notional":3842.855,"turnover_x":20.299166022071695},"realized_sources":{"claimed":49161,"local_db":77939,"gcp_db":144768},"regime":{"SOLJPY":{"table":{"BEAR":{"share":0.1693751430533303,"hours":740,"f1":9.122119882616743e-05,"f6":0.0006778035637896364,"f24":0.002561051692655871,"f24_med":0.002563338301043161,"down24":0.46216216216216216,"contemp":-1.4627828851596831},"BULL":{"share":0.17601281757839324,"hours":769,"f1":0.0001467165608496289,"f6":0.0017429319493075359,"f24":0.005619691234476546,"f24_med":0.0024981328438256067,"down24":0.45253576072821844,"contemp":1.829248010012639},"RANGE":{"share":0.6546120393682765,"hours":2860,"f1":8.922594441705683e-05,"f6":0.00023286053733862687,"f24":0.0016355915364857703,"f24_med":0.001117222413200336,"down24":0.4723776223776224,"contemp":0.06890308204370554}},"flips":604,"flips_per_day":3.31792172121767,"median_episode_h":{"BULL":3.0,"BEAR":4.0,"RANGE":6.0},"ddwin":{"BULL":{"hours":42,"logret":0.032155104387678},"BEAR":{"hours":199,"logret":-0.5211367935835627},"RANGE":{"hours":399,"logret":0.07380324545405079}},"total_logret":0.3571285615468736,"next_total":{"BULL":0.09274509333292233,"BEAR":0.05039423703691982,"RANGE":0.21398923117702623},"next_dd":{"BULL":-0.035850592340926454,"BEAR":-0.07116354066767328,"RANGE":-0.30512879624217065},"t_bear_vs_other":-0.06132874560789154},"ETHJPY":{"table":{"BEAR":{"share":0.14007782101167315,"hours":612,"f1":0.00020450561529959983,"f6":0.0005684770385604507,"f24":0.0004919617956132925,"f24_med":0.002530924192167827,"down24":0.47058823529411764,"contemp":-1.1776155731831852},"BULL":{"share":0.15083543144884412,"hours":659,"f1":0.00031836280149529953,"f6":0.00034775462581053906,"f24":0.0016711440011232645,"f24_med":-0.0023155669013176228,"down24":0.5371775417298937,"contemp":1.4768443172924277},"RANGE":{"share":0.7090867475394828,"hours":3098,"f1":-1.4070092377568364e-05,"f6":0.0003652648759564177,"f24":0.001879613224310792,"f24_med":0.0013486140515245326,"down24":0.4615881213686249,"contemp":-0.00784529745381446}},"flips":505,"flips_per_day":2.77409018081941,"median_episode_h":{"BULL":4.0,"BEAR":4.0,"RANGE":8.0},"ddwin":{"BULL":{"hours":30,"logret":0.024088876219567477},"BEAR":{"hours":169,"logret":-0.46821911311464853},"RANGE":{"hours":441,"logret":0.04961122689280559}},"total_logret":0.22873429549468705,"next_total":{"BULL":0.19229527752249428,"BEAR":0.11205336914552876,"RANGE":-0.07561435117333534},"next_dd":{"BULL":-0.04054214330851212,"BEAR":-0.09154422741781232,"RANGE":-0.2543800402484373},"t_bear_vs_other":0.5475702831872573}},"filters":{"SOLJPY":{"F1: 現行（1時間足）":{"time_share":0.16941391941391942,"crash_avoided":0.17266713952133209,"frozen_next":0.05039423703691982,"active_next":0.30673432450994864,"switches_per_day":1.598901098901099},"F2: 4時間足で同じ判定":{"time_share":0.22802197802197802,"crash_avoided":0.49690991650437516,"frozen_next":0.09264955645221844,"active_next":0.26447900509464994,"switches_per_day":0.5},"F3: 20日EMAを下回る間":{"time_share":0.44894688644688646,"crash_avoided":0.815000404524752,"frozen_next":0.14136571430659042,"active_next":0.21576284724027794,"switches_per_day":0.7472527472527473},"F4: 7日高値から-8%以下":{"time_share":0.1320970695970696,"crash_avoided":0.5950094715024157,"frozen_next":0.0018572725367798082,"active_next":0.35527128901008864,"switches_per_day":0.3626373626373626},"F3+F4 併用":{"time_share":0.46130952380952384,"crash_avoided":0.8075319197371169,"frozen_next":0.17452801048445576,"active_next":0.18260055106241263,"switches_per_day":0.7802197802197802}},"ETHJPY":{"F1: 現行（1時間足）":{"time_share":0.1401098901098901,"crash_avoided":0.23687499047308058,"frozen_next":0.11205336914552876,"active_next":0.11668092634915897,"switches_per_day":1.445054945054945},"F2: 4時間足で同じ判定":{"time_share":0.1978021978021978,"crash_avoided":0.5148333714936042,"frozen_next":0.016850494670143046,"active_next":0.2118838008245446,"switches_per_day":0.5},"F3: 20日EMAを下回る間":{"time_share":0.40865384615384615,"crash_avoided":0.9293899361745954,"frozen_next":-0.06636750226125424,"active_next":0.29510179775594186,"switches_per_day":0.554945054945055},"F4: 7日高値から-8%以下":{"time_share":0.10050366300366301,"crash_avoided":0.4852975871283219,"frozen_next":-0.06920395694853576,"active_next":0.29793825244322336,"switches_per_day":0.17032967032967034},"F3+F4 併用":{"time_share":0.40865384615384615,"crash_avoided":0.9293899361745954,"frozen_next":-0.06636750226125424,"active_next":0.29510179775594186,"switches_per_day":0.554945054945055}}},"sim":{"V5":{"total":0.38730575482406104,"vol":0.46936806857054486,"sharpe":1.5768380500683834,"mdd":-0.34332189683227765,"ann":0.9283720690826689,"realized":106885.30921935162,"fees":11073.817211850183,"trades":1384},"V6":{"total":0.2541595045383953,"vol":0.3412556433148298,"sharpe":1.4424357747888947,"mdd":-0.2616416855778564,"ann":0.5750382848677007,"realized":70133.01221935918,"fees":8789.735254719782,"trades":1170},"V6F":{"total":0.23745386071879127,"vol":0.33058925877366946,"sharpe":1.3966126176935525,"mdd":-0.25520963154927523,"ann":0.5332357039478937,"realized":65601.51305768616,"fees":8192.851003732583,"trades":1095},"BH":{"total":0.34573104120835074,"vol":0.515124014090124,"sharpe":1.348509707178109,"mdd":-0.35258228385925483,"ann":0.8141965002735307}},"frontier":[{"total":0.3519604855254288,"vol":0.4589286287916865,"sharpe":1.4910033539128584,"mdd":-0.33762470693422186,"ann":0.8310817029967987,"mode":"V6","floor":0.0,"realized":97076.20024589445,"fees":10439.801373203125,"trades":1331},{"total":0.2541595045383953,"vol":0.3412556433148298,"sharpe":1.4424357747888947,"mdd":-0.2616416855778564,"ann":0.5750382848677007,"mode":"V6","floor":0.25,"realized":70133.01221935918,"fees":8789.735254719782,"trades":1170},{"total":0.22025250255367523,"vol":0.2698519437259873,"sharpe":1.5544228724152376,"mdd":-0.21291843540074396,"ann":0.49078190756612106,"mode":"V6","floor":0.4,"realized":60918.829867489476,"fees":8108.837765514194,"trades":1105},{"total":0.1942562692844061,"vol":0.2247610319533144,"sharpe":1.6356998944919992,"mdd":-0.17886314992242358,"ann":0.42775627826376716,"mode":"V6","floor":0.5,"realized":53845.12041668089,"fees":7280.518185573712,"trades":1008},{"total":0.1499706417186244,"vol":0.1799031954724245,"sharpe":1.5844469784033999,"mdd":-0.1447557948516205,"ann":0.3235331386876368,"mode":"V6","floor":0.6,"realized":41681.16807446407,"fees":6006.0309290203695,"trades":856},{"total":0.09735883402469336,"vol":0.11571981059599762,"sharpe":1.5989077212530651,"mdd":-0.09105222550150549,"ann":0.204862683977582,"mode":"V6","floor":0.75,"realized":27242.630980306756,"fees":4405.125436776515,"trades":660},{"total":0.3248691396208756,"vol":0.45466018939855257,"sharpe":1.4110501531211037,"mdd":-0.33761954111068937,"ann":0.7582205627773895,"mode":"V6F","floor":0.0,"realized":89718.80382814218,"fees":9684.390684463895,"trades":1241},{"total":0.23745386071879127,"vol":0.33058925877366946,"sharpe":1.3966126176935525,"mdd":-0.25520963154927523,"ann":0.5332357039478937,"mode":"V6F","floor":0.25,"realized":65601.51305768616,"fees":8192.851003732583,"trades":1095},{"total":0.1960515715132296,"vol":0.25864995352194436,"sharpe":1.4542163599723164,"mdd":-0.20580132953565344,"ann":0.43206494879777124,"mode":"V6F","floor":0.4,"realized":54326.86511344862,"fees":7035.207689484612,"trades":964},{"total":0.1670570287825277,"vol":0.21380871744265664,"sharpe":1.4911105837011227,"mdd":-0.17156001655655384,"ann":0.36327542559837434,"mode":"V6F","floor":0.5,"realized":46436.24485292421,"fees":6293.087496917424,"trades":882},{"total":0.13405811600179263,"vol":0.1706974483890774,"sharpe":1.4960541532333465,"mdd":-0.13729781098979943,"ann":0.28705144541026684,"mode":"V6F","floor":0.6,"realized":37350.37233582995,"fees":5359.624445601816,"trades":770},{"total":0.07944867609208739,"vol":0.10039356113714967,"sharpe":1.496038130389149,"mdd":-0.0861315661958082,"ann":0.16573992906490487,"mode":"V6F","floor":0.75,"realized":22356.710861431853,"fees":3769.1354878204675,"trades":569}],"capital":[{"mu":0.1,"capital":36000000.0,"dd30":11448000.0,"dd18":6444000.0},{"mu":0.15,"capital":24000000.0,"dd30":7632000.0,"dd18":4296000.0},{"mu":0.21,"capital":17142857.14285714,"dd30":5451428.571428571,"dd18":3068571.428571428},{"mu":0.235,"capital":15319148.936170213,"dd30":4871489.361702127,"dd18":2742127.659574468}],"simSeries":{"date":["04/02","04/03","04/04","04/05","04/06","04/07","04/08","04/09","04/10","04/11","04/12","04/13","04/14","04/15","04/16","04/17","04/18","04/19","04/20","04/21","04/22","04/23","04/24","04/25","04/26","04/27","04/28","04/29","04/30","05/01","05/02","05/03","05/04","05/05","05/06","05/07","05/08","05/09","05/10","05/11","05/12","05/13","05/14","05/15","05/16","05/17","05/18","05/19","05/20","05/21","05/22","05/23","05/24","05/25","05/26","05/27","05/28","05/29","05/30","05/31","06/01","06/02","06/03","06/04","06/05","06/06","06/07","06/08","06/09","06/10","06/11","06/12","06/13","06/14","06/15","06/16","06/17","06/18","06/19","06/20","06/21","06/22","06/23","06/24","06/25","06/26","06/27","06/28","06/29","06/30","07/01","07/02","07/03","07/04","07/05","07/06","07/07","07/08","07/09","07/10","07/11","07/12","07/13","07/14","07/15","07/16","07/17","07/18","07/19","07/20","07/21","07/22","07/23","07/24","07/25","07/26","07/27","07/28","07/29","07/30","07/31","08/01","08/02","08/03","08/04","08/05","08/06","08/07","08/08","08/09","08/10","08/11","08/12","08/13","08/14","08/15","08/16","08/17","08/18","08/19","08/20","08/21","08/22","08/23","08/24","08/25","08/26","08/27","08/28","08/29","08/30","08/31","09/01","09/02","09/03","09/04","09/05","09/06","09/07","09/08","09/09","09/10","09/11","09/12","09/13","09/14","09/15","09/16","09/17","09/18","09/19","09/20","09/21","09/22","09/23","09/24","09/25","09/26","09/27","09/28","09/29","09/30"],"V5":[272217,269781,272535,273915,272988,275675,273197,282157,284688,287294,288724,279507,283835,297835,294900,299110,306273,301484,300226,298031,299576,308943,305165,304875,303702,306505,298139,297526,298053,291570,296142,296283,297588,299833,304498,306334,301188,303522,310189,312205,314312,310531,302790,311769,301163,294112,294451,285007,285856,289894,291362,291066,282116,286509,290003,284978,283867,272574,277761,277644,275171,268994,260210,249870,239805,218039,212976,222505,229945,221694,225117,224537,228469,232096,228830,254215,247079,246897,233117,236450,243284,246117,245765,232661,227506,222136,232753,235899,232894,235991,234737,245709,254578,258418,264333,261544,263996,265278,252214,254376,257464,260131,258888,253906,262971,268205,262723,256079,257531,261244,266086,269846,271190,265635,259252,260104,265366,265777,263394,259713,257156,250360,247858,247031,247519,249724,250108,252858,252884,257769,259642,255791,253627,256934,256133,255954,256129,256076,258993,261601,278880,305128,316887,323013,329349,331794,331206,325277,343986,345112,345837,350238,345401,343801,333561,343922,336541,339938,346310,340322,342968,338985,331667,342117,341146,335116,340731,334196,328441,341708,361068,360178,356689,369937,369796,365236,371557,371050,374538,374274,373379,372224],"V6":[272217,271277,272259,272346,272273,273771,271838,275238,276901,278948,280030,273017,276218,286840,284747,287558,291790,288308,287408,285918,287036,293540,290818,290602,289735,291813,285893,285455,285843,281064,284334,284427,285352,286867,290324,291655,287998,289694,294391,295815,297403,294971,289643,295877,288373,283385,283624,276944,277545,280402,281441,281232,274900,278008,280480,276925,276140,268151,271819,271737,269988,265618,259402,252088,244662,228163,224324,231548,237188,230933,233528,233089,236070,238821,236344,255589,250180,250042,239594,242121,247303,249453,249185,239250,235342,231272,239325,241710,239432,241782,240831,249150,255875,258784,263267,261153,263012,263984,254078,255717,258057,260078,259134,255358,262228,266194,262039,257003,258103,260918,264589,267438,268458,264246,259406,260052,264041,264352,262544,259754,257816,252664,250767,250141,250511,252182,252474,254557,254576,258282,259702,256784,255142,257649,257042,256907,257039,256999,259210,261188,274285,294197,300370,302045,306350,308562,308273,304110,317718,319205,319389,322311,319998,319222,312878,320285,315661,318123,323651,324255,326030,323603,318168,326721,326142,321849,325876,323515,319424,329086,332747,331525,328924,337519,337348,334140,336786,336015,338864,338685,338270,337662],"V6F":[272217,272217,272217,272217,272217,272217,272437,272679,273527,274669,275427,269883,272119,280961,278977,282688,288200,284908,284038,282592,283664,290128,288297,288073,287222,289274,283574,283171,283547,278884,282080,282182,283098,284584,287953,289178,286088,287726,290537,291952,293504,291085,285845,291997,284599,279682,279920,273321,273914,276729,277750,277538,271291,274359,276801,273294,272515,264631,268253,268170,266444,262135,256009,248791,241771,226561,223033,229685,234882,229125,231514,231104,233842,236372,234094,252044,246896,246753,236454,238949,244053,246156,245903,236103,232245,228221,236129,238485,236234,238540,237602,245797,252433,255312,259747,257662,259500,260458,250698,252314,254636,256636,255714,251985,258784,262712,258606,253633,254722,257498,261120,263939,264946,260790,256021,256659,260601,260913,259134,256380,254464,249374,247505,246882,247244,248894,249182,251254,251271,254912,256307,253422,251806,254283,253681,253548,253680,253640,255827,257772,270715,290400,296468,298090,302333,304521,304241,300141,313539,315000,315176,318060,315789,315023,309133,315724,311434,313856,319295,319894,321644,319257,313905,322356,321803,317567,321533,319709,316590,324280,328389,327195,324657,333088,332917,329726,332343,331571,334367,334189,333776,333177],"BH":[274742,263572,265834,267366,264604,276351,265611,279151,280814,282569,285477,275780,280128,293903,288819,293851,304095,294954,292181,290028,291552,300962,293518,293220,292052,294844,285990,285379,285902,279466,283866,283981,285215,287249,291849,293673,288781,291097,298042,302376,305842,298089,291169,299812,289575,282766,283081,274033,274845,278749,280186,279932,271312,275531,278881,274043,272995,262133,267112,267011,264627,258667,250180,240238,230515,209667,204757,213922,221066,213110,216409,215875,219698,223200,220045,244473,237633,237488,224175,227376,233998,236812,236419,223787,218833,213701,224104,227120,224240,227283,226075,236701,245238,248895,254534,251845,254186,255429,242783,244869,247782,250322,249084,244298,252930,257905,252654,246272,247656,251233,255900,259487,260773,255428,249251,250068,255107,255476,253160,249618,247176,240666,238241,237471,237952,240072,240440,243010,243044,247822,249654,245971,243873,247039,246283,246110,246269,246221,249002,251544,268086,293181,304273,308211,313674,319275,322528,316514,339659,335075,332948,337213,329989,328083,317304,327661,319406,322836,328610,320030,322855,318873,311587,321395,320526,314759,320148,312077,306575,319227,344347,348582,342430,368110,366303,357129,364035,366932,370598,370124,364563,363353]}}</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 (function(){
-  var els=document.querySelectorAll('.fade');
-  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{rootMargin:'0px 0px -8% 0px'});
-  els.forEach(function(e){io.observe(e)});
+const D=JSON.parse(document.getElementById('amulet-data').textContent);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const C={s1:css('--s1'),s2:css('--s2'),s3:css('--s3'),ref:css('--s-ref'),muted:css('--text-muted'),faint:css('--text-faint'),grid:'rgba(255,255,255,.06)'};
+const pct=(x,d=1,sign=true)=>(x==null||isNaN(x))?'—':((sign&&x>0?'+':'')+(x*100).toFixed(d)+'%').replace('-','−');
+const yen=x=>'¥'+Math.round(x).toLocaleString('ja-JP');
+const f2=x=>(x>0?'':'')+x.toFixed(2);
+const S=D.strategy,B=D.bench;
+// hero tiles
+document.getElementById('k-total').textContent=pct(S.total);
+document.getElementById('k-ann').textContent=pct(S.ann);
+document.getElementById('k-mdd').textContent=pct(S.mdd);
+document.getElementById('k-sharpe').textContent=S.sharpe.toFixed(2);
+document.getElementById('s-psr').textContent=(D.psr.psr*100).toFixed(0)+'%';
+document.getElementById('s-mintrl').textContent=Math.round(D.psr.mintrl_days).toLocaleString()+'日';
+document.getElementById('s-boot').textContent=pct(D.boot.p05,0)+'〜'+pct(D.boot.p95,0);
+// coverage strip
+const strip=document.getElementById('strip');
+const cs=D.coverage.summary;
+D.coverage.days.slice(0,183).forEach(k=>{const i=document.createElement('i');i.className=k;strip.appendChild(i)});
+strip.style.gridTemplateColumns='repeat('+Math.min(183,D.coverage.days.length)+',1fr)';
+document.getElementById('cov-sum').textContent='実測 '+cs.obs+'日 ／ 復元 '+cs.mtm+'日 ／ 補間 '+cs.interp+'日';
+
+// Chart defaults
+if(!window.Chart){return;}
+Chart.defaults.color=C.muted; Chart.defaults.font.family="Inter,'Noto Sans JP',sans-serif"; Chart.defaults.font.size=11;
+Chart.defaults.borderColor=C.grid; Chart.defaults.maintainAspectRatio=false;
+Chart.defaults.plugins.legend.display=false;
+Chart.defaults.plugins.tooltip.backgroundColor='rgba(20,20,22,.96)';
+Chart.defaults.plugins.tooltip.borderColor='rgba(255,255,255,.12)';Chart.defaults.plugins.tooltip.borderWidth=1;
+Chart.defaults.plugins.tooltip.titleColor='#fff';Chart.defaults.plugins.tooltip.bodyColor='#e4e4e7';
+Chart.defaults.plugins.tooltip.padding=10;Chart.defaults.plugins.tooltip.boxPadding=4;Chart.defaults.plugins.tooltip.usePointStyle=true;
+Chart.defaults.elements.point.radius=0; Chart.defaults.elements.point.hoverRadius=5; Chart.defaults.elements.line.borderWidth=2;
+Chart.defaults.elements.line.tension=0;
+const crosshair={id:'xh',afterDraw(c){const a=c.tooltip&&c.tooltip.getActiveElements&&c.tooltip.getActiveElements();if(!a||!a.length||c.config.type!=='line')return;const x=a[0].element.x,ctx=c.ctx,y=c.chartArea;ctx.save();ctx.strokeStyle='rgba(255,255,255,.25)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y.top);ctx.lineTo(x,y.bottom);ctx.stroke();ctx.restore();}};
+Chart.register(crosshair);
+const lineOpts=(fmt,extra={})=>Object.assign({interaction:{mode:'index',intersect:false},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:7,autoSkip:true,maxRotation:0}},y:{grid:{color:C.grid},ticks:{callback:fmt,maxTicksLimit:6}}},plugins:{tooltip:{callbacks:{label:c=>' '+c.dataset.label+'  '+fmt(c.parsed.y)}}}},extra);
+function legend(id,items){const el=document.getElementById(id);if(!el)return;el.innerHTML=items.map(([c,l,d])=>'<span><i class="'+(d?'dash':'')+'" style="background:'+c+';color:'+c+'"></i>'+l+'</span>').join('')}
+const ser=D.series, dates=ser.date, est=ser.est;
+const dashSeg={borderDash:ctx=>(est[ctx.p1DataIndex]&&est[ctx.p0DataIndex]&&D.coverage.days[ctx.p1DataIndex]==='interp')?[4,4]:undefined};
+
+// NAV chart
+const navSets=(mode)=>{const base={nav:ser.nav[0],basket:ser.basket[0],expMatched:ser.expMatched[0],sol:ser.sol[0]};
+ const t=(k)=>mode==='idx'?ser[k].map(v=>v/base[k]*100):ser[k];
+ return [
+  {label:'Amulet（実口座）',data:t('nav'),borderColor:C.s1,backgroundColor:C.s1,segment:dashSeg,borderWidth:2.4,order:1},
+  {label:'開始時の保有をそのまま',data:t('basket'),borderColor:C.s2,backgroundColor:C.s2,order:2},
+  {label:'同じ保有比率で売買しない',data:t('expMatched'),borderColor:C.s3,backgroundColor:C.s3,order:3},
+  {label:'SOL単体',data:t('sol'),borderColor:C.ref,backgroundColor:C.ref,borderDash:[2,4],borderWidth:1.5,order:4}]};
+legend('lg-nav',[[C.s1,'Amulet（実口座）'],[C.s2,'開始時の保有をそのまま'],[C.s3,'同じ保有比率で売買しない'],[C.ref,'SOL単体',1]]);
+const yenK=v=>'¥'+(v/1000).toFixed(0)+'k';
+const navChart=new Chart(document.getElementById('c-nav'),{type:'line',data:{labels:dates,datasets:navSets('yen')},options:lineOpts(v=>yen(v),{scales:{x:{grid:{display:false},ticks:{maxTicksLimit:7,maxRotation:0}},y:{grid:{color:C.grid},ticks:{callback:yenK,maxTicksLimit:6}}}})});
+document.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const m=b.dataset.view; navChart.data.datasets=navSets(m);
+  navChart.options.scales.y.ticks.callback=m==='idx'?(v=>v.toFixed(0)):yenK;
+  navChart.options.plugins.tooltip.callbacks.label=c=>' '+c.dataset.label+'  '+(m==='idx'?c.parsed.y.toFixed(1):yen(c.parsed.y));
+  navChart.update();}));
+
+// Drawdown
+const ddOf=a=>{let p=-1e18;return a.map(v=>{p=Math.max(p,v);return v/p-1})};
+legend('lg-dd',[[C.s1,'Amulet'],[C.s2,'開始時の保有をそのまま'],[C.ref,'SOL単体',1]]);
+new Chart(document.getElementById('c-dd'),{type:'line',data:{labels:dates,datasets:[
+ {label:'Amulet',data:ser.dd,borderColor:C.s1,backgroundColor:'rgba(57,135,229,.18)',fill:'origin',segment:dashSeg},
+ {label:'開始時の保有',data:ddOf(ser.basket),borderColor:C.s2,backgroundColor:C.s2},
+ {label:'SOL単体',data:ddOf(ser.sol),borderColor:C.ref,borderDash:[2,4],borderWidth:1.5}]},
+ options:lineOpts(v=>pct(v,0,false),{scales:{x:{grid:{display:false},ticks:{maxTicksLimit:6,maxRotation:0}},y:{max:0,grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%',maxTicksLimit:5}}}})});
+// Exposure
+new Chart(document.getElementById('c-exp'),{type:'line',data:{labels:dates,datasets:[
+ {label:'暗号資産の比率',data:ser.crypto_w,borderColor:C.s1,backgroundColor:'rgba(57,135,229,.18)',fill:'origin',segment:dashSeg}]},
+ options:lineOpts(v=>pct(v,0,false),{scales:{x:{grid:{display:false},ticks:{maxTicksLimit:6,maxRotation:0}},y:{min:0,max:1,grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%',maxTicksLimit:5}}}})});
+
+// KPI table
+const cols=[['Amulet',S,1],['開始時の保有',B.basket],['同じ比率・売買なし',B.expMatched],['平均比率で一定保有',B.constMix],['SOL',B.sol],['ETH',B.eth],['BTC',B.btc]];
+const rows=[['期間リターン','total',x=>pct(x)],['年率（複利）','ann',x=>pct(x)],['変動率（年率）','vol',x=>pct(x,1,false)],['シャープ','sharpe',x=>x.toFixed(2)],['ソルティノ','sortino',x=>x.toFixed(2)],['最大ドローダウン','mdd',x=>pct(x)],['カルマー','calmar',x=>x==null?'—':x.toFixed(2)],['水面下の最長日数','longest_uw_days',x=>Math.round(x)+'日'],['日次VaR 95%','var95',x=>pct(-x,2)],['日次CVaR 95%','cvar95',x=>pct(-x,2)],['歪度','skew',x=>x.toFixed(2)],['超過尖度','kurt',x=>x.toFixed(2)],['最良日','best',x=>pct(x)],['最悪日','worst',x=>pct(x)],['プラスの日の割合','pos_days',x=>pct(x,0,false)],['最終値（円）','final',x=>Math.round(x).toLocaleString()]];
+const tk=document.getElementById('t-kpi');
+tk.tHead.innerHTML='<tr><th>指標</th>'+cols.map((c,i)=>'<th class="'+(i===0?'hl':'')+'">'+c[0]+'</th>').join('')+'</tr>';
+tk.tBodies[0].innerHTML=rows.map(r=>'<tr><td>'+r[0]+'</td>'+cols.map((c,i)=>{const v=c[1][r[1]];const s=r[2](v);const cls=(i===0?'hl ':'')+((r[1]==='total'||r[1]==='ann')?(v<0?'neg':''):'');return '<td class="'+cls+'">'+s+'</td>'}).join('')+'</tr>').join('');
+
+// Monthly
+const mo=D.monthly; const ml=mo.map(m=>m.m.slice(5)+'月');
+legend('lg-mo',[[C.s1,'Amulet'],[C.s2,'開始時の保有'],[C.s3,'同じ比率・売買なし'],[C.ref,'SOL']]);
+new Chart(document.getElementById('c-mo'),{type:'bar',data:{labels:ml,datasets:[
+ {label:'Amulet',data:mo.map(m=>m.ret),backgroundColor:C.s1},{label:'開始時の保有',data:mo.map(m=>m.basket),backgroundColor:C.s2},
+ {label:'同じ比率・売買なし',data:mo.map(m=>m.expm),backgroundColor:C.s3},{label:'SOL',data:mo.map(m=>m.sol),backgroundColor:'rgba(161,161,170,.55)'}]},
+ options:{datasets:{bar:{borderRadius:4,borderSkipped:false,categoryPercentage:.72,barPercentage:.86}},interaction:{mode:'index',intersect:false},scales:{x:{grid:{display:false}},y:{grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%',maxTicksLimit:6}}},plugins:{tooltip:{callbacks:{label:c=>' '+c.dataset.label+'  '+pct(c.parsed.y)}}}}});
+const tm=document.getElementById('t-mo');
+tm.tHead.innerHTML='<tr><th>月</th><th class="hl">Amulet</th><th>開始時の保有</th><th>同じ比率・売買なし</th><th>SOL</th><th>差（対 売買なし）</th><th>月末時価</th></tr>';
+tm.tBodies[0].innerHTML=mo.map(m=>{const d=m.ret-m.expm;return '<tr><td>'+m.m+'</td><td class="hl '+(m.ret<0?'neg':'pos')+'">'+pct(m.ret)+'</td><td>'+pct(m.basket)+'</td><td>'+pct(m.expm)+'</td><td>'+pct(m.sol)+'</td><td class="'+(d<0?'neg':'pos')+'">'+pct(d)+'</td><td>'+Math.round(m.nav).toLocaleString()+'</td></tr>'}).join('');
+
+// Regression
+const R=D.reg,R1=D.reg1;
+document.querySelector('#t-reg tbody').innerHTML=[
+ ['α（年率）',pct(R.alpha_ann),R.alpha_t.toFixed(2),'マイナスだが有意ではない（|t|<2）'],
+ ['β SOL',R.beta_sol.toFixed(2),R.t_sol.toFixed(1),'SOLが1%動くと約0.4%動く'],
+ ['β ETH',R.beta_eth.toFixed(2),R.t_eth.toFixed(1),'ETHが1%動くと約0.3%動く'],
+ ['R²',R.r2.toFixed(2),'—','日々の値動きの82%を市場で説明'],
+ ['トラッキングエラー',pct(R.te_ann,1,false),'—','市場で説明できない揺れ（年率）'],
+ ['SOLとの相関',R1.corr.toFixed(2),'—','単回帰のβは'+R1.beta.toFixed(2)]
+].map(r=>'<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td>'+r[2]+'</td><td style="text-align:left;font-family:inherit">'+r[3]+'</td></tr>').join('');
+const cp=D.capture;
+document.getElementById('capture').innerHTML='<dt>上昇の取り込み率</dt><dd>'+(cp.up_ratio*100).toFixed(0)+'%</dd><dt>下落の取り込み率</dt><dd>'+(cp.dn_ratio*100).toFixed(0)+'%</dd><dt>上昇日の平均（Amulet／SOL）</dt><dd>'+pct(cp.up,2)+' ／ '+pct(cp.up_b,2)+'</dd><dt>下落日の平均（Amulet／SOL）</dt><dd>'+pct(cp.dn,2)+' ／ '+pct(cp.dn_b,2)+'</dd>';
+const ve=D.vsExp;
+document.getElementById('vsexp').innerHTML='<dt>年率の差</dt><dd>'+pct(ve.ann_excess)+'</dd><dt>t値</dt><dd>'+ve.t.toFixed(2)+'</dd><dt>情報レシオ</dt><dd>'+ve.ir.toFixed(2)+'</dd><dt>半年の累計差</dt><dd>'+pct(S.total-B.expMatched.total)+'（'+pct(S.total)+' 対 '+pct(B.expMatched.total)+'）</dd>';
+
+// Sim
+const sm=D.simSeries;
+legend('lg-sim',[[C.s1,'理論値 V5（下限なし）'],[C.s3,'理論値 V6（下限25%）'],[C.ref,'単純保有 SOL・ETH半々',1],[C.s2,'Amulet 実口座']]);
+const navByDate={};dates.forEach((d,i)=>navByDate[d]=ser.nav[i]);
+new Chart(document.getElementById('c-sim'),{type:'line',data:{labels:sm.date,datasets:[
+ {label:'理論値 V5',data:sm.V5,borderColor:C.s1},{label:'理論値 V6',data:sm.V6,borderColor:C.s3},
+ {label:'単純保有',data:sm.BH,borderColor:C.ref,borderDash:[2,4],borderWidth:1.5},
+ {label:'Amulet 実口座',data:sm.date.map(d=>navByDate[d]??null),borderColor:C.s2,borderWidth:2.4,spanGaps:true}]},
+ options:lineOpts(v=>yen(v),{scales:{x:{grid:{display:false},ticks:{maxTicksLimit:6,maxRotation:0}},y:{grid:{color:C.grid},ticks:{callback:yenK,maxTicksLimit:5}}}})});
+const si=D.sim; const ts=document.getElementById('t-sim');
+ts.tHead.innerHTML='<tr><th>方式</th><th>期間</th><th>最大DD</th><th>シャープ</th><th>約定数</th></tr>';
+const simRows=[['理論値 V5（下限なし・停止なし）',si.V5],['理論値 V6（現行・下限25%）',si.V6],['理論値 V6＋改善フィルター',si.V6F],['単純保有 SOL・ETH半々',si.BH],['Amulet 実口座',{total:S.total,mdd:S.mdd,sharpe:S.sharpe}]];
+ts.tBodies[0].innerHTML=simRows.map(r=>'<tr><td>'+r[0]+'</td><td>'+pct(r[1].total)+'</td><td>'+pct(r[1].mdd)+'</td><td>'+r[1].sharpe.toFixed(2)+'</td><td>'+(r[1].trades?r[1].trades.toLocaleString():'—')+'</td></tr>').join('');
+
+// Regime crash chart
+const rg=D.regime;
+const crashLbl=['SOL','ETH'];
+new Chart(document.getElementById('c-crash'),{type:'bar',data:{labels:crashLbl,datasets:[
+ {label:'BEAR',data:['SOLJPY','ETHJPY'].map(s=>Math.expm1(rg[s].next_dd.BEAR)),backgroundColor:C.s2},
+ {label:'RANGE',data:['SOLJPY','ETHJPY'].map(s=>Math.expm1(rg[s].next_dd.RANGE)),backgroundColor:C.s1},
+ {label:'BULL',data:['SOLJPY','ETHJPY'].map(s=>Math.expm1(rg[s].next_dd.BULL)),backgroundColor:C.s3}]},
+ options:{indexAxis:'y',datasets:{bar:{borderRadius:4,borderSkipped:false,categoryPercentage:.7,barPercentage:.85}},interaction:{mode:'index',intersect:false},scales:{x:{grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%'}},y:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:c=>' '+c.dataset.label+' 判定中の下落  '+pct(c.parsed.x)}}}}});
+const tb=rg.SOLJPY.table; const tf=document.getElementById('t-reg-fwd');
+tf.tHead.innerHTML='<tr><th>判定</th><th>時間の割合</th><th>+1時間</th><th>+6時間</th><th>+24時間</th><th>24h後に下落の確率</th></tr>';
+tf.tBodies[0].innerHTML=['BEAR','RANGE','BULL'].map(s=>{const x=tb[s];return '<tr><td>'+s+'</td><td>'+pct(x.share,0,false)+'</td><td>'+pct(x.f1,2)+'</td><td>'+pct(x.f6,2)+'</td><td>'+pct(x.f24,2)+'</td><td>'+pct(x.down24,0,false)+'</td></tr>'}).join('');
+
+// Filters
+const FL=D.filters; const fn=Object.keys(FL.SOLJPY);
+new Chart(document.getElementById('c-filter'),{type:'bar',data:{labels:fn.map(n=>n.split(':')[0]),datasets:[
+ {label:'SOL 避けられた下落',data:fn.map(n=>FL.SOLJPY[n].crash_avoided),backgroundColor:C.s1},
+ {label:'ETH 避けられた下落',data:fn.map(n=>FL.ETHJPY[n].crash_avoided),backgroundColor:C.s2}]},
+ options:{datasets:{bar:{borderRadius:4,borderSkipped:false,categoryPercentage:.7,barPercentage:.85}},interaction:{mode:'index',intersect:false},scales:{x:{grid:{display:false}},y:{min:0,max:1,grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%',maxTicksLimit:5}}},plugins:{tooltip:{callbacks:{title:c=>fn[c[0].dataIndex],label:c=>' '+c.dataset.label+'  '+pct(c.parsed.y,0,false)}}}}});
+const tfi=document.getElementById('t-filter');
+tfi.tHead.innerHTML='<tr><th>フィルター</th><th>SOL 避けた下落</th><th>SOL 停止時間</th><th>ETH 避けた下落</th><th>ETH 停止時間</th><th>切替/日（SOL）</th></tr>';
+tfi.tBodies[0].innerHTML=fn.map(n=>{const a=FL.SOLJPY[n],b=FL.ETHJPY[n];return '<tr><td>'+n+'</td><td>'+pct(a.crash_avoided,0,false)+'</td><td>'+pct(a.time_share,0,false)+'</td><td>'+pct(b.crash_avoided,0,false)+'</td><td>'+pct(b.time_share,0,false)+'</td><td>'+a.switches_per_day.toFixed(1)+'</td></tr>'}).join('');
+
+// Frontier
+const FR=D.frontier; const v6=FR.filter(x=>x.mode==='V6'), v6f=FR.filter(x=>x.mode==='V6F');
+const lblPlugin={id:'lbl',afterDatasetsDraw(c){const ctx=c.ctx;ctx.save();ctx.font='11px Inter';ctx.fillStyle='#d4d4d8';
+ const m=c.getDatasetMeta(0);m.data.forEach((p,i)=>{ctx.fillText('現金'+Math.round(v6[i].floor*100)+'%',p.x+8,p.y-8)});
+ const b=c.getDatasetMeta(2);b.data.forEach(p=>{ctx.fillText('単純保有',p.x+8,p.y+4)});ctx.restore();}};
+new Chart(document.getElementById('c-front'),{type:'scatter',data:{datasets:[
+ {label:'現行V6',data:v6.map(x=>({x:x.mdd,y:x.total})),borderColor:C.s1,backgroundColor:C.s1,showLine:true,pointRadius:5,pointHoverRadius:7,pointBorderColor:'#09090b',pointBorderWidth:2},
+ {label:'V6＋改善フィルター',data:v6f.map(x=>({x:x.mdd,y:x.total})),borderColor:C.s2,backgroundColor:C.s2,showLine:true,pointRadius:5,pointHoverRadius:7,pointBorderColor:'#09090b',pointBorderWidth:2},
+ {label:'単純保有',data:[{x:D.sim.BH.mdd,y:D.sim.BH.total}],backgroundColor:C.ref,pointRadius:6,pointStyle:'rectRot'}]},
+ plugins:[lblPlugin],
+ options:{scales:{x:{title:{display:true,text:'最大ドローダウン',color:C.muted},grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%'}},y:{title:{display:true,text:'期間リターン',color:C.muted},grid:{color:C.grid},ticks:{callback:v=>(v*100).toFixed(0)+'%'}}},plugins:{tooltip:{callbacks:{label:c=>' '+c.dataset.label+'  リターン '+pct(c.parsed.y)+' ／ 最大DD '+pct(c.parsed.x)}}}}});
+const tfr=document.getElementById('t-front');
+tfr.tHead.innerHTML='<tr><th>現金の下限</th><th>期間</th><th>最大DD</th><th>変動率</th><th>シャープ</th></tr>';
+tfr.tBodies[0].innerHTML=v6.map(x=>'<tr><td>'+Math.round(x.floor*100)+'%'+(x.floor===0.25?'（現行）':'')+'</td><td>'+pct(x.total)+'</td><td>'+pct(x.mdd)+'</td><td>'+pct(x.vol,1,false)+'</td><td>'+x.sharpe.toFixed(2)+'</td></tr>').join('');
+
+// Capital
+const tc=document.getElementById('t-cap');
+tc.tHead.innerHTML='<tr><th>想定する年率</th><th>必要な元本</th><th>−18%下落時の目減り（現金50%相当）</th><th>−32%下落時の目減り（今回）</th></tr>';
+tc.tBodies[0].innerHTML=D.capital.map(x=>'<tr><td>'+(x.mu*100).toFixed(1)+'%'+(Math.abs(x.mu-0.235)<1e-6?'（今回の実績）':'')+'</td><td>'+Math.round(x.capital/10000).toLocaleString()+'万円</td><td>−'+Math.round(x.dd18/10000).toLocaleString()+'万円</td><td>−'+Math.round(x.dd30/10000).toLocaleString()+'万円</td></tr>').join('');
+})();
+// reveal + toc
+(function(){
+ const els=document.querySelectorAll('.fade');
+ if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return;}
+ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{rootMargin:'0px 0px -6% 0px'});
+ els.forEach(e=>io.observe(e));
+ const links=[...document.querySelectorAll('.toc a')];const secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+ const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+ secs.forEach(s=>s&&so.observe(s));
 })();
 </script>
 </body>
