@@ -112,7 +112,6 @@ ul { list-style: none; }
 .film-video.ready { opacity: 1; }
 .film-cap { position: absolute; left: var(--gutter); bottom: clamp(24px, 5vh, 48px); z-index: 2; font-size: .74rem; letter-spacing: .28em; font-weight: 500; color: rgba(255, 255, 255, .8); opacity: var(--cap, 0); }
 @media (max-width: 640px) { .film { height: 240svh; } }
-@media (prefers-reduced-motion: reduce) { .film { height: auto; } .film-stick { position: relative; height: auto; padding: 100px 0; } }
 
 /* ---- 共通セクション ---- */
 .sec { padding: clamp(120px, 17vw, 240px) 0; }
@@ -235,10 +234,16 @@ ul { list-style: none; }
 .finale.static .site-footer { opacity: 1; }
 .finale.static .finale-body { padding-bottom: 110px; }
 .finale.static .finale-copy { position: relative; left: auto; top: auto; transform: none; margin: 0 auto; }
-@media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .js .rv { opacity: 1; transform: none; transition: none; }
-    .js [data-lines] .li { transform: none; transition: none; }
-    .story { height: auto; }
-    .story-sticky { position: static; height: auto; padding: 140px var(--gutter); }
-}
+.reduce-motion { scroll-behavior: auto; }
+.reduce-motion .rv { opacity: 1; transform: none; transition: none; }
+.reduce-motion [data-lines] .li { transform: none; transition: none; }
+.reduce-motion .story { height: auto; }
+.reduce-motion .story-sticky { position: static; height: auto; padding: 140px var(--gutter); }
+.reduce-motion .film { height: auto; }
+.reduce-motion .film-stick { position: relative; height: auto; padding: 100px 0; }
+
+/* 動きの切替ボタン（OSの「視差効果を減らす」を尊重しつつ、見る側が選べる） */
+.motion-toggle { position: absolute; left: 50%; top: calc(100vh - 78px); top: calc(100svh - 78px); transform: translateX(-50%); z-index: 6; min-height: 44px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(5, 5, 7, .55); color: #fff; font: 500 .82rem/1 var(--font); letter-spacing: .04em; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.motion-toggle span { font-size: .7rem; margin-right: 4px; }
+.motion-toggle:hover { background: rgba(255, 255, 255, .14); }
+.motion-off { background: none; border: 0; padding: 0 4px; min-height: 32px; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; opacity: .85; }

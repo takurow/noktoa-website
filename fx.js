@@ -6,7 +6,8 @@
 (function () {
     'use strict';
     var root = document.documentElement;
-    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches || /[?&]reduce=1/.test(location.search);
+    var reduce = root.classList.contains('reduce-motion');          // 早期スクリプト(head)が決定: OS設定を尊重。ユーザーが「動きを再生」を選んだ場合は解除
+    var osReduce = root.classList.contains('os-reduce'), optedIn = osReduce && !reduce;
     var mobile = window.matchMedia('(max-width: 720px)').matches;
     function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
     function smooth(a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
@@ -124,13 +125,28 @@
     window.addEventListener('resize', domUpdate);
     domUpdate();
 
+
+    /* 動きの切替: OSの「視差効果を減らす」を尊重しつつ、見る側が選べるようにする */
+    function setMotion(on) { try { if (on) localStorage.setItem('fxMotion', '1'); else localStorage.removeItem('fxMotion'); } catch (e) { } location.reload(); }
+    if (osReduce) {
+        if (reduce && hero) {
+            var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'motion-toggle';
+            btn.innerHTML = '<span aria-hidden="true">▶</span> 動きを再生する'; btn.setAttribute('aria-label', 'アニメーションを再生する');
+            btn.addEventListener('click', function () { setMotion(true); });
+            var stick = hero.querySelector('.phero-stick'); if (stick) stick.appendChild(btn);
+        } else if (optedIn) {
+            var fc = document.querySelector('.fcopy');
+            if (fc) { var off = document.createElement('button'); off.type = 'button'; off.className = 'motion-off'; off.textContent = '動きを止める'; off.addEventListener('click', function () { setMotion(false); }); fc.appendChild(document.createTextNode('　')); fc.appendChild(off); }
+        }
+    }
+
     /* =====================================================
        WebGL
        ===================================================== */
     var canvas = document.getElementById('fx');
     if (!canvas || !hero) return;
     function setStatic() { hero.classList.add('static'); if (finale) finale.classList.add('static'); root.classList.add('fx-static'); }
-    note('reduceMotion', reduce); note('mobile', mobile); note('ua', navigator.userAgent.slice(0, 90));
+    note('reduceMotion', reduce); note('osReduce', osReduce); note('optedIn', optedIn); note('mobile', mobile); note('ua', navigator.userAgent.slice(0, 90));
     var gl = null;
     try { gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, powerPreference: 'high-performance' }); } catch (e) { gl = null; }
     note('webgl', gl ? 'OK' : 'NULL (取得失敗)');
