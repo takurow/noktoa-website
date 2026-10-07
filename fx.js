@@ -11,6 +11,23 @@
     function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
     function smooth(a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
 
+    /* ---- 診断（?debug=1）: 携帯で動かないとき原因を画面に出す ---- */
+    var DEBUG = /[?&]debug=1/.test(location.search), dbg = {}, dbgEl = null, dbgFrames = 0, dbgT = performance.now();
+    function note(k, v) { dbg[k] = v; }
+    if (DEBUG) {
+        dbgEl = document.createElement('pre');
+        dbgEl.style.cssText = 'position:fixed;left:6px;bottom:6px;z-index:99999;max-width:94vw;margin:0;padding:8px 10px;background:rgba(0,0,0,.82);color:#7CFC9A;font:11px/1.45 ui-monospace,Menlo,monospace;white-space:pre-wrap;word-break:break-all;border:1px solid #2a2a2a;border-radius:8px;pointer-events:none';
+        document.addEventListener('DOMContentLoaded', function () { document.body.appendChild(dbgEl); });
+        if (document.body) document.body.appendChild(dbgEl);
+        window.addEventListener('error', function (e) { note('JS_ERROR', (e.message || '') + ' @' + (e.lineno || '?')); });
+        setInterval(function () {
+            var now = performance.now(); note('fps', Math.round(dbgFrames / ((now - dbgT) / 1000))); dbgFrames = 0; dbgT = now;
+            note('scrollY', Math.round(window.pageYOffset)); note('viewport', window.innerWidth + 'x' + window.innerHeight + ' dpr' + (window.devicePixelRatio || 1));
+            dbgEl.textContent = Object.keys(dbg).map(function (k) { return k + ': ' + dbg[k]; }).join('\n');
+        }, 500);
+    }
+    function tickDbg() { dbgFrames++; }
+
     var hero = document.querySelector('.phero');
     var finale = document.querySelector('.finale');
     var header = document.querySelector('.site-header');
@@ -113,8 +130,11 @@
     var canvas = document.getElementById('fx');
     if (!canvas || !hero) return;
     function setStatic() { hero.classList.add('static'); if (finale) finale.classList.add('static'); root.classList.add('fx-static'); }
+    note('reduceMotion', reduce); note('mobile', mobile); note('ua', navigator.userAgent.slice(0, 90));
     var gl = null;
     try { gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, powerPreference: 'high-performance' }); } catch (e) { gl = null; }
+    note('webgl', gl ? 'OK' : 'NULL (取得失敗)');
+    if (/[?&]noblend=1/.test(location.search)) { canvas.style.mixBlendMode = 'normal'; note('blend', 'normal(診断)'); }
     if (!gl) { setStatic(); root.classList.add('fx-off'); return; }
     if (reduce) setStatic();
 
@@ -246,7 +266,7 @@
     }
     var PP, QP;
     try { PP = program(VS, FS, ['aHome', 'aRand']); QP = program(QV, QF, ['aPos']); }
-    catch (err) { if (window.console) console.warn('[fx]', err); setStatic(); root.classList.add('fx-off'); return; }
+    catch (err) { note('SHADER_ERROR', String(err && err.message || err).slice(0, 220)); if (window.console) console.warn('[fx]', err); setStatic(); root.classList.add('fx-off'); return; }
 
     function locs(p, names) { var o = {}; names.forEach(function (n) { o[n] = gl.getUniformLocation(p, n); }); return o; }
     var PU = locs(PP, ['uVP', 'uCam', 'uDpr', 'uTime', 'uAssemble', 'uFinal', 'uSize', 'uAlpha', 'uGold', 'uFlash', 'uShift', 'uEndZ', 'uL', 'uLift', 'uMaxPt', 'uGain', 'uMH', 'uME', 'uPH', 'uPE', 'uFrame', 'uEmb', 'uWm']);
@@ -462,7 +482,7 @@
     function frame(now) {
         if (!running) return; rafId = requestAnimationFrame(frame);
         var dt = clamp((now - last) / 1000 || .016, .001, .1); last = now;
-        update(now, dt); render();
+        tickDbg(); note('drawN', drawN); note('heroP', (U.copy).toFixed(2) + '(copy) assemble ' + U.assemble.toFixed(2)); update(now, dt); render();
         if (now - t0 > 4000) {                                   // 低性能端末は粒子数を段階的に削減
             frames++; if (dt > .034) slow++;
             if (frames >= 90) { if (slow > 40 && drawN > N * .35) drawN = Math.floor(drawN * .72); frames = 0; slow = 0; }
@@ -474,16 +494,17 @@
     document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); else if (visible) start(); });
 
     /* WebGLコンテキスト喪失（iOS等）: 静止表示（ロゴ画像＋通常配置）へ切り替える */
-    canvas.addEventListener('webglcontextlost', function (e) { e.preventDefault(); stop(); setStatic(); root.classList.add('fx-off'); }, false);
+    canvas.addEventListener('webglcontextlost', function (e) { note('CONTEXT', 'LOST'); e.preventDefault(); stop(); setStatic(); root.classList.add('fx-off'); }, false);
 
     var img = new Image();
     img.onload = function () {
-        if (!build(img)) { setStatic(); root.classList.add('fx-off'); return; }
-        resize(); ready = true; root.classList.add('fx-ready'); t0 = performance.now();
+        note('logo', 'loaded ' + img.naturalWidth + 'x' + img.naturalHeight);
+        if (!build(img)) { note('BUILD', 'failed'); setStatic(); root.classList.add('fx-off'); return; }
+        note('particles', N); resize(); ready = true; note('ready', true); root.classList.add('fx-ready'); t0 = performance.now();
         if (window.pageYOffset > 300) t0 -= 6000;
         if (reduce) renderStatic(); else start();
     };
-    img.onerror = function () { setStatic(); root.classList.add('fx-off'); };
+    img.onerror = function () { note('LOGO_ERROR', 'image load failed'); setStatic(); root.classList.add('fx-off'); };
     img.src = 'assets/logo_wh.png';
     resize();
 

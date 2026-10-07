@@ -12,6 +12,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body { font-family: var(--font); background: var(--ink); color: var(--text-d); line-height: 1.8; font-feature-settings: "palt"; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+@supports (overflow: clip) { body { overflow-x: clip; } }
 img, video { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
@@ -74,8 +75,8 @@ ul { list-style: none; }
 .js .rv.d1 { transition-delay: .1s; } .js .rv.d2 { transition-delay: .2s; } .js .rv.d3 { transition-delay: .3s; }
 
 /* ---- ヒーロー ---- */
-.phero { position: relative; height: 330svh; background: var(--ink); }
-.phero-stick { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.phero { position: relative; height: 330vh; height: 330svh; background: var(--ink); }
+.phero-stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .phero-fallback { display: none; position: absolute; left: 50%; top: 42%; width: min(62vw, 520px); transform: translate(-50%, -50%); }
 .fx-off .phero-fallback, html:not(.js) .phero-fallback { display: block; }
 .phero-kicker { position: absolute; left: var(--gutter); bottom: clamp(28px, 6vh, 56px); z-index: 2; font-size: .74rem; letter-spacing: .28em; font-weight: 500; color: rgba(255, 255, 255, .62); opacity: var(--ui, 1); }
@@ -103,8 +104,8 @@ ul { list-style: none; }
 .story.static .story-line .ch.accent { color: var(--gold); }
 
 /* ---- Brand Film: 角丸の映像がスクロールで画面いっぱいに広がる ---- */
-.film { position: relative; height: 260svh; background: var(--ink); }
-.film-stick { position: sticky; top: 0; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.film { position: relative; height: 260vh; height: 260svh; background: var(--ink); }
+.film-stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
 .film-frame { position: relative; width: var(--fw, min(78vw, 1280px)); height: var(--fh, calc(min(78vw, 1280px) * .5625)); border-radius: var(--fr, 28px); overflow: hidden; background: var(--ink-2); }
 .film-poster { position: absolute; inset: 0; background: url('assets/hero-poster.webp') center / cover; }
 .film-video { position: absolute; top: 50%; left: 50%; width: max(calc(100% * 1.22), calc(var(--fh, 600px) * 1.7778 * 1.22)); height: max(calc(100% * 1.22), calc(var(--fw, 1000px) * .5625 * 1.22)); transform: translate(-50%, -50%); border: 0; pointer-events: none; opacity: 0; transition: opacity 1.6s var(--ease-slow); }
@@ -182,8 +183,8 @@ ul { list-style: none; }
 @media (min-width: 860px) { .members-grid { grid-template-columns: 1fr 1fr; } }
 
 /* ---- フィナーレ: ファインダーが文字を囲む ---- */
-.finale { position: relative; height: 320svh; background: var(--ink); }
-.finale-stick { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.finale { position: relative; height: 320vh; height: 320svh; background: var(--ink); }
+.finale-stick { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; }
 .finale-copy { position: absolute; left: 50%; top: 52%; transform: translate(-50%, -50%); z-index: 3; width: max-content; max-width: 92vw; text-align: center; pointer-events: none; }
 .finale.copy-on .finale-copy a { pointer-events: auto; }
 .finale-copy .h1 { color: #fff; font-size: clamp(1.7rem, min(5.4vw, 7.4vh), 4rem); }
@@ -210,7 +211,7 @@ ul { list-style: none; }
 @media (min-width: 860px) { .footer-grid { grid-template-columns: 1fr auto; } .footer-col { min-width: 200px; } }
 
 /* ---- 小画面 ---- */
-@media (max-width: 640px) { .phero { height: 300svh; } .phero-cue { display: none; } .finale { height: 300svh; } .story { height: 320vh; } .finale-copy { max-width: calc(100vw - 132px); } .finale-copy .h1 { font-size: 1.7rem; } .finale-copy .lead-d { font-size: .92rem; } }
+@media (max-width: 640px) { .phero { height: 300vh; height: 300svh; } .phero-cue { display: none; } .finale { height: 300vh; height: 300svh; } .story { height: 320vh; } .finale-copy { max-width: calc(100vw - 132px); } .finale-copy .h1 { font-size: 1.7rem; } .finale-copy .lead-d { font-size: .92rem; } }
 
 /* ---- 静止モード（動きを減らす／WebGL不可） ---- */
 .phero.static { height: auto; }
