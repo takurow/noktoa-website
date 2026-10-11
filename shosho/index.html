@@ -70,7 +70,7 @@ header .mark{font-family:var(--serif);font-size:18px;letter-spacing:.04em}
 /* ===== 画面全体の奥行き（スクロールで上下にだけ動く光） ===== */
 #bgfar,#bgnear{position:fixed;inset:0;pointer-events:none;overflow:hidden;opacity:0}
 #bgfar{z-index:0}
-#bgnear{z-index:6}
+#bgnear{z-index:0}   /* 文字の背面に置く（文字がかすまないように） */
 .bg-d{position:absolute;left:0;top:0;border-radius:50%;will-change:transform}
 .main,footer{position:relative;z-index:1}
 
@@ -148,11 +148,17 @@ a.wl:hover{--b:1}
 .ycap small{font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);text-align:right;line-height:1.7}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 
-/* INSTAGRAM（縦に並べる・サイズ統一） */
-.posts{display:flex;flex-direction:column;align-items:center;gap:18px;padding:4px 0 22px}
-.card{width:min(100%,340px);aspect-ratio:1/1.4;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.22)}
+/* INSTAGRAM：ここだけ横スクロール（サイズ統一） */
+.gal{margin:0 calc(var(--pad)*-1)}
+.posts{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);padding:4px var(--pad) 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.posts::-webkit-scrollbar{display:none}
+.card{flex:0 0 min(78vw,320px);aspect-ratio:1/1.4;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.22);transform:scale(var(--cs,1));opacity:var(--co,1);transform-origin:50% 50%}
 .card .instagram-media{margin:0!important;border-radius:14px!important;min-width:0!important;max-width:100%!important;width:100%!important;height:100%!important}
 .card iframe{width:100%!important;height:100%!important;display:block}
+.gnav{display:flex;align-items:center;gap:14px;padding:0 var(--pad);margin-bottom:18px}
+.gprog{flex:1;height:1px;background:var(--line);position:relative;overflow:hidden}
+.gprog i{position:absolute;left:0;top:0;height:100%;width:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--gp,.16))}
+.gcount{font-family:var(--serif);font-size:12px;letter-spacing:.22em;color:var(--soft);min-width:54px;text-align:right}
 .handle{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:4px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .handle small{font-family:var(--serif);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
 .handle b{font-family:var(--serif);font-weight:400;font-size:clamp(19px,5.2vw,24px);letter-spacing:.02em}
@@ -210,8 +216,8 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
   <div class="gn">Sho Sho</div>
   <div class="gd">DJ — Tokyo</div>
   <button class="ent" id="enter" type="button">Enter</button>
-  <p class="gt"><span data-l="ja">タップすると、動きと一緒に始まります</span><span data-l="en">Tap to begin, with motion</span></p>
-  <button class="gq" id="quiet" type="button"><span data-l="ja">動きなしで見る</span><span data-l="en">View without motion</span></button>
+  <p class="gt">Tap to begin, with motion</p>
+  <button class="gq" id="quiet" type="button">View without motion</button>
 </div>
 
 <header>
@@ -250,7 +256,10 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
 
   <section id="ig">
     <div class="head"><h2>Instagram</h2><span class="lab">Gallery</span></div>
-    <div class="posts" id="grid"></div>
+    <div class="gal" data-gal>
+      <div class="posts" id="grid"></div>
+      <div class="gnav"><div class="gprog"><i></i></div><span class="gcount" id="gcount">01 / 06</span></div>
+    </div>
     <a class="handle" href="https://www.instagram.com/whereisshosho/" target="_blank" rel="noopener noreferrer"><small data-l="ja">最新</small><small data-l="en">Latest</small><b>@whereisshosho ↗</b></a>
   </section>
 
@@ -432,7 +441,7 @@ wall(D.works.place,$('#place'));wall(D.works.brand,$('#brand'));
   const cap=document.createElement('div');cap.className='ycap';cap.innerHTML=`<b>${esc(v.title)}</b><small>${esc(v.sub||'')}</small>`;$('#ytwrap').appendChild(cap);
 });
 
-/* Instagram（縦に並べる） */
+/* Instagram（横スクロール・中央のカードが大きく） */
 let embedLoaded=false;
 function loadEmbed(){
   if(window.instgrm){window.instgrm.Embeds.process();return}
@@ -443,9 +452,23 @@ function loadEmbed(){
 const grid=$('#grid');
 grid.innerHTML=D.gallery.map(u=>`<div class="card"><blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Instagram</a></blockquote></div>`).join('');
 new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){loadEmbed();o.disconnect()}},{rootMargin:'700px'}).observe(grid);
+const gcount=$('#gcount'),gprog=$('.gprog i'),gcards=()=>$$('.card',grid);
+function galUpdate(){
+  const cs=gcards();if(!cs.length)return;
+  const r=grid.getBoundingClientRect(),c=r.left+r.width/2;let best=0,bd=1e9;
+  cs.forEach((el,i)=>{
+    const b=el.getBoundingClientRect(),dd=Math.abs((b.left+b.width/2)-c);if(dd<bd){bd=dd;best=i}
+    if(!quiet){const t=clamp(dd/(b.width*1.1));el.style.setProperty('--cs',(1-t*.06).toFixed(3));el.style.setProperty('--co',(1-t*.4).toFixed(2))}
+  });
+  const max=grid.scrollWidth-grid.clientWidth;
+  gprog.style.setProperty('--gp',(max>0?clamp(.16+.84*grid.scrollLeft/max):1).toFixed(3));
+  gcount.textContent=String(best+1).padStart(2,'0')+' / '+String(cs.length).padStart(2,'0');
+}
+grid.addEventListener('scroll',galUpdate,{passive:true});
+[300,1200,3000,6000].forEach(t=>setTimeout(galUpdate,t));
 
 /* ===== スクロール連動（上下のみ） ===== */
-const FX=[['.head','focus'],['.wcap','focus'],['.wl','focus'],['.ycap','focus'],['.handle','focus'],['.pf','focus'],['.facts div','focus'],['.cbtn','focus'],['.yt','video'],['.card','card'],['footer','focus']];
+const FX=[['.head','focus'],['.wcap','focus'],['.wl','focus'],['.ycap','focus'],['.handle','focus'],['.pf','focus'],['.facts div','focus'],['.cbtn','focus'],['.yt','video'],['.gal','card'],['footer','focus']];
 const fxs=[];
 FX.forEach(([sel,type])=>$$(sel).forEach(el=>{el.dataset.fx=type;fxs.push({el,type})}));
 const lyrs=$$('.lyr[data-d]').map(el=>({el,d:+el.dataset.d}));
@@ -463,11 +486,15 @@ function update(){
   const bo=clamp((sy-h*.55)/(h*.7));bgfar.style.opacity=bo;bgnear.style.opacity=bo;
   bgd.forEach(o=>{const span=vh+o.size+120;let y=((o.y0*vh-sy*o.k)%span+span)%span-o.size;o.el.style.transform=`translate3d(${(o.x*vw).toFixed(0)}px,${y.toFixed(1)}px,0)`});
   /* 各要素：下から上がりながらピントが合う／上に抜けるとき少しボケる */
+  const maxScroll=Math.max(0,document.documentElement.scrollHeight-vh);
   for(const {el,type} of fxs){
     const r=el.getBoundingClientRect();
     if(r.bottom<-vh*.4){put(el,.7,type==='focus'?3:0,0,1);continue}
     if(r.top>vh*1.15){put(el,type==='card'?.0:.04,type==='focus'?8:0,type==='video'?0:40,type==='card'||type==='video'?.9:1);continue}
-    const c=r.top+r.height/2,d=(c-vh*.62)/(vh*.5),tin=clamp(d),tout=clamp(-d-.55);
+    const c=r.top+r.height/2;
+    /* ページ最下部の要素でも、スクロールし切ったときに必ずピントが合うよう基準線を下げる */
+    const cmin=c+sy-maxScroll,ref=Math.min(vh*.96,Math.max(vh*.62,cmin+36));
+    const d=(c-ref)/(vh*.5),tin=clamp(d),tout=clamp(-d-.55);
     if(type==='focus')put(el,clamp(1-tin*.92-tout*.3,.04,1),tin*8+tout*4,tin*36,1);
     else if(type==='card')put(el,clamp(1-tin*.95-tout*.35,0,1),0,tin*60-tout*14,1-tin*.07-tout*.03);
     else{ /* video：枠が少し引いた状態から広がり、角の丸みも変わる */
