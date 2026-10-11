@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="ja" data-lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Sho Sho — DJ</title>
+<meta name="description" content="Sho Sho. DJ based in Tokyo.">
+<meta name="theme-color" content="#c4c4c4">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<link rel="canonical" href="https://noktoa.com/shosho/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2714%27 fill=%27%23121212%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2740%27 text-anchor=%27middle%27 fill=%27%23c4c4c4%27 font-family=%27Georgia,serif%27%3ES%3C/text%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://noktoa.com/shosho/">
+<meta property="og:title" content="Sho Sho — DJ">
+<meta property="og:description" content="Sho Sho. DJ based in Tokyo.">
+<meta property="og:image" content="https://noktoa.com/shosho/assets/shosho-1000.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@400;500;600&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#c4c4c4; --ink:#121212; --soft:rgba(18,18,18,.62); --line:rgba(18,18,18,.26);
+  --serif:'Cormorant Garamond','Shippori Mincho',serif; --mincho:'Shippori Mincho','Cormorant Garamond',serif; --sans:'Jost','Helvetica Neue',Arial,sans-serif;
+  --ease:cubic-bezier(.19,1,.22,1); --pad:20px; --bar:68px;
+  --ps:min(86vw,58svh,540px);
+  --pt:76px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--mincho);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:calc(var(--bar) + env(safe-area-inset-bottom))}
+body.lock{overflow:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;text-align:left}
+[data-l]{display:none}
+html[data-lang="ja"] [data-l="ja"],html[data-lang="en"] [data-l="en"]{display:revert}
+.lab{font-family:var(--serif);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft)}
+
+header{position:fixed;inset:0 0 auto 0;height:52px;padding:0 var(--pad);display:flex;align-items:center;justify-content:space-between;z-index:30;background:linear-gradient(to bottom,rgba(196,196,196,.96) 55%,rgba(196,196,196,0))}
+header .mark{font-family:var(--serif);font-size:18px;letter-spacing:.04em}
+.lang{display:flex;gap:6px;font-family:var(--serif);font-size:15px;letter-spacing:.12em}
+.lang button{padding:10px 8px;opacity:.45;transition:opacity .3s}
+.lang button[aria-pressed="true"]{opacity:1}
+.hig{display:none;font-family:var(--serif);font-size:14px;letter-spacing:.14em}
+
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:30;padding:10px var(--pad) calc(10px + env(safe-area-inset-bottom));display:flex;gap:10px;background:linear-gradient(to top,var(--bg) 62%,rgba(196,196,196,0))}
+.btn{display:flex;align-items:center;justify-content:center;gap:9px;height:44px;border-radius:100px;font-family:var(--serif);font-size:13px;letter-spacing:.2em;text-transform:uppercase;transition:transform .4s var(--ease),background .4s,color .4s;white-space:nowrap}
+.btn:active{transform:scale(.97)}
+.btn.ig{flex:1.35;background:var(--ink);color:var(--bg)}
+.btn.bk{flex:1;border:1px solid var(--ink)}
+.btn svg{width:16px;height:16px;flex:none}
+
+/* ===== HERO：レイヤーで被写界深度 ===== */
+.scene{position:relative;height:calc(var(--pt) + var(--ps)*.84 + 130px);overflow:hidden;isolation:isolate;touch-action:pan-y;-webkit-mask-image:linear-gradient(to bottom,#000 86%,transparent 100%);mask-image:linear-gradient(to bottom,#000 86%,transparent 100%)}
+.lyr{position:absolute;inset:0;pointer-events:none;will-change:transform}
+.ghost{position:absolute;left:50%;top:calc(var(--pt) + var(--ps)*.18);transform:translateX(-50%);white-space:nowrap;font-family:var(--serif);font-weight:300;font-size:min(30vw,300px);line-height:1;letter-spacing:-.04em;color:rgba(255,255,255,.5);filter:blur(10px);opacity:0;transition:opacity 2.4s var(--ease) .2s}
+.ready .ghost{opacity:1}
+.ring{position:absolute;left:50%;top:calc(var(--pt) + var(--ps)*.48);width:calc(var(--ps)*1.12);aspect-ratio:1;border:1px solid rgba(18,18,18,.22);border-radius:50%;transform:translate(-50%,-50%) scale(.7);opacity:0;filter:blur(1.2px);transition:opacity 2s var(--ease) .5s,transform 2.8s var(--ease) .3s}
+.ring.r2{width:calc(var(--ps)*1.5);border-color:rgba(18,18,18,.12);filter:blur(2.4px)}
+.ready .ring{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.bk-d{position:absolute;border-radius:50%;opacity:0;transition:opacity 2.4s var(--ease)}
+.ready .bk-d{opacity:var(--o,.4)}
+.bk-d i{display:block;width:100%;height:100%;border-radius:50%;animation:drift var(--t,14s) ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(var(--dx,14px),var(--dy,-18px),0)}}
+.ph{position:absolute;left:50%;top:var(--pt);width:var(--ps);height:var(--ps);margin-left:calc(var(--ps)/-2);overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 70%,transparent 100%);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  mask-image:linear-gradient(to right,transparent 0,#000 12%,#000 88%,transparent 100%),linear-gradient(to bottom,transparent 0,#000 10%,#000 70%,transparent 100%)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;filter:blur(26px);transform:scale(1.14)}
+.ready .ph img{animation:focus 2.6s var(--ease) .35s forwards}
+@keyframes focus{0%{opacity:0;filter:blur(26px);transform:scale(1.14)}35%{opacity:.85}100%{opacity:1;filter:blur(0);transform:scale(1)}}
+.id{position:absolute;left:0;right:0;top:calc(var(--pt) + var(--ps)*.84);text-align:center;padding:0 var(--pad)}
+h1{font-family:var(--serif);font-weight:300;font-size:clamp(64px,20vw,170px);line-height:.95;letter-spacing:-.03em;white-space:nowrap}
+h1 .w{display:inline-block;overflow:hidden;padding-bottom:.06em;margin:0 .1em}
+h1 .ch{display:inline-block;transform:translateY(112%)}
+.ready h1 .ch{transform:none;transition:transform 1.4s var(--ease);transition-delay:calc(var(--i)*80ms + 1100ms)}
+.sub{margin-top:12px;font-family:var(--serif);font-size:13px;letter-spacing:.26em;text-transform:uppercase;color:var(--soft);opacity:0;transition:opacity 1.4s var(--ease) 1.8s}
+.ready .sub{opacity:1}
+.sub b{font-weight:400;color:var(--ink)}
+
+.fade{opacity:0;transform:translateY(20px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.in.fade,.in .fade{opacity:1;transform:none}
+
+.main{max-width:760px;margin:0 auto}
+section{padding:64px var(--pad) 0}
+.head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px}
+.head h2{font-family:var(--serif);font-weight:300;font-size:clamp(30px,8.4vw,44px);line-height:1;letter-spacing:-.01em}
+
+/* WORK WITH：さりげない文字ロゴ（リンク先は新しいタブ） */
+.wall{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:22px 34px;padding:26px 0;border-top:1px solid var(--line)}
+.wall.last{border-bottom:1px solid var(--line)}
+.wl{display:block;text-align:center;opacity:.74;transition:opacity .5s var(--ease)}
+a.wl:hover{opacity:1}
+a.wl:active{opacity:1}
+.wl .m{display:block;line-height:1.1}
+.wl .s{display:block;margin-top:5px;font-family:var(--sans);font-size:7.5px;letter-spacing:.34em;text-transform:uppercase;opacity:.7}
+.k-wide .m{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.3em;padding-left:.3em}
+.k-serif .m{font-family:var(--serif);font-weight:500;font-size:16px;letter-spacing:.16em;padding-left:.16em}
+.k-italic .m{font-family:var(--serif);font-style:italic;font-weight:400;font-size:22px}
+.k-db .m{font-family:var(--sans);font-weight:600;font-size:24px;letter-spacing:-.04em}
+.wl img{display:block;max-height:26px;max-width:110px;object-fit:contain}
+.place .wl{opacity:.62}
+.place a.wl:hover{opacity:1}
+.place .k-wide .m{font-size:10.5px}.place .k-serif .m{font-size:14.5px}
+.wcap{position:relative;z-index:1;width:max-content;font-family:var(--serif);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);margin:24px auto -8px;padding:0 14px;background:var(--bg)}
+.wcap:first-of-type{margin-top:0}
+
+/* SESSIONS（YouTube） */
+.yt{position:relative;aspect-ratio:16/9;border-radius:16px;overflow:hidden;background:#101010;cursor:pointer;box-shadow:0 20px 50px -24px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.18)}
+.yt .th{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06) brightness(.86);transform:scale(1.05);transition:filter 1.2s var(--ease),transform 2s var(--ease)}
+.yt:hover .th{filter:grayscale(.15) contrast(1.05) brightness(.9);transform:scale(1.09)}
+.yt::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 45%,rgba(0,0,0,.42) 100%);pointer-events:none}
+.yt .pl{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border:1px solid rgba(255,255,255,.85);border-radius:50%;z-index:2;display:grid;place-items:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,.08);transition:transform .7s var(--ease),background .5s}
+.yt:hover .pl{transform:scale(1.1);background:rgba(255,255,255,.2)}
+.yt .pl svg{width:20px;height:20px;margin-left:3px;fill:#fff}
+.yt .du{position:absolute;right:14px;bottom:12px;z-index:2;color:#fff;font-family:var(--serif);font-size:12px;letter-spacing:.2em;opacity:.85;padding:3px 9px;border-radius:100px;background:rgba(0,0,0,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.ycap{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:16px 0 0}
+.ycap b{font-family:var(--serif);font-weight:300;font-size:clamp(22px,6vw,30px);line-height:1.05;letter-spacing:-.01em}
+.ycap small{font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);text-align:right;line-height:1.7}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
+
+/* INSTAGRAM（カードのサイズを統一） */
+.posts{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px var(--pad) 22px;margin:0 calc(var(--pad)*-1);-webkit-overflow-scrolling:touch;scrollbar-width:none;perspective:1100px}
+.posts::-webkit-scrollbar{display:none}
+.card{will-change:transform,opacity;transform-origin:50% 40%;flex:0 0 min(78vw,320px);height:min(122vw,500px);scroll-snap-align:start;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.22)}
+.card .instagram-media{margin:0!important;border-radius:14px!important;min-width:0!important;max-width:100%!important;width:100%!important;height:100%!important}
+.card iframe{width:100%!important;height:100%!important;display:block}
+.handle{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-top:4px;padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);transition:opacity .4s}
+.handle:active{opacity:.6}
+.handle small{font-family:var(--serif);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
+.handle b{font-family:var(--serif);font-weight:400;font-size:clamp(19px,5.2vw,24px);letter-spacing:.02em}
+
+/* PROFILE（控えめに） */
+.pf{font-size:14px;line-height:2.1;letter-spacing:.05em;font-weight:400;color:rgba(18,18,18,.72)}
+html[data-lang="en"] .pf{font-family:var(--serif);font-size:17px;line-height:1.75;letter-spacing:.01em}
+.facts{margin-top:24px;border-top:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-family:var(--serif);font-size:15px}
+.facts dt{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft);padding-top:3px}
+.facts dd{text-align:right;color:rgba(18,18,18,.78)}
+
+/* CONTACT */
+.ct .cbtn{display:flex;align-items:center;justify-content:space-between;width:100%;padding:20px 0;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);font-family:var(--serif);font-weight:300;font-size:clamp(26px,7.4vw,40px);letter-spacing:-.01em;transition:padding .6s var(--ease)}
+.ct .cbtn span{font-size:.7em;transition:transform .6s var(--ease)}
+.ct .cbtn:hover{padding-left:10px}.ct .cbtn:hover span{transform:translateX(-6px)}
+footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;font-family:var(--serif);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--soft)}
+
+/* メールフォーム（下からせり上がる） */
+#mdl{position:fixed;inset:0;z-index:60;visibility:hidden;transition:visibility 0s .8s}
+#mdl.open{visibility:visible;transition:none}
+#mdl .bd{position:absolute;inset:0;background:rgba(18,18,18,.5);opacity:0;transition:opacity .6s var(--ease)}
+#mdl.open .bd{opacity:1}
+#mdl .pnl{position:absolute;left:0;right:0;bottom:0;max-width:640px;margin:0 auto;max-height:92svh;overflow-y:auto;background:var(--bg);border-radius:26px 26px 0 0;padding:30px var(--pad) calc(30px + env(safe-area-inset-bottom));transform:translateY(102%);transition:transform .8s var(--ease)}
+#mdl.open .pnl{transform:none}
+#mdl .x{position:absolute;top:16px;right:16px;width:40px;height:40px;border:1px solid var(--ink);border-radius:50%;display:grid;place-items:center;font-size:22px;line-height:1;text-align:center}
+#mdl .tt{font-family:var(--serif);font-weight:300;font-size:clamp(34px,9vw,52px);line-height:1;letter-spacing:-.02em}
+#mdl form{margin-top:26px;display:grid;gap:20px}
+#mdl label{display:block;font-family:var(--serif);font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--soft)}
+#mdl input,#mdl textarea{display:block;width:100%;margin-top:6px;background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;padding:8px 0 10px;font:400 17px/1.5 var(--mincho);color:var(--ink);outline:none;resize:none;transition:border-color .3s}
+#mdl input:focus,#mdl textarea:focus{border-bottom-width:2px;padding-bottom:9px}
+#mdl textarea{min-height:110px}
+#mdl .row{display:grid;grid-template-columns:1fr;gap:20px}
+#mdl .send{height:50px;border-radius:100px;background:var(--ink);color:var(--bg);font-family:var(--serif);font-size:14px;letter-spacing:.24em;text-transform:uppercase;text-align:center;transition:transform .4s var(--ease),opacity .4s}
+#mdl .send:active{transform:scale(.98)}
+#mdl .send[disabled]{opacity:.5}
+#mdl .note{font-size:12.5px;line-height:1.8;color:var(--soft);min-height:1.8em}
+#mdl .hp{position:absolute;left:-9999px;opacity:0}
+
+@media(min-width:900px){
+  :root{--pad:48px;--ps:min(540px,62svh)}
+  body{padding-bottom:0}
+  .bar{display:none}
+  .hig{display:inline-block}
+  .scene{height:max(calc(var(--pt) + var(--ps)*.84 + 150px),88svh)}
+  .btn.bk:hover{background:var(--ink);color:var(--bg)}
+  .posts{margin:0 calc(var(--pad)*-1)}
+  #mdl .row{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .fade{opacity:1;transform:none}h1 .ch{transform:none}.ghost,.ring,.sub{opacity:1}.bk-d{opacity:var(--o,.4)}.ph img{opacity:1;filter:none;transform:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="mark" href="#top">Sho Sho</a>
+  <div style="display:flex;align-items:center;gap:22px"><a class="hig" href="https://www.instagram.com/whereisshosho/" target="_blank" rel="noopener noreferrer">@whereisshosho ↗</a><div class="lang" role="group" aria-label="Language"><button data-set="ja" aria-pressed="true">JA</button><button data-set="en" aria-pressed="false">EN</button></div></div>
+</header>
+
+<div class="scene" id="top">
+  <div class="lyr" data-d="-1"><div class="ghost" aria-hidden="true">SHO SHO</div></div>
+  <div class="lyr" data-d="-.7" id="bkB"></div>
+  <div class="lyr" data-d="-.35"><div class="ring"></div><div class="ring r2"></div></div>
+  <div class="lyr" data-d="0" id="phL"><div class="ph"><img src="assets/shosho.jpg" alt="Sho Sho" width="1749" height="1749"></div></div>
+  <div class="lyr" data-d=".35">
+    <div class="id">
+      <h1><span class="w"><span class="ch" style="--i:0">S</span><span class="ch" style="--i:1">h</span><span class="ch" style="--i:2">o</span></span><span class="w"><span class="ch" style="--i:3">S</span><span class="ch" style="--i:4">h</span><span class="ch" style="--i:5">o</span></span></h1>
+      <div class="sub"><b>DJ</b> — Tokyo / LA / NY</div>
+    </div>
+  </div>
+  <div class="lyr" data-d="1.2" id="bkF"></div>
+</div>
+
+<div class="main">
+  <section id="work" class="fade">
+    <div class="head"><h2>Work with</h2></div>
+    <div class="wcap">Place</div>
+    <div class="wall place last" id="place" aria-label="Places"></div>
+  </section>
+
+  <section id="sessions" class="fade">
+    <div class="head"><h2>Sessions</h2><span class="lab">NOKTOA</span></div>
+    <div id="ytwrap"></div>
+  </section>
+
+  <section id="ig" class="fade">
+    <div class="head"><h2>Instagram</h2><span class="lab">Gallery</span></div>
+    <div class="posts" id="grid"></div>
+    <a class="handle" href="https://www.instagram.com/whereisshosho/" target="_blank" rel="noopener noreferrer"><small data-l="ja">最新</small><small data-l="en">Latest</small><b>@whereisshosho ↗</b></a>
+  </section>
+
+  <section id="profile" class="fade">
+    <div class="head"><h2>Profile</h2></div>
+    <p class="pf"><span data-l="ja">日本とペルシャのクウォーター<br>ダンサーとして旅した LA NY で<br>ナイトクラブに出会い<br>ラグジュアリーの現場で磨いた感覚で<br>グルーヴのあるサウンドを届ける</span><span data-l="en">Japanese, quarter Persian<br>Found the dance floor as a traveling dancer in LA and NY<br>Shaped in the world of luxury<br>tuned to fashionable, groovy sound</span></p>
+    <dl class="facts">
+      <div><dt>Born</dt><dd>April 20th, 1997 — Tokyo</dd></div>
+      <div><dt>Style</dt><dd>Fashionable, groovy sounds</dd></div>
+    </dl>
+  </section>
+
+  <section id="contact" class="ct fade">
+    <button class="cbtn" id="openForm" type="button"><b style="font-weight:300">Contact</b><span>→</span></button>
+  </section>
+
+  <section id="brandsec" class="fade">
+    <div class="wcap">Brand</div>
+    <div class="wall last" id="brand" aria-label="Brands"></div>
+  </section>
+
+  <footer><span>© 2026 Sho Sho</span><span>Site by NOKTOA</span></footer>
+</div>
+
+<nav class="bar" aria-label="Quick actions">
+  <a class="btn ig" href="https://www.instagram.com/whereisshosho/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".9" fill="currentColor"/></svg>Instagram</a>
+  <button class="btn bk" id="openForm2" type="button">Booking</button>
+</nav>
+
+<div id="mdl" aria-hidden="true">
+  <div class="bd"></div>
+  <div class="pnl" role="dialog" aria-modal="true" aria-labelledby="mtt">
+    <button class="x" type="button" aria-label="Close">×</button>
+    <div class="tt" id="mtt">Booking</div>
+    <form id="bf" novalidate>
+      <div class="row">
+        <label><span data-l="ja">お名前</span><span data-l="en">Name</span><input name="name" type="text" autocomplete="name" required></label>
+        <label><span data-l="ja">メールアドレス</span><span data-l="en">Email</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+      </div>
+      <label><span data-l="ja">日程・場所（わかる範囲で）</span><span data-l="en">Date / Place</span><input name="when" type="text"></label>
+      <label><span data-l="ja">メッセージ</span><span data-l="en">Message</span><textarea name="msg" required></textarea></label>
+      <input class="hp" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="send" type="submit"><span data-l="ja">送信</span><span data-l="en">Send</span></button>
+      <p class="note" id="bnote" role="status"></p>
+    </form>
+  </div>
+</div>
+
+<script src="data.js?v=20261012065228"></script>
+<script>
+(()=>{
+const D=window.SHOSHO,root=document.documentElement;
+const IG='https://www.instagram.com/'+D.handle+'/';
+const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const rnd=(a,b)=>a+Math.random()*(b-a);
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* 言語 */
+$$('[data-set]').forEach(b=>b.addEventListener('click',()=>{
+  root.dataset.lang=b.dataset.set;root.lang=b.dataset.set;
+  $$('[data-set]').forEach(x=>x.setAttribute('aria-pressed',x===b));
+}));
+
+/* ボケの光 */
+function bokeh(host,n,far){
+  for(let i=0;i<n;i++){
+    const size=far?rnd(46,150):rnd(150,330), blur=far?rnd(5,10):rnd(16,30);
+    const light=Math.random()<(far?.7:.55);
+    const d=document.createElement('div');d.className='bk-d';
+    d.style.cssText=`left:${rnd(-6,98)}%;top:${rnd(-4,96)}%;width:${size}px;height:${size}px;--o:${far?rnd(.28,.55):rnd(.18,.36)};transition-delay:${rnd(.3,1.6)}s;filter:blur(${blur}px)`;
+    const i2=document.createElement('i');
+    i2.style.cssText=`background:${light?'radial-gradient(circle,rgba(255,255,255,.95),rgba(255,255,255,.35) 60%,rgba(255,255,255,0))':'radial-gradient(circle,rgba(18,18,18,.5),rgba(18,18,18,.12) 62%,rgba(18,18,18,0))'};--t:${rnd(11,22)}s;--dx:${rnd(-24,24)}px;--dy:${rnd(-30,30)}px`;
+    d.appendChild(i2);host.appendChild(d);
+  }
+}
+bokeh($('#bkB'),9,true);bokeh($('#bkF'),5,false);
+
+/* 読み込み */
+const img=$('.ph img');let ok=false;
+img.complete?ok=true:img.addEventListener('load',()=>ok=true);
+const go=()=>document.body.classList.add('ready');
+(function w(){ok?go():requestAnimationFrame(w)})();
+setTimeout(go,2500);
+
+/* ヒーロー：視差・ドラッグ・ピント送り */
+const lyrs=$$('.lyr[data-d]').map(el=>({el,d:+el.dataset.d}));
+const phEl=$('.ph'),scene=$('.scene');
+let mx=0,my=0,sx=0,sy2=0,dragging=false,dx0=0,dy0=0;
+if(matchMedia('(hover:hover)').matches){addEventListener('pointermove',e=>{if(e.pointerType==='mouse'){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5}})}
+scene.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;dragging=true;dx0=e.clientX;dy0=e.clientY});
+addEventListener('pointermove',e=>{if(!dragging)return;mx=clamp((e.clientX-dx0)/innerWidth*1.5,-.9,.9);my=clamp((e.clientY-dy0)/innerHeight*1.2,-.5,.5)});
+const endDrag=()=>{dragging=false;mx=0;my=0};
+addEventListener('pointerup',endDrag);addEventListener('pointercancel',endDrag);
+function loop(){
+  const sy=scrollY,h=scene.offsetHeight;
+  if(sy<h*1.3&&!reduce){
+    sx+=(mx-sx)*.06;sy2+=(my-sy2)*.06;
+    lyrs.forEach(({el,d})=>{el.style.transform=`translate3d(${(-sx*d*46).toFixed(1)}px,${(-sy*d*.42-sy2*d*26).toFixed(1)}px,0)`});
+    const p=clamp(sy/h);
+    phEl.style.filter=p>.18?`blur(${((p-.18)*9).toFixed(1)}px)`:'none';
+  }
+  requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+/* Work with（url があれば新しいタブで開く） */
+function wall(list,host){
+  list.forEach(it=>{
+    const link=!!it.url;
+    const d=document.createElement(link?'a':'span');d.className='wl k-'+(it.k||'wide');
+    if(link){d.href=it.url;d.target='_blank';d.rel='noopener noreferrer';d.setAttribute('aria-label',it.name+' (opens in a new tab)')}
+    else{d.setAttribute('role','img');d.setAttribute('aria-label',it.name)}
+    d.innerHTML=(it.logo?`<img src="${esc(it.logo)}" alt="">`:`<span class="m">${esc(it.mark)}</span>`)+(it.sub?`<span class="s">${esc(it.sub)}</span>`:'');
+    host.appendChild(d);
+  });
+}
+wall(D.works.place,$('#place'));wall(D.works.brand,$('#brand'));
+
+/* Sessions：YouTube（押すまで読み込まない） */
+(D.sessions||[]).forEach(v=>{
+  const el=document.createElement('div');el.className='yt';el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label','Play: '+v.title);
+  el.innerHTML=`<img class="th" alt="" loading="lazy" src="https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/${v.id}/hqdefault.jpg'"><span class="pl"><svg viewBox="0 0 20 20"><path d="M3 1.5v17L18 10z"/></svg></span><span class="du">${esc(v.len||'')}</span>`;
+  const play=()=>{
+    if($('iframe',el))return;
+    const f=document.createElement('iframe');
+    f.src=`https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+    f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=v.title;
+    el.appendChild(f);
+  };
+  el.addEventListener('click',play);el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play()}});
+  $('#ytwrap').appendChild(el);
+  const cap=document.createElement('div');cap.className='ycap';cap.innerHTML=`<b>${esc(v.title)}</b><small>${esc(v.sub||'')}</small>`;$('#ytwrap').appendChild(cap);
+});
+
+/* Instagram（サイズ統一・横スワイプの奥行き） */
+function depth(host){
+  if(reduce)return;
+  const r=host.getBoundingClientRect(),c=r.left+r.width/2;
+  $$('.card',host).forEach(el=>{
+    const b=el.getBoundingClientRect(),d=((b.left+b.width/2)-c)/(b.width*.95),t=clamp(Math.abs(d),0,1.4);
+    el.style.transform=`rotateY(${(-Math.sign(d)*t*9).toFixed(1)}deg) scale(${(1-t*.07).toFixed(3)})`;
+    el.style.opacity=(1-t*.38).toFixed(2);
+  });
+}
+let embedLoaded=false;
+function loadEmbed(){
+  if(window.instgrm){window.instgrm.Embeds.process();return}
+  if(embedLoaded)return;embedLoaded=true;
+  const s=document.createElement('script');s.async=true;s.src='https://www.instagram.com/embed.js';
+  s.onload=()=>window.instgrm&&window.instgrm.Embeds.process();document.body.appendChild(s);
+}
+const grid=$('#grid');
+grid.innerHTML=D.gallery.map(u=>`<div class="card"><blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener noreferrer">Instagram</a></blockquote></div>`).join('');
+new IntersectionObserver((es,o)=>{if(es[0].isIntersecting){loadEmbed();o.disconnect()}},{rootMargin:'500px'}).observe(grid);
+grid.addEventListener('scroll',()=>depth(grid),{passive:true});
+depth(grid);[600,1800,4000].forEach(t=>setTimeout(()=>depth(grid),t));
+
+/* メールフォーム */
+const mdl=$('#mdl'),form=$('#bf'),note=$('#bnote');
+const L=(ja,en)=>root.dataset.lang==='en'?en:ja;
+function openForm(){mdl.classList.add('open');mdl.setAttribute('aria-hidden','false');document.body.classList.add('lock');note.textContent='';setTimeout(()=>$('input[name=name]',form).focus({preventScroll:true}),500)}
+function closeForm(){mdl.classList.remove('open');mdl.setAttribute('aria-hidden','true');document.body.classList.remove('lock')}
+$('#openForm').addEventListener('click',openForm);$('#openForm2').addEventListener('click',openForm);
+$('.bd',mdl).addEventListener('click',closeForm);$('.x',mdl).addEventListener('click',closeForm);
+addEventListener('keydown',e=>{if(e.key==='Escape')closeForm()});
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const f=Object.fromEntries(new FormData(form));
+  if(f.website)return;                                   // ボット対策（人には見えない欄）
+  if(!f.name.trim()||!/^\S+@\S+\.\S+$/.test(f.email)||!f.msg.trim()){note.textContent=L('お名前・メールアドレス・メッセージをご入力ください','Please fill in your name, email and message.');return}
+  const btn=$('.send',form);btn.disabled=true;
+  const subject='Booking — '+f.name.trim();
+  const body=`Name: ${f.name}\nEmail: ${f.email}\nDate / Place: ${f.when||'-'}\n\n${f.msg}`;
+  if(D.form){
+    try{
+      const r=await fetch(D.form,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:f.name,email:f.email,when:f.when,message:f.msg,_subject:subject})});
+      if(!r.ok)throw 0;note.textContent=L('送信しました。ありがとうございます','Sent. Thank you.');form.reset();
+    }catch(_){note.textContent=L('送信できませんでした。時間をおいてもう一度お試しください','Could not send. Please try again later.')}
+  }else{
+    location.href=`mailto:${D.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    note.textContent=L('メールアプリが開きます。そのまま送信してください','Your mail app will open. Just hit send.');
+  }
+  btn.disabled=false;
+});
+
+/* ボード用 */
+if(location.hash&&window.top!==window){setTimeout(()=>{const t=$(location.hash);t&&window.scrollTo({top:t.getBoundingClientRect().top+scrollY-(location.hash==='#top'?0:40),behavior:'instant'})},1400)}
+
+/* スクロール出現 */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+$$('.fade').forEach(el=>io.observe(el));
+})();
+</script>
+</body>
+</html>
