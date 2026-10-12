@@ -9,6 +9,7 @@
     var reduce = root.classList.contains('reduce-motion');          // 早期スクリプト(head)が決定: OS設定を尊重。ユーザーが「動きを再生」を選んだ場合は解除
     var osReduce = root.classList.contains('os-reduce'), optedIn = osReduce && !reduce;
     var mobile = window.matchMedia('(max-width: 720px)').matches;
+    function dropGate() { root.classList.remove('gate-on'); var g = document.getElementById('gate'); if (g && g.parentNode) g.parentNode.removeChild(g); }
     function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
     function smooth(a, b, v) { var t = clamp((v - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
 
@@ -151,7 +152,7 @@
     try { gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: false, powerPreference: 'high-performance' }); } catch (e) { gl = null; }
     note('webgl', gl ? 'OK' : 'NULL (取得失敗)');
     if (/[?&]noblend=1/.test(location.search)) { canvas.style.mixBlendMode = 'normal'; note('blend', 'normal(診断)'); }
-    if (!gl) { setStatic(); root.classList.add('fx-off'); return; }
+    if (!gl) { dropGate(); setStatic(); root.classList.add('fx-off'); return; }
     if (reduce) setStatic();
 
     var N = mobile ? 36000 : 90000;
@@ -165,7 +166,7 @@
         'precision highp float;',
         'attribute vec4 aHome; attribute vec4 aRand;',
         'uniform mat4 uVP; uniform vec3 uCam;',
-        'uniform float uDpr, uTime, uAssemble, uFinal, uSize, uAlpha, uGold, uFlash, uShift, uEndZ, uL, uLift, uMaxPt, uGain;',
+        'uniform float uDpr, uTime, uAssemble, uFinal, uSize, uAlpha, uGold, uFlash, uShift, uEndZ, uL, uLift, uMaxPt, uGain, uFlow;',
         'uniform vec2 uMH, uME; uniform vec3 uPH, uPE;',
         'uniform vec4 uFrame; uniform vec3 uEmb, uWm;',
         'varying float vA; varying float vG;',
@@ -205,24 +206,23 @@
         '  vec3 logoP = mix(st, h+wob, e);',
         '  logoP.xy += repel(logoP.xy, uMH, 0.62, 0.55)*e;',
         '  logoP += shock(logoP, uPH)*e;',
-        '  float zRel = mod(R.z*uL - uCam.z, uL) - uL*0.86;',
+        '  float zRel = mod(R.z*uL - uCam.z + uFlow, uL) - uL*0.86;',
         '  float px = (R.x*2.-1.)*12.5 + sin(t*.11+R.y*30.)*.9 + sin(zRel*.11+R.x*6.28)*1.4;',
         '  float py = (R.y*2.-1.)*7.5 + cos(t*.09+R.x*30.)*.9 + cos(zRel*.13+R.y*6.28)*1.1;',
         '  vec3 fieldP = vec3(px + uCam.x, py + uCam.y, uCam.z + zRel);',
-        '  vec2 cxy = mix(h.xy, composeXY(h, part), uLift);',
-        '  vec3 eh = vec3(cxy, uEndZ + h.z*(1.-uLift*.85)) + wob;',
+        '  vec3 eh = fieldP + wob;                                    // フィナーレも冒頭と同じ粒子の海。カメラは止まるが、粒子の側が手前へ流れ続ける',
         '  float fd = length(h.xy)*0.17 + R.y*0.26;',
         '  float fe = smr(uFinal*1.65 - fd);',
         '  vec3 endP = eh;',
         '  endP.xy += repel(eh.xy, uME, 0.62, 0.55)*fe;',
         '  endP += shock(eh, uPE)*fe;',
-        '  float fa = (1.-fe)*fe*3.2*(R.z-.5);',
+        '  float fa = 0.;',
         '  vec3 mid = mix(fieldP, endP, fe); mid.x += fa; mid.y -= fa*.6;',
         '  float lw = (1.-dust)*sst(-0.9, 0.9, uCam.z);',
         '  vec3 P = mix(mid, logoP, lw);',
         '  float isEmb = step(.5,part)*step(part,2.5), isWm = step(2.5,part), isBr = 1.-step(.5,part);',
         '  float sc = isEmb*uEmb.z + isWm*uWm.z;',
-        '  float keep = 1. - uLift*(isEmb+isWm);                      // リング・三日月・文字は粒子がほどけて消え、括弧だけが残る',
+        '  float keep = 1.;                           // 終盤は粒子を間引き、うっすらまとわせる',
         '  if(R.y > keep){ gl_Position = vec4(2., 2., 2., 1.); gl_PointSize = 0.; vA = 0.; vG = 0.; return; }',
         '  vec4 clip = uVP*vec4(P, 1.);',
         '  gl_Position = clip; gl_Position.y += uShift*clip.w;',
@@ -236,7 +236,7 @@
         '  float boke = clamp(5.5/(pt/uSize*7.8+0.001), .1, 1.);',
         '  vA = br*near*far*uAlpha*boke*uGain*(1.+uFlash*1.4)*mix(1., .6, dust)*mix(3.6, 1., lw)*mix(1., 1.05, uLift*isBr)*mix(1., .62, step(.5,part)*step(part,1.5));',
         '  float gl = step(.5,part)*step(part,1.5);',
-        '  float g = max(gl*max(lw*e, fe), step(0.95, R.x)*.9);',
+        '  float g = max(gl*lw*e, step(0.95, R.x)*.9);',
         '  vG = clamp(g*uGold, 0., 1.);',
         '}'
     ].join('\n');
@@ -282,10 +282,10 @@
     }
     var PP, QP;
     try { PP = program(VS, FS, ['aHome', 'aRand']); QP = program(QV, QF, ['aPos']); }
-    catch (err) { note('SHADER_ERROR', String(err && err.message || err).slice(0, 220)); if (window.console) console.warn('[fx]', err); setStatic(); root.classList.add('fx-off'); return; }
+    catch (err) { note('SHADER_ERROR', String(err && err.message || err).slice(0, 220)); if (window.console) console.warn('[fx]', err); dropGate(); setStatic(); root.classList.add('fx-off'); return; }
 
     function locs(p, names) { var o = {}; names.forEach(function (n) { o[n] = gl.getUniformLocation(p, n); }); return o; }
-    var PU = locs(PP, ['uVP', 'uCam', 'uDpr', 'uTime', 'uAssemble', 'uFinal', 'uSize', 'uAlpha', 'uGold', 'uFlash', 'uShift', 'uEndZ', 'uL', 'uLift', 'uMaxPt', 'uGain', 'uMH', 'uME', 'uPH', 'uPE', 'uFrame', 'uEmb', 'uWm']);
+    var PU = locs(PP, ['uVP', 'uCam', 'uDpr', 'uTime', 'uAssemble', 'uFinal', 'uSize', 'uAlpha', 'uGold', 'uFlash', 'uShift', 'uEndZ', 'uL', 'uLift', 'uMaxPt', 'uGain', 'uFlow', 'uMH', 'uME', 'uPH', 'uPE', 'uFrame', 'uEmb', 'uWm']);
     var QU = locs(QP, ['uTex', 'uK', 'uSub', 'uFea', 'uRad', 'uN', 'uClr', 'uClrS', 'uRes']);
 
     var quadBuf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
@@ -441,7 +441,7 @@
         gl.uniform1f(PU.uDpr, DPR); gl.uniform1f(PU.uTime, U.time); gl.uniform1f(PU.uAssemble, U.assemble); gl.uniform1f(PU.uFinal, U.final);
         gl.uniform1f(PU.uSize, DPR * (vh / 900) * D); gl.uniform1f(PU.uAlpha, U.alpha); gl.uniform1f(PU.uGold, U.gold); gl.uniform1f(PU.uFlash, U.flash);
         gl.uniform1f(PU.uShift, U.shift); gl.uniform1f(PU.uEndZ, endZ); gl.uniform1f(PU.uL, FIELD_L); gl.uniform1f(PU.uLift, U.lift);
-        gl.uniform1f(PU.uMaxPt, 26 * DPR); gl.uniform1f(PU.uGain, mobile ? .15 : .12);
+        gl.uniform1f(PU.uFlow, U.flow); gl.uniform1f(PU.uMaxPt, 26 * DPR); gl.uniform1f(PU.uGain, mobile ? .15 : .12);
         gl.uniform2fv(PU.uMH, U.mH); gl.uniform2fv(PU.uME, U.mE); gl.uniform3fv(PU.uPH, U.pH); gl.uniform3fv(PU.uPE, U.pE);
         gl.uniform4fv(PU.uFrame, frameU); gl.uniform3fv(PU.uEmb, embU); gl.uniform3fv(PU.uWm, wmU);
         gl.drawArrays(gl.POINTS, 0, drawN);
@@ -462,10 +462,10 @@
         var heroP = clamp(sy / YH, 0, 1), cz = reduce ? D : camZ(sy), ye = reduce ? 0 : yEffOf(sy);
         smx += (mx - smx) * (1 - Math.exp(-dt * 3)); smy += (my - smy) * (1 - Math.exp(-dt * 3));
         var fin = finale ? clamp((sy - Yf) / Lf, 0, 1) : 0, rollK = 1 - smooth(0, .5, fin);
-        var roll = Math.sin(sy * .00042) * .2 * rollK * smooth(.55, 1, heroP);
-        var camx = Math.sin(ye * .0009) * .5 * smooth(.7, 1, heroP) * rollK, camy = Math.cos(ye * .0007) * .36 * smooth(.7, 1, heroP) * rollK;
+        var roll = 0;                                              // 左右の傾き・横揺れは使わない（携帯で触ったとき違和感があるため）
+        var camx = 0, camy = Math.cos(ye * .0007) * .36 * smooth(.7, 1, heroP) * rollK;
         var pf = 1 - smooth(.3, .5, fin);                          // フィナーレでは視差を切り、DOMの文字とずらさない
-        var V = mul(rotZ(roll), mul(rotX(smy * .025 * pf), mul(rotY(-smx * .035 * pf), trans(-camx, -camy, -cz))));
+        var V = mul(rotZ(roll), mul(rotX(smy * .025 * pf), mul(rotY(0), trans(-camx, -camy, -cz))));
         U.vp = mul(persp(FOV, aspect, .1, 140), V); U.cam = [camx, camy, cz]; U.time = t;
         U.assemble = reduce ? 1 : clamp(t / 3.4, 0, 1);
         if (!reduce && !introFlash && t > 3.2) { introFlash = true; if (heroP < .12) flashT = now; }
@@ -489,12 +489,30 @@
         var age = (now - pulseT) / 1000, pAge = age < 1.8 ? age : -1, pny = pulseXY[1] - U.shift;
         U.pH = [pulseXY[0] * TANH * aspect * dH + camx, pny * TANH * dH + camy, pAge]; U.pE = [pulseXY[0] * TANH * aspect * dE + camx, pny * TANH * dE + camy, pAge];
         U.fade = 1 - Math.pow(1 - .16, dt * 60);
+        flow += dt * 0.5 * U.final; U.flow = flow;
         /* DOM連動 */
         hero.style.setProperty('--copy', U.copy.toFixed(3)); hero.style.setProperty('--ui', (1 - smooth(0, .07, heroP)).toFixed(3));
         hero.classList.toggle('copy-on', U.copy > .5);
         if (finale) { finale.style.setProperty('--fcopy', U.fcopy.toFixed(3)); finale.classList.toggle('copy-on', U.fcopy > .5); }
     }
-    var rafId = 0;
+    /* 入口（TAPで始まる）: 押されるまで粒子は組み上がらない。タップ後に t0 を取り直して頭から再生する */
+    var gateEl = root.classList.contains('gate-on') ? document.getElementById('gate') : null, begun = !gateEl;
+    function openGate(quiet) {
+        if (!gateEl) return;
+        begun = true; var g = gateEl; gateEl = null;
+        root.classList.remove('gate-on'); g.classList.add('out');
+        setTimeout(function () { if (g.parentNode) g.parentNode.removeChild(g); }, 1600);
+        if (quiet) { location.href = location.pathname + '?reduce=1'; return; }
+        window.scrollTo(0, 0);
+        if (ready && !reduce) { t0 = performance.now(); start(); }
+    }
+    if (gateEl) {
+        var ent = document.getElementById('enter'), qt = document.getElementById('quiet');
+        if (ent) ent.addEventListener('click', function () { openGate(false); });
+        if (qt) qt.addEventListener('click', function () { openGate(true); });
+        document.addEventListener('keydown', function (e) { if (gateEl && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openGate(false); } });
+    }
+    var rafId = 0, flow = 0;
     function frame(now) {
         if (!running) return; rafId = requestAnimationFrame(frame);
         var dt = clamp((now - last) / 1000 || .016, .001, .1); last = now;
@@ -515,12 +533,12 @@
     var img = new Image();
     img.onload = function () {
         note('logo', 'loaded ' + img.naturalWidth + 'x' + img.naturalHeight);
-        if (!build(img)) { note('BUILD', 'failed'); setStatic(); root.classList.add('fx-off'); return; }
+        if (!build(img)) { note('BUILD', 'failed'); begun = true; if (gateEl) { gateEl = null; root.classList.remove('gate-on'); var g2 = document.getElementById('gate'); if (g2) g2.remove(); } setStatic(); root.classList.add('fx-off'); return; }
         note('particles', N); resize(); ready = true; note('ready', true); root.classList.add('fx-ready'); t0 = performance.now();
         if (window.pageYOffset > 300) t0 -= 6000;
-        if (reduce) renderStatic(); else start();
+        if (reduce) renderStatic(); else if (!gateEl || begun) start();     // 入口がある間は、タップされるまで動かさない
     };
-    img.onerror = function () { note('LOGO_ERROR', 'image load failed'); setStatic(); root.classList.add('fx-off'); };
+    img.onerror = function () { note('LOGO_ERROR', 'image load failed'); begun = true; if (gateEl) { gateEl = null; root.classList.remove('gate-on'); var gg = document.getElementById('gate'); if (gg) gg.remove(); } setStatic(); root.classList.add('fx-off'); };
     img.src = 'assets/logo_wh.png';
     resize();
 

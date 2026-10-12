@@ -247,3 +247,21 @@ ul { list-style: none; }
 .motion-toggle span { font-size: .7rem; margin-right: 4px; }
 .motion-toggle:hover { background: rgba(255, 255, 255, .14); }
 .motion-off { background: none; border: 0; padding: 0 4px; min-height: 32px; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; opacity: .85; }
+
+/* ---- 入口（TAPで始まる。DJ SHOSHOページと同じ流れ） ---- */
+#gate { display: none; }
+.js.gate-on #gate { display: flex; position: fixed; inset: 0; z-index: 200; background: var(--ink); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; transition: opacity 1.3s var(--ease-slow), filter 1.3s var(--ease-slow), visibility 0s 1.3s; }
+.js #gate.out { transition: opacity 1.3s var(--ease-slow), filter 1.3s var(--ease-slow), visibility 0s 1.3s; display: flex; opacity: 0; filter: blur(18px); visibility: hidden; pointer-events: none; position: fixed; inset: 0; z-index: 200; background: var(--ink); flex-direction: column; align-items: center; justify-content: center; }
+.gate-on, .gate-on body { overflow: hidden; }
+.gate-logo { width: min(52vw, 240px); height: auto; }
+.gate-ent { position: relative; margin-top: 52px; width: 112px; height: 112px; border: 1px solid rgba(255, 255, 255, .7); border-radius: 50%; color: #fff; background: none; font: inherit; font-size: .82rem; letter-spacing: .3em; text-transform: uppercase; padding-left: .3em; cursor: pointer; transition: background .5s var(--ease), color .5s var(--ease), transform .6s var(--ease); -webkit-tap-highlight-color: transparent; }
+.gate-ent::before, .gate-ent::after { content: ""; position: absolute; inset: -1px; border: 1px solid rgba(255, 255, 255, .7); border-radius: 50%; opacity: 0; animation: gring 3.2s ease-out infinite; }
+.gate-ent::after { animation-delay: 1.6s; }
+.gate-ent:active { transform: scale(.95); background: #fff; color: var(--ink); }
+.gate-tap { margin-top: 24px; font-size: .84rem; letter-spacing: .08em; color: rgba(255, 255, 255, .62); }
+.gate-quiet { position: absolute; left: 0; right: 0; bottom: calc(26px + env(safe-area-inset-bottom)); background: none; border: 0; font: inherit; font-size: .78rem; letter-spacing: .14em; color: rgba(255, 255, 255, .5); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+@keyframes gring { 0% { transform: scale(1); opacity: .45; } 100% { transform: scale(1.7); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .gate-ent::before, .gate-ent::after { animation: none; } }
+
+/* フィナーレ: 粒子の上でも文字が読めるよう、ごく淡い影を足す */
+.finale-copy .h1, .finale-copy .lead-d { text-shadow: 0 0 22px rgba(5, 5, 7, .9), 0 0 6px rgba(5, 5, 7, .7); }

@@ -74,7 +74,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="fx.css?v=2cc748cf">
+    <link rel="stylesheet" href="fx.css?v=gate2">
+    <link rel="stylesheet" href="works-cases.css?v=1">
 <!-- analytics:start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
@@ -83,10 +84,16 @@ if(h.indexOf('/contact/')>-1)gtag('event','cta_click',{cta_target:h,page:locatio
 else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.pathname});});</script>
 <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yorl0bpxds");</script>
 <!-- analytics:end -->
-<script>(function(){var d=document.documentElement;d.classList.add("js");var os=matchMedia("(prefers-reduced-motion: reduce)").matches,opt=false;try{opt=localStorage.getItem("fxMotion")==="1"}catch(e){}var t=/[?&]osreduce=1/.test(location.search);if(os||t)d.classList.add("os-reduce");if(((os||t)&&!opt)||/[?&]reduce=1/.test(location.search))d.classList.add("reduce-motion")})()</script>
+<script>(function(){var d=document.documentElement;d.classList.add("js");var os=matchMedia("(prefers-reduced-motion: reduce)").matches,opt=false;try{opt=localStorage.getItem("fxMotion")==="1"}catch(e){}var t=/[?&]osreduce=1/.test(location.search);if(os||t)d.classList.add("os-reduce");if(((os||t)&&!opt)||/[?&]reduce=1/.test(location.search))d.classList.add("reduce-motion");if(!d.classList.contains("reduce-motion")&&!/[?&]nogate=1/.test(location.search)&&window.top===window)d.classList.add("gate-on")})()</script>
 </head>
 
 <body>
+<div id="gate" role="dialog" aria-label="Enter">
+    <img class="gate-logo" src="assets/logo_wh.png" alt="NOKTOA">
+    <button class="gate-ent" id="enter" type="button">Enter</button>
+    <p class="gate-tap">タップして始める</p>
+    <button class="gate-quiet" id="quiet" type="button">動きなしで見る</button>
+</div>
 <canvas id="fx" aria-hidden="true"></canvas>
 <header class="site-header">
     <div class="hwrap">
@@ -218,6 +225,29 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             <figure class="work rv d1" data-clear="box" data-pad="12"><video src="assets/works/002.mp4" poster="assets/works/002.jpg" controls preload="none" playsinline></video><figcaption>WORK 02</figcaption></figure>
             <figure class="work rv d2" data-clear="box" data-pad="12"><video src="assets/works/003.mp4" poster="assets/works/003.jpg" controls preload="none" playsinline></video><figcaption>WORK 03</figcaption></figure>
         </div>
+        <div class="works-cases">
+            <a class="cs-card cs-nl rv" href="/works/#neet-legend" data-clear="box" data-pad="12">
+                <p class="cs-eyebrow">自社IP｜TikTok運用</p>
+                <span class="nl-logo"><img src="assets/works/nl-logo.png" alt="ニートlegend" width="887" height="284" loading="lazy"></span>
+                <p class="cs-sub">歴史上の偉人に、AIで聞いてみた。AIとクリエイター歴20年の分業で、4ヶ月でフォロワー1万人に到達。</p>
+                <div class="nl-stats">
+                    <div class="nl-stat"><b>10,062</b><i>フォロワー</i></div>
+                    <div class="nl-stat"><b>378,000</b><i>最高再生数</i></div>
+                    <div class="nl-stat"><b>133,300+</b><i>総いいね</i></div>
+                    <div class="nl-stat"><b>99本</b><i>投稿数</i></div>
+                </div>
+                <div class="nl-figs"><img src="assets/works/nl-fig1.webp" alt="" loading="lazy" width="420" height="690"><img src="assets/works/nl-fig2.webp" alt="" loading="lazy" width="420" height="690"><img src="assets/works/nl-fig3.webp" alt="" loading="lazy" width="420" height="690"><img src="assets/works/nl-fig4.webp" alt="" loading="lazy" width="420" height="690"><img src="assets/works/nl-fig5.webp" alt="" loading="lazy" width="420" height="690"></div>
+                <span class="cs-more">事例を見る <span>›</span></span>
+            </a>
+            <a class="cs-card cs-ss rv d1" href="/works/#sessions" data-clear="box" data-pad="12">
+                <p class="cs-eyebrow">オリジナル企画｜YouTube</p>
+                <div class="ss-thumb"><img src="assets/works/sessions-vol01.webp" alt="NOKTOA Sessions Vol.01 DJ SHOSHO" width="1000" height="562" loading="lazy"><span class="ss-play">Vol.01　66分</span></div>
+                <h3>NOKTOA Sessions</h3>
+                <p class="cs-sub">音と場所が出会う瞬間を、映像作品に残すシリーズ。場所は、説明するより聴かれたほうが伝わる。</p>
+                <div class="ss-steps"><div><b>聴く</b><span>1時間の音楽が流れる</span></div><div><b>映る</b><span>場所が画面にある</span></div><div><b>残る</b><span>名前と空気が記憶に</span></div></div>
+                <span class="cs-more">事例を見る <span>›</span></span>
+            </a>
+        </div>
         <p class="works-foot rv"><a href="/works/" class="link">制作実績をすべて見る <span>›</span></a></p>
     </section>
 
@@ -248,13 +278,13 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
     <section class="finale" id="contact" aria-label="お問い合わせ" data-fx="1,1">
         <div class="finale-stick">
             <div class="finale-body">
-                <div class="finale-copy">
+                <div class="finale-copy" data-clear="box" data-gate="finale" data-pad="-30">
                     <h2 class="h1" data-lines>まずは現状を<br>聞かせてください</h2>
                     <p class="lead-d">映像でも運用でも　課題の整理からご一緒します</p>
                     <a href="/contact/?s=home-cta" class="btn btn-gold btn-lg">相談する</a>
                 </div>
             </div>
-            <footer class="site-footer">
+            <footer class="site-footer" data-clear="box" data-gate="finale" data-pad="-40">
                 <div class="fwrap">
                     <div class="fbrand"><img src="assets/logo_wh.png" alt="NOKTOA"><div><p class="co">株式会社NOKTOA</p><p>〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p><p><a href="mailto:info@noktoa.com?subject=NOKTOAへのご相談&amp;body=お名前：%0A会社名：%0Aご相談内容：%0A">info@noktoa.com</a></p></div></div>
                     <nav class="fnav" aria-label="サイト"><a href="#vision">Vision</a><a href="#services">Services</a><a href="/works/">Works</a><a href="#members">Members</a><a href="/contact/">お問い合わせ</a></nav>
@@ -320,6 +350,6 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
     </section>
 </main>
 
-<script src="fx.js?v=2cc748cf"></script>
+<script src="fx.js?v=flow5"></script>
 </body>
 </html>
