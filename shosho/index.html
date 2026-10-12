@@ -311,7 +311,7 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
 /* Sho Sho サイト設定
    - gallery  : Instagram投稿のURL（横スワイプ。サイズは自動で統一）
    - sessions : NOKTOA sessions の YouTube 動画（id = watch?v= の後ろ）
-   - works    : 実績の文字ロゴ表記。url を入れると新しいタブで開くリンクになる（空なら表示のみ）
+   - works    : 実績の文字ロゴ表記。url=公式サイト（新しいタブで開く）。空なら表示のみ（Raise Tokyo は公式サイトが見つからず未設定）
        公式ロゴが入手できたら logo:'assets/logos/xxx.svg' を足すだけで置き換わる
    - form     : 空なら「メールアプリを開く」方式。Formspree等のURLを入れると、サイトから直接送信される
    出典：@whereisshosho の公開投稿／NOKTOA公式YouTube（2026-10-12 確認） */
@@ -339,15 +339,15 @@ window.SHOSHO = {
       { name: 'Bvlgari Hotel Tokyo', mark: 'BVLGARI', sub: 'Hotel Tokyo', k: 'serif', url: 'https://www.bulgarihotels.com/en_US/tokyo' },
       { name: 'Four Seasons Hotel Tokyo', mark: 'FOUR SEASONS', sub: 'Hotel Tokyo', k: 'serif', url: 'https://www.fourseasons.com/tokyo/' },
       { name: '1 Hotel Tokyo', mark: '1 HOTEL', sub: 'Tokyo', k: 'wide', url: 'https://www.1hotels.com/tokyo' },
-      { name: 'Andaz Tokyo', mark: 'ANDAZ', sub: 'Tokyo', k: 'wide', url: '' },
-      { name: 'Grand Hyatt Tokyo', mark: 'GRAND HYATT', sub: 'Tokyo', k: 'wide', url: '' },
-      { name: 'JW Marriott Tokyo', mark: 'JW MARRIOTT', sub: 'Tokyo', k: 'serif', url: '' },
-      { name: 'Celavi Tokyo', mark: 'CELAVI', sub: 'Tokyo', k: 'wide', url: 'https://www.instagram.com/celavitokyo/' },
+      { name: 'Andaz Tokyo', mark: 'ANDAZ', sub: 'Tokyo', k: 'wide', url: 'https://www.hyatt.com/en-US/hotel/japan/andaz-tokyo-toranomon-hills/tyoaz' },
+      { name: 'Grand Hyatt Tokyo', mark: 'GRAND HYATT', sub: 'Tokyo', k: 'wide', url: 'https://www.hyatt.com/en-US/hotel/japan/grand-hyatt-tokyo/tyogh' },
+      { name: 'JW Marriott Tokyo', mark: 'JW MARRIOTT', sub: 'Tokyo', k: 'serif', url: 'https://www.marriott.com/en-us/hotels/tyojw-jw-marriott-hotel-tokyo/overview/' },
+      { name: 'Celavi Tokyo', mark: 'CELAVI', sub: 'Tokyo', k: 'wide', url: 'https://jp.celavi.com/ja-jp' },
       { name: 'Raise Tokyo', mark: 'RAISE', sub: 'Tokyo', k: 'wide', url: '' },
       { name: 'Embassy of Italy in Japan', mark: 'EMBASSY OF ITALY', sub: 'in Japan', k: 'wide', url: 'https://ambtokyo.esteri.it/' },
       { name: 'Tokyo American Club', mark: 'TOKYO AMERICAN CLUB', sub: '', k: 'serif', url: 'https://www.tokyoamericanclub.org/' },
-      { name: 'Grand Hyatt Manila', mark: 'GRAND HYATT', sub: 'Manila', k: 'wide', url: '' },
-      { name: 'Japan Boat Show', mark: 'JAPAN BOAT SHOW', sub: '', k: 'wide', url: '' }
+      { name: 'Grand Hyatt Manila', mark: 'GRAND HYATT', sub: 'Manila', k: 'wide', url: 'https://www.hyatt.com/en-US/hotel/philippines/grand-hyatt-manila/mangh' },
+      { name: 'Japan Boat Show', mark: 'JAPAN BOAT SHOW', sub: '', k: 'wide', url: 'https://www.boatshow.jp/jibs/2026/' }
     ],
     abroad: [
       { name: 'Cambodia', mark: 'CAMBODIA', sub: '', k: 'serif', url: '' },
