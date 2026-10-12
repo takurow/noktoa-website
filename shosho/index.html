@@ -246,7 +246,11 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
   <section id="work">
     <div class="head"><h2>Work with</h2></div>
     <div class="wcap">Place</div>
-    <div class="wall place last" id="place" aria-label="Places"></div>
+    <div class="wall place" id="place" aria-label="Places"></div>
+    <div class="wcap">Brand</div>
+    <div class="wall" id="brand" aria-label="Brands"></div>
+    <div class="wcap">Abroad</div>
+    <div class="wall last abroad" id="abroad" aria-label="Countries"></div>
   </section>
 
   <section id="sessions">
@@ -274,11 +278,6 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
 
   <section id="contact" class="ct">
     <button class="cbtn" id="openForm" type="button"><b style="font-weight:300">Contact</b><span>→</span></button>
-  </section>
-
-  <section id="brandsec">
-    <div class="wcap">Brand</div>
-    <div class="wall last" id="brand" aria-label="Brands"></div>
   </section>
 
   <footer><span>© 2026 Sho Sho</span><span>Site by NOKTOA</span></footer>
@@ -328,6 +327,8 @@ window.SHOSHO = {
     P('DZcolHjzy36'),  // 1 Hotel Tokyo
     P('DaM8GQnxKUV'),  // Celavi Tokyo（SUNDAY BRUNCH）
     P('DasMgebkYkb'),  // Sea Breeze Boat Show（Clase Azul / Azimut）
+    P('Ddl9WVwk2k4'),  // Philippines 3 gigs（Grand Hyatt Manila ほか）
+    P('DcMLJNjE4MA'),  // Cambodia（Jasmine NightClub）
     R('DdqaKS9vY0F')   // ノンストップMIX
   ],
   sessions: [
@@ -337,19 +338,27 @@ window.SHOSHO = {
     place: [
       { name: 'Bvlgari Hotel Tokyo', mark: 'BVLGARI', sub: 'Hotel Tokyo', k: 'serif', url: 'https://www.bulgarihotels.com/en_US/tokyo' },
       { name: 'Four Seasons Hotel Tokyo', mark: 'FOUR SEASONS', sub: 'Hotel Tokyo', k: 'serif', url: 'https://www.fourseasons.com/tokyo/' },
+      { name: '1 Hotel Tokyo', mark: '1 HOTEL', sub: 'Tokyo', k: 'wide', url: 'https://www.1hotels.com/tokyo' },
+      { name: 'Andaz Tokyo', mark: 'ANDAZ', sub: 'Tokyo', k: 'wide', url: '' },
       { name: 'Grand Hyatt Tokyo', mark: 'GRAND HYATT', sub: 'Tokyo', k: 'wide', url: '' },
       { name: 'JW Marriott Tokyo', mark: 'JW MARRIOTT', sub: 'Tokyo', k: 'serif', url: '' },
       { name: 'Celavi Tokyo', mark: 'CELAVI', sub: 'Tokyo', k: 'wide', url: 'https://www.instagram.com/celavitokyo/' },
       { name: 'Raise Tokyo', mark: 'RAISE', sub: 'Tokyo', k: 'wide', url: '' },
       { name: 'Embassy of Italy in Japan', mark: 'EMBASSY OF ITALY', sub: 'in Japan', k: 'wide', url: 'https://ambtokyo.esteri.it/' },
       { name: 'Tokyo American Club', mark: 'TOKYO AMERICAN CLUB', sub: '', k: 'serif', url: 'https://www.tokyoamericanclub.org/' },
+      { name: 'Grand Hyatt Manila', mark: 'GRAND HYATT', sub: 'Manila', k: 'wide', url: '' },
       { name: 'Japan Boat Show', mark: 'JAPAN BOAT SHOW', sub: '', k: 'wide', url: '' }
+    ],
+    abroad: [
+      { name: 'Cambodia', mark: 'CAMBODIA', sub: '', k: 'serif', url: '' },
+      { name: 'Philippines', mark: 'PHILIPPINES', sub: '', k: 'serif', url: '' }
     ],
     brand: [
       { name: 'Azimut', mark: 'AZIMUT', sub: 'Yachts', k: 'wide', url: 'https://www.azimutyachts.com/' },
       { name: 'd&b audiotechnik', mark: 'd&b', sub: 'audiotechnik', k: 'db', url: 'https://www.dbaudio.com/' },
       { name: 'Clase Azul', mark: 'CLASE AZUL', sub: 'Tequila', k: 'serif', url: 'https://www.claseazul.com/' },
       { name: 'Land Rover', mark: 'LAND ROVER', sub: '', k: 'wide', url: 'https://www.landrover.co.jp/' },
+      { name: 'Loro Piana', mark: 'LORO PIANA', sub: '', k: 'serif', url: 'https://www.loropiana.com/' },
       { name: 'Lardini', mark: 'Lardini', sub: 'Fashion', k: 'italic', url: 'https://www.lardini.it/' }
     ]
   }
@@ -423,7 +432,7 @@ function wall(list,host){
     host.appendChild(d);
   });
 }
-wall(D.works.place,$('#place'));wall(D.works.brand,$('#brand'));
+wall(D.works.place,$('#place'));wall(D.works.brand,$('#brand'));wall(D.works.abroad||[],$('#abroad'));
 
 /* Sessions：YouTube（押すまで読み込まない） */
 (D.sessions||[]).forEach(v=>{
