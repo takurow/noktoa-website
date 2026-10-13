@@ -327,13 +327,7 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
 </div>
 
 <script>
-/* Sho Sho サイト設定
-   - gallery  : Instagram投稿のURL（横スワイプ。サイズは自動で統一）
-   - sessions : NOKTOA sessions の YouTube 動画（id = watch?v= の後ろ）
-   - works    : 実績の文字ロゴ表記（abroad_hidden は当面非表示）。url=公式サイト（新しいタブで開く）。空なら表示のみ（Raise Tokyo は公式サイトが見つからず未設定）
-       公式ロゴが入手できたら logo:'assets/logos/xxx.svg' を足すだけで置き換わる
-   - form     : 空なら「メールアプリを開く」方式。Formspree等のURLを入れると、サイトから直接送信される
-   出典：@whereisshosho の公開投稿／NOKTOA公式YouTube（2026-10-12 確認） */
+
 const P = id => 'https://www.instagram.com/p/' + id + '/';
 const R = id => 'https://www.instagram.com/reel/' + id + '/';
 window.SHOSHO = {
@@ -341,14 +335,14 @@ window.SHOSHO = {
   email: 'yamaguchisho2@me.com',
   form: '',
   gallery: [
-    P('DR487Hnk-Rg'),  // Bvlgari Hotel Tokyo
-    P('DWMQZZokaqw'),  // JAPAN BOATSHOW 2026（Azimut 26M Grande / d&b）
-    P('DZcolHjzy36'),  // 1 Hotel Tokyo
-    P('DaM8GQnxKUV'),  // Celavi Tokyo（SUNDAY BRUNCH）
-    P('DasMgebkYkb'),  // Sea Breeze Boat Show（Clase Azul / Azimut）
-    P('Ddl9WVwk2k4'),  // Philippines 3 gigs（Grand Hyatt Manila ほか）
-    P('DcMLJNjE4MA'),  // Cambodia（Jasmine NightClub）
-    R('DdqaKS9vY0F')   // ノンストップMIX
+    P('DR487Hnk-Rg'),
+    P('DWMQZZokaqw'),
+    P('DZcolHjzy36'),
+    P('DaM8GQnxKUV'),
+    P('DasMgebkYkb'),
+    P('Ddl9WVwk2k4'),
+    P('DcMLJNjE4MA'),
+    R('DdqaKS9vY0F')
   ],
   sessions: [
     { id: 'BuZnKNdDdj0', title: 'Lounge DJ Mix', sub: 'DJ SHOSHO — NOKTOA Sessions at SeaBreeze Boat Service', len: '66 min' }
@@ -367,10 +361,6 @@ window.SHOSHO = {
       { name: 'Tokyo American Club', mark: 'TOKYO AMERICAN CLUB', sub: '', k: 'serif', url: 'https://www.tokyoamericanclub.org/' },
       { name: 'Grand Hyatt Manila', mark: 'GRAND HYATT', sub: 'Manila', k: 'wide', url: 'https://www.hyatt.com/en-US/hotel/philippines/grand-hyatt-manila/mangh' },
       { name: 'Japan Boat Show', mark: 'JAPAN BOAT SHOW', sub: '', k: 'wide', url: 'https://www.boatshow.jp/jibs/2026/' }
-    ],
-    abroad_hidden: [
-      { name: 'Cambodia', mark: 'CAMBODIA', sub: '', k: 'serif', url: '' },
-      { name: 'Philippines', mark: 'PHILIPPINES', sub: '', k: 'serif', url: '' }
     ],
     brand: [
       { name: 'Azimut', mark: 'AZIMUT', sub: 'Yachts', k: 'wide', url: 'https://www.azimutyachts.com/' },
