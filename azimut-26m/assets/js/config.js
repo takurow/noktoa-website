@@ -4,14 +4,16 @@
    invented: empty = feature hidden or falls back gracefully.
    ============================================================ */
 window.SITE_CONFIG = {
-  // Form endpoint (e.g. Formspree "https://formspree.io/f/xxxx").
+  // Form endpoint (Formspree). V7: the same Formspree form NOKTOA's own contact page uses,
+  // so enquiries arrive at the address that form is registered to (info@noktoa.com).
+  // The form POSTs JSON with Accept: application/json; _subject / _replyto / lang / page are added by main.js.
   // Empty → the form falls back to a mailto: link using CONTACT_EMAIL.
   // If both are empty, the form shows the dealer's phone number instead.
-  FORM_ENDPOINT: "",
+  FORM_ENDPOINT: "https://formspree.io/f/xwlprdoa",
 
-  // Dealer contact details for the enquiry fallback and footer.
-  // Confirm the exact address with SeaBreeze before filling in.
-  CONTACT_EMAIL: "",
+  // Enquiry address shown as a plain mailto link (Enquire section + footer) and used by the mailto fallback.
+  // V7: enquiries go to NOKTOA first (info@noktoa.com), then on to the dealer.
+  CONTACT_EMAIL: "info@noktoa.com",
   // International format without "+" or spaces, e.g. "81451234567".
   WHATSAPP: "",
 

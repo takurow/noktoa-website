@@ -6,12 +6,23 @@
 
   var CFG = window.SITE_CONFIG || {};
   var EV = CFG.EVENTS || {};
-  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var html = document.documentElement;
+  /* V7: the head script in index.html decides before paint (html.reduce-motion / html.motion-on / html.gate-on).
+     Fallback to the media query only if that script is missing. */
+  var reduced = html.classList.contains("js")
+    ? html.classList.contains("reduce-motion")
+    : window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var osReduce = html.classList.contains("os-reduce");
   var hasGsap = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
   var hasLenis = typeof window.Lenis !== "undefined";
   var motion = !reduced && hasGsap;
-  var html = document.documentElement;
   var lenis = null;
+  var MOTION_STORE = "azimut26m.motion";
+  function rememberMotion(v) { try { if (v == null) window.localStorage.removeItem(MOTION_STORE); else window.localStorage.setItem(MOTION_STORE, v); } catch (e) { /* private mode: not remembered, still works */ } }
+  /* The opening screen: present only while html.gate-on (set by the head script when JS runs and motion is not already off). */
+  var gateEl = html.classList.contains("gate-on") ? document.getElementById("gate") : null;
+  var gateOpen = !!gateEl;
+  var onGateOpen = [];   /* callbacks that start the entrance once the visitor taps */
   /* every string this file writes goes through the dictionary (i18n.js); English fallback if it is missing */
   function t(key, fallback, vars) {
     if (window.I18N && window.I18N.t) return window.I18N.t(key, fallback, vars);
@@ -21,7 +32,7 @@
   }
   function dealerPhone() { return CFG.PHONE_DISPLAY || t("dealer.fallback", "the dealer"); }
 
-  if (!motion) html.classList.add("no-motion"); else html.classList.add("has-flow");
+  if (!motion) { html.classList.add("no-motion"); html.classList.remove("has-flow"); } else { html.classList.remove("no-motion"); html.classList.add("has-flow"); }
 
   /* ---------- analytics (only when IDs exist) ---------- */
   function loadScript(src, cb) {
@@ -62,6 +73,12 @@
     lenis.on("scroll", window.ScrollTrigger.update);
     window.gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
     window.gsap.ticker.lagSmoothing(0);
+    if (gateOpen) lenis.stop();   /* V7: no scrolling behind the opening screen (lenis-stopped + html.gate-on) */
+  }
+  if (hasGsap) {
+    /* V7 (phones): the address bar showing/hiding fires resize on iOS/Android; without this every ScrollTrigger
+       refreshed mid-scroll (pinned deck jumps, once-only reveals re-measured). Only real width changes refresh now. */
+    window.ScrollTrigger.config({ ignoreMobileResize: true });
   }
 
   function scrollToHash(hash) {
@@ -136,7 +153,7 @@
     if (y > 240 && y > lastY + 4) header.classList.add("is-hidden");
     else if (y < lastY - 4 || y <= 240) header.classList.remove("is-hidden");
     var hid = header.classList.contains("is-hidden");
-    if (hid && !header.contains(document.activeElement)) header.setAttribute("inert", ""); else header.removeAttribute("inert");
+    if (!gateOpen) { if (hid && !header.contains(document.activeElement)) header.setAttribute("inert", ""); else header.removeAttribute("inert"); }
     lastY = y;
 
     var pastHero = y > heroH * 0.85;
@@ -203,7 +220,7 @@
     });
 
     // Hero: slow settle of the zoom, text rises quietly
-    var heroTl = gsap.timeline({ defaults: { ease: EASE } });
+    var heroTl = gsap.timeline({ defaults: { ease: EASE }, paused: gateOpen });   /* V7: starts on the tap, not on load */
     heroTl.to(".hero__img", { scale: 1, duration: 7, ease: "power1.out" }, 0)
       .to(".hero__dealer", { opacity: 1, duration: 1.6 }, 0.4)
       .to(".hero__eyebrow", { opacity: 1, duration: 1.6 }, 0.5)
@@ -218,9 +235,10 @@
     // Time-based breathing (CSS keyframes on .hero__drift) runs only while the hero is on screen
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { hero.classList.toggle("is-live", en.isIntersecting); });
+        entries.forEach(function (en) { hero.classList.toggle("is-live", en.isIntersecting && !gateOpen); });
       }, { threshold: 0.02 }).observe(hero);
-    } else hero.classList.add("is-live");
+    } else if (!gateOpen) hero.classList.add("is-live");
+    if (gateOpen) onGateOpen.push(function () { heroTl.play(0); hero.classList.add("is-live"); });
 
     // Clip reveals (images)
     document.querySelectorAll(".clip-reveal").forEach(function (fig) {
@@ -472,7 +490,14 @@
   /* ---------- contact fallbacks from config ---------- */
   var alt = document.getElementById("altContact");
   var altBits = [];
-  if (CFG.CONTACT_EMAIL) altBits.push('<a href="mailto:' + CFG.CONTACT_EMAIL + '">' + CFG.CONTACT_EMAIL + "</a>");
+  /* V7: the enquiry address is a plain mailto link in the Enquire list and the footer (all languages) */
+  if (CFG.CONTACT_EMAIL) {
+    var mailHref = "mailto:" + CFG.CONTACT_EMAIL;
+    var cm = document.getElementById("contactEmail");
+    if (cm) { cm.innerHTML = '<a href="' + mailHref + '">' + CFG.CONTACT_EMAIL + "</a>"; document.querySelectorAll(".contact__mail").forEach(function (el) { el.hidden = false; }); }
+    var fm = document.getElementById("footerMail"), fml = document.getElementById("footerMailLink");
+    if (fm && fml) { fml.href = mailHref; fml.textContent = CFG.CONTACT_EMAIL; fm.hidden = false; }
+  }
   if (CFG.WHATSAPP) altBits.push('<a href="https://wa.me/' + encodeURIComponent(CFG.WHATSAPP) + '" rel="noopener" target="_blank">WhatsApp</a>');
   function renderAlt() { if (altBits.length) { alt.innerHTML = t("alt.write", "Or write directly:") + " " + altBits.join(" · "); alt.hidden = false; } }
   renderAlt();
@@ -512,7 +537,7 @@
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    if (form.website.value) { setStatus(t("form.thanks", "Thank you."), "is-ok"); return; } // honeypot: silently drop
+    if (form._gotcha && form._gotcha.value) { setStatus(t("form.thanks", "Thank you."), "is-ok"); return; } // honeypot: silently drop (Formspree drops _gotcha too)
     if (!validate()) {
       setStatus(t("form.err.fields", "Please check the highlighted fields."), "is-err");
       var firstBad = form.querySelector(".is-invalid input, .is-invalid textarea");
@@ -521,12 +546,25 @@
       return;
     }
 
+    var lang = form.lang ? form.lang.value : "en";
+    var pageUrl = "";
+    try { pageUrl = window.location.href.split("#")[0]; } catch (e) { /* ignore */ }
+    /* V7 payload (Formspree, JSON). _subject is plain ASCII plus the language code; _replyto lets the inbox reply to the visitor;
+       _gotcha is the honeypot (empty for real people). */
     var data = {
       name: form.name.value.trim(), email: form.email.value.trim(), country: form.country.value.trim(),
       phone: form.phone.value.trim(), message: form.message.value.trim(),
-      listing: form.listing.value, _subject: form._subject.value, lang: form.lang ? form.lang.value : "en"
+      listing: form.listing.value, lang: lang, page: pageUrl,
+      _subject: (form._subject.value || "[Azimut LP] Enquiry") + " (" + lang + ")",
+      _replyto: form.email.value.trim(),
+      _gotcha: form._gotcha ? form._gotcha.value : ""
     };
     var btn = document.getElementById("submitBtn");
+    function mailtoHref() {
+      var body = t("mail.name", "Name") + ": " + data.name + "\n" + t("mail.email", "Email") + ": " + data.email + "\n" + t("mail.country", "Country") + ": " + data.country +
+        (data.phone ? "\n" + t("mail.phone", "Phone") + ": " + data.phone : "") + "\n\n" + data.message + "\n\n— " + data.listing;
+      return "mailto:" + CFG.CONTACT_EMAIL + "?subject=" + encodeURIComponent(t("mail.subject", "Azimut Grande 26Metri enquiry")) + "&body=" + encodeURIComponent(body);
+    }
 
     if (CFG.FORM_ENDPOINT) {
       btn.disabled = true; setStatus(t("form.sending", "Sending…"));
@@ -534,21 +572,27 @@
         .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json().catch(function () { return {}; }); })
         .then(function () {
           form.classList.add("is-sent");
-          setStatus(t("form.ok", "Thank you. We aim to reply as soon as we can during business hours (JST)."), "is-ok");
+          setStatus(t("form.ok", "Thank you. We will reply as soon as we can."), "is-ok");
           track(EV.FORM_SUBMIT, { method: "endpoint" });
         })
         .catch(function () {
+          /* offline, blocked, or the endpoint refused: never lose the enquiry — offer the prepared email and the phone */
           btn.disabled = false;
-          setStatus(t("form.fail", "Something went wrong. Please try again or call {phone}.", { phone: dealerPhone() }), "is-err");
+          if (CFG.CONTACT_EMAIL) {
+            var phoneHtml = CFG.PHONE_TEL ? '<a href="tel:' + CFG.PHONE_TEL + '">' + dealerPhone() + "</a>" : dealerPhone();
+            var mailHtml = '<a href="' + mailtoHref().replace(/"/g, "&quot;") + '">' + CFG.CONTACT_EMAIL + "</a>";
+            status.innerHTML = t("form.failMail", "We could not send your enquiry. Please email {email} or call {phone}.", { email: mailHtml, phone: phoneHtml });
+            status.className = "form__status is-err";
+          } else {
+            setStatus(t("form.fail", "Something went wrong. Please try again or call {phone}.", { phone: dealerPhone() }), "is-err");
+          }
           track(EV.FORM_ERROR, { reason: "endpoint" });
         });
       return;
     }
 
     if (CFG.CONTACT_EMAIL) {
-      var body = t("mail.name", "Name") + ": " + data.name + "\n" + t("mail.email", "Email") + ": " + data.email + "\n" + t("mail.country", "Country") + ": " + data.country +
-        (data.phone ? "\n" + t("mail.phone", "Phone") + ": " + data.phone : "") + "\n\n" + data.message + "\n\n— " + data.listing;
-      window.location.href = "mailto:" + CFG.CONTACT_EMAIL + "?subject=" + encodeURIComponent(data._subject) + "&body=" + encodeURIComponent(body);
+      window.location.href = mailtoHref();
       setStatus(t("form.mailto", "Your email app should open with the enquiry prepared. If it does not, call {phone}.", { phone: dealerPhone() }), "is-ok");
       track(EV.FORM_SUBMIT, { method: "mailto" });
       return;
@@ -558,4 +602,75 @@
     setStatus(t("form.notConfigured", "Online enquiries are not connected yet. Please call {phone} (9:00–18:00 JST).", { phone: dealerPhone() }), "is-err");
     track(EV.FORM_ERROR, { reason: "not_configured" });
   });
+
+  /* ---------- V7: opening screen (tap to enter) ---------- */
+  function langQuery() {
+    var l = (window.I18N && window.I18N.lang) || "en";
+    return "?lang=" + (l === "zh-Hant" ? "zh" : l);
+  }
+  function reloadWith(query) { try { window.location.replace(window.location.pathname + query); } catch (e) { window.location.search = query; } }
+  function closeGate(withMotion) {
+    if (!gateEl) return;
+    var g = gateEl; gateEl = null; gateOpen = false;
+    html.classList.remove("gate-on");
+    g.classList.add("is-out");
+    g.setAttribute("aria-hidden", "true");
+    document.querySelectorAll("[data-gate-inert]").forEach(function (el) { el.removeAttribute("inert"); el.removeAttribute("data-gate-inert"); });
+    window.scrollTo(0, 0);
+    if (lenis) lenis.start();
+    var main = document.getElementById("top");
+    if (main) { main.setAttribute("tabindex", "-1"); main.focus({ preventScroll: true }); }
+    if (withMotion) {
+      onGateOpen.forEach(function (fn) { try { fn(); } catch (e) { /* one failing entrance must not stop the others */ } });
+      if (motion) { window.ScrollTrigger.refresh(); paintTone(); onScroll(); }
+    }
+    setTimeout(function () { if (g.parentNode) g.parentNode.removeChild(g); }, reduced ? 0 : 1300);
+  }
+  if (gateEl) {
+    window.__gateReady = true;   /* head script removes the gate after 6 s if this never runs (script failed to load) */
+    /* everything behind the dialog is inert until it closes */
+    Array.prototype.forEach.call(document.body.children, function (el) {
+      if (el !== gateEl && !el.hasAttribute("inert")) { el.setAttribute("inert", ""); el.setAttribute("data-gate-inert", ""); }
+    });
+    var enterBtn = document.getElementById("gateEnter"), quietBtn = document.getElementById("gateQuiet");
+    /* OS reduced motion and no saved choice: Enter opens the static page; the small link offers motion (remembered, then reload) */
+    var offerMotion = osReduce && !html.classList.contains("motion-on");
+    function labelGate() {
+      if (!quietBtn) return;
+      quietBtn.setAttribute("data-i18n", offerMotion ? "gate.motion" : "gate.quiet");
+      quietBtn.textContent = offerMotion ? t("gate.motion", "Play with motion") : t("gate.quiet", "View without motion");
+    }
+    labelGate();
+    document.addEventListener("i18n:change", labelGate);
+    enterBtn.addEventListener("click", function () { closeGate(motion); });
+    quietBtn.addEventListener("click", function () {
+      if (offerMotion) { rememberMotion("1"); reloadWith(langQuery()); return; }
+      rememberMotion("0");
+      reloadWith(langQuery() + "&reduce=1");
+    });
+    document.addEventListener("keydown", function (e) {
+      if (!gateEl) return;
+      if (e.key !== "Enter" && e.key !== " ") return;
+      if (e.target && e.target.closest && e.target.closest("button, a, input, textarea, select")) return; /* a focused button handles its own key */
+      e.preventDefault(); closeGate(motion);
+    });
+    try { enterBtn.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+  }
+
+  /* footer toggle: the way back from "View without motion" (and a way to switch it off later) */
+  var mt = document.getElementById("motionToggle");
+  if (mt) {
+    var isOff = reduced;
+    function labelToggle() {
+      mt.setAttribute("data-i18n", isOff ? "motion.on" : "motion.off");
+      mt.textContent = isOff ? t("motion.on", "View with motion") : t("motion.off", "View without motion");
+    }
+    labelToggle();
+    document.addEventListener("i18n:change", labelToggle);
+    mt.hidden = !hasGsap;
+    mt.addEventListener("click", function () {
+      if (isOff) { rememberMotion("1"); reloadWith(langQuery()); }
+      else { rememberMotion("0"); reloadWith(langQuery() + "&reduce=1"); }
+    });
+  }
 })();

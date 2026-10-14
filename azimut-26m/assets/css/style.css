@@ -550,31 +550,34 @@ html.has-flow .deck, html.has-flow .plans, html.has-flow .beyond, html.has-flow 
 
 /* V6: the background streamlines (.flow) were removed. */
 
-/* Reduced motion: everything static */
+/* Reduced motion: everything static. V7: html.motion-on (visitor tapped "Play with motion" on the gate) opts out of this block. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .hero__img { transform: none; }
-  .hero.is-live .hero__drift { animation: none; }
-  .hero__dim { display: none; }
-  .hero__dealer, .hero__eyebrow, .hero__title, .hero__sub, .hero__actions, .reveal-lines, .r { opacity: 1; transform: none; }
-  .clip-reveal > img, .clip-reveal > .parallax { clip-path: none; }
-  .design__fig .parallax img { height: 100%; }
-  .site-header.is-hidden { transform: none; }
-  .plans__img { clip-path: none; }
-  .gauge__needle { transform: rotate(78deg); } /* 28 kn static */
-  .gauge__arc-on { stroke-dashoffset: calc(1 - 28 / 30); }
-  .gauge__mark, .gauge__mlabel, .gauge__stops li { opacity: 1; }
-  .range__places, .range__label { opacity: 1; }
-  .range__ring, .range__ring-fill { transform: none; }
-  .hero__water { transform: translateY(72%); }
-  .wave svg { transform: none; }
+  html:not(.motion-on) *, html:not(.motion-on) *::before, html:not(.motion-on) *::after { animation: none !important; transition: none !important; }
+  html:not(.motion-on) .hero__img { transform: none; }
+  html:not(.motion-on) .hero.is-live .hero__drift { animation: none; }
+  html:not(.motion-on) .hero__dim { display: none; }
+  html:not(.motion-on) .hero__dealer, html:not(.motion-on) .hero__eyebrow, html:not(.motion-on) .hero__title, html:not(.motion-on) .hero__sub, html:not(.motion-on) .hero__actions, html:not(.motion-on) .reveal-lines, html:not(.motion-on) .r { opacity: 1; transform: none; }
+  html:not(.motion-on) .clip-reveal > img, html:not(.motion-on) .clip-reveal > .parallax { clip-path: none; }
+  html:not(.motion-on) .design__fig .parallax img { height: 100%; }
+  html:not(.motion-on) .site-header.is-hidden { transform: none; }
+  html:not(.motion-on) .plans__img { clip-path: none; }
+  html:not(.motion-on) .gauge__needle { transform: rotate(78deg); } /* 28 kn static */
+  html:not(.motion-on) .gauge__arc-on { stroke-dashoffset: calc(1 - 28 / 30); }
+  html:not(.motion-on) .gauge__mark, html:not(.motion-on) .gauge__mlabel, html:not(.motion-on) .gauge__stops li { opacity: 1; }
+  html:not(.motion-on) .range__places, html:not(.motion-on) .range__label { opacity: 1; }
+  html:not(.motion-on) .range__ring, html:not(.motion-on) .range__ring-fill { transform: none; }
+  html:not(.motion-on) .hero__water { transform: translateY(72%); }
+  html:not(.motion-on) .wave svg { transform: none; }
   @media (min-width: 1024px) {
-    .deck__pin { height: auto; display: block; overflow-x: auto; scroll-snap-type: x mandatory; }
-    .deck__panel { scroll-snap-align: start; }
-    .deck { padding-bottom: clamp(96px, 14vw, 200px); }
+    html:not(.motion-on) .deck__pin { height: auto; display: block; overflow-x: auto; scroll-snap-type: x mandatory; }
+    html:not(.motion-on) .deck__panel { scroll-snap-align: start; }
+    html:not(.motion-on) .deck { padding-bottom: clamp(96px, 14vw, 200px); }
   }
 }
 .no-motion .hero__img { transform: none; }
+.no-motion .gauge__needle { transform: rotate(78deg); } /* no JS: 28 kn static (JS overrides inline) */
+.no-motion .gauge__arc-on { stroke-dashoffset: calc(1 - 28 / 30); }
+.no-motion .gauge__mark, .no-motion .gauge__mlabel, .no-motion .gauge__stops li { opacity: 1; }
 .no-motion .hero.is-live .hero__drift { animation: none; }
 .no-motion .hero__dim { display: none; }
 .no-motion .hero__dealer, .no-motion .hero__eyebrow, .no-motion .hero__title, .no-motion .hero__sub, .no-motion .hero__actions,
@@ -650,3 +653,67 @@ html[lang="ja"] .btn, html[lang="zh-Hant"] .btn { letter-spacing: .08em; }
 html[lang="ja"] .hs span, html[lang="zh-Hant"] .hs span { font-size: 11px; letter-spacing: .08em; }
 html[lang="ja"] .gauge__mlabel, html[lang="zh-Hant"] .gauge__mlabel { letter-spacing: .08em; font-size: 11px; }
 html[lang="ja"] .range__label, html[lang="zh-Hant"] .range__label { letter-spacing: .1em; }
+
+/* ============================================================
+   V7 — Opening screen (tap to enter), motion opt-in, no-JS
+   ============================================================ */
+/* Without JS, html keeps .no-motion from the markup: the page is static and fully visible.
+   The head script removes .no-motion only when motion is allowed, before the first paint. */
+.gate { display: none; }
+html.js.gate-on .gate, html.js .gate.is-out {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: fixed; inset: 0; z-index: 200; background: var(--bg-0); color: var(--ivory);
+  padding: 32px var(--gutter) calc(32px + env(safe-area-inset-bottom)); text-align: center;
+  transition: opacity 1.1s var(--ease), visibility 0s linear 1.1s;
+}
+html.js .gate.is-out { opacity: 0; visibility: hidden; pointer-events: none; }
+html.gate-on, html.gate-on body { overflow: hidden; }
+main:focus { outline: none; }
+@media (max-height: 560px) {
+  /* short viewports (phone landscape): tighten and let the small link flow under the rest */
+  .gate__name { margin-top: 16px; font-size: 24px; }
+  .gate__langs { margin-top: 12px; }
+  .gate__enter { width: 84px; height: 84px; margin-top: 20px; }
+  .gate__tap { margin-top: 12px; }
+  .gate__quiet { position: static; margin-top: 8px; }
+}
+.gate__inner { display: flex; flex-direction: column; align-items: center; }
+.gate__logo { width: 124px; height: auto; opacity: .92; }
+@media (max-width: 480px) { .gate__logo { width: 112px; } }
+.gate__name { font-family: var(--font-display); font-weight: 300; font-size: clamp(26px, 3vw, 34px); letter-spacing: .01em; line-height: 1.2; margin: 30px 0 0; }
+.gate__langs { display: flex; gap: 6px; margin: 28px 0 0; font-size: 13px; letter-spacing: .04em; }
+.gate__langs button {
+  background: none; border: 0; margin: 0; padding: 10px 12px; min-height: 44px; color: var(--ivory-45);
+  font: inherit; letter-spacing: inherit; cursor: pointer; border-bottom: 1px solid transparent;
+  transition: color .4s var(--ease), border-color .4s var(--ease);
+}
+.gate__langs button:hover { color: var(--ivory); }
+.gate__langs button.is-current { color: var(--ivory); border-bottom-color: var(--mint-70); }
+.gate__langs button:focus-visible { outline: 1px solid var(--mint); outline-offset: 2px; }
+.gate__enter {
+  width: 104px; height: 104px; margin: 44px 0 0; border-radius: 50%; border: 1px solid var(--ivory-45);
+  background: transparent; color: var(--ivory); font-family: var(--font-text); font-size: 12px; font-weight: 400;
+  letter-spacing: .22em; text-transform: uppercase; padding-left: .22em; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: border-color .6s var(--ease), background-color .6s var(--ease), color .6s var(--ease), transform .6s var(--ease);
+}
+.gate__enter:hover, .gate__enter:focus-visible { border-color: var(--ivory); outline: none; }
+.gate__enter:focus-visible { box-shadow: 0 0 0 4px rgb(var(--mint-rgb) / .25); }
+.gate__enter:active { background: var(--ivory); color: var(--bg-0); transform: scale(.97); }
+html[lang="ja"] .gate__enter, html[lang="zh-Hant"] .gate__enter { letter-spacing: .12em; padding-left: .12em; font-size: 13px; }
+.gate__tap { margin: 22px 0 0; font-size: 12px; letter-spacing: .08em; color: var(--ivory-45); }
+.gate__quiet {
+  position: absolute; left: 0; right: 0; bottom: calc(28px + env(safe-area-inset-bottom)); margin: 0 auto; width: max-content; max-width: 90%;
+  background: none; border: 0; padding: 10px 8px; min-height: 44px; color: var(--ivory-45); font: inherit; font-size: 12px; letter-spacing: .06em;
+  text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--ivory-15); cursor: pointer;
+  transition: color .4s var(--ease);
+}
+.gate__quiet:hover { color: var(--ivory); }
+
+/* Footer: enquiry email + motion toggle */
+.site-footer__mail a { color: var(--ivory); border-bottom: 1px solid var(--ivory-45); transition: border-color .4s var(--ease); }
+.site-footer__mail a:hover { border-bottom-color: var(--mint); }
+.textbtn { background: none; border: 0; padding: 0; margin: 0; color: var(--ivory-45); font: inherit; letter-spacing: inherit; cursor: pointer; border-bottom: 1px solid var(--ivory-15); transition: color .4s var(--ease), border-color .4s var(--ease); }
+.textbtn:hover { color: var(--ivory); border-bottom-color: var(--mint); }
+.site-footer__motion { margin-top: 16px; }
+.form__status a { color: var(--ivory); border-bottom: 1px solid var(--ivory-45); }
+.form__status a:hover { border-bottom-color: var(--mint); }
