@@ -562,13 +562,15 @@
     var btn = document.getElementById("submitBtn");
     function mailtoHref() {
       var body = t("mail.name", "Name") + ": " + data.name + "\n" + t("mail.email", "Email") + ": " + data.email + "\n" + t("mail.country", "Country") + ": " + data.country +
-        (data.phone ? "\n" + t("mail.phone", "Phone") + ": " + data.phone : "") + "\n\n" + data.message + "\n\n— " + data.listing;
+        (data.phone ? "\n" + t("mail.phone", "Phone") + ": " + data.phone : "") + "\n\n" + data.message + "\n\n" + data.listing;
       return "mailto:" + CFG.CONTACT_EMAIL + "?subject=" + encodeURIComponent(t("mail.subject", "Azimut Grande 26Metri enquiry")) + "&body=" + encodeURIComponent(body);
     }
 
     if (CFG.FORM_ENDPOINT) {
       btn.disabled = true; setStatus(t("form.sending", "Sending…"));
-      fetch(CFG.FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data) })
+      var ctl = (typeof AbortController !== "undefined") ? new AbortController() : null;
+      if (ctl) setTimeout(function () { ctl.abort(); }, 15000);
+      fetch(CFG.FORM_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data), signal: ctl ? ctl.signal : undefined })
         .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json().catch(function () { return {}; }); })
         .then(function () {
           form.classList.add("is-sent");
@@ -627,7 +629,6 @@
     setTimeout(function () { if (g.parentNode) g.parentNode.removeChild(g); }, reduced ? 0 : 1300);
   }
   if (gateEl) {
-    window.__gateReady = true;   /* head script removes the gate after 6 s if this never runs (script failed to load) */
     /* everything behind the dialog is inert until it closes */
     Array.prototype.forEach.call(document.body.children, function (el) {
       if (el !== gateEl && !el.hasAttribute("inert")) { el.setAttribute("inert", ""); el.setAttribute("data-gate-inert", ""); }
@@ -655,6 +656,7 @@
       e.preventDefault(); closeGate(motion);
     });
     try { enterBtn.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
+    window.__gateReady = true;   /* set only after the gate is fully wired; otherwise the head script frees the page after 6 s */
   }
 
   /* footer toggle: the way back from "View without motion" (and a way to switch it off later) */
