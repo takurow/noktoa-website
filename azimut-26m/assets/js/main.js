@@ -638,14 +638,27 @@
     var offerMotion = osReduce && !html.classList.contains("motion-on");
     function labelGate() {
       if (!quietBtn) return;
-      quietBtn.setAttribute("data-i18n", offerMotion ? "gate.motion" : "gate.quiet");
-      quietBtn.textContent = offerMotion ? t("gate.motion", "Play with motion") : t("gate.quiet", "View without motion");
+      quietBtn.setAttribute("data-i18n", "gate.quiet");
+      quietBtn.textContent = t("gate.quiet", "View without motion");
+      var hint = document.getElementById("gateHint");
+      if (hint) { hint.hidden = !offerMotion; hint.textContent = t("gate.hint", "Reduce Motion is turned on in your device settings. Tapping Enter plays the animation for this page."); }
     }
     labelGate();
     document.addEventListener("i18n:change", labelGate);
-    enterBtn.addEventListener("click", function () { closeGate(motion); });
+    /* Enter = an explicit request to play the animation. If the device has Reduce Motion on, remember the opt-in and reload once,
+       then enter automatically (sessionStorage flag) so the visitor taps only once. */
+    function onEnter() {
+      if (offerMotion) {
+        rememberMotion("1");
+        try { window.sessionStorage.setItem("azimut26m.autoenter", "1"); } catch (e) { /* then the gate simply shows again after reload */ }
+        reloadWith(langQuery());
+        return;
+      }
+      closeGate(motion);
+    }
+    enterBtn.addEventListener("click", onEnter);
     quietBtn.addEventListener("click", function () {
-      if (offerMotion) { rememberMotion("1"); reloadWith(langQuery()); return; }
+      if (offerMotion) { closeGate(false); return; }
       rememberMotion("0");
       reloadWith(langQuery() + "&reduce=1");
     });
@@ -653,10 +666,13 @@
       if (!gateEl) return;
       if (e.key !== "Enter" && e.key !== " ") return;
       if (e.target && e.target.closest && e.target.closest("button, a, input, textarea, select")) return; /* a focused button handles its own key */
-      e.preventDefault(); closeGate(motion);
+      e.preventDefault(); onEnter();
     });
     try { enterBtn.focus({ preventScroll: true }); } catch (e) { /* ignore */ }
-    window.__gateReady = true;   /* set only after the gate is fully wired; otherwise the head script frees the page after 6 s */
+    var auto = false;
+    try { auto = window.sessionStorage.getItem("azimut26m.autoenter") === "1"; window.sessionStorage.removeItem("azimut26m.autoenter"); } catch (e) { /* ignore */ }
+    window.__gateReady = true;
+    if (auto && motion) setTimeout(function () { closeGate(true); }, 60);   /* set only after the gate is fully wired; otherwise the head script frees the page after 6 s */
   }
 
   /* footer toggle: the way back from "View without motion" (and a way to switch it off later) */

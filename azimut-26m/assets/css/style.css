@@ -660,6 +660,8 @@ html[lang="ja"] .range__label, html[lang="zh-Hant"] .range__label { letter-spaci
 /* Without JS, html keeps .no-motion from the markup: the page is static and fully visible.
    The head script removes .no-motion only when motion is allowed, before the first paint. */
 .gate { display: none; }
+.gate__hint { margin: 18px auto 0; max-width: 30ch; font-size: 12px; line-height: 1.6; color: var(--ivory-70); text-align: center; }
+.gate__hint[hidden] { display: none; }
 html.js.gate-on .gate, html.js .gate.is-out {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   position: fixed; inset: 0; z-index: 200; background: var(--bg-0); color: var(--ivory);
