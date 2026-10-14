@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23081424%27/%3E%3Cpath d=%27M6 22 L16 8 L26 22 Z%27 fill=%27none%27 stroke=%27%23f4efe6%27 stroke-width=%271.6%27/%3E%3C/svg%3E">
-  <link rel="preload" as="image" href="assets/img/aerial-quarter.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/video/hero1_side_poster.jpg" fetchpriority="high">
   <script>(function(){var d=document.documentElement,q=location.search,os=false,pref=null;d.classList.add("js");try{os=matchMedia("(prefers-reduced-motion: reduce)").matches||/[?&]osreduce=1/.test(q)}catch(e){}try{pref=localStorage.getItem("azimut26m.motion")}catch(e){}var reduce=/[?&]reduce=1/.test(q)||pref==="0"||(os&&pref!=="1");if(reduce){d.classList.add("reduce-motion")}else{d.classList.remove("no-motion");if(os)d.classList.add("motion-on")}if(os)d.classList.add("os-reduce");if(!/[?&]nogate=1/.test(q)&&!(/[?&]reduce=1/.test(q)||pref==="0")&&window.top===window)d.classList.add("gate-on");setTimeout(function(){if(!window.__gateReady){d.classList.remove("gate-on");d.classList.add("no-motion");var g=document.getElementById("gate");if(g)g.hidden=true;document.querySelectorAll("[inert]").forEach(function(e){e.removeAttribute("inert")})}},6000)})()</script>
   <script>/* ?debug=1 : on-screen diagnostics for phones (no data leaves the device) */
 (function(){if(!/[?&]debug=1/.test(location.search))return;var errs=[];function add(m){errs.push(String(m).slice(0,140));if(errs.length>6)errs.shift()}
@@ -33,10 +33,11 @@ window.addEventListener("unhandledrejection",function(e){add("promise: "+(e.reas
 function mm(q){try{return matchMedia(q).matches}catch(x){return "n/a"}}
 function ls(){try{return localStorage.getItem("azimut26m.motion")}catch(x){return "blocked"}}
 document.addEventListener("DOMContentLoaded",function(){var b=document.createElement("pre");b.style.cssText="position:fixed;left:6px;right:6px;bottom:6px;z-index:2147483647;margin:0;padding:8px;background:rgba(0,0,0,.82);color:#9fe;font:10px/1.35 monospace;white-space:pre-wrap;pointer-events:none;border-radius:6px";document.body.appendChild(b);
-function u(){var d=document.documentElement,t=document.querySelector(".hero__title");b.textContent=["w="+innerWidth+" dpr="+devicePixelRatio,"os-reduce(media)="+mm("(prefers-reduced-motion: reduce)"),"saved pref="+ls(),"html.class="+d.className,"gsap="+typeof window.gsap+" ST="+typeof window.ScrollTrigger+" Lenis="+typeof window.Lenis,"gateReady="+!!window.__gateReady+" gateInDOM="+!!document.getElementById("gate"),"hero title opacity="+(t?getComputedStyle(t).opacity:"-"),"scrollY="+Math.round(scrollY),"errors:"].concat(errs.length?errs:["(none)"]).join("\n")}
+function vid(){var v=document.querySelector(".hero__video.is-on")||document.querySelector(".hero__video");if(!v)return "video=none";return "video rs="+v.readyState+" paused="+v.paused+" t="+v.currentTime.toFixed(1)+"/"+(isFinite(v.duration)?v.duration.toFixed(1):"?")+" src="+((v.currentSrc||"").split("/").pop()||"-")+" state="+(window.__heroVideo||"-")}
+function u(){var d=document.documentElement,t=document.querySelector(".hero__title");b.textContent=["w="+innerWidth+" dpr="+devicePixelRatio+" saveData="+(navigator.connection&&navigator.connection.saveData),"os-reduce(media)="+mm("(prefers-reduced-motion: reduce)"),"saved pref="+ls(),"html.class="+d.className,"gsap="+typeof window.gsap+" ST="+typeof window.ScrollTrigger+" Lenis="+typeof window.Lenis,"gateReady="+!!window.__gateReady+" gateInDOM="+!!document.getElementById("gate"),"hero title opacity="+(t?getComputedStyle(t).opacity:"-"),vid(),"clips playing="+document.querySelectorAll(".vclip.is-playing").length,"scrollY="+Math.round(scrollY),"errors:"].concat(errs.length?errs:["(none)"]).join("\n")}
 u();setInterval(u,700)})})();</script>
 
-  <link rel="stylesheet" href="assets/css/style.css?v=20261014j">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014u">
 </head>
 <body>
   <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
@@ -63,10 +64,11 @@ u();setInterval(u,700)})})();</script>
         <span class="brand__name">Azimut Grande 26Metri <span class="brand__sub" data-i18n="brand.sub">· 2025 · Yokohama</span></span>
       </a>
       <nav class="site-nav" aria-label="Sections" data-i18n-attr="aria-label:nav.aria">
-        <a href="#design" data-i18n="nav.design">Design</a>
-        <a href="#deck" data-i18n="nav.deck">Deck</a>
-        <a href="#plans" data-i18n="nav.plans">Plans</a>
-        <a href="#engineering" data-i18n="nav.engineering">Engineering</a>
+        <a href="#exterior" data-i18n="nav.exterior">Exterior</a>
+        <a href="#beyond" data-i18n="nav.beyond">Flybridge</a>
+        <a href="#design" data-i18n="nav.design">Interior</a>
+        <a href="#plans" data-i18n="nav.plans">Layout</a>
+        <a href="#engineering" data-i18n="nav.engineering">Engines</a>
         <a href="#range" data-i18n="nav.range">Range</a>
         <a href="#gallery" data-i18n="nav.gallery">Gallery</a>
         <a href="#specs" data-i18n="nav.specs">Specs</a>
@@ -95,8 +97,12 @@ u();setInterval(u,700)})})();</script>
     <section class="hero" id="hero" data-tone="0">
       <div class="hero__media">
         <div class="hero__drift">
-          <img class="hero__img" src="assets/img/aerial-quarter.webp" width="2048" height="1152" fetchpriority="high" decoding="sync"
-               alt="Azimut Grande 26Metri under way along a cliff coastline, white hull on deep blue water" data-i18n-attr="alt:hero.img.alt">
+          <div class="hero__frame" id="heroFrame">
+            <img class="hero__img" src="assets/video/hero1_side_poster.jpg" width="1600" height="900" fetchpriority="high" decoding="sync"
+                 alt="Azimut Grande 26Metri under way along a cliff coastline, white hull on deep blue water" data-i18n-attr="alt:hero.img.alt">
+            <video class="hero__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+            <video class="hero__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+          </div>
         </div>
       </div>
       <div class="hero__shade" aria-hidden="true"></div>
@@ -111,9 +117,70 @@ u();setInterval(u,700)})})();</script>
           <a class="btn btn--light" href="#enquire" data-cta="hero" data-i18n="cta.hero">Request price &amp; private viewing</a>
         </div>
       </div>
-      <a class="hero__scroll" href="#intro" aria-label="Scroll to read more" data-i18n-attr="aria-label:hero.scroll.aria">
+      <a class="hero__scroll" href="#exterior" aria-label="Scroll to read more" data-i18n-attr="aria-label:hero.scroll.aria">
         <span data-i18n="hero.scroll">Scroll</span><i aria-hidden="true"></i>
       </a>
+    </section>
+
+    <section class="exterior section" id="exterior" data-tone="0" aria-label="Exterior" data-i18n-attr="aria-label:ext.aria">
+      <figure class="vclip vclip--bleed clip-reveal" data-clip="ext_cove">
+        <div class="vclip__box">
+          <img class="vclip__poster" src="assets/video/ext_cove_poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+               alt="Azimut Grande 26Metri at anchor in a rocky cove, seen from the air, clear green water" data-i18n-attr="alt:ext.cove.alt">
+          <video class="vclip__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+        </div>
+        <figcaption class="wrap" data-i18n="ext.cove.cap">At anchor</figcaption>
+      </figure>
+      <div class="wrap exterior__one">
+        <figure class="clip-reveal exterior__cliffs">
+          <div class="parallax" data-speed="0.12">
+            <img src="assets/img/drone-side-cliffs.webp" width="2600" height="1462" loading="lazy" decoding="async"
+                 alt="Azimut Grande 26Metri under way along white cliffs, seen from the side, white hull on deep blue water" data-i18n-attr="alt:ext.cliffs.alt">
+          </div>
+          <figcaption data-i18n="ext.cliffs.cap">Under way, along the cliffs</figcaption>
+        </figure>
+      </div>
+      <div class="wrap exterior__berth">
+        <p class="exterior__text" data-i18n="ext.text">26.36 m overall, 6.30 m beam, 1.41 m draught. The model has a carbon-fibre superstructure and exterior lines by Alberto Mancini, according to Azimut.</p>
+        <figure class="vclip vclip--slide clip-reveal" data-clip="ext_slide">
+          <div class="vclip__box">
+            <img class="vclip__poster" src="assets/video/ext_slide_poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="Azimut Grande 26Metri at anchor, seen from directly above, then from the side below the cliffs" data-i18n-attr="alt:ext.slide.alt">
+            <video class="vclip__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+          </div>
+          <figcaption data-i18n="ext.slide.cap">At anchor, from above and from the side</figcaption>
+        </figure>
+      </div>
+      <div class="wrap exterior__pair">
+        <figure class="clip-reveal">
+          <img src="assets/img/drone-front-run-1.webp" width="2600" height="1462" loading="lazy" decoding="async"
+               alt="Azimut Grande 26Metri under way, seen from ahead, bow wave and an island behind" data-i18n-attr="alt:ext.front.alt">
+          <figcaption data-i18n="ext.front.cap">Under way, from ahead</figcaption>
+        </figure>
+        <figure class="clip-reveal exterior__wake">
+          <img src="assets/img/drone-topdown-wake.webp" width="2600" height="1463" loading="lazy" decoding="async"
+               alt="Azimut Grande 26Metri under way, seen from directly above, white wake on dark water" data-i18n-attr="alt:ext.wake.alt">
+          <figcaption data-i18n="ext.wake.cap">Under way, from directly above</figcaption>
+        </figure>
+      </div>
+      <div class="wrap exterior__rings">
+        <figure class="vclip vclip--rings clip-reveal" data-clip="ext_rings">
+          <div class="vclip__box">
+            <img class="vclip__poster" src="assets/video/ext_rings_poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+                 alt="From directly above: the bow of the Azimut Grande 26Metri at anchor, rings of wake on dark water beside it" data-i18n-attr="alt:ext.rings.alt">
+            <video class="vclip__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+          </div>
+          <figcaption data-i18n="ext.rings.cap">From above</figcaption>
+        </figure>
+      </div>
+      <figure class="vclip vclip--bleed vclip--sunset clip-reveal" data-clip="ext_sunset">
+        <div class="vclip__box">
+          <img class="vclip__poster" src="assets/video/ext_sunset_poster.jpg" width="1600" height="900" loading="lazy" decoding="async"
+               alt="Backlit: cliffs against the sun, light on the water, the hardtop of the Azimut Grande 26Metri in the foreground" data-i18n-attr="alt:ext.sunset.alt">
+          <video class="vclip__video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" disablepictureinpicture disableremoteplayback></video>
+        </div>
+        <figcaption class="wrap" data-i18n="ext.sunset.cap">Against the light</figcaption>
+      </figure>
     </section>
 
     <section class="intro section" id="intro" data-tone="0">
@@ -210,6 +277,31 @@ u();setInterval(u,700)})})();</script>
     </section>
 
     <div class="wave" aria-hidden="true"><svg viewBox="0 0 2880 120" preserveAspectRatio="none" focusable="false"><g class="wave__g" data-k="0.33"><path class="wave__deep" d="M0 60 C240 38 480 38 720 60 C960 82 1200 82 1440 60 C1680 38 1920 38 2160 60 C2400 82 2640 82 2880 60 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="0.66"><path class="wave__mid" d="M0 70 C240 86 480 86 720 70 C960 54 1200 54 1440 70 C1680 86 1920 86 2160 70 C2400 54 2640 54 2880 70 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="1"><path class="wave__line" d="M0 64 C240 46 480 46 720 64 C960 82 1200 82 1440 64 C1680 46 1920 46 2160 64 C2400 82 2640 82 2880 64"/></g></svg></div>
+    <section class="beyond section" id="beyond" data-tone="2">
+      <div class="wrap beyond__grid">
+        <div class="beyond__text">
+          <h2 class="h2" data-i18n="beyond.h2">Flybridge and aft deck</h2>
+          <p class="lede" data-i18n="beyond.lede">The flybridge is one level, about 50 m², with the helm, sunpads and dining under the hardtop. Aft, the Deck2Deck™ terrace extends the transom into outdoor dining for eight.</p>
+          <ul class="beyond__list">
+            <li data-i18n="beyond.l1">Flybridge ≈ 50 m², single level</li>
+            <li data-i18n="beyond.l2">Deck2Deck™ transom terrace, dining for eight</li>
+            <li data-i18n="beyond.l3">Carbon-fibre superstructure, about 30% lighter</li>
+            <li data-i18n="beyond.l4">Bow lounge with sunpads and table</li>
+          </ul>
+          <p class="note" data-i18n="beyond.note">Figures per Azimut technical specification for the model.</p>
+          <a class="textlink" href="#enquire" data-cta="beyond" data-i18n="cta.beyond">Arrange a viewing</a>
+        </div>
+        <div class="beyond__media">
+          <figure class="clip-reveal beyond__main">
+            <img src="assets/img/drone-topdown-bow.webp" width="2600" height="1463" loading="lazy" decoding="async" alt="Azimut Grande 26Metri from directly above: bow sunpads and foredeck, the hardtop and flybridge aft" data-i18n-attr="alt:beyond.main.alt">
+            <figcaption><span data-i18n="beyond.main.cap">From above: the bow lounge, with the flybridge aft</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <div class="wave" aria-hidden="true"><svg viewBox="0 0 2880 120" preserveAspectRatio="none" focusable="false"><g class="wave__g" data-k="0.33"><path class="wave__deep" d="M0 60 C240 38 480 38 720 60 C960 82 1200 82 1440 60 C1680 38 1920 38 2160 60 C2400 82 2640 82 2880 60 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="0.66"><path class="wave__mid" d="M0 70 C240 86 480 86 720 70 C960 54 1200 54 1440 70 C1680 86 1920 86 2160 70 C2400 54 2640 54 2880 70 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="1"><path class="wave__line" d="M0 64 C240 46 480 46 720 64 C960 82 1200 82 1440 64 C1680 46 1920 46 2160 64 C2400 82 2640 82 2880 64"/></g></svg></div>
     <section class="design section" id="design" data-tone="0">
       <div class="wrap">
         <div class="design__head">
@@ -292,7 +384,7 @@ u();setInterval(u,700)})})();</script>
                 <div class="plans__canvas" style="aspect-ratio: 2200 / 523">
                   <img class="plans__img" src="assets/img/plan/fly.webp" width="2200" height="523" loading="lazy" decoding="async" alt="Fly deck general arrangement, stern to the left" data-i18n-attr="alt:plans.fly.alt">
                   <button type="button" class="hs" style="--x:38%;--y:48%" data-img="assets/img/aerial-top.webp" data-cap="Flybridge from above. One level, about 50 m² per the model specification" data-i18n-attr="data-cap:hs.fly.cap"><span data-i18n="hs.fly">Flybridge</span></button>
-                  <button type="button" class="hs" style="--x:80%;--y:46%" data-img="assets/img/aerial-bow.webp" data-cap="Bow, from the air" data-i18n-attr="data-cap:hs.bow.cap"><span data-i18n="hs.bow">Bow</span></button>
+                  <button type="button" class="hs" style="--x:80%;--y:46%" data-img="assets/img/drone-topdown-bow.webp" data-cap="Bow lounge, from directly above" data-i18n-attr="data-cap:hs.bow.cap"><span data-i18n="hs.bow">Bow</span></button>
                 </div>
               </div>
               <div class="plans__deck" role="tabpanel" id="plan-main" aria-labelledby="tab-main">
@@ -337,39 +429,6 @@ u();setInterval(u,700)})})();</script>
     </section>
 
     <div class="wave" aria-hidden="true"><svg viewBox="0 0 2880 120" preserveAspectRatio="none" focusable="false"><g class="wave__g" data-k="0.33"><path class="wave__deep" d="M0 60 C240 38 480 38 720 60 C960 82 1200 82 1440 60 C1680 38 1920 38 2160 60 C2400 82 2640 82 2880 60 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="0.66"><path class="wave__mid" d="M0 70 C240 86 480 86 720 70 C960 54 1200 54 1440 70 C1680 86 1920 86 2160 70 C2400 54 2640 54 2880 70 L2880 120 L0 120 Z"/></g><g class="wave__g" data-k="1"><path class="wave__line" d="M0 64 C240 46 480 46 720 64 C960 82 1200 82 1440 64 C1680 46 1920 46 2160 64 C2400 82 2640 82 2880 64"/></g></svg></div>
-    <section class="beyond section" id="beyond" data-tone="2">
-      <div class="wrap beyond__grid">
-        <div class="beyond__text">
-          <h2 class="h2" data-i18n="beyond.h2">Flybridge and aft deck</h2>
-          <p class="lede" data-i18n="beyond.lede">The flybridge is one level, about 50 m², with the helm, sunpads and dining under the hardtop. Aft, the Deck2Deck™ terrace extends the transom into outdoor dining for eight.</p>
-          <ul class="beyond__list">
-            <li data-i18n="beyond.l1">Flybridge ≈ 50 m², single level</li>
-            <li data-i18n="beyond.l2">Deck2Deck™ transom terrace, dining for eight</li>
-            <li data-i18n="beyond.l3">Carbon-fibre superstructure, about 30% lighter</li>
-            <li data-i18n="beyond.l4">Bow lounge with sunpads and table</li>
-          </ul>
-          <p class="note" data-i18n="beyond.note">Figures per Azimut technical specification for the model.</p>
-          <a class="textlink" href="#enquire" data-cta="beyond" data-i18n="cta.beyond">Arrange a viewing</a>
-        </div>
-        <div class="beyond__media">
-          <figure class="clip-reveal beyond__main">
-            <img src="assets/img/aerial-top.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Azimut Grande 26Metri from directly above: flybridge, hardtop and bow sunpads on deep blue water" data-i18n-attr="alt:beyond.main.alt">
-            <figcaption><span data-i18n="beyond.main.cap">From above: the flybridge on one level</span></figcaption>
-          </figure>
-          <div class="beyond__pair">
-            <figure class="clip-reveal">
-              <img src="assets/img/wake-topdown.webp" width="800" height="450" loading="lazy" decoding="async" alt="Azimut Grande 26Metri under way, seen from directly above, white wake on open sea" data-i18n-attr="alt:beyond.d2d.alt">
-              <figcaption><span data-i18n="beyond.d2d.cap">Under way, from directly above</span></figcaption>
-            </figure>
-            <figure class="clip-reveal">
-              <img src="assets/img/aerial-side.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Azimut Grande 26Metri under way along the coast, seen from the side" data-i18n-attr="alt:beyond.cockpit.alt">
-              <figcaption><span data-i18n="beyond.cockpit.cap">Under way, from the side</span></figcaption>
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="engineering section" id="engineering" data-tone="0">
       <div class="wrap">
         <div class="eng__head">
@@ -449,11 +508,11 @@ u();setInterval(u,700)})})();</script>
         <p class="note gallery__note" data-i18n="gallery.note">All photographs are of this boat. Press a picture to enlarge.</p>
       </div>
       <div class="wrap gallery__grid" id="galleryGrid">
-        <button type="button" class="g" data-full="assets/img/aerial-side.webp" data-cap="Aerial, starboard side" data-i18n-attr="data-cap:g.aerial_starboard_side"><img src="assets/img/aerial-side.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Aerial, starboard side" data-i18n-attr="alt:g.aerial_starboard_side"></button>
+        <button type="button" class="g" data-full="assets/img/aerial-side.webp" data-cap="Under way, bow quarter" data-i18n-attr="data-cap:g.aerial_bow_quarter"><img src="assets/img/aerial-side.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Under way, bow quarter" data-i18n-attr="alt:g.aerial_bow_quarter"></button>
         <button type="button" class="g" data-full="assets/img/dining-salon.webp" data-cap="Dining area" data-i18n-attr="data-cap:g.dining_area"><img src="assets/img/dining-salon.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Dining area" data-i18n-attr="alt:g.dining_area"></button>
-        <button type="button" class="g" data-full="assets/img/marina-dusk.webp" data-cap="Alongside at dusk, Yokohama" data-i18n-attr="data-cap:g.alongside_at_dusk_yokohama"><img src="assets/img/marina-dusk.webp" width="1365" height="2048" loading="lazy" decoding="async" alt="Alongside at dusk, Yokohama" data-i18n-attr="alt:g.alongside_at_dusk_yokohama"></button>
         <button type="button" class="g" data-full="assets/img/owner-suite-window.webp" data-cap="Owner's suite window" data-i18n-attr="data-cap:g.owner_s_suite_window"><img src="assets/img/owner-suite-window.webp" width="800" height="533" loading="lazy" decoding="async" alt="Owner's suite window" data-i18n-attr="alt:g.owner_s_suite_window"></button>
-        <button type="button" class="g" data-full="assets/img/aerial-quarter.webp" data-cap="Aerial, stern quarter" data-i18n-attr="data-cap:g.aerial_stern_quarter"><img src="assets/img/aerial-quarter.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Aerial, stern quarter" data-i18n-attr="alt:g.aerial_stern_quarter"></button>
+        <button type="button" class="g" data-full="assets/img/drone-front-run-1.webp" data-cap="Under way, from ahead" data-i18n-attr="data-cap:g.under_way_from_ahead"><img src="assets/img/drone-front-run-1.webp" width="2600" height="1462" loading="lazy" decoding="async" alt="Under way, from ahead" data-i18n-attr="alt:g.under_way_from_ahead"></button>
+        <button type="button" class="g" data-full="assets/img/drone-topdown-bow.webp" data-cap="Bow lounge, from directly above" data-i18n-attr="data-cap:g.bow_from_above"><img src="assets/img/drone-topdown-bow.webp" width="2600" height="1463" loading="lazy" decoding="async" alt="Bow lounge, from directly above" data-i18n-attr="alt:g.bow_from_above"></button>
         <button type="button" class="g" data-full="assets/img/lounge-corner.webp" data-cap="Lounge corner" data-i18n-attr="data-cap:g.lounge_corner"><img src="assets/img/lounge-corner.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Lounge corner" data-i18n-attr="alt:g.lounge_corner"></button>
         <button type="button" class="g" data-full="assets/img/owner-suite-bed.webp" data-cap="Owner's suite" data-i18n-attr="data-cap:g.owner_s_suite"><img src="assets/img/owner-suite-bed.webp" width="800" height="533" loading="lazy" decoding="async" alt="Owner's suite bed" data-i18n-attr="alt:g.owner_s_suite_bed"></button>
         <button type="button" class="g" data-full="assets/img/owner-bath.webp" data-cap="Owner's bathroom" data-i18n-attr="data-cap:g.owner_s_bathroom"><img src="assets/img/owner-bath.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Owner's bathroom" data-i18n-attr="alt:g.owner_s_bathroom"></button>
@@ -461,7 +520,6 @@ u();setInterval(u,700)})})();</script>
         <button type="button" class="g" data-full="assets/img/guest-cabin.webp" data-cap="Guest cabin" data-i18n-attr="data-cap:g.guest_cabin"><img src="assets/img/guest-cabin.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Guest cabin" data-i18n-attr="alt:g.guest_cabin"></button>
         <button type="button" class="g" data-full="assets/img/guest-cabin-2.webp" data-cap="Guest cabin" data-i18n-attr="data-cap:g.guest_cabin"><img src="assets/img/guest-cabin-2.webp" width="800" height="533" loading="lazy" decoding="async" alt="Second guest cabin" data-i18n-attr="alt:g.second_guest_cabin"></button>
         <button type="button" class="g" data-full="assets/img/guest-bath.webp" data-cap="Guest bathroom" data-i18n-attr="data-cap:g.guest_bathroom"><img src="assets/img/guest-bath.webp" width="800" height="533" loading="lazy" decoding="async" alt="Guest bathroom" data-i18n-attr="alt:g.guest_bathroom"></button>
-        <button type="button" class="g" data-full="assets/img/marina-bollards.webp" data-cap="Stern, alongside" data-i18n-attr="data-cap:g.stern_alongside"><img src="assets/img/marina-bollards.webp" width="1365" height="2048" loading="lazy" decoding="async" alt="Stern alongside the pier" data-i18n-attr="alt:g.stern_alongside_the_pier"></button>
         <button type="button" class="g" data-full="assets/img/dining-table.webp" data-cap="Dining table" data-i18n-attr="data-cap:g.dining_table"><img src="assets/img/dining-table.webp" width="800" height="533" loading="lazy" decoding="async" alt="Dining table" data-i18n-attr="alt:g.dining_table"></button>
         <button type="button" class="g" data-full="assets/img/dining-sun.webp" data-cap="Dining area in sun" data-i18n-attr="data-cap:g.dining_area_in_sun"><img src="assets/img/dining-sun.webp" width="800" height="533" loading="lazy" decoding="async" alt="Dining area in afternoon sun" data-i18n-attr="alt:g.dining_area_in_afternoon_sun"></button>
         <button type="button" class="g" data-full="assets/img/galley-counter.webp" data-cap="Galley" data-i18n-attr="data-cap:g.galley"><img src="assets/img/galley-counter.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Galley" data-i18n-attr="alt:g.galley"></button>
@@ -472,9 +530,8 @@ u();setInterval(u,700)})})();</script>
         <button type="button" class="g" data-full="assets/img/helm-wide.webp" data-cap="Helm" data-i18n-attr="data-cap:g.helm"><img src="assets/img/helm-wide.webp" width="800" height="533" loading="lazy" decoding="async" alt="Helm, wide" data-i18n-attr="alt:g.helm_wide"></button>
         <button type="button" class="g" data-full="assets/img/helm-seats.webp" data-cap="Helm seats" data-i18n-attr="data-cap:g.helm_seats"><img src="assets/img/helm-seats.webp" width="800" height="533" loading="lazy" decoding="async" alt="Helm seats" data-i18n-attr="alt:g.helm_seats"></button>
         <button type="button" class="g" data-full="assets/img/helm.webp" data-cap="Helm controls" data-i18n-attr="data-cap:g.helm_controls"><img src="assets/img/helm.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Helm controls" data-i18n-attr="alt:g.helm_controls"></button>
-        <button type="button" class="g" data-full="assets/img/aerial-bow.webp" data-cap="Bow, aerial" data-i18n-attr="data-cap:g.bow_aerial"><img src="assets/img/aerial-bow.webp" width="800" height="450" loading="lazy" decoding="async" alt="Bow from the air" data-i18n-attr="alt:g.bow_from_the_air"></button>
-        <button type="button" class="g" data-full="assets/img/aerial-bow-2.webp" data-cap="Bow, aerial" data-i18n-attr="data-cap:g.bow_aerial"><img src="assets/img/aerial-bow-2.webp" width="800" height="450" loading="lazy" decoding="async" alt="Bow from the air, second angle" data-i18n-attr="alt:g.bow_from_the_air_second_angle"></button>
-        <button type="button" class="g" data-full="assets/img/wake-topdown.webp" data-cap="Wake, top-down" data-i18n-attr="data-cap:g.wake_top_down"><img src="assets/img/wake-topdown.webp" width="800" height="450" loading="lazy" decoding="async" alt="Wake from directly above" data-i18n-attr="alt:g.wake_from_directly_above"></button>
+        <button type="button" class="g" data-full="assets/img/drone-topdown-wake.webp" data-cap="Under way, from directly above" data-i18n-attr="data-cap:g.wake_from_directly_above"><img src="assets/img/drone-topdown-wake.webp" width="2600" height="1463" loading="lazy" decoding="async" alt="Under way, from directly above" data-i18n-attr="alt:g.wake_from_directly_above"></button>
+        <button type="button" class="g" data-full="assets/img/drone-side-run.webp" data-cap="Under way, seen from the side" data-i18n-attr="data-cap:g.under_way_side"><img src="assets/img/drone-side-run.webp" width="2600" height="1463" loading="lazy" decoding="async" alt="Under way, seen from the side" data-i18n-attr="alt:g.under_way_side"></button>
         <button type="button" class="g" data-full="assets/img/aerial-top.webp" data-cap="Top-down" data-i18n-attr="data-cap:g.top_down"><img src="assets/img/aerial-top.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Top-down aerial" data-i18n-attr="alt:g.top_down_aerial"></button>
         <button type="button" class="g" data-full="assets/img/salon-wide.webp" data-cap="Salon" data-i18n-attr="data-cap:g.salon"><img src="assets/img/salon-wide.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Salon" data-i18n-attr="alt:g.salon"></button>
         <button type="button" class="g" data-full="assets/img/lounge-ottoman.webp" data-cap="Lounge" data-i18n-attr="data-cap:g.lounge"><img src="assets/img/lounge-ottoman.webp" width="2048" height="1365" loading="lazy" decoding="async" alt="Lounge" data-i18n-attr="alt:g.lounge"></button>
@@ -483,7 +540,7 @@ u();setInterval(u,700)})})();</script>
         <button type="button" class="g" data-full="assets/img/engine-detail.webp" data-cap="Engine detail" data-i18n-attr="data-cap:g.engine_detail"><img src="assets/img/engine-detail.webp" width="800" height="450" loading="lazy" decoding="async" alt="Engine detail" data-i18n-attr="alt:g.engine_detail"></button>
         <button type="button" class="g" data-full="assets/img/engine-room-floor.webp" data-cap="Engine room floor" data-i18n-attr="data-cap:g.engine_room_floor"><img src="assets/img/engine-room-floor.webp" width="800" height="450" loading="lazy" decoding="async" alt="Engine room floor" data-i18n-attr="alt:g.engine_room_floor"></button>
         <button type="button" class="g" data-full="assets/img/generator.webp" data-cap="Generator" data-i18n-attr="data-cap:g.generator"><img src="assets/img/generator.webp" width="800" height="450" loading="lazy" decoding="async" alt="Generator" data-i18n-attr="alt:g.generator"></button>
-        <button type="button" class="g" data-full="assets/img/hero-wide.webp" data-cap="Under way" data-i18n-attr="data-cap:g.under_way"><img src="assets/img/hero-wide.webp" width="2048" height="1152" loading="lazy" decoding="async" alt="Under way along the coast" data-i18n-attr="alt:g.under_way_along_the_coast"></button>
+        <button type="button" class="g" data-full="assets/img/drone-side-cliffs.webp" data-cap="Under way, along the cliffs" data-i18n-attr="data-cap:g.under_way_along_the_cliffs"><img src="assets/img/drone-side-cliffs.webp" width="2600" height="1462" loading="lazy" decoding="async" alt="Under way, along the cliffs" data-i18n-attr="alt:g.under_way_along_the_cliffs"></button>
       </div>
     </section>
 
@@ -677,7 +734,7 @@ u();setInterval(u,700)})})();</script>
   <script src="assets/js/vendor/ScrollTrigger.min.js?v=1" defer></script>
   <script src="assets/js/vendor/lenis.min.js?v=1" defer></script>
   <script src="assets/js/config.js?v=20261014h" defer></script>
-  <script src="assets/js/i18n.js?v=20261014j" defer></script>
-  <script src="assets/js/main.js?v=20261014j" defer></script>
+  <script src="assets/js/i18n.js?v=20261014k" defer></script>
+  <script src="assets/js/main.js?v=20261014k" defer></script>
 </body>
 </html>

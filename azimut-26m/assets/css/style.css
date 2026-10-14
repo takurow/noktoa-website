@@ -9,9 +9,9 @@
 
 :root {
   /* --- colour tokens (the only place colours are defined) --- */
-  --bg-0: #071c26;            /* deepest sea: hero, intro, design, engineering, specs, footer */
+  --bg-0: #071c26;            /* deepest sea: hero, exterior, intro, interior, engineering, range, specs, footer */
   --bg-1: #0b2431;            /* one step lighter: performance, deck, plans, gallery, enquire */
-  --bg-2: #103040;            /* lightest plane: image boxes, beyond                              */
+  --bg-2: #103040;            /* lightest plane: image boxes, flybridge (beyond)                  */
   --shade-rgb: 7 28 38;       /* rgb of --bg-0, for translucent shades (header, CTA bar, hotspots) */
   --mint: #8fd0b0;            /* SeaBreeze mint (logo). Accent only.                               */
   --mint-rgb: 143 208 176;
@@ -151,16 +151,29 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 /* V5: media is 2.5 % larger than the hero on every side, so the scroll-shrink (to 0.96) never reveals an edge */
 .hero__media { position: absolute; inset: -2.5%; will-change: transform; }
 .hero__drift { position: absolute; inset: 0; transform-origin: 50% 60%; will-change: transform; }
-.hero__img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transform: scale(1.08); }
-@media (min-width: 701px) { .hero__img { width: 114%; max-width: none; transform-origin: 0% 55%; } }
-@media (max-width: 700px) { .hero__img { object-position: 74% 50%; } }
-/* V5: time-based motion — a breath, vertical only. 28 s per cycle, scale 1 → 1.035, drift 0 → -1.2 % (up). Runs while the hero is on screen. */
+/* V9: .hero__frame holds the poster and two <video>s (the reel). GSAP settles the frame 1.08 → 1 on entry.
+   The poster is always underneath; a video fades in over it (1.2 s) once it is actually playing, the next clip fades over the current one. */
+.hero__frame { position: absolute; inset: 0; transform: scale(1.08); transform-origin: 50% 55%; will-change: transform; }
+.hero__img, .hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.hero__video { opacity: 0; transition: opacity 1.2s cubic-bezier(.45, 0, .55, 1); pointer-events: none; }
+.hero__video.is-on { opacity: 1; }
+/* desktop (V9): the words sit in the sky, top left; the boat runs through the lower half untouched. The frame shows its upper part. */
+@media (min-width: 701px) { .hero__img, .hero__video { object-position: 50% 28%; } }
+/* phones: the words stay at the bottom and the frame is lifted 18 % (sky cropped) so the boat sits above them.
+   Each clip keeps the boat inside the tall crop (9:19.5 shows ~26 % of a 16:9 frame): side run → left of centre, head-on → right of centre */
+@media (max-width: 700px) {
+  .hero__img, .hero__video { height: 118%; top: -18%; object-position: 34% 100%; }
+  .hero__video[data-clip="hero2_front"] { object-position: 60% 100%; }
+  .hero__video[data-clip="hero3_wake"] { object-position: 50% 100%; }
+}
+/* V5: time-based motion — a breath, vertical only. 28 s per cycle, scale 1 → 1.035, drift 0 → -1.2 % (up). Runs while the hero is on screen.
+   V9: only while the poster is showing (.hero.is-video = a clip is playing; the footage itself moves). */
 @keyframes heroBreath {
   0%   { transform: translate3d(0, 0, 0) scale(1); }
   50%  { transform: translate3d(0, -1.2%, 0) scale(1.035); }
   100% { transform: translate3d(0, 0, 0) scale(1); }
 }
-.hero.is-live .hero__drift { animation: heroBreath 28s cubic-bezier(.45, 0, .55, 1) infinite; }
+.hero.is-live:not(.is-video) .hero__drift { animation: heroBreath 28s cubic-bezier(.45, 0, .55, 1) infinite; }
 .hero__dim { position: absolute; inset: 0; z-index: 1; background: var(--bg-0); opacity: 0; pointer-events: none; }
 /* V6: dealer line over the hero picture: one line of text and a small logo, no frame */
 .hero__dealer { display: flex; align-items: center; gap: 12px; margin: 0 0 26px; font-size: 13px; letter-spacing: .02em; color: var(--ivory); }
@@ -168,8 +181,9 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 @media (max-width: 640px) { .hero__dealer { font-size: 12px; gap: 10px; margin-bottom: 20px; } .hero__dealer img { height: 18px; } }
 .hero__shade {
   position: absolute; inset: 0;
+  /* V9 (desktop): the words are in the upper left, so the shade is deepest at the top and fades out over the water; a little returns at the foot for the wave */
   background:
-    linear-gradient(180deg, rgb(var(--shade-rgb) / .5) 0%, rgb(var(--shade-rgb) / 0) 26%, rgb(var(--shade-rgb) / .14) 44%, rgb(var(--shade-rgb) / .9) 100%);
+    linear-gradient(180deg, rgb(var(--shade-rgb) / .66) 0%, rgb(var(--shade-rgb) / .48) 30%, rgb(var(--shade-rgb) / .12) 48%, rgb(var(--shade-rgb) / .1) 66%, rgb(var(--shade-rgb) / .78) 100%);
 }
 .hero__water {
   position: absolute; left: 0; right: 0; bottom: 0; height: 100%; z-index: 2; pointer-events: none;
@@ -181,7 +195,10 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .hero__water::after { content: ""; position: absolute; left: 0; right: 0; top: calc(var(--wave-h) - 2px); bottom: 0; background: var(--bg-0); }
 .no-motion .hero__water { transform: translateY(72%); } /* static: the crest stays as a still curve */
 .hero__content {
-  position: absolute; left: 0; right: 0; bottom: clamp(72px, 12vh, 140px); z-index: 3;
+  /* V9 (desktop): the name sits in the sky at the top, the line and the button at the foot; the boat runs through the middle band between them.
+     Phones keep the whole block at the foot (below). */
+  position: absolute; left: 0; right: 0; top: clamp(88px, 13vh, 136px); bottom: clamp(56px, 8vh, 104px); z-index: 3;
+  display: flex; flex-direction: column; align-items: flex-start;
   margin-inline: auto; width: min(100% - 2 * var(--gutter), var(--wrap));
 }
 .hero__eyebrow, .hero__dealer { opacity: 0; text-shadow: 0 1px 3px rgb(var(--shade-rgb) / .9), 0 2px 18px rgb(var(--shade-rgb) / .8); }
@@ -189,10 +206,10 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .hero__dealer img { filter: drop-shadow(0 1px 2px rgb(var(--shade-rgb) / .8)); }
 .hero__title {
   font-family: var(--font-display); font-weight: 300;
-  font-size: clamp(42px, 4.8vw, 72px); line-height: 1.02; letter-spacing: -.015em; margin: 0 0 24px; max-width: 7em;
+  font-size: clamp(40px, 4.2vw, 62px); line-height: 1.02; letter-spacing: -.015em; margin: 0 0 20px; max-width: 7em; /* V9: a little smaller over moving footage */
 }
 .hero__title, .hero__sub, .hero__actions { opacity: 0; transform: translateY(24px); }
-.hero__sub { font-size: clamp(15px, 1.3vw, 18px); color: var(--ivory-70); max-width: 48ch; margin: 0 0 32px; }
+.hero__sub { font-size: clamp(15px, 1.3vw, 18px); color: var(--ivory-70); max-width: 48ch; margin: auto 0 28px; } /* margin-top auto = pushed to the foot on desktop */
 .hero__scroll {
   position: absolute; right: var(--gutter); bottom: 28px; z-index: 3; display: flex; align-items: center; gap: 12px;
   font-size: 10px; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory-45);
@@ -200,7 +217,13 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .hero__scroll i { display: block; width: 1px; height: 48px; background: var(--ivory-45); transform-origin: top; animation: scrollline 3.2s var(--ease) infinite; }
 @keyframes scrollline { 0% { transform: scaleY(0); } 45% { transform: scaleY(1); transform-origin: top; } 46% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
 @media (max-width: 640px) { .hero__scroll { display: none; } }
-@media (max-width: 1023px) { .hero__shade { background: linear-gradient(180deg, rgb(var(--shade-rgb) / .5) 0%, rgb(var(--shade-rgb) / 0) 22%, rgb(var(--shade-rgb) / .1) 40%, rgb(var(--shade-rgb) / .9) 100%); } }
+@media (max-width: 700px) {
+  /* phones: dealer line and eyebrow up in the sky under the header; name, line and button at the foot; the boat between them */
+  .hero__content { top: 84px; bottom: clamp(48px, 7vh, 96px); }
+  .hero__title { margin-top: auto; }
+  .hero__sub { margin-top: 0; }
+  .hero__shade { background: linear-gradient(180deg, rgb(var(--shade-rgb) / .5) 0%, rgb(var(--shade-rgb) / 0) 22%, rgb(var(--shade-rgb) / .12) 40%, rgb(var(--shade-rgb) / .66) 70%, rgb(var(--shade-rgb) / .92) 100%); }
+}
 
 /* V6: dealer band (after Intro) — a quiet two-line line-up: logo 96–110 px on phones, 120–136 px on desktop. Not a heading. */
 .dealer { padding: 0 0 var(--space-l); }
@@ -212,6 +235,51 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .dealer__contact a:hover { border-bottom-color: var(--mint); }
 .dealer__cta { color: var(--mint); border-bottom-color: var(--mint-45) !important; }
 @media (max-width: 480px) { .dealer__text { font-size: 13px; } }
+
+/* Exterior (V9): drone footage, video and stills alternating, right after the hero.
+   full-bleed clip (cove) → wide still pushed right (cliffs) → facts + a clip beside them (slide) → two stills, the second a tall crop
+   → a clip from above on the left (rings) → full-bleed clip (late light). Each block sits differently: nothing is centred twice in a row.
+   .vclip: poster <img> fills the box; the <video> sits on top at opacity 0 and fades in once it is really playing (.is-playing, set by main.js). */
+.exterior { padding-top: var(--space-m); }
+.vclip { margin: 0; }
+.vclip__box { position: relative; overflow: hidden; background: var(--bg-0); }
+.vclip__poster, .vclip__video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.vclip__poster { position: relative; }
+.vclip__video { position: absolute; inset: 0; opacity: 0; transition: opacity .9s cubic-bezier(.45, 0, .55, 1); pointer-events: none; }
+.vclip.is-playing .vclip__video { opacity: 1; }
+/* full-bleed clips: never more than ~2/3 of the screen tall (56–70 vh) */
+.vclip--bleed { width: 100%; }
+.vclip--bleed .vclip__box { height: clamp(300px, 64vh, 760px); }
+.vclip--bleed figcaption { margin-top: 14px; }
+.vclip--sunset { margin-top: clamp(56px, 8vw, 128px); }
+.vclip--sunset .vclip__box { height: clamp(280px, 58vh, 700px); }
+.vclip--sunset .vclip__poster, .vclip--sunset .vclip__video { object-position: 50% 40%; }
+@media (max-width: 700px) { .vclip--bleed .vclip__box { height: clamp(240px, 56vh, 520px); } }
+/* the wide still, pushed to the right edge of the content column */
+.exterior__one { margin-top: clamp(48px, 7vw, 112px); }
+.exterior__cliffs { width: min(100%, 1120px); margin-left: auto; }
+.exterior__cliffs .parallax { overflow: hidden; aspect-ratio: 16 / 9; }
+.exterior__cliffs .parallax img { width: 100%; height: 118%; object-fit: cover; object-position: 50% 50%; will-change: transform; }
+/* facts on the left, a clip beside them */
+.exterior__berth { display: grid; gap: 40px; margin-top: clamp(56px, 8vw, 128px); }
+.exterior__text { font-size: clamp(16px, 1.3vw, 19px); line-height: 1.7; color: var(--ivory-70); max-width: 44ch; margin: 0; }
+.vclip--slide .vclip__box { aspect-ratio: 4 / 3; }
+.vclip--slide .vclip__poster, .vclip--slide .vclip__video { object-position: 62% 50%; }
+@media (min-width: 768px) { .exterior__berth { grid-template-columns: 5fr 7fr; gap: 64px; align-items: center; } }
+/* two stills: head-on (wide) and the wake (a tall crop, set lower) */
+.exterior__pair { display: grid; gap: 32px 24px; margin-top: clamp(48px, 7vw, 112px); }
+.exterior__pair figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.exterior__pair .exterior__wake img { aspect-ratio: 4 / 5; object-position: 50% 50%; }
+@media (min-width: 768px) {
+  .exterior__pair { grid-template-columns: 7fr 4fr; gap: 32px; align-items: start; }
+  .exterior__pair .exterior__wake { margin-top: clamp(32px, 6vw, 96px); }
+}
+/* the clip from above, on the left, not full width */
+.exterior__rings { margin-top: clamp(56px, 8vw, 128px); }
+.vclip--rings { width: min(100%, 880px); }
+.vclip--rings .vclip__box { aspect-ratio: 16 / 10; }
+.vclip--rings .vclip__poster, .vclip--rings .vclip__video { object-position: 30% 50%; }
+@media (max-width: 700px) { .vclip--slide .vclip__box, .vclip--rings .vclip__box { aspect-ratio: 4 / 3; } }
 
 /* Intro */
 .intro__text {
@@ -271,8 +339,8 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .design__pair figure:last-child img { aspect-ratio: 4 / 5; }
 
 /* clip reveal: start hidden, JS animates clip-path */
-.clip-reveal > img, .clip-reveal > .parallax { clip-path: inset(0 0 100% 0); }
-.no-motion .clip-reveal > img, .no-motion .clip-reveal > .parallax { clip-path: none; }
+.clip-reveal > img, .clip-reveal > .parallax, .clip-reveal > .vclip__box { clip-path: inset(0 0 100% 0); }
+.no-motion .clip-reveal > img, .no-motion .clip-reveal > .parallax, .no-motion .clip-reveal > .vclip__box { clip-path: none; }
 
 /* Walk the deck */
 .deck { padding-top: var(--space-l); background: var(--bg-1); position: relative; }
@@ -360,10 +428,7 @@ figcaption { font-size: 12px; letter-spacing: .04em; color: var(--ivory-45); mar
 .beyond__list { list-style: none; padding: 0; margin: 28px 0 0; }
 .beyond__list li { padding: 10px 0; border-bottom: 1px solid var(--ivory-15); font-size: 15px; }
 .beyond__media figure img { object-fit: cover; width: 100%; }
-.beyond__main img { aspect-ratio: 16 / 9; } /* V5: aerial photographs are 16:9 — show the whole boat */
-.beyond__pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-@media (min-width: 768px) { .beyond__pair { gap: 24px; margin-top: 24px; } }
-.beyond__pair figure img { aspect-ratio: 16 / 10; }
+.beyond__main img { aspect-ratio: 16 / 9; } /* V5: aerial photographs are 16:9 — show the whole boat. V8: one picture only; the other aerials are in Exterior */
 
 /* Range */
 .range { background: var(--bg-0); }
@@ -553,12 +618,13 @@ html.has-flow .deck, html.has-flow .plans, html.has-flow .beyond, html.has-flow 
 /* Reduced motion: everything static. V7: html.motion-on (visitor tapped "Play with motion" on the gate) opts out of this block. */
 @media (prefers-reduced-motion: reduce) {
   html:not(.motion-on) *, html:not(.motion-on) *::before, html:not(.motion-on) *::after { animation: none !important; transition: none !important; }
-  html:not(.motion-on) .hero__img { transform: none; }
+  html:not(.motion-on) .hero__frame { transform: none; }
+  html:not(.motion-on) .hero__video { display: none; } /* V9: poster only */
   html:not(.motion-on) .hero.is-live .hero__drift { animation: none; }
   html:not(.motion-on) .hero__dim { display: none; }
   html:not(.motion-on) .hero__dealer, html:not(.motion-on) .hero__eyebrow, html:not(.motion-on) .hero__title, html:not(.motion-on) .hero__sub, html:not(.motion-on) .hero__actions, html:not(.motion-on) .reveal-lines, html:not(.motion-on) .r { opacity: 1; transform: none; }
-  html:not(.motion-on) .clip-reveal > img, html:not(.motion-on) .clip-reveal > .parallax { clip-path: none; }
-  html:not(.motion-on) .design__fig .parallax img { height: 100%; }
+  html:not(.motion-on) .clip-reveal > img, html:not(.motion-on) .clip-reveal > .parallax, html:not(.motion-on) .clip-reveal > .vclip__box { clip-path: none; }
+  html:not(.motion-on) .design__fig .parallax img, html:not(.motion-on) .exterior__cliffs .parallax img { height: 100%; }
   html:not(.motion-on) .site-header.is-hidden { transform: none; }
   html:not(.motion-on) .plans__img { clip-path: none; }
   html:not(.motion-on) .gauge__needle { transform: rotate(78deg); } /* 28 kn static */
@@ -574,7 +640,8 @@ html.has-flow .deck, html.has-flow .plans, html.has-flow .beyond, html.has-flow 
     html:not(.motion-on) .deck { padding-bottom: clamp(96px, 14vw, 200px); }
   }
 }
-.no-motion .hero__img { transform: none; }
+.no-motion .hero__frame { transform: none; }
+.no-motion .hero__video, .reduce-motion .hero__video, .reduce-motion .vclip__video { display: none; } /* V9: static = posters only */
 .no-motion .gauge__needle { transform: rotate(78deg); } /* no JS: 28 kn static (JS overrides inline) */
 .no-motion .gauge__arc-on { stroke-dashoffset: calc(1 - 28 / 30); }
 .no-motion .gauge__mark, .no-motion .gauge__mlabel, .no-motion .gauge__stops li { opacity: 1; }
@@ -582,7 +649,7 @@ html.has-flow .deck, html.has-flow .plans, html.has-flow .beyond, html.has-flow 
 .no-motion .hero__dim { display: none; }
 .no-motion .hero__dealer, .no-motion .hero__eyebrow, .no-motion .hero__title, .no-motion .hero__sub, .no-motion .hero__actions,
 .no-motion .reveal-lines, .no-motion .r { opacity: 1; transform: none; }
-.no-motion .design__fig .parallax img { height: 100%; }
+.no-motion .design__fig .parallax img, .no-motion .exterior__cliffs .parallax img { height: 100%; }
 
 /* no-JS / no-GSAP fallback: deck stays reachable */
 @media (min-width: 1024px) { .no-motion .deck__pin { height: auto; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 var(--gutter); } .no-motion .deck__panel { scroll-snap-align: start; flex: 0 0 64vw; } }
@@ -641,7 +708,7 @@ html[lang="ja"] body, html[lang="zh-Hant"] body { line-height: 1.8; }
 html[lang="ja"] .lede, html[lang="zh-Hant"] .lede { line-height: 1.95; }
 html[lang="ja"] .h2, html[lang="zh-Hant"] .h2 { line-height: 1.3; letter-spacing: .02em; word-break: keep-all; overflow-wrap: anywhere; } /* breaks only at <wbr>, spaces and punctuation */
 html[lang="ja"] :is(p, li, td, figcaption, dd, label), html[lang="zh-Hant"] :is(p, li, td, figcaption, dd, label) { line-break: strict; }
-html[lang="ja"] .hero__title, html[lang="zh-Hant"] .hero__title { line-height: 1.14; letter-spacing: .01em; font-size: clamp(42px, 5.8vw, 84px); }
+html[lang="ja"] .hero__title, html[lang="zh-Hant"] .hero__title { line-height: 1.14; letter-spacing: .01em; font-size: clamp(40px, 4.6vw, 66px); max-width: 9.5em; }
 html[lang="ja"] .intro__text, html[lang="zh-Hant"] .intro__text { line-height: 1.7; letter-spacing: .02em; font-size: clamp(21px, 2.6vw, 34px); }
 html[lang="ja"] .plans__photo figcaption, html[lang="zh-Hant"] .plans__photo figcaption { line-height: 1.5; }
 html[lang="ja"] .acc summary, html[lang="zh-Hant"] .acc summary { letter-spacing: .02em; }

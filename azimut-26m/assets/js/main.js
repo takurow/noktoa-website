@@ -221,7 +221,7 @@
 
     // Hero: slow settle of the zoom, text rises quietly
     var heroTl = gsap.timeline({ defaults: { ease: EASE }, paused: gateOpen });   /* V7: starts on the tap, not on load */
-    heroTl.to(".hero__img", { scale: 1, duration: 7, ease: "power1.out" }, 0)
+    heroTl.to(".hero__frame", { scale: 1, duration: 7, ease: "power1.out" }, 0)   /* V9: poster and videos settle together */
       .to(".hero__dealer", { opacity: 1, duration: 1.6 }, 0.4)
       .to(".hero__eyebrow", { opacity: 1, duration: 1.6 }, 0.5)
       .to(".hero__title", { opacity: 1, y: 0, duration: 1.8 }, 0.7)
@@ -242,7 +242,7 @@
 
     // Clip reveals (images)
     document.querySelectorAll(".clip-reveal").forEach(function (fig) {
-      var target = fig.querySelector(".parallax") || fig.querySelector("img");
+      var target = fig.querySelector(".parallax") || fig.querySelector(".vclip__box") || fig.querySelector("img");
       gsap.fromTo(target, { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.8, ease: EASE, scrollTrigger: { trigger: fig, start: "top 82%", once: true } });
     });
 
@@ -290,6 +290,141 @@
 
     window.addEventListener("load", function () { ST.refresh(); paintTone(); });
     ST.addEventListener("refresh", paintTone);
+  }
+
+  /* ---------- V9: drone footage ----------
+     Rules (BRIEF_V9): no video at all with reduced motion, Save-Data, ?novideo=1, or no MP4 support — the posters stay.
+     ≤ 700 px wide loads the _720 files, otherwise _1080. Every <video> is muted + playsinline; sources are set here, never in the HTML,
+     so a browser that does not run JS downloads nothing but the posters. */
+  var saveData = false;
+  try { saveData = !!(navigator.connection && navigator.connection.saveData); } catch (e) { /* ignore */ }
+  var canVideo = !reduced && !html.classList.contains("no-motion") && !saveData && !/[?&]novideo=1/.test(location.search) &&
+    (function () { try { var v = document.createElement("video"); return !!v.canPlayType && v.canPlayType("video/mp4") !== ""; } catch (e) { return false; } })();
+  function clipSrc(name) { return "assets/video/" + name + "_" + (window.innerWidth <= 700 ? "720" : "1080") + ".mp4"; }
+  function setClip(v, name) {
+    if (v.dataset.clip === name) return;
+    v.dataset.clip = name;
+    v.setAttribute("src", clipSrc(name));
+    try { v.load(); } catch (e) { /* ignore */ }
+  }
+  function safePlay(v) {
+    var p;
+    try { p = v.play(); } catch (e) { return Promise.reject(e); }
+    return (p && typeof p.then === "function") ? p : Promise.resolve();
+  }
+
+  /* Hero reel: hero1_side → hero2_front → hero3_wake, crossfaded between two <video> elements.
+     Clip 1 starts loading at once (it is the only video in the first load); it plays on the gate tap (a user gesture, so iOS plays it too)
+     or immediately with ?nogate=1. The next clip is fetched only after the current one is playing. If play() is refused (Low Power Mode,
+     an old browser) the poster stays and the breathing zoom carries on. window.__heroVideo is read by the ?debug=1 panel. */
+  var HERO_CLIPS = ["hero1_side", "hero2_front", "hero3_wake"];
+  var heroVids = Array.prototype.slice.call(hero.querySelectorAll(".hero__video"));
+  window.__heroVideo = canVideo ? "idle" : (reduced ? "off:reduced-motion" : saveData ? "off:save-data" : "off");
+  if (canVideo && heroVids.length === 2) {
+    var cur = heroVids[0], nxt = heroVids[1], heroStarted = false, switching = false, heroInView = true, fadeTimer = null, fadeFor = "";
+    function nextClip(v) { return HERO_CLIPS[(HERO_CLIPS.indexOf(v.dataset.clip) + 1) % HERO_CLIPS.length]; }
+    function onPlaying(v) {
+      if (v !== cur) return;   /* a looping clip fires "playing" again at its wrap; only the current one may take the screen */
+      v.classList.add("is-on");
+      hero.classList.add("is-video");
+      window.__heroVideo = "playing:" + v.dataset.clip;
+      var other = v === cur ? nxt : cur;
+      if (fadeFor === v.dataset.clip) return;   /* same clip resumed or wrapped: nothing to reschedule */
+      fadeFor = v.dataset.clip;
+      clearTimeout(fadeTimer);
+      fadeTimer = setTimeout(function () {
+        if (other !== v) { other.classList.remove("is-on"); try { other.pause(); } catch (e) { /* ignore */ } }
+        /* the current clip is on screen: now fetch the next one (one at a time, no bandwidth fight) */
+        setClip(other, nextClip(v));
+      }, 1400);
+    }
+    function heroFail(err) {
+      window.__heroVideo = "fallback:" + (err && err.name ? err.name : "play-refused");
+      hero.classList.remove("is-video");
+      heroVids.forEach(function (v) { v.classList.remove("is-on"); });
+    }
+    function advance() {
+      /* called near the end of the current clip; if the next one is not ready the current simply loops (loop attr) and we try again */
+      if (switching) return;
+      var want = nextClip(cur);
+      if (nxt.dataset.clip !== want) { setClip(nxt, want); return; }
+      if (nxt.readyState < 3) return;
+      switching = true;
+      try { nxt.currentTime = 0; } catch (e) { /* ignore */ }
+      var prev = cur; cur = nxt; nxt = prev;   /* swap first, so the "playing" event of the new clip is accepted whenever it fires */
+      safePlay(cur).then(function () { switching = false; })
+        .catch(function () { nxt = cur; cur = prev; switching = false; });
+    }
+    heroVids.forEach(function (v) {
+      v.addEventListener("playing", function () { onPlaying(v); });
+      v.addEventListener("timeupdate", function () {
+        if (v !== cur || !heroInView || document.hidden) return;
+        if (isFinite(v.duration) && v.duration - v.currentTime < 1.1) advance();
+      });
+      v.addEventListener("error", function () { if (v === cur) heroFail({ name: "MediaError" }); });
+    });
+    function heroPlay() {
+      if (!heroStarted || !heroInView || document.hidden) return;
+      safePlay(cur).catch(function (e) { if (e && e.name === "AbortError") return; heroFail(e); });
+    }
+    function heroPause() { heroVids.forEach(function (v) { try { v.pause(); } catch (e) { /* ignore */ } }); }
+    function heroStart() {
+      if (heroStarted) return;
+      heroStarted = true;
+      setClip(cur, HERO_CLIPS[0]);
+      window.__heroVideo = "starting";
+      heroPlay();
+    }
+    /* clip 1 begins loading now (poster is already painted); the other element stays empty until clip 1 plays */
+    setClip(cur, HERO_CLIPS[0]);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          heroInView = en.isIntersecting;
+          if (heroInView) heroPlay(); else heroPause();
+        });
+      }, { threshold: 0.05 }).observe(hero);
+    }
+    document.addEventListener("visibilitychange", function () { if (document.hidden) heroPause(); else heroPlay(); });
+    if (gateOpen) onGateOpen.push(heroStart); else heroStart();
+  }
+
+  /* Exterior clips (.vclip): src is set when the figure comes within half a screen; plays at ≥ 40 % visible, pauses when it leaves;
+     never more than two playing at once (the oldest is paused). The poster stays until the video is really playing. */
+  var vclips = Array.prototype.slice.call(document.querySelectorAll(".vclip[data-clip]"));
+  if (canVideo && vclips.length && "IntersectionObserver" in window) {
+    var playingClips = [];
+    function clipVideo(fig) { return fig.querySelector(".vclip__video"); }
+    function clipStop(fig) {
+      var v = clipVideo(fig); if (!v) return;
+      try { v.pause(); } catch (e) { /* ignore */ }
+      var k = playingClips.indexOf(fig); if (k >= 0) playingClips.splice(k, 1);
+    }
+    function clipWant(fig) {
+      var v = clipVideo(fig); if (!v || fig.classList.contains("is-failed") || document.hidden) return;
+      setClip(v, fig.dataset.clip);
+      if (playingClips.indexOf(fig) < 0) {
+        while (playingClips.length >= 2) clipStop(playingClips[0]);
+        playingClips.push(fig);
+      }
+      safePlay(v).catch(function (e) { if (e && e.name === "AbortError") return; fig.classList.add("is-failed"); fig.classList.remove("is-playing"); clipStop(fig); });
+    }
+    vclips.forEach(function (fig) {
+      var v = clipVideo(fig); if (!v) return;
+      v.addEventListener("playing", function () { fig.classList.add("is-playing"); });
+      v.addEventListener("error", function () { fig.classList.add("is-failed"); fig.classList.remove("is-playing"); });
+    });
+    var clipLoader = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { var v = clipVideo(en.target); if (v) setClip(v, en.target.dataset.clip); clipLoader.unobserve(en.target); } });
+    }, { rootMargin: "50% 0px 50% 0px" });
+    var clipPlayer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting && en.intersectionRatio >= 0.4) clipWant(en.target); else clipStop(en.target); });
+    }, { threshold: [0, 0.4, 0.6] });
+    vclips.forEach(function (fig) { clipLoader.observe(fig); clipPlayer.observe(fig); });
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) playingClips.slice().forEach(clipStop);
+      else vclips.forEach(function (fig) { var r = fig.getBoundingClientRect(); var vis = Math.max(0, Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0)); if (r.height && vis / r.height >= 0.4) clipWant(fig); });
+    });
   }
 
   /* ---------- speed gauge (0 -> 20 eco -> 24 cruise -> 28 max) ---------- */
@@ -674,6 +809,9 @@
     window.__gateReady = true;
     if (auto && motion) setTimeout(function () { closeGate(true); }, 60);   /* set only after the gate is fully wired; otherwise the head script frees the page after 6 s */
   }
+  /* V9: with ?nogate=1 there is no gate, but the head script's 6 s safety net must still know the page is wired
+     (otherwise it adds .no-motion after 6 s, which would hide the videos) */
+  window.__gateReady = true;
 
   /* footer toggle: the way back from "View without motion" (and a way to switch it off later) */
   var mt = document.getElementById("motionToggle");
