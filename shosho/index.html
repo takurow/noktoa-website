@@ -227,6 +227,14 @@ footer{display:flex;justify-content:space-between;padding:56px var(--pad) 8px;fo
 .quiet *,.quiet *::before,.quiet *::after{transition:none!important;animation:none!important}
 .quiet h1 .ch{transform:none}.quiet .ghost,.quiet .ring,.quiet .sub,.quiet .hint{opacity:1}.quiet .bk-d{opacity:var(--o,.4)}.quiet .sun{opacity:1}.quiet .ph img{opacity:1;filter:none;transform:none}
 </style>
+<!-- analytics:start -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
+<script>if(location.hostname==='noktoa.com'){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
+document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;var h=a.getAttribute('href')||'';
+if(h.indexOf('/contact/')>-1)gtag('event','cta_click',{cta_target:h,page:location.pathname});
+else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.pathname});});}</script>
+<script>if(location.hostname==='noktoa.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yorl0bpxds");</script>
+<!-- analytics:end -->
 </head>
 <body class="gate-on">
 
@@ -329,8 +337,8 @@ const P = id => 'https://www.instagram.com/p/' + id + '/';
 const R = id => 'https://www.instagram.com/reel/' + id + '/';
 window.SHOSHO = {
   handle: 'whereisshosho',
-  email: 'yamaguchisho2@me.com',
-  form: '',
+  email: 'info@noktoa.com',
+  form: 'https://formspree.io/f/xwlprdoa',
   gallery: [
     P('DR487Hnk-Rg'),
     P('DWMQZZokaqw'),
@@ -543,8 +551,8 @@ form.addEventListener('submit',async e=>{
   const bodyTxt=`Name: ${f.name}\nEmail: ${f.email}\nDate / Place: ${f.when||'-'}\n\n${f.msg}`;
   if(D.form){
     try{
-      const r=await fetch(D.form,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({name:f.name,email:f.email,when:f.when,message:f.msg,_subject:subject})});
-      if(!r.ok)throw 0;note.textContent=L('送信しました。ありがとうございます','Sent. Thank you.','已发送，谢谢');form.reset();
+      const r=await fetch(D.form,{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({'お名前':f.name,email:f.email,'日程・場所':f.when,'相談内容':f.msg,'流入元ページ':'shosho',_subject:'【SHOSHO】'+subject})});
+      if(!r.ok)throw 0;if(window.gtag)gtag('event','generate_lead',{source:'shosho'});note.textContent=L('送信しました。ありがとうございます','Sent. Thank you.','已发送，谢谢');form.reset();
     }catch(_){note.textContent=L('送信できませんでした。時間をおいてもう一度お試しください','Could not send. Please try again later.','发送失败，请稍后再试')}
   }else{
     location.href=`mailto:${D.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyTxt)}`;
