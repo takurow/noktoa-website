@@ -26,6 +26,16 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23081424%27/%3E%3Cpath d=%27M6 22 L16 8 L26 22 Z%27 fill=%27none%27 stroke=%27%23f4efe6%27 stroke-width=%271.6%27/%3E%3C/svg%3E">
   <link rel="preload" as="image" href="assets/img/aerial-quarter.webp" fetchpriority="high">
   <script>(function(){var d=document.documentElement,q=location.search,os=false,pref=null;d.classList.add("js");try{os=matchMedia("(prefers-reduced-motion: reduce)").matches||/[?&]osreduce=1/.test(q)}catch(e){}try{pref=localStorage.getItem("azimut26m.motion")}catch(e){}var reduce=/[?&]reduce=1/.test(q)||pref==="0"||(os&&pref!=="1");if(reduce){d.classList.add("reduce-motion")}else{d.classList.remove("no-motion");if(os)d.classList.add("motion-on")}if(os)d.classList.add("os-reduce");if(!/[?&]nogate=1/.test(q)&&!(/[?&]reduce=1/.test(q)||pref==="0")&&window.top===window)d.classList.add("gate-on");setTimeout(function(){if(!window.__gateReady){d.classList.remove("gate-on");d.classList.add("no-motion");var g=document.getElementById("gate");if(g)g.hidden=true;document.querySelectorAll("[inert]").forEach(function(e){e.removeAttribute("inert")})}},6000)})()</script>
+  <script>/* ?debug=1 : on-screen diagnostics for phones (no data leaves the device) */
+(function(){if(!/[?&]debug=1/.test(location.search))return;var errs=[];function add(m){errs.push(String(m).slice(0,140));if(errs.length>6)errs.shift()}
+window.addEventListener("error",function(e){add((e.target&&e.target.src?"load fail: "+e.target.src.split("/").pop():(e.message||"error")+" @"+(e.lineno||""))) },true);
+window.addEventListener("unhandledrejection",function(e){add("promise: "+(e.reason&&e.reason.message||e.reason))});
+function mm(q){try{return matchMedia(q).matches}catch(x){return "n/a"}}
+function ls(){try{return localStorage.getItem("azimut26m.motion")}catch(x){return "blocked"}}
+document.addEventListener("DOMContentLoaded",function(){var b=document.createElement("pre");b.style.cssText="position:fixed;left:6px;right:6px;bottom:6px;z-index:2147483647;margin:0;padding:8px;background:rgba(0,0,0,.82);color:#9fe;font:10px/1.35 monospace;white-space:pre-wrap;pointer-events:none;border-radius:6px";document.body.appendChild(b);
+function u(){var d=document.documentElement,t=document.querySelector(".hero__title");b.textContent=["w="+innerWidth+" dpr="+devicePixelRatio,"os-reduce(media)="+mm("(prefers-reduced-motion: reduce)"),"saved pref="+ls(),"html.class="+d.className,"gsap="+typeof window.gsap+" ST="+typeof window.ScrollTrigger+" Lenis="+typeof window.Lenis,"gateReady="+!!window.__gateReady+" gateInDOM="+!!document.getElementById("gate"),"hero title opacity="+(t?getComputedStyle(t).opacity:"-"),"scrollY="+Math.round(scrollY),"errors:"].concat(errs.length?errs:["(none)"]).join("\n")}
+u();setInterval(u,700)})})();</script>
+
   <link rel="stylesheet" href="assets/css/style.css?v=20261014j">
 </head>
 <body>
@@ -663,9 +673,9 @@
     <p class="lightbox__count" id="lbCount"></p>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="assets/js/vendor/gsap.min.js?v=1" defer></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=1" defer></script>
+  <script src="assets/js/vendor/lenis.min.js?v=1" defer></script>
   <script src="assets/js/config.js?v=20261014h" defer></script>
   <script src="assets/js/i18n.js?v=20261014j" defer></script>
   <script src="assets/js/main.js?v=20261014j" defer></script>
