@@ -373,8 +373,19 @@
       heroStarted = true;
       setClip(cur, HERO_CLIPS[0]);
       window.__heroVideo = "starting";
+      heroVids.forEach(function (v) { v.muted = true; v.defaultMuted = true; v.playsInline = true; v.autoplay = true; });
       heroPlay();
+      /* iOS may refuse the first play() (no user activation, Low Power Mode); try again shortly, and on the first touch (see unlock below) */
+      setTimeout(function () { if (cur.paused) heroPlay(); }, 500);
+      setTimeout(function () { if (cur.paused) heroPlay(); }, 1500);
     }
+    /* First touch / click / key / wheel anywhere counts as user activation on iOS: if the reel is not playing yet, start it right then. */
+    var unlockEv = ["touchstart", "touchend", "pointerdown", "click", "keydown", "wheel", "scroll"];
+    function unlockHero() {
+      if (heroStarted && heroInView && !document.hidden && cur.paused) heroPlay();
+      if (!cur.paused && cur.currentTime > 0.3) unlockEv.forEach(function (n) { window.removeEventListener(n, unlockHero, true); });
+    }
+    unlockEv.forEach(function (n) { window.addEventListener(n, unlockHero, { capture: true, passive: true }); });
     /* clip 1 begins loading now (poster is already painted); the other element stays empty until clip 1 plays */
     setClip(cur, HERO_CLIPS[0]);
     if ("IntersectionObserver" in window) {
