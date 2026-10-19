@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0e1013">
+<title>背景セレクトシート</title>
+<style>
+:root{--bg:#0e1013;--panel:#171a1f;--line:#2a2f37;--text:#e8eaed;--sub:#9aa3ad;--acc:#c9a96a;--ok:#7fd1a0;--mid:#8fb4e8;--low:#e0c070;--ng:#e07a7a;--cols:2;--sat:env(safe-area-inset-top);--sab:env(safe-area-inset-bottom)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,"Hiragino Sans","Yu Gothic",sans-serif;-webkit-text-size-adjust:100%}
+button,input,textarea{font:inherit;color:var(--text)}
+input,textarea{font-size:16px}
+button{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;min-height:40px}
+button:active{border-color:var(--acc)}
+button.on{background:var(--acc);color:#111;border-color:var(--acc)}
+input[type=text],textarea{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 11px;width:100%}
+header{position:sticky;top:0;z-index:20;background:rgba(14,16,19,.95);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:calc(8px + var(--sat)) 12px 8px}
+.top{display:flex;align-items:center;gap:8px}
+.top h1{margin:0;font-size:15px;font-weight:600;letter-spacing:.03em;flex:0 0 auto}
+.stat{flex:1;color:var(--sub);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:right}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.tabs::-webkit-scrollbar{display:none}
+.tabs button{flex:0 0 auto;padding:6px 12px;min-height:34px;font-size:13px;border-radius:999px}
+main{padding:12px 12px calc(80px + var(--sab));max-width:1500px;margin:0 auto}
+section{margin-bottom:28px}
+section h2{font-size:14px;margin:0 0 2px;color:var(--acc);font-weight:600}
+section p{margin:0 0 10px;color:var(--sub);font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:10px}
+.card{min-width:0;background:var(--panel);border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.card.r3{border-color:var(--ok)}.card.r2{border-color:var(--mid)}.card.r1{border-color:var(--low)}.card.r0{opacity:.4}
+.card .im{position:relative;display:block;width:100%;aspect-ratio:16/9;background:#000;cursor:zoom-in}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;left:6px;top:6px;background:rgba(0,0,0,.6);border-radius:8px;padding:0 7px;font-size:12px;line-height:22px}
+.cm{position:absolute;right:6px;top:6px;background:rgba(0,0,0,.6);border-radius:8px;padding:0 6px;font-size:12px;line-height:22px}
+.meta{padding:6px 8px 8px}
+.ttl{font-size:12px;line-height:1.35;margin-bottom:6px;min-height:2.7em;overflow:hidden}
+.rate{display:flex;gap:6px}
+.rate button{flex:1;padding:0;min-height:40px;font-size:17px;border-radius:9px}
+.rate button.a3.on{background:var(--ok);border-color:var(--ok)}
+.rate button.a2.on{background:var(--mid);border-color:var(--mid)}
+.rate button.a1.on{background:var(--low);border-color:var(--low)}
+.rate button.a0.on{background:var(--ng);border-color:var(--ng)}
+.rate button.on{color:#111}
+@media(min-width:700px){:root{--cols:3}}
+@media(min-width:1000px){:root{--cols:4}}
+@media(min-width:1400px){:root{--cols:5}}
+/* lightbox */
+#lb{position:fixed;inset:0;height:100dvh;background:#050607;z-index:50;display:none;flex-direction:column}
+#lb.show{display:flex}
+#lb .bar{display:flex;align-items:center;gap:8px;padding:calc(8px + var(--sat)) 10px 8px}
+#lb .cap{flex:1;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+#lb .stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:pan-y;position:relative}
+#lb .stage img{max-width:100%;max-height:100%;object-fit:contain}
+#lb .nv{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);border:none;font-size:26px;width:44px;height:64px;border-radius:10px;padding:0}
+#lb .pv{left:4px}#lb .nx{right:4px}
+#lb .foot{padding:8px 10px calc(10px + var(--sab));background:var(--panel);border-top:1px solid var(--line)}
+#lb .foot .rate button{min-height:52px;font-size:22px}
+#lb .foot input{margin-top:8px}
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center}
+.sheet.show{display:flex}
+.sheet .box{background:var(--panel);border-radius:16px 16px 0 0;width:min(640px,100%);max-height:92dvh;overflow:auto;padding:14px 14px calc(16px + var(--sab));border:1px solid var(--line)}
+.sheet h3{margin:0 0 10px;font-size:16px}
+.sheet .grp{margin:14px 0 6px;color:var(--sub);font-size:12px}
+.sheet .btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sheet .btns .wide{grid-column:1/-1}
+.sheet .help{color:var(--sub);font-size:12px;margin:6px 0}
+.row{display:flex;gap:8px;align-items:center}
+.seg button{flex:1}
+#aggbox{max-width:760px}
+.ar{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.ar img{width:112px;aspect-ratio:16/9;object-fit:cover;border-radius:8px;flex:0 0 auto}
+.ar .t{font-size:13px}.ar .s{color:var(--sub);font-size:12px}
+textarea{min-height:120px;resize:vertical}
+.fab{position:fixed;right:14px;bottom:calc(14px + var(--sab));z-index:30;border-radius:999px;background:var(--acc);color:#111;border:none;padding:0 18px;min-height:48px;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.45)}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <h1>背景セレクト</h1>
+    <span class="stat" id="stat"></span>
+    <button id="menuBtn" aria-label="メニュー">☰ メニュー</button>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</header>
+<main id="main"></main>
+<button class="fab" id="fab">結果を送る</button>
+
+<div id="lb">
+  <div class="bar"><div class="cap" id="lbt"></div><button id="lbc">閉じる ✕</button></div>
+  <div class="stage" id="stage">
+    <img id="lbi" alt="">
+    <button class="nv pv" id="lbp" aria-label="前">‹</button>
+    <button class="nv nx" id="lbn" aria-label="次">›</button>
+  </div>
+  <div class="foot"><div class="rate" id="lbr"></div><input type="text" id="lbcm" placeholder="コメント（任意）"></div>
+</div>
+
+<div class="sheet" id="menu"><div class="box">
+  <h3>メニュー</h3>
+  <div class="grp">あなたの名前（結果を送るときに使います）</div>
+  <input type="text" id="who" placeholder="例：山田" autocomplete="off">
+  <div class="grp">表示</div>
+  <div class="row seg" id="colSeg"><button data-c="1">1列</button><button data-c="2">2列</button><button data-c="3">3列</button><button data-c="0">自動</button></div>
+  <div class="grp">結果を渡す</div>
+  <div class="btns">
+    <button id="shareBtn" class="on wide">結果を送る（LINEなど）</button>
+    <button id="exTxt">テキストをコピー</button>
+    <button id="exJson">JSON保存</button>
+    <button id="exCsv">CSV保存</button>
+  </div>
+  <div class="grp">まとめる人用</div>
+  <div class="btns"><button id="aggBtn" class="wide">チームの集計を開く</button></div>
+  <div class="grp">その他</div>
+  <div class="btns"><button id="clr">自分の評価を全消去</button><button id="menuX">閉じる</button></div>
+  <p class="help">評価はこの端末のブラウザに自動保存されます。◎=最有力 ○=良い △=迷う ×=なし。</p>
+</div></div>
+
+<div class="sheet" id="agg"><div class="box" id="aggbox">
+  <h3>チームの集計</h3>
+  <p class="help">メンバーから届いた「結果を送る」のメッセージを、そのまま全部貼り付けて「集計する」を押してください。同じ名前が複数ある場合は最新（下にある方）を採用します。</p>
+  <textarea id="paste" placeholder="【CCSEL】山田&#10;◎131,150&#10;○132&#10;…"></textarea>
+  <label class="help"><input type="checkbox" id="incMe" checked style="width:auto;vertical-align:middle"> 自分の評価も含める</label>
+  <div class="btns"><button id="doAgg" class="on">集計する</button><button id="aggCopy">集計をテキストでコピー</button></div>
+  <div id="aggout" style="margin-top:12px"></div>
+  <div class="btns" style="margin-top:12px"><button id="aggX" class="wide">閉じる</button></div>
+</div></div>
+
+<script>
+const ITEMS=[{"n": 1, "t": "川沿い定番"}, {"n": 2, "t": "雨の路地"}, {"n": 3, "t": "夕暮れ屋上"}, {"n": 4, "t": "高架ライトトレイル"}, {"n": 5, "t": "発光クラゲの空"}, {"n": 6, "t": "ガラス連絡橋"}, {"n": 7, "t": "工業港"}, {"n": 8, "t": "STERILE白の世界"}, {"n": 9, "t": "霧の夜明け"}, {"n": 10, "t": "バステト巨大ホログラム"}, {"n": 11, "t": "自然と融合した近未来"}, {"n": 12, "t": "アステカ黒曜石ピラミッド"}, {"n": 13, "t": "アステカ×ネオン羽毛の蛇"}, {"n": 14, "t": "砂漠の二つの月"}, {"n": 15, "t": "海底都市"}, {"n": 16, "t": "空中の浮遊島"}, {"n": 17, "t": "海の鳥居"}, {"n": 18, "t": "極地の氷とオーロラ"}, {"n": 19, "t": "溶岩と黒曜石"}, {"n": 20, "t": "バステト神殿"}, {"n": 21, "t": "水墨×ネオン"}, {"n": 22, "t": "80sシンセウェイブ"}, {"n": 23, "t": "ブルータリズムの霧"}, {"n": 24, "t": "シュールな目の月"}, {"n": 25, "t": "月面基地と環の惑星"}, {"n": 26, "t": "密林の遺跡"}, {"n": 27, "t": "スチームパンク飛行船港"}, {"n": 28, "t": "昼のアニメ調都市"}, {"n": 29, "t": "水晶の花園"}, {"n": 30, "t": "ゴシックの嵐"}, {"n": 31, "t": "二つの次元の水平線"}, {"n": 32, "t": "黒砂と光の裂け目"}, {"n": 33, "t": "白の砂浜と黒い扉"}, {"n": 34, "t": "雲の砂浜"}, {"n": 35, "t": "空に浮かぶ海"}, {"n": 36, "t": "海に沈むアステカ"}, {"n": 37, "t": "ネオンの海岸"}, {"n": 38, "t": "水晶の砂浜"}, {"n": 39, "t": "海のバステト"}, {"n": 40, "t": "砕けた水平線"}, {"n": 41, "t": "白い光の柱"}, {"n": 42, "t": "黒いリングの門"}, {"n": 43, "t": "回転する輪と琥珀の核"}, {"n": 44, "t": "上下反転した海"}, {"n": 45, "t": "逆さに昇る光の粒"}, {"n": 46, "t": "暗い海のアステカ"}, {"n": 47, "t": "黒石のバステト"}, {"n": 48, "t": "白い扉と灰の海"}, {"n": 49, "t": "砕けた鏡の水平線"}, {"n": 50, "t": "発光する深淵の海岸"}, {"n": 51, "t": "月ほどの水滴"}, {"n": 52, "t": "光のファスナー"}, {"n": 53, "t": "同心円の波紋"}, {"n": 54, "t": "黄金の曼荼羅の潮目"}, {"n": 55, "t": "星を映す光の刃の森"}, {"n": 56, "t": "星へ昇る渦"}, {"n": 57, "t": "光の糸のバステト"}, {"n": 58, "t": "二つの水平線"}, {"n": 59, "t": "水の門と硝子の階段"}, {"n": 60, "t": "黒い太陽の日食"}, {"n": 61, "t": "真珠の月"}, {"n": 62, "t": "硝子の貝の門"}, {"n": 63, "t": "薄紫の惑星と霞"}, {"n": 64, "t": "宙に浮く白い花"}, {"n": 65, "t": "二つの月と真珠の石"}, {"n": 66, "t": "霞むガラスの灯台"}, {"n": 67, "t": "光の糸のカーテン"}, {"n": 68, "t": "猫の目の月"}, {"n": 69, "t": "真珠の階段"}, {"n": 70, "t": "結晶の貝の庭"}, {"n": 71, "t": "ブルーアワーの霞"}, {"n": 72, "t": "月夜の真珠"}, {"n": 73, "t": "霧の夜明けと羽"}, {"n": 74, "t": "菫色の夜と惑星"}, {"n": 75, "t": "セピアの翅の光"}, {"n": 76, "t": "セージ色の薄明"}, {"n": 77, "t": "嵐の晴れ間の白い花"}, {"n": 78, "t": "真夜中の青と淡い三日月"}, {"n": 79, "t": "パステルの硝子の尖塔"}, {"n": 80, "t": "灯籠の小舟"}, {"n": 81, "t": "紺の夜とクラゲの薄光"}, {"n": 82, "t": "月のない夜の薄紅の惑星"}, {"n": 83, "t": "淡い三日月と銀の滴"}, {"n": 84, "t": "霞む硝子の尖塔"}, {"n": 85, "t": "翅の光と梅色の夜"}, {"n": 86, "t": "霧の島と鼠色の海"}, {"n": 87, "t": "白い花の灯"}, {"n": 88, "t": "硝子の花弁の門"}, {"n": 89, "t": "琥珀の灯籠の舟"}, {"n": 90, "t": "真珠の球と銀の道"}, {"n": 91, "t": "重力が逆の海"}, {"n": 92, "t": "立ち上がる水平線"}, {"n": 93, "t": "水の階段"}, {"n": 94, "t": "星空の砂"}, {"n": 95, "t": "空中で凍った波"}, {"n": 96, "t": "硝子の球"}, {"n": 97, "t": "直角に交わる海"}, {"n": 111, "t": "細い水の糸"}, {"n": 112, "t": "傾いた扉"}, {"n": 113, "t": "低い月と銀の糸"}, {"n": 114, "t": "折れた水平線"}, {"n": 115, "t": "浮く光の群れ"}, {"n": 116, "t": "凍った波"}, {"n": 117, "t": "空中で終わる階段"}, {"n": 118, "t": "海面の雲"}, {"n": 119, "t": "二つの月"}, {"n": 120, "t": "琥珀の灯"}, {"n": 121, "t": "昇る砂"}, {"n": 122, "t": "逆さの木"}, {"n": 123, "t": "雲の鯨"}, {"n": 124, "t": "逆さの雨"}, {"n": 125, "t": "半分沈む硝子球"}, {"n": 126, "t": "熾火の潮目"}, {"n": 127, "t": "光の裂け目"}, {"n": 128, "t": "波紋"}, {"n": 129, "t": "浮く小島"}, {"n": 130, "t": "眠る光"}, {"n": 131, "t": "海の果ての滝"}, {"n": 132, "t": "空に浮かぶ海"}, {"n": 133, "t": "巨大な月"}, {"n": 134, "t": "水の柱"}, {"n": 135, "t": "水位の段差"}, {"n": 136, "t": "逆さの山脈"}, {"n": 137, "t": "椀状の世界"}, {"n": 138, "t": "雲の壁"}, {"n": 139, "t": "空から降りる階段"}, {"n": 140, "t": "二つの空"}, {"n": 141, "t": "滝とマゼンタの霧"}, {"n": 142, "t": "空の海とシアン"}, {"n": 143, "t": "菫色の巨大な月"}, {"n": 144, "t": "青紫の水の柱"}, {"n": 145, "t": "発光する波と逆さの山"}, {"n": 146, "t": "雲の壁とピンクの裂け目"}, {"n": 147, "t": "シアンの階段"}, {"n": 148, "t": "椀状の世界と菫の空"}, {"n": 149, "t": "マゼンタのカーテン"}, {"n": 150, "t": "水の絶壁と橙の逆光"}, {"n": 151, "t": "傾いた海"}, {"n": 152, "t": "山ほどの波の壁"}, {"n": 153, "t": "海から立つ砂丘"}, {"n": 154, "t": "雲の穴の逆さの海"}, {"n": 155, "t": "浜に眠る雲"}, {"n": 156, "t": "砂の坂を昇る海"}, {"n": 157, "t": "浮島の滝"}, {"n": 158, "t": "浮く岩"}, {"n": 159, "t": "段々の海"}, {"n": 160, "t": "夜の波"}, {"n": 161, "t": "段々の海とマゼンタ"}, {"n": 162, "t": "波の壁とシアンの空"}, {"n": 163, "t": "浜に眠る雲と菫の光"}, {"n": 164, "t": "傾いた海とピンク"}, {"n": 165, "t": "砂丘の山とマゼンタ"}, {"n": 166, "t": "雲の穴とシアン"}, {"n": 167, "t": "砂の坂と菫ピンク"}, {"n": 168, "t": "浮く岩とシアンの線"}, {"n": 169, "t": "浮島の滝とマゼンタ"}, {"n": 170, "t": "雲の川と青い発光"}];
+const GROUPS=[
+ {id:"quiet",name:"静かな版",desc:"ありえない現象を物質＋自然光だけで。131–140／151–160",f:n=>(n>=131&&n<=140)||(n>=151&&n<=160)},
+ {id:"neon",name:"ネオン版",desc:"ネオン色は実在する光源から。141–150／161–170",f:n=>(n>=141&&n<=150)||(n>=161&&n<=170)},
+ {id:"loose",name:"隙のある版",desc:"傾き・偏り・フィルム粒子。111–130",f:n=>n>=111&&n<=130},
+ {id:"dark",name:"暗め・異空間",desc:"41–60／81–97",f:n=>(n>=41&&n<=60)||(n>=81&&n<=97)},
+ {id:"ennui",name:"アンニュイ",desc:"柔らかめ。61–80",f:n=>n>=61&&n<=80},
+ {id:"early",name:"初期探索",desc:"近未来・自然・アステカ・海×異次元など。01–40",f:n=>n>=1&&n<=40}
+];
+const KEY="bgselect_v1";
+let S={};try{S=JSON.parse(localStorage.getItem(KEY)||"{}")}catch(e){}
+S.who=S.who||"";S.r=S.r||{};S.c=S.c||{};S.cols=S.cols===undefined?2:S.cols;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const $=s=>document.querySelector(s);
+const SYM={3:"◎",2:"○",1:"△",0:"×"};
+const pad=n=>String(n).padStart(3,"0");
+const itemOf=n=>ITEMS.find(i=>i.n===n)||{n,t:""};
+let tab="all",order=[],cur=-1;
+
+function setCols(){
+  const r=document.documentElement.style;
+  if(S.cols>0)r.setProperty("--cols",S.cols);else r.removeProperty("--cols");
+  document.querySelectorAll("#colSeg button").forEach(b=>b.classList.toggle("on",+b.dataset.c===S.cols));
+}
+function rateBtns(n,host,after){
+  host.innerHTML="";
+  [3,2,1,0].forEach(v=>{
+    const b=document.createElement("button");b.className="a"+v+(S.r[n]===v?" on":"");b.textContent=SYM[v];
+    b.onclick=e=>{e.stopPropagation();if(S.r[n]===v)delete S.r[n];else S.r[n]=v;save();syncCard(n);if(after)after()};
+    host.appendChild(b);
+  });
+}
+function syncCard(n){
+  const c=document.getElementById("c"+n);
+  if(c){c.className="card"+(S.r[n]!==undefined?" r"+S.r[n]:"");rateBtns(n,c.querySelector(".rate"));const m=c.querySelector(".cm");if(m)m.style.display=S.c[n]?"":"none"}
+  stat();
+}
+function stat(){
+  const v=Object.values(S.r);
+  $("#stat").textContent=`◎${v.filter(x=>x===3).length} ○${v.filter(x=>x===2).length} △${v.filter(x=>x===1).length} ×${v.filter(x=>x===0).length}／${ITEMS.length}`;
+}
+function build(){
+  const tabs=$("#tabs");tabs.innerHTML="";
+  const mk=(id,t)=>{const b=document.createElement("button");b.textContent=t;b.dataset.id=id;b.onclick=()=>{tab=id;render();window.scrollTo(0,0)};tabs.appendChild(b)};
+  mk("all","すべて");GROUPS.forEach(g=>mk(g.id,g.name));mk("picked","◎○だけ");mk("todo","未評価");
+  render();
+}
+function render(){
+  document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.id===tab));
+  const main=$("#main");main.innerHTML="";order=[];
+  const gs=(tab==="all"||tab==="picked"||tab==="todo")?GROUPS:GROUPS.filter(g=>g.id===tab);
+  gs.forEach(g=>{
+    let list=ITEMS.filter(it=>g.f(it.n));
+    if(tab==="picked")list=list.filter(it=>S.r[it.n]>=2);
+    if(tab==="todo")list=list.filter(it=>S.r[it.n]===undefined);
+    if(!list.length)return;
+    const sec=document.createElement("section");
+    sec.innerHTML=`<h2>${g.name}（${list.length}）</h2><p>${g.desc}</p>`;
+    const grid=document.createElement("div");grid.className="grid";
+    list.forEach(it=>{
+      order.push(it.n);
+      const c=document.createElement("div");c.id="c"+it.n;
+      c.innerHTML=`<a class="im"><img loading="lazy" decoding="async" src="t/${pad(it.n)}.jpg" alt=""><span class="badge">${it.n}</span><span class="cm" style="display:${S.c[it.n]?"":"none"}">💬</span></a><div class="meta"><div class="ttl">${it.t}</div><div class="rate"></div></div>`;
+      c.querySelector(".im").onclick=()=>openLb(it.n);
+      c.className="card"+(S.r[it.n]!==undefined?" r"+S.r[it.n]:"");rateBtns(it.n,c.querySelector(".rate"));
+      grid.appendChild(c);
+    });
+    sec.appendChild(grid);main.appendChild(sec);
+  });
+  if(!order.length)main.innerHTML='<p class="help" style="padding:30px 0;text-align:center">該当する画像はありません</p>';
+  stat();
+}
+/* lightbox */
+function openLb(n){cur=order.indexOf(n);showLb();document.body.style.overflow="hidden"}
+function showLb(){
+  const n=order[cur],it=itemOf(n);
+  $("#lbi").src=`f/${pad(n)}.jpg`;$("#lbt").textContent=`${n}　${it.t}`;
+  rateBtns(n,$("#lbr"));$("#lbcm").value=S.c[n]||"";
+  $("#lb").classList.add("show");
+  [order[(cur+1)%order.length],order[(cur-1+order.length)%order.length]].forEach(m=>{const i=new Image();i.src=`f/${pad(m)}.jpg`});
+}
+function closeLb(){$("#lb").classList.remove("show");document.body.style.overflow=""}
+const step=d=>{cur=(cur+d+order.length)%order.length;showLb()};
+$("#lbc").onclick=closeLb;$("#lbp").onclick=()=>step(-1);$("#lbn").onclick=()=>step(1);
+$("#lbcm").oninput=e=>{const n=order[cur];if(e.target.value)S.c[n]=e.target.value;else delete S.c[n];save();syncCard(n)};
+let tx=0,ty=0;
+$("#stage").addEventListener("touchstart",e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+$("#stage").addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)step(dx<0?1:-1)},{passive:true});
+document.addEventListener("keydown",e=>{
+  if(!$("#lb").classList.contains("show")||e.target.tagName==="INPUT")return;
+  if(e.key==="Escape")closeLb();if(e.key==="ArrowLeft")step(-1);if(e.key==="ArrowRight")step(1);
+  const m={"1":3,"2":2,"3":1,"4":0}[e.key];
+  if(m!==undefined){const n=order[cur];if(S.r[n]===m)delete S.r[n];else S.r[n]=m;save();syncCard(n);rateBtns(n,$("#lbr"))}
+});
+/* sheets */
+const open=id=>$(id).classList.add("show"),shut=id=>$(id).classList.remove("show");
+$("#menuBtn").onclick=()=>{$("#who").value=S.who;open("#menu")};$("#menuX").onclick=()=>shut("#menu");
+$("#menu").onclick=e=>{if(e.target.id==="menu")shut("#menu")};
+$("#agg").onclick=e=>{if(e.target.id==="agg")shut("#agg")};
+$("#aggBtn").onclick=()=>{shut("#menu");open("#agg")};$("#aggX").onclick=()=>shut("#agg");
+$("#who").oninput=e=>{S.who=e.target.value;save()};
+document.querySelectorAll("#colSeg button").forEach(b=>b.onclick=()=>{S.cols=+b.dataset.c;save();setCols()});
+/* export */
+const who=()=>(S.who||"").trim();
+function msg(){
+  const L=[`【CCSEL】${who()||"名無し"}`];
+  [3,2,1,0].forEach(v=>{const ns=ITEMS.filter(it=>S.r[it.n]===v).map(it=>it.n);if(ns.length)L.push(SYM[v]+ns.join(","))});
+  ITEMS.forEach(it=>{if(S.c[it.n])L.push(`💬${it.n}=${S.c[it.n].replace(/\n/g," ")}`)});
+  return L.join("\n");
+}
+function needName(){if(who())return true;shut("#agg");$("#who").value="";open("#menu");setTimeout(()=>$("#who").focus(),50);alert("先に「あなたの名前」を入れてください");return false}
+async function share(){
+  if(!needName())return;
+  const t=msg();
+  if(navigator.share){try{await navigator.share({text:t});return}catch(e){if(e&&e.name==="AbortError")return}}
+  copy(t,"結果をコピーしました。LINEなどに貼り付けて送ってください。");
+}
+function copy(t,okMsg){(navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(()=>alert(okMsg||"コピーしました"),()=>prompt("コピーしてください",t))}
+$("#shareBtn").onclick=share;$("#fab").onclick=()=>{open("#menu");$("#who").value=S.who};
+$("#exTxt").onclick=()=>{if(needName())copy(msg(),"コピーしました。LINEなどに貼り付けて送ってください。")};
+function dl(name,text,type){const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([text],{type}));a.download=name;a.click()}
+$("#exJson").onclick=()=>{if(needName())dl(`select_${who()}.json`,JSON.stringify({who:who(),r:S.r,c:S.c},null,1),"application/json")};
+$("#exCsv").onclick=()=>{if(!needName())return;const rows=[["番号","タイトル","評価","コメント"]];ITEMS.forEach(it=>{if(S.r[it.n]!==undefined||S.c[it.n])rows.push([it.n,it.t,S.r[it.n]!==undefined?SYM[S.r[it.n]]:"",(S.c[it.n]||"").replace(/"/g,'""')])});dl(`select_${who()}.csv`,"﻿"+rows.map(r=>r.map(x=>`"${x}"`).join(",")).join("\n"),"text/csv")};
+$("#clr").onclick=()=>{if(confirm("あなたの評価とコメントをすべて消します。よろしいですか？")){S.r={};S.c={};save();render();shut("#menu")}};
+/* aggregate */
+const PTS={3:3,2:2,1:1,0:0};
+function parse(text){
+  const people={};
+  text.split("【CCSEL】").slice(1).forEach(chunk=>{
+    const lines=chunk.split(/\r?\n/);const name=(lines.shift()||"").trim()||"名無し";
+    const p={r:{},c:{}};
+    lines.forEach(l=>{
+      l=l.trim();const s=l[0];
+      const v={"◎":3,"○":2,"△":1,"×":0}[s];
+      if(v!==undefined){(l.slice(1).match(/\d+/g)||[]).forEach(x=>p.r[+x]=v);return}
+      const m=l.match(/^💬\s*(\d+)\s*=\s*(.*)$/);if(m)p.c[+m[1]]=m[2];
+    });
+    people[name]=p;
+  });
+  return people;
+}
+let aggText="";
+function doAgg(){
+  const people=parse($("#paste").value);
+  if($("#incMe").checked&&Object.keys(S.r).length){people[(who()||"自分")+"（自分）"]={r:S.r,c:S.c}}
+  const names=Object.keys(people);const tot={};
+  names.forEach(nm=>{const p=people[nm];
+    Object.entries(p.r).forEach(([n,v])=>{const o=tot[n]=tot[n]||{p:0,c:{3:0,2:0,1:0,0:0},cm:[]};o.p+=PTS[v];o.c[v]++});
+    Object.entries(p.c).forEach(([n,t])=>{if(!t)return;const o=tot[n]=tot[n]||{p:0,c:{3:0,2:0,1:0,0:0},cm:[]};o.cm.push(nm+"："+t)});
+  });
+  const rows=Object.entries(tot).map(([n,o])=>({n:+n,...o})).sort((a,b)=>b.p-a.p||b.c[3]-a.c[3]||a.n-b.n);
+  if(!names.length){$("#aggout").innerHTML='<p class="help">貼り付けた内容から結果が見つかりませんでした。</p>';aggText="";return}
+  const lines=[`【集計】${names.length}人（${names.join("、")}）`];
+  rows.forEach((a,i)=>{lines.push(`${i+1}. ${a.n} ${itemOf(a.n).t}　${a.p}点（◎${a.c[3]} ○${a.c[2]} △${a.c[1]} ×${a.c[0]}）`+(a.cm.length?`　💬${a.cm.join(" / ")}`:""))});
+  aggText=lines.join("\n");
+  $("#aggout").innerHTML=`<p class="help">${names.length}人：${names.join("、")}</p>`+rows.map((a,i)=>`<div class="ar"><img src="t/${pad(a.n)}.jpg" alt=""><div><div class="t"><b>${i+1}位</b>　${a.n} ${itemOf(a.n).t}</div><div class="s"><b>${a.p}点</b>　◎${a.c[3]} ○${a.c[2]} △${a.c[1]} ×${a.c[0]}</div>${a.cm.length?`<div class="s">💬 ${a.cm.join(" ／ ")}</div>`:""}</div></div>`).join("");
+}
+$("#doAgg").onclick=doAgg;
+$("#aggCopy").onclick=()=>{if(!aggText)doAgg();if(aggText)copy(aggText,"集計をコピーしました")};
+setCols();build();
+</script>
+</body>
+</html>
