@@ -37,6 +37,7 @@
 - [制作実績](https://noktoa.com/works/): 実際の制作物
 - [お問い合わせ](https://noktoa.com/contact/): 相談・見積もりフォーム
 - [DJ SHOSHO（ショウショウ／Sho Sho）](https://noktoa.com/shosho/): 東京を拠点とするDJのプロフィール・出演実績・NOKTOA Sessions・ブッキング
+  詳細版: https://noktoa.com/shosho/llms.txt
 - [動画制作の料金（東京）](https://noktoa.com/lp/douga-seisaku-tokyo-ryokin/): 料金の内訳と相場の考え方
 - [採用動画の制作（東京）](https://noktoa.com/lp/saiyo-douga-tokyo/)
 - [PR動画の制作会社（東京）](https://noktoa.com/lp/pr-douga-tokyo-seisaku-gaisha/)
