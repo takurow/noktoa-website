@@ -15,7 +15,9 @@
   const gate = $("#gate");
   const proVideo = $("#pro-video");
   function leaveGate(asCalm) {
+    // ENTER＝「動きを見る」を本人が選んだ。iPhoneの「視差効果を減らす」がオンでも、ここで動きを再生する（ShoSho HPと同じ）
     if (asCalm) html.classList.add("calm");
+    else { html.classList.remove("calm"); html.classList.add("motion"); }
     gate.classList.add("is-leaving");
     setTimeout(() => { html.classList.remove("gate-on"); gate.setAttribute("hidden", ""); measure(); }, 1200);
     if (document.activeElement) document.activeElement.blur();
