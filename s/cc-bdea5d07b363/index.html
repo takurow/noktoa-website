@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="ja" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CHILLCAT THE BASTET — Official Archive</title>
+<meta name="description" content="広島出身のラッパー、作詞家 CHILLCAT THE BASTET の公式アーカイブ。2006年からの年表、ソロとMiiakiisの全作品、作詞提供曲、一緒に曲をつくった人たちを、ひとつにまとめています。">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="googlebot" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#040506">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="CHILLCAT THE BASTET — Official Archive">
+<meta property="og:description" content="広島で始まり、20年。全作品と、言葉と、夜の記録。">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300..900&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<link rel="preload" as="image" href="assets/img/logo_icon.webp">
+<script>
+  // JSが動く環境だけ入口と演出を有効にする。OSの「視差効果を減らす」と ?reduce=1 は最初から「動きなし」
+  (function (d) {
+    var h = d.documentElement, q = location.search;
+    h.classList.remove("no-js"); h.classList.add("js", "gate-on");
+    if (/[?&]reduce=1/.test(q) || (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches)) h.classList.add("calm");
+  })(document);
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MusicGroup","name":"CHILLCAT THE BASTET","genre":["Hip Hop","Rap"],"foundingLocation":{"@type":"Place","name":"広島"},"member":{"@type":"Person","name":"CHILLCAT THE BASTET","jobTitle":["ラッパー","作詞家"]},"sameAs":["https://open.spotify.com/artist/1ISGu4AMrhb7CzN9yb1Bsz","https://music.apple.com/jp/artist/1415408096","https://www.youtube.com/@chillcatthebastet9592","https://www.instagram.com/chillcat082/","https://x.com/chillcat082","https://soundcloud.com/mc-chill-cat","https://www.tunecore.co.jp/artists/chillcatthebastet"]}
+</script>
+</head>
+<body>
+<a class="skip" href="#profile">本文へ移動</a>
+<div class="progress" aria-hidden="true"></div>
+
+<!-- 入口：MVのロゴ -->
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate__inner">
+    <div class="gate__logo">
+      <img src="assets/img/logo_icon.webp" alt="CHILLCAT THE BASTET のロゴ（丸くなった黒猫と黄色の筆文字）" width="1724" height="2000">
+      <span class="gate__glint" aria-hidden="true"></span>
+    </div>
+    <p class="gate__kicker label" id="gate-title">OFFICIAL ARCHIVE — <b>SINCE 2006</b></p>
+    <button class="gate__enter" id="enter" type="button"><span>ENTER</span></button>
+    <button class="gate__calm" id="enter-calm" type="button">動きなしで見る<span>VIEW WITHOUT MOTION</span></button>
+    <p class="gate__note label">SOUND OFF ・ 音は出ません</p>
+  </div>
+</div>
+
+<header class="hd">
+  <a class="hd__mark" href="#top" aria-label="CHILLCAT THE BASTET トップへ"><img src="assets/img/logo_icon_s.webp" alt="" width="345" height="400"><span>CHILLCAT THE BASTET</span></a>
+  <button class="hd__menu" id="menu-open" type="button" aria-haspopup="dialog" aria-controls="menu"><i aria-hidden="true"></i><span>MENU</span></button>
+</header>
+
+<button class="newstab" id="news-open" type="button" aria-haspopup="dialog" aria-controls="news">
+  <span class="newstab__en">NIGHT NEWS</span><span class="newstab__ja">夜のしらせ</span>
+</button>
+
+<main>
+  <!-- 00 プロローグ：ロゴの猫の目へ寄る → 文字が垂れる → 瞳孔が裂けて夜の海へ -->
+  <section class="pin prologue" id="top" aria-labelledby="h-top">
+    <div class="pin__stage" id="pro">
+      <canvas class="pro__gl" id="gl" aria-hidden="true"></canvas>
+      <div class="pro__still" aria-hidden="true">
+        <img class="pro__stilllogo" src="assets/img/logo_icon.webp" alt="" width="1724" height="2000">
+      </div>
+      <video class="pro__video" id="pro-video" muted playsinline loop preload="auto" aria-hidden="true">
+        <source src="assets/video/sea_185.mp4" type="video/mp4">
+      </video>
+      <h1 class="sr-only" id="h-top">CHILLCAT THE BASTET</h1>
+
+      <div class="pro__story" id="pro-story">
+        <p class="pro__kicker label"><b>THE NIGHT ARCHIVE</b><br>OF A STRAY CAT FROM HIROSHIMA</p>
+        <p class="pro__en">Since 2006, a cat from Hiroshima has been rapping in the dark. Twenty years of records, stages, and words written for others — kept here, in one place.</p>
+        <p class="pro__ja">2006年、広島のクラブで、一匹の猫が歌いはじめた。それから20年分の作品と、ステージと、人に書いた言葉を、ここにすべて置いておく。</p>
+      </div>
+      <p class="pro__vert" id="pro-vert" aria-hidden="true">二〇〇六 — 二〇二六　広島 — 東京</p>
+      <div class="pro__foot" id="pro-foot">
+        <p class="label">RAPPER / LYRICIST</p>
+        <p class="label">HIROSHIMA — TOKYO</p>
+        <p class="pro__hint label" id="pro-hint"><i aria-hidden="true"></i>SCROLL</p>
+      </div>
+
+      <div class="pro__cap" id="pro-cap">
+        <p class="label">YEAR</p>
+        <p class="pro__year">2006</p>
+        <p class="pro__capja">広島のクラブに、一匹の猫が現れた。</p>
+        <p class="pro__capen">A stray cat appeared in the clubs of Hiroshima.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 信条（縦書き） -->
+  <section class="pin creed" aria-label="信条">
+    <div class="pin__stage" id="creed">
+      <div class="creed__bg" id="creed-bg" style="background-image:url(assets/img/sea_132.webp)" aria-hidden="true"></div>
+      <div class="creed__shade" aria-hidden="true"></div>
+      <div class="creed__body">
+        <div class="creed__cols">
+          <p class="creed__ja" data-split>誰にも理解されなくても</p>
+          <p class="creed__ja" data-split>自分の美学だけは</p>
+          <p class="creed__ja" data-split>最後まで裏切らない</p>
+        </div>
+        <p class="creed__en" id="creed-en">Even if no one understands — my own aesthetics, I will never betray, to the very end.</p>
+        <p class="creed__sign label" id="creed-sign">— CHILLCAT THE BASTET</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 プロフィール -->
+  <section class="chapter profile" id="profile" aria-labelledby="h-profile">
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.01 — PROFILE</p>
+        <h2 class="ch-head__en" id="h-profile">Who is<br>the cat</h2>
+        <p class="ch-head__ja">プロフィール</p>
+      </header>
+      <div class="profile__grid">
+        <figure class="plate rv">
+          <div class="profile__plate"><img src="assets/img/logo_icon.webp" alt="CHILLCAT THE BASTET のロゴ" loading="lazy" decoding="async" width="1724" height="2000"></div>
+          <figcaption class="label">PLATE I — THE BASTET（MV LOGO）</figcaption>
+        </figure>
+        <div class="profile__copy">
+          <p class="ch-lead rv">広島出身のラッパー、作詞家。18歳で広島のクラブに立ち、20年たったいまも歌いつづけている。持ち味は、滑らかなフロウと、エゴイズムの強い率直なリリック。</p>
+          <dl class="facts rv">
+            <div><dt>NAME</dt><dd>CHILLCAT THE BASTET</dd></div>
+            <div><dt>FROM</dt><dd>広島</dd></div>
+            <div><dt>BORN</dt><dd>1988</dd></div>
+            <div><dt>SINCE</dt><dd>2006年、広島のクラブシーンから</dd></div>
+            <div><dt>ROOTS</dt><dd>中学でブラックミュージックに出会い、LL Cool J、Fabolousを聴く。高校2年でラップを始める</dd></div>
+            <div><dt>CREW</dt><dd>Miiakiis（Tiga、CHILLCAT THE BASTET、KEY-K）</dd></div>
+            <div><dt>LABEL</dt><dd>First Nuke Records</dd></div>
+            <div><dt>ALSO</dt><dd>作詞家。SUPER★DRAGONほか、ほかのアーティストへ14曲</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="stats rv">
+        <div class="stat"><span class="stat__n" data-count="20">20</span><p class="stat__t"><b>YEARS</b>2006年から、歌って20年</p></div>
+        <div class="stat"><span class="stat__n" data-count="43">43</span><p class="stat__t"><b>RECORDS</b>記録している作品（ソロ、Miiakiis、客演）</p></div>
+        <div class="stat"><span class="stat__n" data-count="14">14</span><p class="stat__t"><b>WORDS</b>ほかのアーティストに書いた詞</p></div>
+        <div class="stat"><span class="stat__n" data-count="1">1</span><p class="stat__t"><b>MINUTE</b>Miiakiis初ワンマンが完売するまで</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 年表 -->
+  <section class="chapter timeline" id="years" aria-labelledby="h-years">
+    <div class="tl__plate" aria-hidden="true"><img src="assets/img/sea_93.webp" alt="" loading="lazy" decoding="async"></div>
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.02 — TIMELINE</p>
+        <h2 class="ch-head__en" id="h-years">Twenty years<br>of nights</h2>
+        <p class="ch-head__ja">年表</p>
+      </header>
+      <ol class="tl" id="tl">
+        <li class="tl__row rv"><p class="tl__yr">2006</p><ul class="tl__ev"><li>18歳。<b>広島のクラブシーンで活動を始める</b></li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2008</p><ul class="tl__ev"><li>1st『<b>CAT FOOD</b>』。タワーレコード広島店の限定作品で、<b>Weekly 1位</b></li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2009</p><ul class="tl__ev"><li>ユニット<b>MARVELOUS</b>を結成（TATSUMA、Nasky）。毎月フリーダウンロードで曲を出す</li><li>「8月6日」が、大学の講義で使われる</li><li>年間60本を超えるライブで全国へ。イベント「<b>Candy</b>」を主宰し、広島CLUB QUATTROを満員にする。「LADY BIRD」のレギュラーMC</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2011</p><ul class="tl__ev"><li>毎週月曜に曲を配信する「Weekly Distribution」を、25週連続で続ける</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2012</p><ul class="tl__ev"><li>カナダへ音楽留学</li><li>12月、2nd『<b>Natural</b>』が<b>iTunes HipHopチャート3位</b></li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2018</p><ul class="tl__ev"><li>EP『<b>NEKOJARASHI</b>』。ここから配信の記録が始まる（First Nuke Records）</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2019</p><ul class="tl__ev"><li>EP『<b>Matatabi</b>』。「HIROSHIMA」を収録</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2021</p><ul class="tl__ev"><li>アルバム『<b>Dark Matter</b>』がiTunesチャートに入る</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2022</p><ul class="tl__ev"><li>アルバム『<b>Black Out</b>』</li><li>Miiakiis『MofMof』。<b>初ワンマンが1分で完売</b></li><li><b>SUPER★DRAGON</b>への作詞提供が始まる</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2024</p><ul class="tl__ev"><li>Miiakiis『Error』と、渋谷WWW Xほか4都市のツアー</li><li>Miiakiis『Who?』</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2025</p><ul class="tl__ev"><li>アルバム『<b>Ideology</b>』が、発売初日に<b>iTunes HipHop 日本4位</b></li><li>Miiakiis『Eclipse』『Heartless』と全国ツアー</li></ul></li>
+        <li class="tl__row rv"><p class="tl__yr">2026</p><ul class="tl__ev"><li><b>恵比寿LIQUIDROOM</b>。これまでで最大の会場</li><li>「Pay&amp;Play」「Doot (feat. AMI)」</li><li>Miiakiis「Taigii」「Love Protocol」</li></ul></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 03 全作品 -->
+  <section class="chapter archive" id="archive" aria-labelledby="h-archive">
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.03 — ARCHIVE</p>
+        <h2 class="ch-head__en" id="h-archive">Cat<br>archive</h2>
+        <p class="ch-head__ja">全作品（43）</p>
+      </header>
+      <p class="ch-lead rv">配信されている作品も、いまは聴けない作品も、ここに残しておく。ソロ、Miiakiis、客演を、新しい順に並べた。ジャケットを押すと、曲目と聴ける場所が出る。</p>
+      <div class="filters rv" role="group" aria-label="作品の絞り込み">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">ALL <small>43</small></button>
+        <button class="filter" type="button" data-filter="solo" aria-pressed="false">SOLO <small>18</small></button>
+        <button class="filter" type="button" data-filter="miiakiis" aria-pressed="false">MIIAKIIS <small>23</small></button>
+        <button class="filter" type="button" data-filter="feat" aria-pressed="false">FEAT. <small>2</small></button>
+      </div>
+      <div class="archive__body">
+        <ol class="grid" id="grid">
+        <li class="rel" data-group="miiakiis" data-id="6808110738"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ee/cb/56/eecb56ea-f9c3-e634-3d51-fc87a4485615/4550760200012_cover.png/600x600bb.jpg" alt="『Love Protocol』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.43 ・ 2026.09.12</span><span class="rel__title">Love Protocol</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="6791026736"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c2/27/b1/c227b133-8f4e-df6f-cb81-3a15105c31c7/4550758627623_cover.png/600x600bb.jpg" alt="『Taigii』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.42 ・ 2026.07.29</span><span class="rel__title">Taigii</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1894979635"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f3/ec/f9/f3ecf9d7-799e-bedc-8e56-68d7456580d3/4550755675030_cover.jpg/600x600bb.jpg" alt="『Doot (feat. AMI)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.41 ・ 2026.04.23</span><span class="rel__title">Doot (feat. AMI)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1893312128"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/81/91/f8/8191f82c-6d69-d643-489a-164e5940d039/4550755440584_cover.jpg/600x600bb.jpg" alt="『Pay&amp;Play』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.40 ・ 2026.04.17</span><span class="rel__title">Pay&amp;Play</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1867710925"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/24/68/4b2468c0-5738-d30c-86f6-5bc0e5904fab/4550752488916_cover.png/600x600bb.jpg" alt="『Boogie Night (feat. Romantic CHUUDOKU)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.39 ・ 2026.01.10</span><span class="rel__title">Boogie Night (feat. Romantic CHUUDOKU)</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1841347893"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/51/32/a1/5132a15d-300a-b9e5-ba8d-540e6ad9e268/4550712834272_cover.png/600x600bb.jpg" alt="『Heartless』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.38 ・ 2025.10.10</span><span class="rel__title">Heartless</span><span class="rel__sub">MIIAKIIS ・ EP</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1838999220"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f6/2d/db/f62ddba8-a76e-1b12-8d1a-55a6e8d68ba5/4550712623579_cover.png/600x600bb.jpg" alt="『Heartless』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.37 ・ 2025.09.26</span><span class="rel__title">Heartless</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1834302615"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/1e/5c/b2/1e5cb2d0-e163-24ce-025f-08527ef5afe8/4550711713011_cover.jpg/600x600bb.jpg" alt="『Unscripted Story』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.36 ・ 2025.08.31</span><span class="rel__title">Unscripted Story</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1815128483"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/87/81/f28781c9-4381-4f8e-92fa-f31d42d66c6b/4550708915060_cover.png/600x600bb.jpg" alt="『Eclipse』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.35 ・ 2025.05.21</span><span class="rel__title">Eclipse</span><span class="rel__sub">MIIAKIIS ・ ALBUM</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1810196414"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c4/0a/e5/c40ae5b0-98c6-9eae-02f8-e9da8696d9f7/4550708053182_cover.png/600x600bb.jpg" alt="『Ideology』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.34 ・ 2025.04.25</span><span class="rel__title">Ideology</span><span class="rel__sub">ALBUM ・ 10 TRACKS</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1797287173"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/c8/0d/f2c80d53-2946-e4fb-7d82-92d8505de8ed/4571641027900_cover.jpg/600x600bb.jpg" alt="『Ego / Play House』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.33 ・ 2025.03.01</span><span class="rel__title">Ego / Play House</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1790353493"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/3f/7e/b63f7ec7-690b-6766-bb8c-fcad50b6cec6/4571640753411_cover.png/600x600bb.jpg" alt="『Ivy』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.32 ・ 2025.01.31</span><span class="rel__title">Ivy</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1791488015"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8c/65/62/8c6562e1-5256-336b-bf39-630a96cd3d91/4571640789045_cover.jpg/600x600bb.jpg" alt="『Joint (feat. AMI)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.31 ・ 2025.01.23</span><span class="rel__title">Joint (feat. AMI)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1777013801"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7b/ad/bd/7badbd80-c35f-cf70-f092-be80fcf1b4b5/4571640361258_cover.png/600x600bb.jpg" alt="『Even If I Can Be Nothing』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.30 ・ 2024.11.03</span><span class="rel__title">Even If I Can Be Nothing</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1772247758"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/88/4a/05/884a0549-fc25-b025-4687-5b6010e97c0e/4571640176104_cover.png/600x600bb.jpg" alt="『Who?』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.29 ・ 2024.10.09</span><span class="rel__title">Who?</span><span class="rel__sub">MIIAKIIS ・ ALBUM</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1768919554"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ad/4f/f3/ad4ff3c1-06cc-25b4-f4eb-89158b501d35/0198448994330_cover.jpg/600x600bb.jpg" alt="『Loud』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.28 ・ 2024.09.29</span><span class="rel__title">Loud</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1766236186"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a5/0b/d2/a50bd244-8d60-1838-2df3-bf034b28de47/0198448927772_cover.png/600x600bb.jpg" alt="『Kuwabara』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.27 ・ 2024.09.18</span><span class="rel__title">Kuwabara</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1760285044"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0f/c4/bf/0fc4bf6d-33f0-9877-c834-15113d716d3b/0198448761185_cover.png/600x600bb.jpg" alt="『Nekodamashi (feat. pinoko)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.26 ・ 2024.08.14</span><span class="rel__title">Nekodamashi (feat. pinoko)</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1755970579"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c7/d3/cc/c7d3cc4a-29d9-e8ac-e5e8-a53b9832106e/0198448637541_cover.jpg/600x600bb.jpg" alt="『Feed Me』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.25 ・ 2024.07.27</span><span class="rel__title">Feed Me</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1753071653"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/58/01/d1/5801d145-3d9d-5d37-e07b-b8ace66d651c/0198448546690_cover.png/600x600bb.jpg" alt="『Trippin (feat. Sora) [Remix]』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.24 ・ 2024.07.03</span><span class="rel__title">Trippin (feat. Sora) [Remix]</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1747447515"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/60/14/d4601458-7419-fc64-6835-2651f8a6d708/0198448404624_cover.jpg/600x600bb.jpg" alt="『Never Give It Up』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.23 ・ 2024.06.05</span><span class="rel__title">Never Give It Up</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="feat" data-id="1739915869"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/68/e7/01/68e7017b-b229-0225-f115-9df86a72361b/0198448147071_cover.jpg/600x600bb.jpg" alt="『I Need U (feat. Miiakiis)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.22 ・ 2024.04.10</span><span class="rel__title">I Need U (feat. Miiakiis)</span><span class="rel__sub">MOS ・ FEAT.</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1723757309"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/94/c8/b9/94c8b9ff-badb-69bb-c2a5-144386670d40/3617222382622_cover.jpg/600x600bb.jpg" alt="『Error』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.21 ・ 2024.01.06</span><span class="rel__title">Error</span><span class="rel__sub">MIIAKIIS ・ EP</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1718952672"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e9/47/45/e9474561-8109-c9bc-dcf0-d476adc80e8b/3617222187579_cover.jpg/600x600bb.jpg" alt="『Masquerade (feat. MOS)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.20 ・ 2023.12.02</span><span class="rel__title">Masquerade (feat. MOS)</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1715463907"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e6/50/2e/e6502ebf-6122-1315-b578-be8c36b84a03/3617222094402_cover.jpg/600x600bb.jpg" alt="『Drop It (feat. Charasuma)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.19 ・ 2023.11.11</span><span class="rel__title">Drop It (feat. Charasuma)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1714050349"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/81/ff/17/81ff17bc-1ced-6e56-e0f2-bbd40f0be225/3617222056882_cover.jpg/600x600bb.jpg" alt="『Trippin』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.18 ・ 2023.11.04</span><span class="rel__title">Trippin</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1692886685"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/7a/f5/717af541-0d50-96eb-e6e6-af4df8130c75/859759844843_cover.jpg/600x600bb.jpg" alt="『Ter in Die』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.17 ・ 2023.06.24</span><span class="rel__title">Ter in Die</span><span class="rel__sub">MIIAKIIS ・ ALBUM</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1688361857"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/c0/07/8e/c0078ee1-497f-c6e1-cf72-748f3df65764/859759697043_cover.jpg/600x600bb.jpg" alt="『Trauma』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.16 ・ 2023.05.26</span><span class="rel__title">Trauma</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1666456641"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/80/0c/b8/800cb8ce-e4a5-f93d-331d-03513268368e/859759212383_cover.png/600x600bb.jpg" alt="『Puppet (feat. Nrtt)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.15 ・ 2023.01.25</span><span class="rel__title">Puppet (feat. Nrtt)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1659983216"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/b9/60/1d/b9601d51-f83b-60ff-781f-9d51541f3bc9/859759080234_cover.jpg/600x600bb.jpg" alt="『Mouiikai? (feat. Gashima)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.14 ・ 2022.12.17</span><span class="rel__title">Mouiikai? (feat. Gashima)</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1642258137"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9d/d2/65/9dd26518-30f1-20b1-bce9-6ab2c6917e94/859758631093_cover.jpg/600x600bb.jpg" alt="『MofMof』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.13 ・ 2022.09.10</span><span class="rel__title">MofMof</span><span class="rel__sub">MIIAKIIS ・ EP</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1633406366"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/bb/98/d7/bb98d732-443d-b3b2-6911-567a323b99fe/859758451226_cover.png/600x600bb.jpg" alt="『Black Out』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.12 ・ 2022.07.15</span><span class="rel__title">Black Out</span><span class="rel__sub">ALBUM ・ 10 TRACKS</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1631548292"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/2f/bb/ab/2fbbabde-be56-f4f0-2b1f-92ddbd52845a/859758404772_cover.jpg/600x600bb.jpg" alt="『Neverland』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.11 ・ 2022.07.08</span><span class="rel__title">Neverland</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="1600409580"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/7d/2d/44/7d2d440f-c274-fe66-5507-81e5ed3d86c2/859757693139_cover.jpg/600x600bb.jpg" alt="『Cross』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.10 ・ 2021.12.25</span><span class="rel__title">Cross</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1549467602"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/45/c1/4d/45c14d4e-53f1-a4c2-0b25-d0f81f244f50/859756548126_cover.jpg/600x600bb.jpg" alt="『Dark Matter』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.09 ・ 2021.01.19</span><span class="rel__title">Dark Matter</span><span class="rel__sub">ALBUM ・ 8 TRACKS</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1525517228"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/3a/60/36/3a603668-d91a-01f5-87e0-c0eabe1fd8e3/859756022510_cover.jpg/600x600bb.jpg" alt="『Remote Love (feat. Anna Ishii)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.08 ・ 2020.08.08</span><span class="rel__title">Remote Love (feat. Anna Ishii)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1519146280"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/e5/59/4f/e5594fb6-f39e-710a-aa7c-892f5ba9d152/859755925997_cover.jpg/600x600bb.jpg" alt="『ハリボテ』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.07 ・ 2020.06.24</span><span class="rel__title">ハリボテ</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1508447467"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/3f/cc/c2/3fccc264-0190-c7aa-8d2a-ef6329434d31/859755629970_cover.jpg/600x600bb.jpg" alt="『I Miss You.』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.06 ・ 2020.04.20</span><span class="rel__title">I Miss You.</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1492664505"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/a2/5c/17/a25c177c-29bd-6860-99f4-2a65275a0b4d/859755319741_cover.jpg/600x600bb.jpg" alt="『Matatabi』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.05 ・ 2019.12.26</span><span class="rel__title">Matatabi</span><span class="rel__sub">EP ・ 6 TRACKS</span></span></button></li>
+        <li class="rel" data-group="feat" data-id="1488589086"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/d1/3e/60/d13e606d-4300-2893-1790-bbe64242e838/859755250150_cover.jpg/600x600bb.jpg" alt="『Kaeritai (feat. Chillcat the Bastet)』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.04 ・ 2019.11.21</span><span class="rel__title">Kaeritai (feat. Chillcat the Bastet)</span><span class="rel__sub">BENTO KIDZ ・ FEAT.</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1415408085"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/82/80/bd/8280bd45-87e5-fc12-acad-5a27779dba2f/859754245171_cover.jpg/600x600bb.jpg" alt="『NEKOJARASHI』のジャケット" width="600" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.03 ・ 2018.07.28</span><span class="rel__title">NEKOJARASHI</span><span class="rel__sub">EP ・ 4 TRACKS</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="natural"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><span class="rel__ghost"><span class="label">NOT ON STREAMING</span><b>Natural</b></span></span><span class="rel__meta"><span class="rel__no">No.02 ・ 2012.12</span><span class="rel__title">Natural</span><span class="rel__sub">ALBUM</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="catfood"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><span class="rel__ghost"><span class="label">NOT ON STREAMING</span><b>CAT FOOD</b></span></span><span class="rel__meta"><span class="rel__no">No.01 ・ 2008</span><span class="rel__title">CAT FOOD</span><span class="rel__sub">ALBUM</span></span></button></li>
+        </ol>
+        <aside class="log" aria-hidden="true"><p class="label">REGISTRY LOG</p><ol class="log__list" id="log"></ol></aside>
+      </div>
+      <p class="label archive__src">DATA — APPLE MUSIC（2026.10.29時点）。『CAT FOOD』『Natural』は配信されていません</p>
+    </div>
+  </section>
+
+  <!-- 04 作詞提供 -->
+  <section class="chapter words" id="words" aria-labelledby="h-words">
+    <p class="words__big" aria-hidden="true">14</p>
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.04 — WORDS FOR OTHERS</p>
+        <h2 class="ch-head__en" id="h-words">Words<br>for others</h2>
+        <p class="ch-head__ja">作詞提供（14曲）</p>
+      </header>
+      <p class="ch-lead rv">自分では歌わない曲にも、言葉を書いてきた。SUPER★DRAGONの10曲をはじめ、ほかのアーティストのために詞を書いた14曲。</p>
+      <ol class="credits rv">
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Sweets</span><span class="credits__note">ドラマ「シュガードッグライフ」主題歌</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Dreamland</span><span class="credits__note">2025.03.26 ・ 共作詞 Jean、Tomoya</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Revolution</span><span class="credits__note">2023.03.01</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Not Enough</span><span class="credits__note">2022.11.16 ・ 共作詞 Jean、Tomoya</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Hallucination of Love</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Hey, girl</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Gotta Keep It Going On</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Legend</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Are U Ready?</span></li>
+        <li><span class="credits__artist">SUPER★DRAGON</span><span class="credits__song">Pioneer (Keep It Real)</span></li>
+        <li><span class="credits__artist">YOSUKE</span><span class="credits__song">BURNING HEART</span></li>
+        <li><span class="credits__artist">ONE N&#x27; ONLY</span><span class="credits__song">Turn it up</span></li>
+        <li><span class="credits__artist">Def Class</span><span class="credits__song">Do or Die</span></li>
+        <li><span class="credits__artist">VOKSY DAYS</span><span class="credits__song">Light It Up</span></li>
+      </ol>
+      <p class="label words__foot">LYRICS BY CHILLCAT THE BASTET（共作詞を含む）</p>
+    </div>
+  </section>
+
+  <!-- 05 人 -->
+  <section class="chapter people" id="people" aria-labelledby="h-people">
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.05 — PEOPLE</p>
+        <h2 class="ch-head__en" id="h-people">People of<br>the night</h2>
+        <p class="ch-head__ja">一緒に夜をつくる人たち</p>
+      </header>
+      <p class="ch-lead rv">Miiakiisの仲間、昔のユニット、曲に声を貸してくれた人たち。名前の横の数字は、一緒に残した曲の数。</p>
+      <div class="crew rv">
+        <div class="crew__card"><p class="label">CREW</p><p class="crew__name">Miiakiis</p><p class="crew__role">Tiga、CHILLCAT THE BASTET、KEY-K。23作品を出しているクルー</p></div>
+        <div class="crew__card"><p class="label">MIIAKIIS — MC</p><p class="crew__name">Tiga</p><p class="crew__role">Miiakiisの相方。ソロ作「アオハル」にも参加</p></div>
+        <div class="crew__card"><p class="label">MIIAKIIS — DJ</p><p class="crew__name">KEY-K</p><p class="crew__role">ソロ作品の録音、ミックス、マスタリングも担う</p></div>
+        <div class="crew__card"><p class="label">UNIT — 2009</p><p class="crew__name">MARVELOUS</p><p class="crew__role">TATSUMA、Naskyと組んだユニット。毎月フリーダウンロードで曲を出した</p></div>
+      </div>
+      <p class="label people__h rv">FEATURED — 曲に参加した人たち</p>
+      <ul class="roster rv">
+        <li><span class="roster__name">GASHIMA</span><span class="roster__n">03</span><span class="roster__songs">Mouiikai?（2022） / もういいかい?（2023） / Level Up（2024）</span></li>
+        <li><span class="roster__name">AMI</span><span class="roster__n">02</span><span class="roster__songs">Joint（2025） / Doot（2026）</span></li>
+        <li><span class="roster__name">ANNA ISHII</span><span class="roster__n">02</span><span class="roster__songs">Remote Love（2020） / REMOTE LOVE（2021）</span></li>
+        <li><span class="roster__name">Cuegee</span><span class="roster__n">02</span><span class="roster__songs">Ego（2025） / Dictator（2025）</span></li>
+        <li><span class="roster__name">JUN SHITABABA</span><span class="roster__n">02</span><span class="roster__songs">I miss you（2021） / I Miss You.（2020・連名シングル）</span></li>
+        <li><span class="roster__name">MOS</span><span class="roster__n">02</span><span class="roster__songs">Masquerade（2024） / I Need U（2024・Miiakiisが客演）</span></li>
+        <li><span class="roster__name">Mt&#x27;</span><span class="roster__n">02</span><span class="roster__songs">アオハル（2021） / Hard（2022）</span></li>
+        <li><span class="roster__name">pinoko</span><span class="roster__n">02</span><span class="roster__songs">Nekodamashi（2024） / NEKODAMASHI（2024）</span></li>
+        <li><span class="roster__name">150</span><span class="roster__n">01</span><span class="roster__songs">DETOX（2019）</span></li>
+        <li><span class="roster__name">BENTO KIDZ</span><span class="roster__n">01</span><span class="roster__songs">Kaeritai（2019・CHILLCATが客演）</span></li>
+        <li><span class="roster__name">ELLe</span><span class="roster__n">01</span><span class="roster__songs">Hypnotize（2022）</span></li>
+        <li><span class="roster__name">KOPERU</span><span class="roster__n">01</span><span class="roster__songs">ケナゲラ（2023）</span></li>
+        <li><span class="roster__name">Midnight city&#x27;s Olgorl</span><span class="roster__n">01</span><span class="roster__songs">Who&#x27;s（2018）</span></li>
+        <li><span class="roster__name">nomor</span><span class="roster__n">01</span><span class="roster__songs">I&#x27;m Fine（2019）</span></li>
+        <li><span class="roster__name">nomore</span><span class="roster__n">01</span><span class="roster__songs">カゲユレ（2022）</span></li>
+        <li><span class="roster__name">Nrtt</span><span class="roster__n">01</span><span class="roster__songs">Puppet（2023）</span></li>
+        <li><span class="roster__name">Romantic CHUUDOKU</span><span class="roster__n">01</span><span class="roster__songs">Boogie Night（2026）</span></li>
+        <li><span class="roster__name">Sora</span><span class="roster__n">01</span><span class="roster__songs">Trippin（2024）</span></li>
+        <li><span class="roster__name">チャラスマ</span><span class="roster__n">01</span><span class="roster__songs">Drop It（2025）</span></li>
+        <li><span class="roster__name">ハジ→</span><span class="roster__n">01</span><span class="roster__songs">To Ex（2023）</span></li>
+        <li><span class="roster__name">心之助</span><span class="roster__n">01</span><span class="roster__songs">オママゴト（2025）</span></li>
+        <li><span class="roster__name">鴉 a.k.a jungo</span><span class="roster__n">01</span><span class="roster__songs">罵詈雑言（2025）</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 06 広島 -->
+  <section class="chapter roots" id="roots" aria-labelledby="h-roots">
+    <div class="roots__bg" aria-hidden="true"><img src="assets/img/sea_89.webp" alt="" loading="lazy" decoding="async"></div>
+    <div class="chapter__in roots__in">
+      <div class="roots__head">
+        <p class="label rv" data-decode>CH.06 — ROOTS</p>
+        <h2 class="roots__title rv" id="h-roots">広島</h2>
+        <p class="roots__en rv">HIROSHIMA</p>
+      </div>
+      <div class="roots__body">
+        <p class="roots__catch rv">広島で始まって<br>いまも広島を歌っている</p>
+        <ul class="roots__list rv">
+          <li><p class="label">2006 — CLUB</p><p>18歳、広島のクラブで歌いはじめる</p></li>
+          <li><p class="label">2008 — TOWER RECORDS</p><p>『CAT FOOD』が、タワーレコード広島店でWeekly 1位</p></li>
+          <li><p class="label">2009 — 8月6日</p><p>「8月6日」が、大学の講義で使われる</p></li>
+          <li><p class="label">CANDY / LADY BIRD</p><p>主宰したイベント「Candy」で、広島CLUB QUATTROを満員に。「LADY BIRD」ではレギュラーMC</p></li>
+          <li><p class="label">2019 — HIROSHIMA</p><p>EP『Matatabi』に「HIROSHIMA」を収録</p></li>
+          <li><p class="label">2026 — TAIGII</p><p>Miiakiis「Taigii」。広島の言葉「たいぎい」</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 いま -->
+  <section class="chapter now" id="now" aria-labelledby="h-now">
+    <div class="now__bg" aria-hidden="true"><img src="assets/img/sea_145.webp" alt="" loading="lazy" decoding="async"></div>
+    <div class="chapter__in">
+      <header class="ch-head rv">
+        <p class="ch-head__no label" data-decode>CH.07 — NOW</p>
+        <h2 class="ch-head__en" id="h-now">Now</h2>
+        <p class="ch-head__ja">いま</p>
+      </header>
+      <p class="ch-lead rv">いちばん新しい作品。ライブと新作の知らせは、公式のXとInstagramで。</p>
+      <ol class="latest rv">
+        <li class="rel" data-group="miiakiis" data-id="6808110738"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ee/cb/56/eecb56ea-f9c3-e634-3d51-fc87a4485615/4550760200012_cover.png/600x600bb.jpg" alt="『Love Protocol』のジャケット" width="600" height="600" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.43 ・ 2026.09.12</span><span class="rel__title">Love Protocol</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="miiakiis" data-id="6791026736"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c2/27/b1/c227b133-8f4e-df6f-cb81-3a15105c31c7/4550758627623_cover.png/600x600bb.jpg" alt="『Taigii』のジャケット" width="600" height="600" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.42 ・ 2026.07.29</span><span class="rel__title">Taigii</span><span class="rel__sub">MIIAKIIS ・ SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1894979635"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f3/ec/f9/f3ecf9d7-799e-bedc-8e56-68d7456580d3/4550755675030_cover.jpg/600x600bb.jpg" alt="『Doot (feat. AMI)』のジャケット" width="600" height="600" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.41 ・ 2026.04.23</span><span class="rel__title">Doot (feat. AMI)</span><span class="rel__sub">SINGLE</span></span></button></li>
+        <li class="rel" data-group="solo" data-id="1893312128"><button class="rel__btn" type="button" aria-haspopup="dialog"><span class="rel__cover"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/81/91/f8/8191f82c-6d69-d643-489a-164e5940d039/4550755440584_cover.jpg/600x600bb.jpg" alt="『Pay&amp;Play』のジャケット" width="600" height="600" decoding="async" referrerpolicy="no-referrer"></span><span class="rel__meta"><span class="rel__no">No.40 ・ 2026.04.17</span><span class="rel__title">Pay&amp;Play</span><span class="rel__sub">SINGLE</span></span></button></li>
+      </ol>
+      <div class="next rv">
+        <p class="label">NEXT</p>
+        <p class="next__t">New works in progress</p>
+        <p>次の作品をつくっている。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 終章 -->
+  <section class="follow" id="follow" aria-labelledby="h-follow">
+    <div class="follow__bg" aria-hidden="true">
+      <video id="follow-video" muted playsinline loop preload="none" poster="assets/img/sea_183.webp" data-src="assets/video/sea_183.mp4"></video>
+    </div>
+    <div class="follow__in">
+      <div class="follow__logo rv"><img src="assets/img/logo_icon.webp" alt="" loading="lazy" decoding="async" width="1724" height="2000"></div>
+      <p class="label">EPILOGUE</p>
+      <h2 class="follow__title" id="h-follow">Follow<br>the cat</h2>
+      <ul class="links">
+        <li><a href="https://open.spotify.com/artist/1ISGu4AMrhb7CzN9yb1Bsz" target="_blank" rel="noopener"><span class="links__name">Spotify</span><span class="links__id">LISTEN ↗</span></a></li>
+        <li><a href="https://music.apple.com/jp/artist/1415408096" target="_blank" rel="noopener"><span class="links__name">Apple Music</span><span class="links__id">LISTEN ↗</span></a></li>
+        <li><a href="https://www.youtube.com/@chillcatthebastet9592" target="_blank" rel="noopener"><span class="links__name">YouTube</span><span class="links__id">@chillcatthebastet9592 ↗</span></a></li>
+        <li><a href="https://www.instagram.com/chillcat082/" target="_blank" rel="noopener"><span class="links__name">Instagram</span><span class="links__id">@chillcat082 ↗</span></a></li>
+        <li><a href="https://x.com/chillcat082" target="_blank" rel="noopener"><span class="links__name">X</span><span class="links__id">@chillcat082 ↗</span></a></li>
+        <li><a href="https://soundcloud.com/mc-chill-cat" target="_blank" rel="noopener"><span class="links__name">SoundCloud</span><span class="links__id">mc-chill-cat ↗</span></a></li>
+        <li><a href="https://www.tunecore.co.jp/artists/chillcatthebastet" target="_blank" rel="noopener"><span class="links__name">TuneCore</span><span class="links__id">ARTIST PAGE ↗</span></a></li>
+        <li><a href="https://miiakiis.bitfan.id/contents/menu/90609" target="_blank" rel="noopener"><span class="links__name">Miiakiis</span><span class="links__id">OFFICIAL ↗</span></a></li>
+      </ul>
+      <footer class="ft">
+        <p class="label">© CHILLCAT THE BASTET</p>
+        <p class="label">SITE — NOKTOA</p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!-- メニュー -->
+<dialog class="sheet" id="menu" aria-label="メニュー">
+  <button class="sheet__close" type="button" data-close>CLOSE</button>
+  <nav class="menu__inner" aria-label="章">
+    <ol class="menu__list">
+      <li><a href="#top" data-close><span class="menu__no">00</span><span class="menu__en">Prologue</span><span class="menu__ja">はじまり</span></a></li>
+      <li><a href="#profile" data-close><span class="menu__no">01</span><span class="menu__en">Who is the cat</span><span class="menu__ja">プロフィール</span></a></li>
+      <li><a href="#years" data-close><span class="menu__no">02</span><span class="menu__en">Twenty years of nights</span><span class="menu__ja">年表</span></a></li>
+      <li><a href="#archive" data-close><span class="menu__no">03</span><span class="menu__en">Cat archive</span><span class="menu__ja">全作品</span></a></li>
+      <li><a href="#words" data-close><span class="menu__no">04</span><span class="menu__en">Words for others</span><span class="menu__ja">作詞提供</span></a></li>
+      <li><a href="#people" data-close><span class="menu__no">05</span><span class="menu__en">People of the night</span><span class="menu__ja">人</span></a></li>
+      <li><a href="#roots" data-close><span class="menu__no">06</span><span class="menu__en">Hiroshima</span><span class="menu__ja">広島</span></a></li>
+      <li><a href="#now" data-close><span class="menu__no">07</span><span class="menu__en">Now</span><span class="menu__ja">いま</span></a></li>
+      <li><a href="#follow" data-close><span class="menu__no">08</span><span class="menu__en">Follow the cat</span><span class="menu__ja">リンク</span></a></li>
+    </ol>
+    <div class="menu__ext">
+      <a href="https://open.spotify.com/artist/1ISGu4AMrhb7CzN9yb1Bsz" target="_blank" rel="noopener">SPOTIFY ↗</a>
+      <a href="https://music.apple.com/jp/artist/1415408096" target="_blank" rel="noopener">APPLE MUSIC ↗</a>
+      <a href="https://www.youtube.com/@chillcatthebastet9592" target="_blank" rel="noopener">YOUTUBE ↗</a>
+      <a href="https://www.instagram.com/chillcat082/" target="_blank" rel="noopener">INSTAGRAM ↗</a>
+      <a href="https://x.com/chillcat082" target="_blank" rel="noopener">X ↗</a>
+    </div>
+  </nav>
+</dialog>
+
+<!-- お知らせ -->
+<dialog class="news" id="news" aria-labelledby="news-title">
+  <button class="sheet__close" type="button" data-close>CLOSE</button>
+  <div class="news__inner">
+    <p class="label">NIGHT NEWS</p>
+    <h2 class="news__title" id="news-title">夜のしらせ</h2>
+    <ul class="news__list">
+      <li><time datetime="2026-09-12">2026.09.12</time><p>Miiakiis「Love Protocol」配信</p></li>
+      <li><time datetime="2026-07-29">2026.07.29</time><p>Miiakiis「Taigii」配信</p></li>
+      <li><time datetime="2026-04-23">2026.04.23</time><p>「Doot (feat. AMI)」配信</p></li>
+      <li><time datetime="2026-04-17">2026.04.17</time><p>「Pay&amp;Play」配信</p></li>
+      <li><time datetime="2026-01-16">2026.01.16</time><p>恵比寿LIQUIDROOM公演。これまでで最大の会場</p></li>
+      <li><time datetime="2026-01-10">2026.01.10</time><p>Miiakiis「Boogie Night (feat. Romantic CHUUDOKU)」配信</p></li>
+    </ul>
+    <p class="news__more">最新の知らせは <a href="https://x.com/chillcat082" target="_blank" rel="noopener">X @chillcat082</a> で。</p>
+  </div>
+</dialog>
+
+<!-- 作品の詳細 -->
+<dialog class="detail" id="detail" aria-labelledby="d-title">
+  <button class="sheet__close" type="button" data-close>CLOSE</button>
+  <div class="detail__in">
+    <div class="detail__cover" id="d-cover"></div>
+    <div>
+      <p class="label" id="d-no"></p>
+      <h3 class="detail__title" id="d-title"></h3>
+      <p class="detail__artist" id="d-artist"></p>
+      <ol class="detail__tracks" id="d-tracks"></ol>
+      <p class="detail__note" id="d-note"></p>
+      <div class="detail__links" id="d-links"></div>
+    </div>
+  </div>
+</dialog>
+
+<script type="application/json" id="rel-data">{"6808110738":{"title":"Love Protocol","type":"SINGLE","date":"2026-09-12","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ee/cb/56/eecb56ea-f9c3-e634-3d51-fc87a4485615/4550760200012_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/love-protocol-single/6808110738","n":1,"tracks":[],"note":null,"no":43},"6791026736":{"title":"Taigii","type":"SINGLE","date":"2026-07-29","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c2/27/b1/c227b133-8f4e-df6f-cb81-3a15105c31c7/4550758627623_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/taigii-single/6791026736","n":1,"tracks":[],"note":null,"no":42},"1894979635":{"title":"Doot (feat. AMI)","type":"SINGLE","date":"2026-04-23","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f3/ec/f9/f3ecf9d7-799e-bedc-8e56-68d7456580d3/4550755675030_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/doot-feat-ami-single/1894979635","n":1,"tracks":[],"note":null,"no":41},"1893312128":{"title":"Pay&Play","type":"SINGLE","date":"2026-04-17","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/81/91/f8/8191f82c-6d69-d643-489a-164e5940d039/4550755440584_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/pay-play-single/1893312128","n":1,"tracks":[],"note":null,"no":40},"1867710925":{"title":"Boogie Night (feat. Romantic CHUUDOKU)","type":"SINGLE","date":"2026-01-10","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4b/24/68/4b2468c0-5738-d30c-86f6-5bc0e5904fab/4550752488916_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/boogie-night-feat-romantic-chuudoku-single/1867710925","n":1,"tracks":[],"note":null,"no":39},"1841347893":{"title":"Heartless","type":"EP","date":"2025-10-10","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/51/32/a1/5132a15d-300a-b9e5-ba8d-540e6ad9e268/4550712834272_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/heartless-ep/1841347893","n":6,"tracks":["Heartless","Trauma (Nameless A.K.A NL Remix)","オマジナイ","GALI","僕と君を乗せてく","笑えれば"],"note":null,"no":38},"1838999220":{"title":"Heartless","type":"SINGLE","date":"2025-09-26","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f6/2d/db/f62ddba8-a76e-1b12-8d1a-55a6e8d68ba5/4550712623579_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/heartless-single/1838999220","n":1,"tracks":[],"note":null,"no":37},"1834302615":{"title":"Unscripted Story","type":"SINGLE","date":"2025-08-31","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/1e/5c/b2/1e5cb2d0-e163-24ce-025f-08527ef5afe8/4550711713011_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/unscripted-story-single/1834302615","n":1,"tracks":[],"note":null,"no":36},"1815128483":{"title":"Eclipse","type":"ALBUM","date":"2025-05-21","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/87/81/f28781c9-4381-4f8e-92fa-f31d42d66c6b/4550708915060_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/eclipse/1815128483","n":7,"tracks":["Moon Light","Till I Die","オママゴト (feat. 心之助)","Ooh Wee","Ego (feat. Cuegee)","I'm So Into You","Shooting Star"],"note":null,"no":35},"1810196414":{"title":"Ideology","type":"ALBUM","date":"2025-04-25","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c4/0a/e5/c40ae5b0-98c6-9eae-02f8-e9da8696d9f7/4550708053182_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/ideology/1810196414","n":10,"tracks":["Intro","罵詈雑言 (feat. 鴉 a.k.a jungo)","ヤミツキ","FEED ME","Anything","DEAD SHEEP","Dictator (feat. Cuegee)","この線路の先で","Joint (feat. AMI)","Drop It (feat. チャラスマ)"],"note":null,"no":34},"1797287173":{"title":"Ego / Play House","type":"SINGLE","date":"2025-03-01","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/c8/0d/f2c80d53-2946-e4fb-7d82-92d8505de8ed/4571641027900_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/ego-play-house-single/1797287173","n":2,"tracks":["Ego (feat. Cuegee)","オママゴト (feat. 心之助)"],"note":null,"no":33},"1790353493":{"title":"Ivy","type":"SINGLE","date":"2025-01-31","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/3f/7e/b63f7ec7-690b-6766-bb8c-fcad50b6cec6/4571640753411_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/ivy-single/1790353493","n":1,"tracks":[],"note":null,"no":32},"1791488015":{"title":"Joint (feat. AMI)","type":"SINGLE","date":"2025-01-23","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8c/65/62/8c6562e1-5256-336b-bf39-630a96cd3d91/4571640789045_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/joint-feat-ami-single/1791488015","n":1,"tracks":[],"note":null,"no":31},"1777013801":{"title":"Even If I Can Be Nothing","type":"SINGLE","date":"2024-11-03","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/7b/ad/bd/7badbd80-c35f-cf70-f092-be80fcf1b4b5/4571640361258_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/even-if-i-can-be-nothing-single/1777013801","n":1,"tracks":[],"note":null,"no":30},"1772247758":{"title":"Who?","type":"ALBUM","date":"2024-10-09","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/88/4a/05/884a0549-fc25-b025-4687-5b6010e97c0e/4571640176104_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/who/1772247758","n":7,"tracks":["KUWABARA","Level Up (feat. GASHIMA)","Never Give It Up","NEKODAMASHI (feat. pinoko)","君にいてほしい","Who U Are","Trippin (feat. Sora)"],"note":null,"no":29},"1768919554":{"title":"Loud","type":"SINGLE","date":"2024-09-29","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ad/4f/f3/ad4ff3c1-06cc-25b4-f4eb-89158b501d35/0198448994330_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/loud-single/1768919554","n":1,"tracks":[],"note":null,"no":28},"1766236186":{"title":"Kuwabara","type":"SINGLE","date":"2024-09-18","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a5/0b/d2/a50bd244-8d60-1838-2df3-bf034b28de47/0198448927772_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/kuwabara-single/1766236186","n":1,"tracks":[],"note":null,"no":27},"1760285044":{"title":"Nekodamashi (feat. pinoko)","type":"SINGLE","date":"2024-08-14","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/0f/c4/bf/0fc4bf6d-33f0-9877-c834-15113d716d3b/0198448761185_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/nekodamashi-feat-pinoko-single/1760285044","n":1,"tracks":[],"note":null,"no":26},"1755970579":{"title":"Feed Me","type":"SINGLE","date":"2024-07-27","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/c7/d3/cc/c7d3cc4a-29d9-e8ac-e5e8-a53b9832106e/0198448637541_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/feed-me-single/1755970579","n":1,"tracks":[],"note":null,"no":25},"1753071653":{"title":"Trippin (feat. Sora) [Remix]","type":"SINGLE","date":"2024-07-03","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/58/01/d1/5801d145-3d9d-5d37-e07b-b8ace66d651c/0198448546690_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/trippin-feat-sora-remix-single/1753071653","n":1,"tracks":[],"note":null,"no":24},"1747447515":{"title":"Never Give It Up","type":"SINGLE","date":"2024-06-05","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/60/14/d4601458-7419-fc64-6835-2651f8a6d708/0198448404624_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/never-give-it-up-single/1747447515","n":1,"tracks":[],"note":null,"no":23},"1739915869":{"title":"I Need U (feat. Miiakiis)","type":"SINGLE","date":"2024-04-10","artist":"MOS","group":"feat","art":"https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/68/e7/01/68e7017b-b229-0225-f115-9df86a72361b/0198448147071_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/i-need-u-feat-miiakiis-single/1739915869","n":2,"tracks":["I Need U (feat. Miiakiis)","hajime (feat. Miiakiis)"],"note":null,"no":22},"1723757309":{"title":"Error","type":"EP","date":"2024-01-06","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/94/c8/b9/94c8b9ff-badb-69bb-c2a5-144386670d40/3617222382622_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/error-ep/1723757309","n":6,"tracks":["404","Bakko","Trippin","Casanova","Masquerade (feat. MOS)","ERROR"],"note":null,"no":21},"1718952672":{"title":"Masquerade (feat. MOS)","type":"SINGLE","date":"2023-12-02","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e9/47/45/e9474561-8109-c9bc-dcf0-d476adc80e8b/3617222187579_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/masquerade-feat-mos-single/1718952672","n":1,"tracks":[],"note":null,"no":20},"1715463907":{"title":"Drop It (feat. Charasuma)","type":"SINGLE","date":"2023-11-11","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e6/50/2e/e6502ebf-6122-1315-b578-be8c36b84a03/3617222094402_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/drop-it-feat-charasuma-single/1715463907","n":1,"tracks":[],"note":null,"no":19},"1714050349":{"title":"Trippin","type":"SINGLE","date":"2023-11-04","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/81/ff/17/81ff17bc-1ced-6e56-e0f2-bbd40f0be225/3617222056882_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/trippin-single/1714050349","n":1,"tracks":[],"note":null,"no":18},"1692886685":{"title":"Ter in Die","type":"ALBUM","date":"2023-06-24","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/71/7a/f5/717af541-0d50-96eb-e6e6-af4df8130c75/859759844843_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/ter-in-die/1692886685","n":7,"tracks":["ter in die","Trauma","ケナゲラ (feat. KOPERU)","Dance With Me","Don't Miss It","To Ex (feat. ハジ→)","もういいかい? (feat. GASHIMA)"],"note":null,"no":17},"1688361857":{"title":"Trauma","type":"SINGLE","date":"2023-05-26","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/c0/07/8e/c0078ee1-497f-c6e1-cf72-748f3df65764/859759697043_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/trauma-single/1688361857","n":1,"tracks":[],"note":null,"no":16},"1666456641":{"title":"Puppet (feat. Nrtt)","type":"SINGLE","date":"2023-01-25","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/80/0c/b8/800cb8ce-e4a5-f93d-331d-03513268368e/859759212383_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/puppet-feat-nrtt-single/1666456641","n":1,"tracks":[],"note":null,"no":15},"1659983216":{"title":"Mouiikai? (feat. Gashima)","type":"SINGLE","date":"2022-12-17","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/b9/60/1d/b9601d51-f83b-60ff-781f-9d51541f3bc9/859759080234_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/mouiikai-feat-gashima-single/1659983216","n":1,"tracks":[],"note":null,"no":14},"1642258137":{"title":"MofMof","type":"EP","date":"2022-09-10","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/9d/d2/65/9dd26518-30f1-20b1-bce9-6ab2c6917e94/859758631093_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/mofmof-ep/1642258137","n":6,"tracks":["New Day","MofMof","Señorita","I Was In Love With You","Neverland","Du Du-Da Da"],"note":null,"no":13},"1633406366":{"title":"Black Out","type":"ALBUM","date":"2022-07-15","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/bb/98/d7/bb98d732-443d-b3b2-6911-567a323b99fe/859758451226_cover.png/600x600bb.jpg","url":"https://music.apple.com/jp/album/black-out/1633406366","n":10,"tracks":["NEGOTO","Politics","Hypnotize (feat. ELLe)","ヒトリゴト","断捨離","Hard (feat. Mt')","Black Out","カゲユレ (feat. nomore)","With You","カルマ"],"note":null,"no":12},"1631548292":{"title":"Neverland","type":"SINGLE","date":"2022-07-08","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/2f/bb/ab/2fbbabde-be56-f4f0-2b1f-92ddbd52845a/859758404772_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/neverland-single/1631548292","n":1,"tracks":[],"note":null,"no":11},"1600409580":{"title":"Cross","type":"SINGLE","date":"2021-12-25","artist":"Miiakiis","group":"miiakiis","art":"https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/7d/2d/44/7d2d440f-c274-fe66-5507-81e5ed3d86c2/859757693139_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/cross-single/1600409580","n":1,"tracks":[],"note":null,"no":10},"1549467602":{"title":"Dark Matter","type":"ALBUM","date":"2021-01-19","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/45/c1/4d/45c14d4e-53f1-a4c2-0b25-d0f81f244f50/859756548126_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/dark-matter/1549467602","n":8,"tracks":["minority","アオハル (feat. Tiga & Mt')","HIGH","ハリボテ","Nervous","カッコーの巣の上で","REMOTE LOVE (feat. ANNA ISHII)","I miss you (feat. JUN SHITABABA)"],"note":null,"no":9},"1525517228":{"title":"Remote Love (feat. Anna Ishii)","type":"SINGLE","date":"2020-08-08","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/3a/60/36/3a603668-d91a-01f5-87e0-c0eabe1fd8e3/859756022510_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/remote-love-feat-anna-ishii-single/1525517228","n":1,"tracks":[],"note":null,"no":8},"1519146280":{"title":"ハリボテ","type":"SINGLE","date":"2020-06-24","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/e5/59/4f/e5594fb6-f39e-710a-aa7c-892f5ba9d152/859755925997_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/%E3%83%8F%E3%83%AA%E3%83%9C%E3%83%86-single/1519146280","n":1,"tracks":[],"note":null,"no":7},"1508447467":{"title":"I Miss You.","type":"SINGLE","date":"2020-04-20","artist":"CHILLCAT THE BASTETxJUN SHITABABA","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/3f/cc/c2/3fccc264-0190-c7aa-8d2a-ef6329434d31/859755629970_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/i-miss-you-single/1508447467","n":1,"tracks":[],"note":null,"no":6},"1492664505":{"title":"Matatabi","type":"EP","date":"2019-12-26","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/a2/5c/17/a25c177c-29bd-6860-99f4-2a65275a0b4d/859755319741_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/matatabi-ep/1492664505","n":6,"tracks":["I'm Fine (feat. nomor)","Take It","Monk","DETOX (feat. 150)","Laid Back","HIROSHIMA"],"note":null,"no":5},"1488589086":{"title":"Kaeritai (feat. Chillcat the Bastet)","type":"SINGLE","date":"2019-11-21","artist":"BENTO KIDZ","group":"feat","art":"https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/d1/3e/60/d13e606d-4300-2893-1790-bbe64242e838/859755250150_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/kaeritai-feat-chillcat-the-bastet-single/1488589086","n":1,"tracks":[],"note":null,"no":4},"1415408085":{"title":"NEKOJARASHI","type":"EP","date":"2018-07-28","artist":"CHILLCAT THE BASTET","group":"solo","art":"https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/82/80/bd/8280bd45-87e5-fc12-acad-5a27779dba2f/859754245171_cover.jpg/600x600bb.jpg","url":"https://music.apple.com/jp/album/nekojarashi-ep/1415408085","n":4,"tracks":["Routine","NEKOJARASHI","Who's (feat. Midnight city's Olgorl)","ケータイ小説"],"note":null,"no":3},"natural":{"title":"Natural","type":"ALBUM","date":"2012-12","artist":"CHILLCAT THE BASTET","group":"solo","art":"","url":"","n":null,"tracks":[],"note":"2nd。iTunes HipHopチャート3位","no":2},"catfood":{"title":"CAT FOOD","type":"ALBUM","date":"2008","artist":"CHILLCAT THE BASTET","group":"solo","art":"","url":"","n":null,"tracks":[],"note":"1st。タワーレコード広島店限定でWeekly 1位","no":1}}</script>
+<script src="js/gl.js" defer></script>
+<script src="js/main.js" defer></script>
+</body>
+</html>
