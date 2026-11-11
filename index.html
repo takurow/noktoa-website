@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#09090b">
+    <meta name="theme-color" content="#050507">
     <title>株式会社NOKTOA｜東京の映像制作・SNS運用・PR設計｜「伝える」を「資産」へ</title>
     <meta name="description"
         content="株式会社NOKTOAは、東京を拠点に映像制作・SNS運用支援・PR設計を手がける戦略的パートナーです。企業のビジネスモデルを解読し、経営課題をクリエイティブで解消。採用動画・PR動画・SNS広告動画の企画から撮影・編集まで自社完結で対応します。">
@@ -71,11 +71,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="fx.css?v=gate2">
-    <link rel="stylesheet" href="works-cases.css?v=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+JP:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="base.css?v=20261112">
+    <link rel="stylesheet" href="fx.css?v=20261112">
+    <link rel="stylesheet" href="works-cases.css?v=20261112">
+    <link rel="stylesheet" href="v3.css?v=20261112d">
+    <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/works/"},"eagerness":"moderate"}],"prefetch":[{"where":{"href_matches":"/contact/*"},"eagerness":"moderate"}]}</script>
 <!-- analytics:start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
 <script>if(location.hostname==='noktoa.com'){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
@@ -109,7 +110,7 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
     <section class="phero" id="home" aria-label="NOKTOA" data-fx="1,1">
         <div class="phero-stick">
             <img class="phero-fallback" src="assets/logo_wh.png" alt="NOKTOA">
-            <p class="phero-kicker">NOKTOA INC. — TOKYO</p>
+            <p class="phero-kicker">NOKTOA INC. — TOKYO<time id="tokyo-time"></time></p>
             <div class="phero-copy">
                 <h1 class="display" data-lines data-clear="text" data-gate="hero">「伝える」を<br>「資産」へ</h1>
                 <p class="hero-sub" data-clear="text" data-gate="hero">ビジネスを解読し　発信を設計し　映像と運用で残す</p>
@@ -162,7 +163,8 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
         </div>
     </section>
     
-    <section class="chapter dark" data-fx=".26,1">
+    <div class="stack">
+    <section class="chapter dark" data-fx=".26,1" data-no="01">
         <div class="wrap chapter-grid">
             <div class="chapter-head" data-clear="box">
                 <p class="label">01 — Video Production</p>
@@ -175,7 +177,7 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             </div>
         </div>
     </section>
-    <section class="chapter paper" data-fx=".1,0">
+    <section class="chapter paper" data-fx=".1,0" data-no="02">
         <div class="wrap chapter-grid">
             <div class="chapter-head" data-clear="box">
                 <p class="label">02 — SNS Operation</p>
@@ -188,7 +190,7 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             </div>
         </div>
     </section>
-    <section class="chapter dark" data-fx=".26,1">
+    <section class="chapter dark" data-fx=".26,1" data-no="03">
         <div class="wrap chapter-grid">
             <div class="chapter-head" data-clear="box">
                 <p class="label">03 — PR Design</p>
@@ -201,7 +203,7 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             </div>
         </div>
     </section>
-    <section class="chapter paper" data-fx=".1,0">
+    <section class="chapter paper" data-fx=".1,0" data-no="04">
         <div class="wrap chapter-grid">
             <div class="chapter-head" data-clear="box">
                 <p class="label">04 — Original IP</p>
@@ -214,6 +216,22 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             </div>
         </div>
     </section>
+    </div>
+
+    <section class="scrub" id="scrub" aria-label="制作実績 映像をスクロールでたどる" data-fx=".1,0">
+        <div class="scrub-stick">
+            <div class="scrub-copy" data-clear="box" data-pad="20">
+                <p class="label">Works — Case 01</p>
+                <div class="scrub-line on"><h2>所有したときの<br>体験を撮る</h2><p>数千万円から十数億円という商材において、映像に求められるのは情報量ではありません。</p></div>
+                <div class="scrub-line"><h2>乗り込む瞬間の<br>高揚</h2><p>言葉で説明しづらいものほど、映像の役割は大きくなります。</p></div>
+                <div class="scrub-line"><h2>水面に落ちる光</h2><p>企画から撮影・編集・カラーグレーディングまで、自社で完結させています。</p></div>
+            </div>
+            <div class="scrub-stage" data-clear="box" data-pad="12">
+                <div class="scrub-frame"><canvas width="450" height="800" role="img" aria-label="横浜ベイサイドマリーナで撮影したボートショーの映像"></canvas><img src="assets/scrub/f001.webp" alt="" width="450" height="800" loading="lazy"></div>
+                <div class="scrub-tl" aria-hidden="true"><span class="scrub-tc">00:00:04:14</span><div class="scrub-ruler"><i class="scrub-head"></i></div><span class="scrub-hint">SCROLL TO SCRUB</span></div>
+            </div>
+        </div>
+    </section>
 
     <section class="sec dark works" id="works" data-fx=".2,1">
         <div class="wrap sec-head">
@@ -221,9 +239,9 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             <h2 class="h1" data-lines data-clear="text">質感と高級感を<br>映像で伝える</h2>
         </div>
         <div class="works-row">
-            <figure class="work rv" data-clear="box" data-pad="12"><video src="assets/works/SBSBSB.mp4" poster="assets/works/SBSBSB.jpg" controls preload="none" playsinline></video><figcaption>WORK 01</figcaption></figure>
-            <figure class="work rv d1" data-clear="box" data-pad="12"><video src="assets/works/002.mp4" poster="assets/works/002.jpg" controls preload="none" playsinline></video><figcaption>WORK 02</figcaption></figure>
-            <figure class="work rv d2" data-clear="box" data-pad="12"><video src="assets/works/003.mp4" poster="assets/works/003.jpg" controls preload="none" playsinline></video><figcaption>WORK 03</figcaption></figure>
+            <figure class="work rv" data-clear="box" data-pad="12"><button class="reel-btn" type="button" data-src="assets/works/SBSBSB.mp4" data-poster="assets/works/SBSBSB.jpg" data-cap="プライベートボートショー 開催告知" aria-label="プライベートボートショー 開催告知 を再生"><img src="assets/works/SBSBSB.jpg" alt="" width="720" height="1280" loading="lazy"><span class="play">再生</span></button><figcaption>WORK 01　プライベートボートショー 開催告知</figcaption></figure>
+            <figure class="work rv d1" data-clear="box" data-pad="12"><button class="reel-btn" type="button" data-src="assets/works/002.mp4" data-poster="assets/works/002.jpg" data-cap="会場ダイジェスト" aria-label="会場ダイジェスト を再生"><img src="assets/works/002.jpg" alt="" width="720" height="1280" loading="lazy"><span class="play">再生</span></button><figcaption>WORK 02　会場ダイジェスト</figcaption></figure>
+            <figure class="work rv d2" data-clear="box" data-pad="12"><button class="reel-btn" type="button" data-src="assets/works/003.mp4" data-poster="assets/works/003.jpg" data-cap="マリーナの一日" aria-label="マリーナの一日 を再生"><img src="assets/works/003.jpg" alt="" width="720" height="1280" loading="lazy"><span class="play">再生</span></button><figcaption>WORK 03　マリーナの一日</figcaption></figure>
         </div>
         <div class="works-cases">
             <a class="cs-card cs-nl rv" href="/works/#neet-legend" data-clear="box" data-pad="12">
@@ -251,13 +269,26 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
         <p class="works-foot rv"><a href="/works/" class="link">制作実績をすべて見る <span>›</span></a></p>
     </section>
 
+    <section class="figs dark" id="numbers" aria-label="数字で見る実績" data-fx=".16,1">
+        <div class="wrap">
+            <p class="label rv">In Numbers</p>
+            <h2 class="h1" style="margin-top:26px" data-lines data-clear="text">自分たちの手で伸ばし<br>数字で確かめる</h2>
+            <dl class="fig-list">
+                <div class="fig rv" data-clear="box" data-pad="10"><dd class="fig-n"><b>10,062</b><i>人</i></dd><dt>自社IP「ニートlegend」　4ヶ月でのフォロワー</dt></div>
+                <div class="fig rv" data-clear="box" data-pad="10"><dd class="fig-n"><b>378,000</b><i>回</i></dd><dt>1本あたりの最高再生数</dt></div>
+                <div class="fig rv" data-clear="box" data-pad="10"><dd class="fig-n"><b>133,300+</b></dd><dt>総いいね</dt></div>
+                <div class="fig rv" data-clear="box" data-pad="10"><dd class="fig-n"><b>6</b><i>媒体</i></dd><dt>自社発プレスリリースの大手メディア転載</dt></div>
+            </dl>
+        </div>
+    </section>
+
     <section class="sec light" id="process" data-fx=".1,0">
         <div class="wrap">
             <div class="sec-head" style="margin-bottom:clamp(30px,5vw,64px)">
                 <p class="label rv">How We Work</p>
                 <h2 class="h1" style="margin-top:26px" data-lines data-clear="text">依頼をそのまま作らない<br>文脈ごと再編集する</h2>
             </div>
-            <div class="steps">
+            <div class="steps tl"><i class="tl-head" aria-hidden="true"></i>
                 <div class="step rv" data-clear="box" data-pad="10"><span class="num">01</span><h3>解読と再定義</h3><p>表層の課題ではなく、ビジネスモデルとブランドの核を深く理解し、発信すべき文脈を根本から再設計します。</p></div><div class="step rv" data-clear="box" data-pad="10"><span class="num">02</span><h3>設計と実装</h3><p>ターゲットの感情を動かすシネマティックな映像と、各プラットフォームに最適化されたクリエイティブを制作します。</p></div><div class="step rv" data-clear="box" data-pad="10"><span class="num">03</span><h3>運用と資産化</h3><p>データを用いた緻密なPDCAにより、単発の施策にとどまらず、持続的に価値を生む強固な資産へと昇華させます。</p></div>
             </div>
         </div>
@@ -348,8 +379,14 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
             </div>
         </div>
     </section>
+    <dialog id="theater" aria-label="作品を再生">
+        <video controls playsinline preload="none"></video>
+        <button class="theater-close" type="button" aria-label="閉じる">×</button>
+        <p class="theater-cap"></p>
+    </dialog>
 </main>
 
 <script src="fx.js?v=flow5"></script>
+<script src="v3.js?v=20261112d"></script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#050507">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アニメーション動画制作なら東京のNOKTOA｜難しいを、わかるに</title>
     <meta name="description"
@@ -17,8 +18,9 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../lp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+JP:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/base.css?v=20261112">
+    <link rel="stylesheet" href="/site.css?v=20261112">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -88,10 +90,11 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
 </head>
 
 <body>
-    <header>
-        <div class="wrap">
-            <a href="/"><img src="../../assets/logo_wh.png" alt="株式会社NOKTOA"></a>
-            <a href="#contact" class="cta-btn">無料で相談する</a>
+    <header class="site-header">
+        <div class="hwrap">
+            <a href="/" class="logo" aria-label="NOKTOA トップへ"><img src="/assets/logo_wh.png" alt="株式会社NOKTOA"></a>
+            <nav class="hnav" aria-label="メイン"><a href="/#vision">Vision</a><a href="/#services">Services</a><a href="/works/">Works</a><a href="/#members">Members</a></nav>
+            <a href="#contact" class="btn btn-gold btn-sm">無料で相談する</a>
         </div>
     </header>
 
@@ -112,7 +115,7 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
                     <a href="#what" class="ghost">アニメーション動画とは</a>
                 </div>
                 <div class="video-frame">
-                    <img src="../../assets/animation-douga-tokyo-seisaku-hero.webp" alt="東京のスタジオでモーショングラフィックスを制作する様子" width="760" height="428" fetchpriority="high">
+                    <img src="/assets/animation-douga-tokyo-seisaku-hero.webp" alt="東京のスタジオでモーショングラフィックスを制作する様子" width="760" height="428" fetchpriority="high">
                 </div>
             </div>
         </section>
@@ -217,21 +220,17 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
         </section>
     </main>
 
-    <footer>
-        <div class="wrap">
-            <p class="related">
-                関連ページ：
-                <a href="/lp/seminar-event-douga-tokyo-satsuei/">セミナー・イベント動画 東京 撮影</a>
-                <a href="/lp/drone-kuusatsu-tokyo/">ドローン空撮 東京</a>
-                <a href="/lp/shigyou-douga-tokyo/">士業・事務所動画 東京</a>
-                <a href="/lp/clinic-douga-tokyo-seisaku/">クリニック動画 東京 制作</a>
-                <a href="/lp/sns-unyo-daiko-tokyo-hiyo/">SNS運用代行 東京 費用</a>
-                <a href="/works/">制作実績</a>
-                <a href="/">NOKTOA トップ</a>
-                <a href="/contact/">無料相談・お問い合わせ</a>
-            </p>
-            <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
-            <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>
+    <footer class="foot">
+        <div class="foot-wrap">
+            <nav class="foot-related" aria-label="関連ページ">
+                <p class="t">RELATED</p>
+                <a href="/lp/seminar-event-douga-tokyo-satsuei/">セミナー・イベント動画 東京 撮影</a><a href="/lp/drone-kuusatsu-tokyo/">ドローン空撮 東京</a><a href="/lp/shigyou-douga-tokyo/">士業・事務所動画 東京</a><a href="/lp/clinic-douga-tokyo-seisaku/">クリニック動画 東京 制作</a><a href="/lp/sns-unyo-daiko-tokyo-hiyo/">SNS運用代行 東京 費用</a><a href="/works/">制作実績</a><a href="/">NOKTOA トップ</a><a href="/contact/">無料相談・お問い合わせ</a>
+            </nav>
+            <div class="foot-main">
+                <div class="foot-brand"><img src="/assets/logo_wh.png" alt="NOKTOA" width="120" height="34" loading="lazy"><div><p class="co">株式会社NOKTOA</p><p>〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p><p><a href="mailto:info@noktoa.com">info@noktoa.com</a></p></div></div>
+                <nav class="foot-nav" aria-label="サイト"><a href="/">トップ</a><a href="/#services">Services</a><a href="/works/">Works</a><a href="/#members">Members</a><a href="/contact/">お問い合わせ</a></nav>
+            </div>
+            <p class="foot-copy">「伝える」を「資産」へ　&copy; 2026 NOKTOA Inc. All rights reserved.</p>
         </div>
     </footer>
     <div class="sticky-cta">

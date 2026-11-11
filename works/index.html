@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#050507">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>制作実績｜株式会社NOKTOA｜東京の映像制作・SNS運用</title>
     <meta name="description"
@@ -42,241 +43,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500;700;900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/works-cases.css?v=1">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+JP:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/works-cases.css?v=20261112">
 
-    <style>
-        .works-main {
-            padding-top: 140px;
-        }
-
-        .works-wrap {
-            width: min(1180px, calc(100% - 48px));
-            margin-inline: auto;
-        }
-
-        .works-lead {
-            padding-bottom: 96px;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .works-eyebrow {
-            font-family: 'Inter', sans-serif;
-            font-size: .75rem;
-            letter-spacing: .32em;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-        }
-
-        .works-lead h1 {
-            font-size: clamp(2.1rem, 5.2vw, 3.6rem);
-            font-weight: 700;
-            line-height: 1.35;
-            letter-spacing: .01em;
-            margin-bottom: 28px;
-        }
-
-        .works-lead p {
-            max-width: 62ch;
-            color: var(--text-muted);
-            line-height: 2;
-            font-size: 1rem;
-        }
-
-        .case {
-            padding: 96px 0;
-            border-bottom: 1px solid var(--glass-border);
-        }
-
-        .case-head {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: baseline;
-            gap: 12px 20px;
-            margin-bottom: 18px;
-        }
-
-        .case-num {
-            font-family: 'Inter', sans-serif;
-            font-size: .78rem;
-            letter-spacing: .28em;
-            color: var(--text-muted);
-        }
-
-        .case-tag {
-            font-size: .72rem;
-            letter-spacing: .12em;
-            color: var(--text-muted);
-            border: 1px solid var(--glass-border);
-            border-radius: 999px;
-            padding: 5px 14px;
-        }
-
-        .case h2 {
-            font-size: clamp(1.45rem, 3.2vw, 2.15rem);
-            font-weight: 700;
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .case-client {
-            font-size: .78rem;
-            letter-spacing: .06em;
-            color: var(--text-muted);
-            margin: -8px 0 22px;
-        }
-
-        .case-body {
-            max-width: 64ch;
-            color: var(--text-muted);
-            line-height: 2.05;
-            margin-bottom: 40px;
-        }
-
-        .case-facts {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-            gap: 1px;
-            background: var(--glass-border);
-            border: 1px solid var(--glass-border);
-            margin-bottom: 48px;
-        }
-
-        .fact {
-            background: var(--bg);
-            padding: 24px 22px;
-        }
-
-        .fact dt {
-            font-size: .72rem;
-            letter-spacing: .16em;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-        }
-
-        .fact dd {
-            font-size: 1.02rem;
-            font-weight: 600;
-            line-height: 1.6;
-        }
-
-        .reel-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 28px;
-        }
-
-        .reel {
-            min-width: 0;
-        }
-
-        .reel video {
-            width: 100%;
-            aspect-ratio: 9 / 16;
-            display: block;
-            background: #000;
-            border: 1px solid var(--glass-border);
-            object-fit: cover;
-        }
-
-        .reel-caption {
-            margin-top: 14px;
-            font-size: .84rem;
-            color: var(--text-muted);
-            line-height: 1.7;
-        }
-
-        .reel-caption strong {
-            display: block;
-            color: var(--text-main);
-            font-weight: 600;
-            font-size: .92rem;
-            margin-bottom: 4px;
-        }
-
-        .media-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: grid;
-            gap: 14px;
-        }
-
-        .media-list li {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 16px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            line-height: 1.8;
-        }
-
-        .media-list li span:first-child {
-            color: var(--text-main);
-            font-weight: 600;
-            min-width: 12ch;
-        }
-
-        .works-cta {
-            padding: 104px 0 128px;
-            text-align: center;
-        }
-
-        .works-cta h2 {
-            font-size: clamp(1.4rem, 3.4vw, 2rem);
-            font-weight: 700;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .works-cta p {
-            color: var(--text-muted);
-            line-height: 2;
-            margin-bottom: 36px;
-        }
-
-        .works-cta a {
-            display: inline-block;
-            padding: 17px 44px;
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            text-decoration: none;
-            font-size: .9rem;
-            letter-spacing: .12em;
-            transition: background .35s var(--ease-premium), color .35s var(--ease-premium);
-        }
-
-        .works-cta a:hover,
-        .works-cta a:focus-visible {
-            background: var(--primary);
-            color: var(--bg);
-        }
-
-        .works-note {
-            margin-top: 28px;
-            font-size: .78rem;
-            color: var(--text-muted);
-        }
-
-        @media (max-width: 600px) {
-            .works-main {
-                padding-top: 108px;
-            }
-
-            .case {
-                padding: 68px 0;
-            }
-
-            .reel-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 22px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/base.css?v=20261112">
+    <link rel="stylesheet" href="/site.css?v=20261112">
 <!-- analytics:start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
 <script>if(location.hostname==='noktoa.com'){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
@@ -285,23 +56,14 @@ if(h.indexOf('/contact/')>-1)gtag('event','cta_click',{cta_target:h,page:locatio
 else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.pathname});});}</script>
 <script>if(location.hostname==='noktoa.com')(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","yorl0bpxds");</script>
 <!-- analytics:end -->
-<style id="jp-wrap">/* 日本語の折り返し（全社ルール 2026-10-17）句読点・文節でのみ折れる */html{word-break:keep-all;line-break:strict;overflow-wrap:anywhere;text-wrap:pretty}</style>
 </head>
 
 <body>
-    <header class="header blur-effect">
-        <div class="header-container">
-            <a href="/" class="logo">
-                <img src="/assets/logo_wh.png" alt="NOKTOA Logo">
-            </a>
-            <nav class="nav">
-                <ul class="nav-links">
-                    <li><a href="/#vision">VISION</a></li>
-                    <li><a href="/#services">SERVICES</a></li>
-                    <li><a href="/works/">WORKS</a></li>
-                    <li><a href="/#members">MEMBERS</a></li>
-                </ul>
-            </nav>
+    <header class="site-header">
+        <div class="hwrap">
+            <a href="/" class="logo" aria-label="NOKTOA トップへ"><img src="/assets/logo_wh.png" alt="株式会社NOKTOA"></a>
+            <nav class="hnav" aria-label="メイン"><a href="/#vision">Vision</a><a href="/#services">Services</a><a href="/works/" aria-current="page">Works</a><a href="/#members">Members</a></nav>
+            <a href="/contact/?s=works-header" class="btn btn-gold btn-sm">相談する</a>
         </div>
     </header>
 
@@ -494,41 +256,18 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
                 企画が固まっていない段階でも、撮影日だけ決まっている状態でも構いません。<br>
                 予算と目的をお聞かせいただければ、実現できる形をご提案します。
             </p>
-            <a href="/contact/?s=works">
-                無料で相談する
-            </a>
+            <a href="/contact/?s=works" class="cta-btn">無料で相談する</a>
             <p class="works-note">info@noktoa.com ／ 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container footer-content">
-            <div class="footer-brand">
-                <img src="/assets/logo_wh.png" alt="NOKTOA Logo" class="footer-logo">
-                <p class="footer-company">株式会社NOKTOA</p>
-                <p>
-                    〒154-0004<br>
-                    東京都世田谷区太子堂四丁目18番15号<br>
-                    マガザン三軒茶屋2-3F-3
-                </p>
-                <p class="footer-email">
-                    <a
-                        href="mailto:info@noktoa.com?subject=NOKTOAへのご相談&amp;body=お名前：%0A会社名：%0Aご相談内容：%0A">info@noktoa.com</a>
-                </p>
+    <footer class="foot">
+        <div class="foot-wrap">
+            <div class="foot-main">
+                <div class="foot-brand"><img src="/assets/logo_wh.png" alt="NOKTOA" width="120" height="34" loading="lazy"><div><p class="co">株式会社NOKTOA</p><p>〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p><p><a href="mailto:info@noktoa.com">info@noktoa.com</a></p></div></div>
+                <nav class="foot-nav" aria-label="サイト"><a href="/">トップ</a><a href="/#services">Services</a><a href="/works/">Works</a><a href="/#members">Members</a><a href="/contact/">お問い合わせ</a></nav>
             </div>
-            <nav class="footer-col">
-                <p class="footer-col-title">SITE</p>
-                <ul>
-                    <li><a href="/#vision">Vision</a></li>
-                    <li><a href="/#services">Services</a></li>
-                    <li><a href="/works/">Works</a></li>
-                    <li><a href="/#members">Members</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="container footer-bottom">
-            <p>「伝える」を「資産」へ</p>
-            <p>&copy; 2026 NOKTOA Inc. All rights reserved.</p>
+            <p class="foot-copy">「伝える」を「資産」へ　&copy; 2026 NOKTOA Inc. All rights reserved.</p>
         </div>
     </footer>
 </body>

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="theme-color" content="#050507">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>お問い合わせ・無料相談｜株式会社NOKTOA（東京・映像制作／SNS運用）</title>
     <meta name="description" content="株式会社NOKTOAへのご相談・お見積もりフォーム。映像制作、SNS運用支援、PR設計についてお気軽にご相談ください。ご相談・お見積もりは無料です。通常1営業日以内にご返信します。">
@@ -52,59 +53,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/lp/lp.css">
-    <style>
-        .form-wrap { max-width: 640px; }
-        .field { margin-bottom: 22px; }
-        .field label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
-        .field .req { color: var(--accent); font-size: 12px; margin-left: 6px; }
-        .field .opt { color: var(--muted); font-size: 12px; margin-left: 6px; }
-        .field input, .field textarea, .field select {
-            width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
-            color: var(--text); padding: 13px 14px; font-size: 16px; font-family: inherit; line-height: 1.7;
-        }
-        .field textarea { min-height: 150px; resize: vertical; }
-        .field input:focus, .field textarea:focus, .field select:focus {
-            outline: none; border-color: var(--accent);
-        }
-        .field .hint { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
-        .hp { position: absolute; left: -9999px; opacity: 0; height: 0; }
-        .submit-btn {
-            width: 100%; background: var(--accent); color: #14141c; border: none; border-radius: 8px;
-            padding: 16px; font-size: 16px; font-weight: 700; font-family: inherit; cursor: pointer;
-        }
-        .submit-btn:disabled { opacity: 0.5; cursor: default; }
-        .form-note { color: var(--muted); font-size: 13px; margin-top: 16px; text-align: center; }
-        .form-msg { border-radius: 8px; padding: 16px 18px; margin-bottom: 24px; font-size: 15px; display: none; }
-        .form-msg.ok { display: block; background: rgba(201, 168, 106, 0.12); border: 1px solid var(--accent); }
-        .form-msg.ng { display: block; background: rgba(220, 90, 90, 0.12); border: 1px solid rgba(220, 90, 90, 0.5); }
-        .alt-contact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 24px; margin-top: 40px; }
-        .alt-contact.top { margin-top: 0; margin-bottom: 36px; border-color: var(--accent); }
-        .relay { display: none; background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 26px 24px; }
-        .relay h2 { font-size: 20px; margin: 0 0 10px; }
-        .relay p { font-size: 15px; margin: 0 0 18px; line-height: 1.8; }
-        .relay .ways { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
-        .relay .way {
-            flex: 1 1 200px; text-align: center; text-decoration: none; cursor: pointer;
-            background: var(--accent); color: #14141c; border: none; border-radius: 8px;
-            padding: 15px 16px; font-size: 15px; font-weight: 700; font-family: inherit;
-        }
-        .relay .way.sub { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-        .relay textarea {
-            width: 100%; min-height: 190px; background: #14141c; border: 1px solid var(--line);
-            border-radius: 8px; color: var(--text); padding: 14px; font-size: 14px;
-            font-family: inherit; line-height: 1.8; resize: vertical;
-        }
-        .relay .addr { font-size: 17px; font-weight: 700; margin: 16px 0 0; }
-        .relay .addr a { color: var(--accent); }
-        .relay .copied { color: var(--accent); font-size: 14px; margin: 10px 0 0; display: none; }
-        .alt-contact .direct { font-size: 18px; font-weight: 700; }
-        .alt-contact .direct a { text-decoration: none; }
-        .alt-contact p { margin: 0 0 8px; font-size: 15px; }
-        .alt-contact p:last-child { margin: 0; }
-        .alt-contact a { color: var(--accent); }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+JP:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/base.css?v=20261112">
+    <link rel="stylesheet" href="/site.css?v=20261112">
 <!-- analytics:start -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WC19TT5BD2"></script>
 <script>if(location.hostname==='noktoa.com'){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-WC19TT5BD2');
@@ -116,10 +67,10 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
 </head>
 
 <body>
-    <header>
-        <div class="wrap">
-            <a href="/"><img src="/assets/logo_wh.png" alt="株式会社NOKTOA"></a>
-            <a href="/" class="cta-btn" style="background:transparent;color:var(--text);border:1px solid var(--line);font-weight:500;">トップへ</a>
+    <header class="site-header">
+        <div class="hwrap">
+            <a href="/" class="logo" aria-label="NOKTOA トップへ"><img src="/assets/logo_wh.png" alt="株式会社NOKTOA"></a>
+            <nav class="hnav" aria-label="メイン"><a href="/#vision">Vision</a><a href="/#services">Services</a><a href="/works/">Works</a><a href="/#members">Members</a></nav>
         </div>
     </header>
 
@@ -234,15 +185,17 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
         </section>
     </main>
 
-    <footer>
-        <div class="wrap">
-            <p class="related">
-                <a href="/">NOKTOA トップ</a>
-                <a href="/works/">制作実績</a>
-                <a href="/lp/douga-seisaku-tokyo-ryokin/">動画制作の料金（東京）</a>
-            </p>
-            <p style="margin-top:16px;">株式会社NOKTOA ｜ 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3 ｜ <a href="mailto:info@noktoa.com">info@noktoa.com</a></p>
-            <p style="margin-top:8px;">© 2026 NOKTOA Inc.</p>
+    <footer class="foot">
+        <div class="foot-wrap">
+            <nav class="foot-related" aria-label="関連ページ">
+                <p class="t">RELATED</p>
+                <a href="/">NOKTOA トップ</a><a href="/works/">制作実績</a><a href="/lp/douga-seisaku-tokyo-ryokin/">動画制作の料金（東京）</a>
+            </nav>
+            <div class="foot-main">
+                <div class="foot-brand"><img src="/assets/logo_wh.png" alt="NOKTOA" width="120" height="34" loading="lazy"><div><p class="co">株式会社NOKTOA</p><p>〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3</p><p><a href="mailto:info@noktoa.com">info@noktoa.com</a></p></div></div>
+                <nav class="foot-nav" aria-label="サイト"><a href="/">トップ</a><a href="/#services">Services</a><a href="/works/">Works</a><a href="/#members">Members</a><a href="/contact/">お問い合わせ</a></nav>
+            </div>
+            <p class="foot-copy">「伝える」を「資産」へ　&copy; 2026 NOKTOA Inc. All rights reserved.</p>
         </div>
     </footer>
 
