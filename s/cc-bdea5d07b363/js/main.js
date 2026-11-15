@@ -56,17 +56,18 @@
     const date = r.date.replace(/-/g, ".");
     $("#d-cover").innerHTML = r.art
       ? `<img src="${esc(r.art)}" alt="『${esc(r.title)}』のジャケット" referrerpolicy="no-referrer">`
-      : `<span class="rel__ghost"><span class="label">NOT ON STREAMING</span><b>${esc(r.title)}</b></span>`;
-    $("#d-no").textContent = `No.${String(r.no).padStart(2, "0")} ・ ${r.type} ・ ${date}`;
+      : `<span class="rel__ghost"><span class="label">配信なし</span><b>${esc(r.title)}</b></span>`;
+    const TJ = { SINGLE: "シングル", EP: "EP", ALBUM: "アルバム" };
+    $("#d-no").textContent = `${r.date.slice(0, 4)}年${/^\d\d$/.test(r.date.slice(5, 7)) ? Number(r.date.slice(5, 7)) + "月" : ""}　${TJ[r.type] || r.type}`;
     $("#d-title").textContent = r.title;
     $("#d-artist").textContent = r.artist;
     const tracks = r.tracks && r.tracks.length ? r.tracks : (r.art ? [r.title] : []);
     $("#d-tracks").innerHTML = tracks.map(t => `<li><span>${featMark(t)}</span></li>`).join("");
     $("#d-note").textContent = r.note || (r.art ? "" : "現在は配信されていません");
     const links = [];
-    if (r.url) links.push(`<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>APPLE MUSIC で聴く ↗</span></a>`);
-    if (r.group !== "miiakiis") links.push(`<a class="btn" href="${SPOTIFY}" target="_blank" rel="noopener"><span>SPOTIFY ↗</span></a>`);
-    else links.push(`<a class="btn" href="https://miiakiis.bitfan.id/contents/menu/90609" target="_blank" rel="noopener"><span>MIIAKIIS OFFICIAL ↗</span></a>`);
+    if (r.url) links.push(`<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>Apple Musicで聴く ↗</span></a>`);
+    if (r.group !== "miiakiis") links.push(`<a class="btn" href="${SPOTIFY}" target="_blank" rel="noopener"><span>Spotifyで聴く ↗</span></a>`);
+    else links.push(`<a class="btn" href="https://miiakiis.bitfan.id/contents/menu/90609" target="_blank" rel="noopener"><span>Miiakiis公式 ↗</span></a>`);
     $("#d-links").innerHTML = links.join("");
   }
   function openDetail(li) {

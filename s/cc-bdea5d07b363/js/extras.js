@@ -46,11 +46,11 @@
     const show = (id, r, final) => {
       cover.innerHTML = `<img src="${esc(r.art)}" alt="" referrerpolicy="no-referrer">`;
       t.textContent = r.title;
-      s.textContent = `${r.artist} ・ ${r.date.slice(0, 4)} ・ ${r.type}`;
+      s.textContent = `${r.artist}　${r.date.slice(0, 4)}年`;
       cover.classList.toggle("is-final", !!final);
       if (final) {
         l.innerHTML = `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>聴く ↗</span></a>`;
-        go.querySelector("span").textContent = "もう一曲、引く";
+        go.querySelector("span").textContent = "もう一曲引く";
       }
     };
     go.addEventListener("click", () => {
@@ -84,7 +84,7 @@
   const badge = document.createElement("p");
   badge.className = "eyes label"; badge.setAttribute("aria-live", "polite");
   hd.insertBefore(badge, $("#menu-open"));
-  const paint = () => { badge.hidden = found.size === 0; badge.textContent = `EYES ${found.size}/9`; };
+  const paint = () => { badge.hidden = found.size === 0; badge.textContent = `見つけた目　${found.size}`; };
   paint();
   SPOTS.forEach(([id, x, y], i) => {
     const sec = document.getElementById(id); if (!sec) return;
