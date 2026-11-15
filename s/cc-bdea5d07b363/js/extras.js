@@ -34,39 +34,44 @@
     set();
   });
 
-  /* ---------- 2. 夜の一曲を引く ---------- */
+  /* ---------- 2. 一曲引く（レコードが滑り出てくる） ---------- */
   const draw = $("#draw");
   const DATA = $("#rel-data") ? JSON.parse($("#rel-data").textContent) : null;
   if (draw && DATA) {
     draw.hidden = false;
     const pool = Object.entries(DATA).filter(([, r]) => r.art);
-    const cover = $("#draw-cover"), t = $("#draw-t"), s = $("#draw-s"), l = $("#draw-l"), go = $("#draw-go");
-    const SP = "https://open.spotify.com/artist/1ISGu4AMrhb7CzN9yb1Bsz";
-    let last = "", busy = false;
-    const show = (id, r, final) => {
-      cover.innerHTML = `<img src="${esc(r.art)}" alt="" referrerpolicy="no-referrer">`;
-      t.textContent = r.title;
-      s.textContent = `${r.artist}　${r.date.slice(0, 4)}年`;
-      cover.classList.toggle("is-final", !!final);
-      if (final) {
-        l.innerHTML = `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>聴く ↗</span></a>`;
-        go.querySelector("span").textContent = "もう一曲引く";
-      }
+    const cover = $("#draw-cover"), glow = $("#draw-glow"), t = $("#draw-t"), s = $("#draw-s"), l = $("#draw-l"), go = $("#draw-go");
+    let last = "", busy = false, warmed = false;
+    const warm = () => { if (warmed) return; warmed = true; pool.forEach(([, r]) => { const i = new Image(); i.referrerPolicy = "no-referrer"; i.src = r.art; }); };
+    new IntersectionObserver(es => { if (es[0].isIntersecting) warm(); }, { rootMargin: "400px" }).observe(draw);
+    const paint = r => {
+      cover.style.backgroundImage = `url("${r.art.replace(/"/g, "%22")}")`;
+      glow.style.backgroundImage = cover.style.backgroundImage;
     };
     go.addEventListener("click", () => {
       if (busy) return;
-      busy = true; l.innerHTML = ""; draw.classList.add("is-drawing");
+      busy = true; warm();
+      draw.classList.remove("is-final"); draw.classList.add("is-drawing");
+      l.innerHTML = ""; t.textContent = ""; s.textContent = "";
       let pick;
       do { pick = pool[Math.floor(Math.random() * pool.length)]; } while (pick[0] === last && pool.length > 1);
       last = pick[0];
-      const steps = calm() ? 1 : 14;
+      const steps = calm() ? 1 : 16;
       let i = 0;
       const step = () => {
         i++;
-        if (i >= steps) { show(pick[0], pick[1], true); busy = false; draw.classList.remove("is-drawing"); return; }
-        const m = pool[Math.floor(Math.random() * pool.length)];
-        show(m[0], m[1], false);
-        setTimeout(step, 55 + i * 14);
+        if (i >= steps) {
+          const r = pick[1];
+          paint(r);
+          t.textContent = r.title;
+          s.textContent = `${r.artist}　${r.date.slice(0, 4)}年`;
+          l.innerHTML = `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>聴く ↗</span></a>`;
+          go.querySelector("span").textContent = "もう一曲引く";
+          draw.classList.remove("is-drawing"); draw.classList.add("is-final"); busy = false;
+          return;
+        }
+        paint(pool[Math.floor(Math.random() * pool.length)][1]);
+        setTimeout(step, 50 + i * 16);
       };
       step();
     });
