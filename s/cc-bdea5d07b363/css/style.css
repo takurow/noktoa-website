@@ -794,3 +794,12 @@ p, li, dd { text-wrap: pretty; }
 .draw { border: 0; background: rgba(15, 34, 36, .5); }
 .sheet__close { letter-spacing: .1em; }
 .hd__menu { letter-spacing: .12em; font-family: var(--f-jp); }
+
+/* v6 — 端正に：説明を削り、見出しは名詞、薄い黒帯 */
+.thesis { font-weight: 600; font-size: clamp(1.25rem, 2.4vw, 1.9rem); line-height: 1.9; letter-spacing: .1em; color: var(--paper-2); }
+.ch-head__ja { font-weight: 700; letter-spacing: .12em; }
+.pro__lead { font-weight: 600; font-size: clamp(1.3rem, 2.1vw, 1.8rem); letter-spacing: .16em; line-height: 1.9; }
+.redact { background: rgba(236, 235, 228, .16); color: transparent; }
+.redact:hover, .redact:focus-visible, .redact.is-open { color: var(--paper); background: transparent; }
+.no-js .redact, .calm .redact { background: transparent; color: inherit; }
+.name__body { max-width: 22em; }
