@@ -107,3 +107,6 @@
     if (href && href.startsWith("#")) { ev.preventDefault(); const el = $(href); if (el) scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: calm() ? "auto" : "smooth" }); }
   });
 })();
+
+/* 伏せ字：押すと（または近づくと）読める */
+document.querySelectorAll(".redact").forEach(b => b.addEventListener("click", () => b.classList.toggle("is-open")));

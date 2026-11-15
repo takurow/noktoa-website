@@ -236,7 +236,7 @@
     const want = p > .4 && p < .999;
     if (want !== videoOn) { videoOn = want; want ? proVideo.play().catch(() => {}) : proVideo.pause(); }
     // 携帯は目が画面の中ほどに来るよう、ロゴを少し左下に置く（最初から固定。横には動かさない）
-    if (glc) glc.render(p, v, t, videoOn, VW < 720 ? [-.10, -.06] : [0, -.01], VW < 720 ? .78 : .88);
+    if (glc) glc.render(p, v, t, videoOn, VW < 720 ? [-.04, -.20] : [.17, -.01], VW < 720 ? .7 : .84);
   }
   function renderCreed(p) {
     chars.forEach((cs, i) => {
