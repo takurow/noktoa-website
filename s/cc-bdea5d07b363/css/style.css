@@ -848,3 +848,101 @@ p, li, dd { text-wrap: pretty; }
   .draw.is-final .draw__vw { transform: translateX(calc(var(--s) * .3)); }
   .draw.is-drawing .draw__vw { transform: translateX(calc(var(--s) * .15)); }
 }
+
+/* ---- v8 オルゴール ---- */
+.draw__box { display: block; width: 100%; height: clamp(150px, 20vw, 240px); margin-top: clamp(26px, 5vw, 60px); -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent); }
+.draw__snd { display: block; margin-top: 18px; padding: 0; border: 0; background: none; font: inherit; font-size: 12px; letter-spacing: .24em; color: var(--mist); cursor: pointer; transition: color .3s; }
+.draw__snd:hover, .draw__snd[aria-pressed="true"] { color: var(--yellow); }
+.draw__snd:focus-visible { outline: 1px solid var(--yellow); outline-offset: 6px; }
+.draw { padding-bottom: clamp(0px, 1vw, 8px); }
+
+/* v8.1 飾りを引く */
+.draw__glow { filter: blur(120px) saturate(1); }
+.draw.is-final .draw__glow, .draw.is-drawing .draw__glow { opacity: .16; }
+.draw__cover { box-shadow: none; }
+.draw.is-final .draw__cover { box-shadow: none; }
+.draw__vw { box-shadow: none; }
+.draw__vw::after { display: none; }
+.draw__snd { letter-spacing: .1em; font-size: 13px; }
+
+/* v9 オルゴール作り込み（機構を写実に。端のぼかしは外す） */
+.draw__box { height: clamp(180px, 25vw, 310px); margin-top: clamp(22px, 4vw, 48px); -webkit-mask-image: none; mask-image: none; }
+
+/* v10 蓄音機（ラッパの高さのぶん、枠を高くする） */
+.draw__box { height: clamp(300px, 34vw, 430px); margin-top: clamp(14px, 3vw, 36px); }
+
+/* v11 蓄音機（WebGL）。3D版のときだけ、蓄音機を大きく置いて上のレコードは引く */
+.draw.has-gl .draw__vw { display: none; }
+.draw.has-gl .draw__disc { width: var(--s); }
+.draw.has-gl .draw__box { height: clamp(330px, 92vw, 400px); margin-top: 8px; -webkit-mask-image: linear-gradient(#000 86%, transparent), linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); -webkit-mask-composite: source-in; mask-image: linear-gradient(#000 86%, transparent), linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-composite: intersect; }
+@media (min-width: 900px) {
+  .draw.has-gl { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); align-items: center; column-gap: clamp(20px, 3.4vw, 56px); padding-top: clamp(18px, 2.4vw, 36px); padding-bottom: clamp(18px, 2.4vw, 36px); padding-left: clamp(12px, 2vw, 32px); }
+  .draw.has-gl .draw__box { grid-column: 1; grid-row: 1; height: clamp(440px, 43vw, 580px); margin: 0; }
+  .draw.has-gl .draw__stage { grid-column: 2; grid-row: 1; grid-template-columns: 1fr; gap: clamp(20px, 2.4vw, 32px); align-content: center; }
+  .draw.has-gl .draw__disc { --s: clamp(150px, 15vw, 210px); }
+}
+
+/* v12 「一曲引く」ボタン：黄の面＋回る盤のしるし */
+.draw__go { position: relative; display: inline-flex; align-items: center; gap: 16px; min-height: 64px; padding: 0 30px 0 18px; border: 0; border-radius: 0; background: var(--yellow); color: #0a0c0d; font-family: var(--f-min); font-weight: 800; font-size: 17px; letter-spacing: .14em; overflow: hidden; isolation: isolate; transition: transform .5s var(--ease), color .4s; }
+.draw__go::before { content: ""; flex: none; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle, #0a0c0d 0 3px, var(--yellow) 3.5px 7px, #0a0c0d 7.5px 9px, transparent 9.5px), repeating-radial-gradient(circle, #0a0c0d 0 1.5px, #2a2d2e 2px 3px); transition: transform .9s var(--ease); }
+.draw__go::after { content: ""; position: absolute; inset: 0; z-index: -1; background: #0a0c0d; transform: translateX(-101%); transition: transform .55s var(--ease); }
+.draw__go:hover, .draw__go:focus-visible { color: var(--yellow); }
+.draw__go:hover::after, .draw__go:focus-visible::after { transform: none; }
+.draw__go:hover::before { transform: rotate(180deg); background: radial-gradient(circle, var(--yellow) 0 3px, #0a0c0d 3.5px 7px, var(--yellow) 7.5px 9px, transparent 9.5px), repeating-radial-gradient(circle, #fcef06 0 1.5px, #5a5600 2px 3px); }
+.draw__go:active { transform: scale(.97); }
+.draw.is-drawing .draw__go { opacity: 1; }
+.draw.is-drawing .draw__go::before { animation: spin .8s linear infinite; }
+.calm .draw__go::before { animation: none !important; transition: none; }
+.draw__go:focus-visible { outline: 2px solid var(--paper); outline-offset: 4px; }
+.draw__go::before { position: relative; inset: auto; z-index: 0; transform-origin: 50% 50%; }
+.draw__go { font-size: 17px; }
+.draw__go span { white-space: nowrap; }
+.draw__go::before { transform: none; }
+.draw__go:hover::before { transform: rotate(180deg); }
+
+/* ---- v13 アイコンを盤と真鍮の世界に揃える ---- */
+.ar { display: inline-block; width: 1.2em; height: 1.2em; margin-left: .6em; vertical-align: -.26em; fill: none; stroke: currentColor; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.ar circle { stroke-dasharray: 52 4.5; transform-origin: 10px 10px; transition: transform .9s var(--ease); }
+.ar path { transition: transform .5s var(--ease); }
+a:hover .ar circle, .btn:hover .ar circle { transform: rotate(200deg); }
+a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
+.links__id .ar, .follow__links .ar { opacity: .85; }
+
+/* メニュー：盤 */
+.hd__menu i, .draw__go::before { --sheen: conic-gradient(from 20deg, transparent 0 70deg, rgba(236,235,228,.55) 82deg, transparent 96deg 250deg, rgba(236,235,228,.3) 262deg, transparent 276deg); }
+.hd__menu i { width: 26px; height: 26px; border: 0; border-radius: 50%; background: var(--sheen), radial-gradient(circle, var(--yellow) 0 3px, #0a0c0d 3.5px 5px, transparent 5.5px), repeating-radial-gradient(circle, #0c0f10 0 1.2px, #232829 1.6px 2.6px); box-shadow: 0 0 0 1px rgba(236,235,228,.28); transition: none; }
+.hd__menu:hover i { height: 26px; animation: spin 3.2s linear infinite; }
+.calm .hd__menu:hover i { animation: none; }
+
+/* 隠れた猫の目 */
+.eye i { display: none; }
+.eye svg { width: 30px; height: 16px; overflow: visible; fill: none; stroke: var(--yellow); stroke-width: 1.1; stroke-linejoin: round; opacity: .2; transform: scaleY(.3); transition: opacity .5s, transform .5s var(--ease); }
+.eye .e-p { fill: var(--yellow); stroke: none; transition: transform .5s var(--ease); transform-origin: 15px 8px; }
+.eye:hover svg, .eye:focus-visible svg { opacity: .95; transform: scaleY(1); }
+.eye:hover .e-p { transform: scaleX(1.6); }
+.eye.is-found svg { opacity: .95; transform: scaleY(1); }
+.eye.is-found .e-o { fill: rgba(252,239,6,.14); }
+.js:not(.calm) .eye:not(.is-found) svg { animation: blink 7s infinite; }
+
+/* 閉じる */
+.sheet__close { display: inline-flex; align-items: center; gap: 12px; }
+.sheet__close::before { content: ""; width: 24px; height: 24px; border-radius: 50%; box-shadow: inset 0 0 0 1px currentColor; background: linear-gradient(45deg, transparent 46%, currentColor 46% 54%, transparent 54%) center / 10px 10px no-repeat, linear-gradient(-45deg, transparent 46%, currentColor 46% 54%, transparent 54%) center / 10px 10px no-repeat; transition: transform .7s var(--ease); }
+.sheet__close:hover::before { transform: rotate(180deg); }
+.draw__go::before { background: var(--sheen), radial-gradient(circle, #0a0c0d 0 3px, var(--yellow) 3.5px 7px, #0a0c0d 7.5px 9px, transparent 9.5px), repeating-radial-gradient(circle, #0a0c0d 0 1.5px, #2a2d2e 2px 3px); }
+.draw__go:hover::before { background: radial-gradient(circle, var(--yellow) 0 3px, #0a0c0d 3.5px 7px, var(--yellow) 7.5px 9px, transparent 9.5px), repeating-radial-gradient(circle, #fcef06 0 1.5px, #5a5600 2px 3px); }
+.ch-head__ja { letter-spacing: .02em; }
+
+/* ---- v15 まだ選ばれていない間の動き ---- */
+.draw__cover::before { z-index: 2; transition: opacity .6s; }
+.draw__cover::after { content: ""; position: absolute; inset: 0; z-index: 1; background: rgba(7, 11, 12, .66); -webkit-backdrop-filter: grayscale(1) blur(2px); backdrop-filter: grayscale(1) blur(2px); opacity: 0; transition: opacity .6s; pointer-events: none; }
+.draw:not(.is-drawing):not(.is-final) .draw__cover.is-peek::after { opacity: 1; animation: peek 2.2s var(--ease) both; }
+.draw:not(.is-drawing):not(.is-final) .draw__cover { outline: 1px solid rgba(252, 239, 6, .55); outline-offset: 0; animation: frame 2.8s var(--ease) infinite; }
+.draw:not(.is-drawing):not(.is-final) .draw__cover::before { animation: qbob 3.2s ease-in-out infinite; color: var(--yellow); opacity: .9; }
+.draw.is-drawing .draw__cover::after, .draw.is-final .draw__cover::after { display: none; }
+.draw:not(.is-drawing):not(.is-final) .draw__go { animation: callout 2.8s var(--ease) infinite; }
+.draw:not(.is-drawing):not(.is-final) .draw__go::before { animation: spin 7s linear infinite; }
+@keyframes peek { 0% { opacity: 0; } 18%, 72% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes frame { 0% { outline-offset: 0; outline-color: rgba(252, 239, 6, .6); } 70%, 100% { outline-offset: 16px; outline-color: rgba(252, 239, 6, 0); } }
+@keyframes qbob { 0%, 100% { transform: translateY(6px) rotate(-3deg); } 50% { transform: translateY(-6px) rotate(3deg); } }
+@keyframes callout { 0% { box-shadow: 0 0 0 0 rgba(252, 239, 6, .5); } 70%, 100% { box-shadow: 0 0 0 16px rgba(252, 239, 6, 0); } }
+.calm .draw__cover, .calm .draw__cover::before, .calm .draw__go { animation: none !important; }

@@ -56,7 +56,7 @@
     const date = r.date.replace(/-/g, ".");
     $("#d-cover").innerHTML = r.art
       ? `<img src="${esc(r.art)}" alt="『${esc(r.title)}』のジャケット" referrerpolicy="no-referrer">`
-      : `<span class="rel__ghost"><span class="label">配信なし</span><b>${esc(r.title)}</b></span>`;
+      : `<span class="rel__ghost"><span class="label">Not streaming</span><b>${esc(r.title)}</b></span>`;
     const TJ = { SINGLE: "シングル", EP: "EP", ALBUM: "アルバム" };
     $("#d-no").textContent = `${r.date.slice(0, 4)}年${/^\d\d$/.test(r.date.slice(5, 7)) ? Number(r.date.slice(5, 7)) + "月" : ""}　${TJ[r.type] || r.type}`;
     $("#d-title").textContent = r.title;
@@ -65,9 +65,9 @@
     $("#d-tracks").innerHTML = tracks.map(t => `<li><span>${featMark(t)}</span></li>`).join("");
     $("#d-note").textContent = r.note || (r.art ? "" : "現在は配信されていません");
     const links = [];
-    if (r.url) links.push(`<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>Apple Musicで聴く ↗</span></a>`);
-    if (r.group !== "miiakiis") links.push(`<a class="btn" href="${SPOTIFY}" target="_blank" rel="noopener"><span>Spotifyで聴く ↗</span></a>`);
-    else links.push(`<a class="btn" href="https://miiakiis.bitfan.id/contents/menu/90609" target="_blank" rel="noopener"><span>Miiakiis公式 ↗</span></a>`);
+    if (r.url) links.push(`<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>Listen on Apple Music<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a>`);
+    if (r.group !== "miiakiis") links.push(`<a class="btn" href="${SPOTIFY}" target="_blank" rel="noopener"><span>Listen on Spotify<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a>`);
+    else links.push(`<a class="btn" href="https://miiakiis.bitfan.id/contents/menu/90609" target="_blank" rel="noopener"><span>Miiakiis Official<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a>`);
     $("#d-links").innerHTML = links.join("");
   }
   function openDetail(li) {
