@@ -1026,3 +1026,22 @@ a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
   .draw.has-gl { display: flex; flex-direction: column; }
   .draw.has-gl .draw__box { order: -1; margin: 0 0 14px; }
 }
+
+/* v19 制作クレジット */
+.ft__by { display: inline-flex; align-items: center; gap: 14px; text-transform: none; letter-spacing: .14em; }
+.ft__by img { display: block; width: auto; height: 46px; opacity: .85; transition: opacity .4s; }
+.ft__by:hover img { opacity: 1; }
+
+/* v20 選ばれても大きさを変えない：各行の場所を最初から確保する */
+.draw__q, .draw.is-final .draw__q, .draw.is-drawing .draw__q { font-size: clamp(1.15rem, 2.1vw, 1.7rem); min-height: 3.8em; transition: color .8s; }
+.draw__t { font-size: clamp(1.2rem, 2.6vw, 1.9rem); min-height: 3.9em; margin-top: 18px; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; }
+.draw__s { min-height: 3em; }
+.draw__l { min-height: 64px; }
+.draw__go { min-width: 270px; justify-content: flex-start; }
+.draw__q, .draw.is-final .draw__q, .draw.is-drawing .draw__q { min-height: 0; }
+.draw__t { font-size: clamp(1.1rem, 2.3vw, 1.7rem); min-height: 2.7em; -webkit-line-clamp: 2; line-clamp: 2; margin-top: 14px; }
+.draw__s { min-height: 1.6em; }
+@media (max-width: 719px) { .draw__s { min-height: 3.1em; } }
+.draw__l { min-height: 64px; margin-top: 16px; }
+.draw__s { height: 1.9em; min-height: 0; line-height: 1.9; overflow: hidden; }
+@media (max-width: 719px) { .draw__s { height: 3.8em; } }
