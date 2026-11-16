@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-"""地域別LP（映像制作）の生成。既存LPと同じ base.css+site.css の型。
+"""DEPRECATED（2026-11-16）: scripts/gen_area_lp2.py に置き換え。実行すると新しい本文を上書きして薄い版に戻るため、実行しない。
+地域別LP（映像制作）の生成。既存LPと同じ base.css+site.css の型。
 使い方: python3 scripts/gen_area_lp.py  → lp/douga-seisaku-<area>/index.html
 書かないこと: 作り話の実績・地元ロケ実績・出張費の金額（本人確認前）。"""
+import sys; sys.exit('DEPRECATED: use scripts/gen_area_lp2.py')
 import os, json, html
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AREAS=[
