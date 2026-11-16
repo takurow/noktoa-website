@@ -4,7 +4,7 @@
 使い方: python3 scripts/gen_area_lp2.py   （gen_area_lp.py は廃止＝この版が置き換え）"""
 import os, re, json, html, glob
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CSSV='20261116g'; IMGV='20261116c'
+CSSV='20261116g'; BASEV='20261116h'; IMGV='20261116c'   # base.css は別セッションの色変更で h に更新済み
 AREAS=["東京","神奈川","大阪","京都","名古屋","広島"]
 ALT={
  'douga-seisaku-osaka':'倉庫の棚で荷物を確認する担当者','douga-seisaku-kyoto':'工房の作業台で手仕事をする職人','douga-seisaku-nagoya':'部品を検査する工場の作業者',
@@ -122,7 +122,7 @@ def build(d):
     <script type="application/ld+json">
 {json.dumps(graph,ensure_ascii=False,indent=2)}
     </script>
-    <link rel="stylesheet" href="/base.css?v={CSSV}">
+    <link rel="stylesheet" href="/base.css?v={BASEV}">
     <link rel="stylesheet" href="/site.css?v={CSSV}">
 </head>
 
