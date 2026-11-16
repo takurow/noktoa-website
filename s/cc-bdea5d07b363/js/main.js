@@ -102,6 +102,9 @@
     if (document.startViewTransition && !calm()) document.startViewTransition(run); else run();
   }));
 
+  { const f0 = filters.find(x => x.dataset.filter === "solo"); // はじめは SOLO
+    if (f0) { filters.forEach(x => x.setAttribute("aria-pressed", String(x === f0))); $$("#grid .rel").forEach(li => { li.hidden = li.dataset.group !== "solo"; }); } }
+
   /* ---------- 記録の札が「解読」されて現れる ---------- */
   const GLYPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/.#";
   function decode(el) {

@@ -1,5 +1,5 @@
 /* CHILLCAT HP — 蓄音機（three.js／WebGL）。extras.js から動的に読み込む。発光・ブルーム・粒子は使わない。 */
-export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash }) {
+export function createGram(THREE, { canvas, host, calm, on = {} }) {
   const TAU = Math.PI * 2;
   const sm = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
   const ez = x => sm(0, 1, x);
@@ -125,7 +125,9 @@ export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash 
   const spin = new THREE.Group(); spin.position.set(C[0], 0, C[2]); scene.add(spin);
   add(new THREE.CylinderGeometry(1.58, 1.58, .1, 96), M.steel, spin).position.y = .06;
   { const f = add(new THREE.CircleGeometry(1.56, 96), M.felt, spin, false, true); f.rotation.x = -Math.PI / 2; f.position.y = .1115; }
-  const disc = new THREE.Group(); disc.position.x = .012; spin.add(disc);
+  const hold = new THREE.Group(); hold.position.set(C[0], 0, C[2]); scene.add(hold);   // 盤は台と別に持つ（持ち上げ・着地のため）
+  const dspin = new THREE.Group(); hold.add(dspin);
+  const disc = new THREE.Group(); disc.position.x = .012; dspin.add(disc);
   add(new THREE.CylinderGeometry(1.5, 1.5, .03, 128), M.dark, disc).position.y = .1285;
   { const t = add(new THREE.CircleGeometry(1.5, 160), M.vinyl, disc, false, true); t.rotation.x = -Math.PI / 2; t.position.y = .1445;
     const l = add(new THREE.CircleGeometry(.53, 72), M.label, disc, false, true); l.rotation.x = -Math.PI / 2; l.position.y = .1462; }
@@ -207,19 +209,22 @@ export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash 
   scene.add(key, key.target);
   const rim = new THREE.DirectionalLight(0xc4d0ff, 2.4); rim.position.set(7, 5.5, -6); scene.add(rim);
 
-  /* ---- 状態 ---- */
+  /* ---- 状態（盤・アーム・クランク・カメラを別々に動かす） ---- */
+  const H0 = .95;                                   // 盤を受け取る高さ（ここから台へ落とす）
   let W = 0, H = 0, vis = false, raf = 0, last = 0, T = 0;
-  let th = 0, om = 0, crank = .5, mode = "idle", tM = 0, rn = RN_REST, lift = 1, rn0 = RN_REST, lift0 = 1, crank0 = 0, rnL = 0, drooped = false;
-  let mel = null, melI = 0, melA = 0;
-  let camK = 0, px = 0, py = 0, pxT = 0, pyT = 0;
+  let th = 0, om = 0, spinOn = false, thD = 0, omD = 0;
+  let crank = .5, crank0 = .5, windT = -1;
+  let rn = RN_REST, lift = 1, arm = { mode: "rest", t: 0, rn0: RN_REST, lift0: 1 };
+  let dsc = { mode: "on", t: 0 }, wob = 0, restAt = -1;
+  let camK = 0, camT = 0, breath = 0, px = 0, py = 0, pxT = 0, pyT = 0;
 
   const place = () => {
-    spin.rotation.y = -th;
-    const wob = lift < .05 ? .012 * Math.sin(th) : 0;
-    yaw.rotation.y = -needleAt(rn + wob);
-    tilt.rotation.z = .145 * lift + (lift < .05 ? .0025 * Math.sin(th * 2) : 0);
+    spin.rotation.y = -th; dspin.rotation.y = -thD;
+    const down = arm.mode === "down", wb = down ? .012 * Math.sin(thD) : 0;
+    yaw.rotation.y = -needleAt(rn + wb);
+    tilt.rotation.z = .145 * lift + (down ? .0025 * Math.sin(thD * 2) : 0);
     crankG.rotation.x = -crank;
-    const asp = W / Math.max(1, H), fit = Math.max(1, 1.04 / asp), k = (1 - .055 * camK) * fit;
+    const asp = W / Math.max(1, H), fit = Math.max(1, 1.04 / asp), k = (1 - .055 * camK - .012 * breath) * fit;
     const sway = camK * .1 * Math.sin(T * .42), ya = px * .05 + sway * .03, pt = py * .025;
     const bx = 3.3, by = 2.7, bz = 13.4, ca = Math.cos(ya), sa = Math.sin(ya);
     cam.position.set((bx * ca + bz * sa) * k + .15, 1.5 + (by + pt * 10) * k, (bz * ca - bx * sa) * k);
@@ -231,35 +236,47 @@ export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash 
     W = w; H = h; renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2)); renderer.setSize(w, h, false);
     cam.aspect = w / h; cam.updateProjectionMatrix();
   };
+  const fire = (name, a) => { try { if (on[name]) on[name](a); } catch (e) { /* 演出側の失敗で止めない */ } };
 
-  const finish = () => { mode = "end"; tM = 0; rnL = 0; mel = null; drooped = false; };
   const step = dt => {
-    T += dt; tM += dt; let omT = 0, ta = .7, camT = 0;
-    if (mode === "start") {
-      const pc = crank; crank = crank0 + TAU * 1.75 * ez(tM / .85);
-      if (Math.floor(crank / (TAU / 6)) > Math.floor(pc / (TAU / 6))) A.tick();
-      omT = tM > .2 ? OM : 0; ta = .4; camT = 1;
-      lift = tM < .46 ? Math.min(1, lift0 + tM / .1) : 1 - ez((tM - .46) / .16);
-      rn = rn0 + (RN_OUT - rn0) * ez((tM - .08) / .38);
-      if (tM >= .64) { mode = "play"; tM = 0; lift = 0; melA = STEP * .4; A.crackle(true); }
-    } else if (mode === "play") {
-      omT = OM; ta = .4; camT = 1;
-      rn = Math.max(.72, rn - .07 / OM * om * dt);                    // 針は回った分だけ内へ進む
-      if (mel) { melA += om * dt; while (melA >= STEP && melI < mel.length) { melA -= STEP; mel[melI++].forEach(i => A.voice(i, .9, om / OM)); } } // 旋律は盤の回転で進む
-      if (tM > 6) finish();
-    } else if (mode === "end") {
-      omT = tM > .75 ? 0 : OM; ta = .75; camT = tM < 1.2 ? 1 : 0;
-      if (tM > .75 && !drooped) { drooped = true; A.droop(1.5); }      // 盤が遅くなると音程も下がる
-      if (tM < 1.45) rn = Math.max(.72, rn - .07 / OM * om * dt);
-      else { if (!rnL) { rnL = rn; A.crackle(false); } lift = ez((tM - 1.45) / .22); rn = rnL + (RN_REST - rnL) * ez((tM - 1.65) / .95); }
-      if (tM > 2.7 && om < .1) { om = 0; lift = 1; rn = RN_REST; mode = "idle"; }
+    T += dt;
+    if (windT >= 0) { // クランクを巻く
+      windT += dt; const pc = crank; crank = crank0 + TAU * 1.75 * ez(windT / .9);
+      if (Math.floor(crank / (TAU / 7)) > Math.floor(pc / (TAU / 7))) fire("tick");
+      if (windT >= .9) windT = -1;
     }
-    A.guard();
-    om += (omT - om) * (1 - Math.exp(-dt / ta)); th += om * dt;
-    camK += (camT - camK) * (1 - Math.exp(-dt / 1.1)); if (mode === "idle" && camK < .004) camK = 0;
+    om += ((spinOn ? OM : 0) - om) * (1 - Math.exp(-dt / (spinOn ? .5 : .95))); if (!spinOn && om < .06) om = 0;
+    th += om * dt;
+    if (dsc.mode === "eject") { // いまの盤を持ち上げて、手前へ下げる
+      dsc.t += dt; const k = Math.min(1, dsc.t / .5), up = ez(k / .45), out = k < .25 ? 0 : Math.pow((k - .25) / .75, 2);
+      hold.position.set(C[0] + .6 * out, .5 * up, C[2] + 8.5 * out); hold.rotation.x = .16 * out; omD *= Math.exp(-dt / .25);
+      if (k >= 1) { hold.visible = false; dsc.mode = "none"; }
+    } else if (dsc.mode === "land") { // 新しい盤が台へ落ちる
+      dsc.t += dt; const k = Math.min(1, dsc.t / .3);
+      hold.position.set(C[0], H0 * (1 - k * k), C[2]); hold.rotation.set(0, 0, .09 * (1 - k));
+      if (k >= 1) { dsc.mode = "on"; wob = 1; hold.position.y = 0; fire("land"); }
+    } else if (dsc.mode === "on") {
+      omD += (om - omD) * (1 - Math.exp(-dt / .14));   // 台の回転に、盤が摩擦で追いつく
+      if (wob > .002) { wob *= Math.exp(-dt / .16); hold.rotation.set(.012 * wob * Math.sin(T * 34), 0, .012 * wob * Math.cos(T * 34)); hold.position.y = .018 * wob * Math.abs(Math.sin(T * 34)); }
+      else if (wob) { wob = 0; hold.rotation.set(0, 0, 0); hold.position.y = 0; }
+    }
+    thD += omD * dt;
+    if (arm.mode === "toRec") { // 休み台から外周へ振って、降ろす
+      arm.t += dt;
+      lift = arm.t < .46 ? Math.min(1, arm.lift0 + arm.t / .12) : 1 - ez((arm.t - .46) / .2);
+      rn = arm.rn0 + (RN_OUT - arm.rn0) * ez((arm.t - .05) / .42);
+      if (arm.t >= .66) { arm.mode = "down"; lift = 0; breath = 1; fire("needle"); }
+    } else if (arm.mode === "down") rn = Math.max(.72, rn - .07 / OM * omD * dt);   // 針は回った分だけ内へ
+    else if (arm.mode === "toRest") {
+      arm.t += dt; lift = arm.lift0 + (1 - arm.lift0) * ez(arm.t / .24); rn = arm.rn0 + (RN_REST - arm.rn0) * ez((arm.t - .2) / .9);
+      if (arm.t >= 1.1) { arm.mode = "rest"; rn = RN_REST; lift = 1; }
+    }
+    if (restAt >= 0) { restAt -= dt; if (restAt < 0) { restAt = -1; spinOn = false; camT = 0; fire("stop"); if (arm.mode === "down" || arm.mode === "toRec") arm = { mode: "toRest", t: 0, rn0: rn, lift0: lift }; } }
+    breath *= Math.exp(-dt / .3); if (breath < .003) breath = 0;
+    camK += (camT - camK) * (1 - Math.exp(-dt / 1.1)); if (!camT && camK < .004) camK = 0;
     px += (pxT - px) * (1 - Math.exp(-dt / .25)); py += (pyT - py) * (1 - Math.exp(-dt / .25));
   };
-  const moving = () => mode !== "idle" || camK > 0 || Math.abs(pxT - px) > .003 || Math.abs(pyT - py) > .003;
+  const moving = () => spinOn || om > 0 || omD > .05 || windT >= 0 || restAt >= 0 || arm.mode === "toRec" || arm.mode === "toRest" || dsc.mode === "land" || dsc.mode === "eject" || wob > 0 || camK > 0 || breath > 0 || Math.abs(pxT - px) > .003 || Math.abs(pyT - py) > .003;
   const frame = t => {
     raf = 0; if (!vis || calm()) return;
     const dt = Math.min(.05, (t - last) / 1000 || .016); last = t;
@@ -270,7 +287,7 @@ export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash 
 
   size(); render();
   if (window.ResizeObserver) new ResizeObserver(() => { size(); render(); }).observe(canvas); else window.addEventListener("resize", () => { size(); render(); });
-  new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) { if (!W) size(); render(); run(); } else A.crackle(false); }, { rootMargin: "80px" }).observe(canvas);
+  new IntersectionObserver(es => { vis = es[0].isIntersecting; if (vis) { if (!W) size(); render(); run(); } else fire("hidden"); }, { rootMargin: "80px" }).observe(canvas);
   if (window.matchMedia && matchMedia("(hover: hover)").matches) {
     host.addEventListener("pointermove", ev => { if (calm()) return; const r = canvas.getBoundingClientRect(); pxT = Math.max(-1, Math.min(1, ((ev.clientX - r.left) / r.width - .5) * 2)); pyT = Math.max(-1, Math.min(1, ((ev.clientY - r.top) / r.height - .5) * 2)); run(); });
     host.addEventListener("pointerleave", () => { pxT = 0; pyT = 0; run(); });
@@ -278,17 +295,22 @@ export function createGram(THREE, { canvas, host, audio: A, calm, compose, hash 
   canvas.addEventListener("webglcontextrestored", () => { size(); render(); });
 
   return {
-    play(key) {
-      if (calm()) { render(); return; }             // 動きなし：静止画のまま
-      mel = compose(hash(key)); melI = 0; melA = 0;
-      rn0 = rn; lift0 = lift; crank0 = crank; mode = "start"; tM = 0;
-      if (lift0 < .5) A.crackle(false); run();
+    press() { // 押した瞬間：巻く・回す・いまの盤を下げる
+      if (calm()) return;
+      windT = 0; crank0 = crank; spinOn = true; camT = 1; restAt = -1;
+      if (arm.mode === "down" || arm.mode === "toRec") { arm = { mode: "toRest", t: 0, rn0: rn, lift0: lift }; fire("lift"); }
+      if (dsc.mode === "on" || dsc.mode === "land") dsc = { mode: "eject", t: 0 };
+      run();
     },
-    chime() {
-      if (calm() || mode === "idle" || mode === "end") return;
-      if (mode === "start") { lift = 0; A.crackle(true); }
-      [2, 5, 7, 10, 12].forEach((i, n) => setTimeout(() => A.voice(i, 1, 1), n * 110));
-      finish(); run();
-    }
+    pose() { // 盤を受け取る位置（canvas 内の楕円。px）
+      if (!W) return null; place(); cam.updateMatrixWorld();
+      const p = (x, y, z) => { const v = new THREE.Vector3(x, y, z).project(cam); return [(v.x * .5 + .5) * W, (-v.y * .5 + .5) * H]; };
+      const y = .146 + H0, c = p(C[0], y, C[2]), ex = p(C[0] + 1.5, y, C[2]), ez2 = p(C[0], y, C[2] + 1.5);
+      return { x: c[0], y: c[1], rx: Math.hypot(ex[0] - c[0], ex[1] - c[1]), ry: Math.hypot(ez2[0] - c[0], ez2[1] - c[1]) };
+    },
+    land() { if (calm()) return; hold.visible = true; hold.position.set(C[0], H0, C[2]); omD = om * .15; dsc = { mode: "land", t: 0 }; run(); },
+    needle() { if (calm()) return; arm = { mode: "toRec", t: 0, rn0: rn, lift0: lift }; run(); },
+    rest(sec) { if (calm()) return; restAt = Math.max(0, sec); run(); },
+    still() { hold.visible = true; hold.position.set(C[0], 0, C[2]); hold.rotation.set(0, 0, 0); dsc = { mode: "on", t: 0 }; render(); }
   };
 }

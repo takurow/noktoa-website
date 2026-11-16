@@ -51,87 +51,59 @@
     };
     return { rng, hash, compose };
   })();
-  const gramAudio = soundOn => { // 蓄音機らしく、帯域の狭いこもった音。「音 なし」では何も鳴らない
-    const SC = [0, 3, 5, 7, 10], live = new Set();
-    let ac = null, bus = null, crk = null, crkBuf = null;
-    const freq = i => 440 * Math.pow(2, (Math.floor(i / 5) * 12 + SC[i % 5]) / 12);
-    const init = () => {
-      if (!soundOn() || calm()) return;
-      try {
-        if (!ac) {
-          ac = new (window.AudioContext || window.webkitAudioContext)();
-          bus = ac.createGain(); bus.gain.value = .16;
-          const hp = ac.createBiquadFilter(), bp = ac.createBiquadFilter(), lp = ac.createBiquadFilter();
-          hp.type = "highpass"; hp.frequency.value = 380; bp.type = "peaking"; bp.frequency.value = 1150; bp.Q.value = .9; bp.gain.value = 7; lp.type = "lowpass"; lp.frequency.value = 2300; lp.Q.value = .5;
-          bus.connect(hp).connect(bp).connect(lp).connect(ac.destination);
-          const n = Math.round(ac.sampleRate * 2.6); crkBuf = ac.createBuffer(1, n, ac.sampleRate);
-          const d = crkBuf.getChannelData(0), r = gramTune.rng(9); let lpv = 0;
-          for (let k = 0; k < n; k++) { lpv += ((r() * 2 - 1) - lpv) * .35; d[k] = lpv * .05; }
-          for (let c = 0; c < 34; c++) { const at = Math.floor(r() * (n - 400)), amp = .15 + r() * .5, len = 20 + Math.floor(r() * 90); for (let k = 0; k < len; k++) d[at + k] += (r() * 2 - 1) * amp * Math.pow(1 - k / len, 2); }
-        }
-        if (ac.state === "suspended") ac.resume();
-      } catch (e) { ac = null; }
+  const dynImport = (() => { try { return new Function("u", "return import(u)"); } catch (e) { return null; } })();
+  const assetURL = f => new URL(f, document.baseURI).href;
+  const gramAudio = soundOn => { // 効果音は js/sfx.js（WebAudio の合成だけ）。クリックするまで鳴らさない。「Sound off」では何も鳴らない
+    let ac = null, kit = null, mod = null;
+    const fx = (name, ...a) => { if (!kit || !soundOn() || calm()) return; try { kit[name](...a); } catch (e) { /* 音の失敗で演出を止めない */ } };
+    return {
+      fx,
+      load() { if (dynImport && !mod) dynImport(assetURL("js/sfx.js?v=18")).then(m => { mod = m; if (ac && !kit) kit = mod.makeSfx(ac); }).catch(() => {}); },
+      init() { // クリックの中で呼ぶ
+        if (!soundOn() || calm()) return;
+        try { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (mod && !kit) kit = mod.makeSfx(ac); if (ac.state === "suspended") ac.resume(); } catch (e) { ac = null; }
+      },
+      mute() { if (kit) try { kit.silence(); } catch (e) { /* 何もしない */ } },
+      // canvas 版が呼ぶ旧い口（旋律とクラックルは廃止。爪の音だけ残す）
+      voice() {}, droop() {}, crackle() {}, guard() {}, tick() { fx("ratchet"); }
     };
-    const voice = (i, vel, rate = 1) => { // rate＝盤の回転の速さ（遅いと音程も下がる）
-      if (!ac || !soundOn()) return;
-      const t = ac.currentTime, f = freq(i) * Math.max(.3, rate) * Math.pow(2, (Math.random() - .5) * .012);
-      [["triangle", 1, .7, 1.1], ["sine", 2, .28, .6], ["sine", 3.01, .12, .35]].forEach(([ty, m, a, d]) => {
-        const o = ac.createOscillator(), e = ac.createGain();
-        o.type = ty; o.frequency.value = f * m;
-        e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(a * vel, t + .012); e.gain.exponentialRampToValueAtTime(.0001, t + d);
-        o.connect(e).connect(bus); o.start(t); o.stop(t + d + .05);
-        live.add(o); o.onended = () => live.delete(o);
-      });
-    };
-    const droop = sec => { // 盤が止まっていくとき、鳴っている音の高さを下げる
-      if (!ac) return; const t = ac.currentTime;
-      live.forEach(o => { try { o.detune.setValueAtTime(0, t); o.detune.linearRampToValueAtTime(-1500, t + sec); } catch (e) { /* 鳴り終わり */ } });
-    };
-    const crackle = on => { // 針が溝をこする音
-      if (!ac) return;
-      try {
-        if (on && soundOn() && !crk) {
-          const s = ac.createBufferSource(), hp = ac.createBiquadFilter(), lp = ac.createBiquadFilter(), e = ac.createGain(), t = ac.currentTime;
-          s.buffer = crkBuf; s.loop = true; hp.type = "highpass"; hp.frequency.value = 700; lp.type = "lowpass"; lp.frequency.value = 5200;
-          e.gain.setValueAtTime(0, t); e.gain.linearRampToValueAtTime(.085, t + .08);
-          s.connect(hp).connect(lp).connect(e).connect(ac.destination); s.start(); crk = [s, e];
-          const o = ac.createOscillator(), oe = ac.createGain(); o.frequency.setValueAtTime(110, t); o.frequency.exponentialRampToValueAtTime(48, t + .09); // 針が降りる小さな音
-          oe.gain.setValueAtTime(.09, t); oe.gain.exponentialRampToValueAtTime(.0001, t + .12); o.connect(oe).connect(ac.destination); o.start(t); o.stop(t + .14);
-        } else if (!on && crk) { const [s, e] = crk, t = ac.currentTime; crk = null; e.gain.cancelScheduledValues(t); e.gain.setValueAtTime(e.gain.value, t); e.gain.linearRampToValueAtTime(0, t + .15); s.stop(t + .2); }
-      } catch (e) { crk = null; }
-    };
-    const tick = () => { // クランクを巻く小さな音
-      if (!ac || !soundOn()) return;
-      const t = ac.currentTime, o = ac.createOscillator(), e = ac.createGain(); o.type = "square"; o.frequency.value = 1500;
-      e.gain.setValueAtTime(.012, t); e.gain.exponentialRampToValueAtTime(.0001, t + .02); o.connect(e).connect(ac.destination); o.start(t); o.stop(t + .03);
-    };
-    return { init, voice, droop, crackle, tick, guard() { if (crk && !soundOn()) crackle(false); } };
   };
   const musicBox = (host, soundOn) => {
     let cv = document.createElement("canvas");
     cv.className = "draw__box"; cv.setAttribute("aria-hidden", "true");
     $(".draw__stage", host).after(cv);
     const A = gramAudio(soundOn);
-    let impl = null, pending = null, queued = null;
+    let impl = null, pending = null, needleCb = null;
     const glOK = () => { try { const c = document.createElement("canvas"); return !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl"))); } catch (e) { return false; } };
     const flat = () => { // canvas 2D 版へ（WebGL で一度触った canvas は使い回せないので作り直す）
       host.classList.remove("has-gl");
       const n = document.createElement("canvas"); n.className = cv.className; n.setAttribute("aria-hidden", "true"); cv.replaceWith(n); cv = n;
       impl = canvasBox(host, soundOn, cv, A);
     };
-    const load = () => pending || (pending = (() => {
-      const url = f => new URL(f, document.baseURI).href;
-      let imp; try { imp = new Function("u", "return import(u)"); } catch (e) { return Promise.reject(e); }
-      return Promise.all([imp(url("js/vendor/three.module.min.js")), imp(url("js/gram3d.js?v=11d"))])
-        .then(([T, G]) => { impl = G.createGram(T, { canvas: cv, host, audio: A, calm, compose: gramTune.compose, hash: gramTune.hash }); });
-    })().catch(() => flat()).then(() => { if (queued) { const q = queued; queued = null; impl.play(q.key); if (q.chime) impl.chime(); } }));
-    if (glOK()) {
-      host.classList.add("has-gl");
-      new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { ob.disconnect(); load(); } }, { rootMargin: "900px" }).observe(host);
-    } else impl = canvasBox(host, soundOn, cv, A);
+    const on = { // 3D の動きの節目で音を出す
+      tick: () => A.fx("ratchet"), land: () => A.fx("land"), stop: () => A.fx("stop"), lift: () => A.fx("lift"), hidden: () => A.mute(),
+      needle: () => { A.fx("needle"); if (needleCb) { const c = needleCb; needleCb = null; c(true); } }
+    };
+    const load = () => pending || (pending = (dynImport
+      ? Promise.all([dynImport(assetURL("js/vendor/three.module.min.js")), dynImport(assetURL("js/gram3d.js?v=18"))]).then(([T, G]) => { impl = G.createGram(T, { canvas: cv, host, calm, on }); })
+      : Promise.reject()).catch(() => flat()));
+    const gl = glOK();
+    if (gl) host.classList.add("has-gl"); else impl = canvasBox(host, soundOn, cv, A);
+    new IntersectionObserver((es, ob) => { if (es[0].isIntersecting) { ob.disconnect(); A.load(); if (gl) load(); } }, { rootMargin: "900px" }).observe(host);
     return {
-      play(key) { A.init(); if (impl) impl.play(key); else { queued = { key }; load(); } },
-      chime() { if (impl) impl.chime(); else if (queued) queued.chime = true; }
+      audio: A,
+      press(key) { A.init(); if (impl && impl.press) impl.press(); else if (impl) impl.play(key); },
+      pose() { // 盤を受け取る位置（画面座標）。3D 版だけ
+        const p = impl && impl.pose ? impl.pose() : null; if (!p) return null;
+        const r = cv.getBoundingClientRect(); return { x: r.left + p.x, y: r.top + p.y, rx: p.rx, ry: p.ry };
+      },
+      land() { if (impl && impl.land) impl.land(); },
+      needle(cb) { // 針が触れたら cb(true)。3D でないときは間を置いて cb(false)
+        if (impl && impl.needle) { needleCb = cb; impl.needle(); setTimeout(() => { if (needleCb === cb) { needleCb = null; cb(false); } }, 1500); }
+        else setTimeout(() => cb(false), 380);
+      },
+      rest(sec) { if (impl && impl.rest) impl.rest(sec); else { if (impl) impl.chime(); setTimeout(() => A.fx("stop"), 1600); } },
+      still() { if (impl && impl.still) impl.still(); }
     };
   };
 
@@ -447,7 +419,7 @@
     snd.type = "button"; snd.className = "draw__snd";
     const sndPaint = () => { snd.setAttribute("aria-pressed", sndOn); snd.textContent = sndOn ? "Sound on" : "Sound off"; };
     sndPaint();
-    snd.addEventListener("click", () => { sndOn = !sndOn; store.set(sndKey, sndOn ? "1" : "0"); sndPaint(); });
+    snd.addEventListener("click", () => { sndOn = !sndOn; store.set(sndKey, sndOn ? "1" : "0"); sndPaint(); if (!sndOn) box.audio.mute(); });
     go.after(snd);
     const box = musicBox(draw, () => sndOn);
     const warm = () => { if (warmed) return; warmed = true; pool.forEach(([, r]) => { const i = new Image(); i.referrerPolicy = "no-referrer"; i.src = r.art; }); };
@@ -461,36 +433,78 @@
       cover.classList.remove("is-peek"); void cover.offsetWidth; cover.classList.add("is-peek");
     };
     setInterval(peek, 2200);
+    let shown = null;
     const paint = r => {
+      shown = r;
       cover.style.backgroundImage = `url("${r.art.replace(/"/g, "%22")}")`;
       glow.style.backgroundImage = cover.style.backgroundImage;
     };
-    go.addEventListener("click", () => {
+    /* ---- 選ぶ演出：めくる（溜め）→ 決まる → 盤を運ぶ → 針が降りる → 結果（解放） ---- */
+    const discEl = $("#draw-disc"), DIM = "grayscale(.85) brightness(.6)";
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+    const anim = (el, kf, opt) => (el.animate ? el.animate(kf, opt).finished.catch(() => {}) : Promise.resolve());
+    const card = r => { const c = document.createElement("span"); c.className = "draw__card"; c.style.backgroundImage = `url("${r.art.replace(/"/g, "%22")}")`; return c; };
+    let top = null;
+    const flip = (r, gap) => { // 棚の盤をめくる：手前の一枚が前へ倒れ、次の一枚が奥から出てくる
+      const next = card(r), prev = top, d = Math.max(180, Math.min(440, gap * 1.5));
+      if (prev) prev.before(next); else discEl.appendChild(next);
+      top = next;
+      anim(next, [{ transform: "scale(.93) translateY(-2.5%)", filter: "grayscale(1) brightness(.32)" }, { transform: "scale(1) translateY(0)", filter: DIM }], { duration: d, easing: "cubic-bezier(.2,.8,.2,1)", fill: "both" });
+      if (prev) anim(prev, [{ transform: "perspective(800px) translateY(0) rotateX(0deg)", opacity: 1 }, { transform: "perspective(800px) translateY(5%) rotateX(-78deg)", opacity: 0 }], { duration: d * .9, easing: "cubic-bezier(.5,0,.8,.45)", fill: "both" }).then(() => prev.remove());
+    };
+    const fly = pose => { // ジャケットの裏から盤が出て、弧を描いて台の上まで運ばれる
+      const h = draw.getBoundingClientRect(), c = cover.getBoundingClientRect(), S = c.width * .94, el = document.createElement("span");
+      el.className = "draw__fly"; el.style.width = el.style.height = S + "px";
+      el.style.left = (c.left - h.left + (c.width - S) / 2) + "px"; el.style.top = (c.top - h.top + (c.height - S) / 2) + "px";
+      draw.appendChild(el);
+      const dx = pose.x - (c.left + c.width / 2), dy = pose.y - (c.top + c.height / 2), sx = 2 * pose.rx / S, sy = 2 * pose.ry / S, wide = Math.abs(dx) > Math.abs(dy), side = wide ? Math.sign(dx) : 1;
+      const tf = (x, y, a, b, deg) => `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px) scale(${a.toFixed(3)}, ${b.toFixed(3)}) rotate(${deg}deg)`;
+      return anim(el, [
+        { transform: tf(0, 0, 1, 1, 0), offset: 0 },
+        { transform: tf(c.width * .4 * side, 0, 1, 1, 50), offset: .24, easing: "cubic-bezier(.5,0,.3,1)" },
+        { transform: tf(wide ? dx * .56 : dx * .5 + c.width * .3, wide ? dy * .5 - Math.abs(dx) * .14 - 20 : dy * .5, (1 + sx) / 2, (1 + sy) / 2 + .05, 230), offset: .64 },
+        { transform: tf(dx, dy, sx, sy, 400), offset: 1 }
+      ], { duration: 700, easing: "cubic-bezier(.4,.05,.3,1)", fill: "both" }).then(() => el.remove());
+    };
+    const show = r => { // 結果を出す
+      t.textContent = r.title;
+      s.textContent = `${r.artist}　${r.date.slice(0, 4)}年`;
+      l.innerHTML = `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a>`;
+      go.querySelector("span").textContent = "Another record";
+      draw.classList.remove("is-drawing"); draw.classList.add("is-final"); busy = false;
+    };
+    go.addEventListener("click", async () => {
       if (busy) return;
       busy = true; warm();
-      draw.classList.remove("is-final"); draw.classList.add("is-drawing");
-      l.innerHTML = ""; t.textContent = ""; s.textContent = "";
       let pick;
       do { pick = pool[Math.floor(Math.random() * pool.length)]; } while (pick[0] === last && pool.length > 1);
-      last = pick[0]; box.play(pick[0]);
-      const steps = calm() ? 1 : 16;
-      let i = 0;
-      const step = () => {
-        i++;
-        if (i >= steps) {
-          const r = pick[1];
-          paint(r);
-          t.textContent = r.title;
-          s.textContent = `${r.artist}　${r.date.slice(0, 4)}年`;
-          l.innerHTML = `<a class="btn" href="${esc(r.url)}" target="_blank" rel="noopener"><span>Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a>`;
-          go.querySelector("span").textContent = "Another record";
-          draw.classList.remove("is-drawing"); draw.classList.add("is-final"); busy = false; box.chime();
-          return;
-        }
-        paint(pool[Math.floor(Math.random() * pool.length)][1]);
-        setTimeout(step, 50 + i * 16);
-      };
-      step();
+      last = pick[0];
+      const key = pick[0], r = pick[1], A = box.audio;
+      draw.classList.remove("is-final", "is-breath");
+      l.innerHTML = ""; t.textContent = ""; s.textContent = "";
+      if (calm()) { paint(r); show(r); box.still(); return; }   // 動きなし：結果だけ
+      draw.classList.add("is-drawing");
+      box.press(key); A.fx("press"); setTimeout(() => A.fx("wind"), 90);
+      if (shown) { top = card(shown); top.style.filter = DIM; discEl.appendChild(top); }
+      const n = 11; let gap = 56, prev = shown;
+      for (let i = 0; i < n; i++) { // だんだん遅くなる（どれになるか分からない時間）
+        let c = r;
+        if (i < n - 1) { let g = 0; do { c = pool[Math.floor(Math.random() * pool.length)][1]; } while ((c === prev || c === r) && ++g < 8); }
+        prev = c; flip(c, gap); glow.style.backgroundImage = `url("${c.art.replace(/"/g, "%22")}")`; A.fx("flick", i, n);
+        await wait(gap); gap *= 1.2;
+      }
+      await wait(250);                                           // 溜め：音も動きも、いったん止まる
+      paint(r); A.fx("select", key);                             // この一枚
+      const picked = top; top = null;
+      if (picked) anim(picked, [{ filter: DIM, transform: "scale(1)" }, { filter: "grayscale(0) brightness(1.05)", transform: "scale(1.035)", offset: .42 }, { filter: "grayscale(0) brightness(1)", transform: "scale(1)" }], { duration: 640, easing: "cubic-bezier(.2,.7,.2,1)", fill: "both" }).then(() => picked.remove());
+      await wait(170);
+      const pose = box.pose();
+      if (pose) { A.fx("whoosh", .64); await fly(pose); box.land(); await wait(120); }
+      await new Promise(res => box.needle(real => { if (!real) A.fx("needle"); res(); }));
+      draw.classList.add("is-breath");                           // 針が触れた瞬間、画面がわずかに息をする
+      await wait(130);
+      show(r); A.fx("result", key);                              // 解放
+      box.rest(3.4);
     });
   }
 
@@ -513,7 +527,7 @@
     const b = document.createElement("button");
     b.type = "button"; b.className = "eye"; b.dataset.eye = i;
     b.style.left = x + "%"; b.style.top = y + "%";
-    b.setAttribute("aria-label", "暗がりの猫の目（隠し）");
+    b.setAttribute("aria-label", "隠し要素");
     b.innerHTML = '<svg viewBox="0 0 30 16" aria-hidden="true"><path class="e-o" d="M1.5 8Q15-3.5 28.5 8Q15 19.5 1.5 8Z"/><ellipse class="e-p" cx="15" cy="8" rx="1.7" ry="5.4"/></svg>';
     if (found.has(String(i))) b.classList.add("is-found");
     b.addEventListener("click", () => {

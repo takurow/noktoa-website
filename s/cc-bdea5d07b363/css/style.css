@@ -22,9 +22,9 @@
   --ease-slow: cubic-bezier(.16, 1, .3, 1);
 
   --f-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
-  --f-min: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --f-min: "Klee One", "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --f-jp: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  --f-serif: "Instrument Serif", "Times New Roman", serif;
+  --f-serif: "Klee One", "Instrument Serif", "Times New Roman", serif;
   --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 
   --gutter: clamp(18px, 4.4vw, 64px);
@@ -946,3 +946,83 @@ a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
 @keyframes qbob { 0%, 100% { transform: translateY(6px) rotate(-3deg); } 50% { transform: translateY(-6px) rotate(3deg); } }
 @keyframes callout { 0% { box-shadow: 0 0 0 0 rgba(252, 239, 6, .5); } 70%, 100% { box-shadow: 0 0 0 16px rgba(252, 239, 6, 0); } }
 .calm .draw__cover, .calm .draw__cover::before, .calm .draw__go { animation: none !important; }
+
+/* v16 Words は小さく・目立たせない */
+.words.chapter { padding-block: clamp(40px, 7vh, 80px); }
+.words .ch-head__ja { font-size: clamp(1.1rem, 2vw, 1.5rem); color: var(--mist); }
+.words .ch-lead { font-size: 14px; color: var(--mist); }
+.words__note { font-size: 12.5px; color: var(--mist); }
+.words__top { gap: 20px; }
+.words__fig { width: min(120px, 34%); opacity: .7; }
+.words__fig .label { display: none; }
+.credits { margin-top: 20px; }
+.credits li { padding: 9px 0; }
+.credits__artist { font-size: 11.5px; color: var(--mist); }
+.credits__song { font-size: clamp(.95rem, 1.5vw, 1.1rem); font-weight: 400; color: var(--paper-2); }
+.credits li:hover .credits__song { font-weight: 400; color: var(--paper); }
+.credits__note { font-size: 12px; color: var(--mist); }
+.words__foot { font-size: 11.5px; color: var(--mist); }
+@media (min-width: 900px) { .words__top { grid-template-columns: 1fr 120px; gap: 32px; } .words__fig { width: 120px; } }
+
+/* v17 繊細に・独自の書体（Klee One）・気取らない */
+.bridge,
+.bridge__ja,
+.ch-head__ja,
+.code b,
+.collab__t,
+.creed__ja,
+.cut__ja,
+.draw__q,
+.draw__t,
+.follow__title,
+.menu__en,
+.menu__ja,
+.name__quote,
+.news__title,
+.newstab__ja,
+.pro__capja,
+.pro__lead,
+.pro__vert,
+.pro__year,
+.roots__catch,
+.roots__title,
+.roster__name,
+.secret__t,
+.start a b,
+.thesis,
+/* v12 「一曲引く」ボタン：黄の面＋回る盤のしるし */
+.draw__go { font-weight: 400; }
+.pro__capen, .creed__en, .names__en, .bridge__en, .cut__en, .code__no { font-style: normal; }
+.draw__cover::before { font-style: normal; font-weight: 400; }
+.ch-head__ja { font-size: clamp(1.5rem, 3.4vw, 2.5rem); letter-spacing: .06em; line-height: 1.3; }
+.thesis { font-size: clamp(1.15rem, 2.1vw, 1.65rem); letter-spacing: .08em; line-height: 1.9; }
+.name__quote { font-size: clamp(1.15rem, 2.2vw, 1.7rem); letter-spacing: .06em; }
+.pro__lead { font-size: clamp(1.15rem, 1.9vw, 1.6rem); letter-spacing: .1em; }
+.pro__year { font-size: clamp(44px, 7vw, 100px); letter-spacing: .12em; }
+.pro__capja { font-size: clamp(13px, 1.3vw, 17px); letter-spacing: .16em; }
+.roots__catch { font-size: clamp(1.1rem, 2.2vw, 1.7rem); }
+.collab__t { font-size: clamp(1.2rem, 2.4vw, 1.9rem); letter-spacing: .06em; }
+.follow__title { font-size: clamp(1.8rem, 5vw, 4rem); letter-spacing: .06em; }
+.draw__q { font-size: clamp(1.15rem, 2.1vw, 1.7rem); letter-spacing: .1em; line-height: 1.9; }
+.draw__t { font-size: clamp(1.4rem, 3.2vw, 2.4rem); letter-spacing: .06em; }
+.menu__en { font-size: clamp(1.15rem, 3vw, 1.8rem); letter-spacing: .1em; }
+.news__title { font-size: 1.2rem; letter-spacing: .14em; }
+.newstab__ja { font-size: 11.5px; letter-spacing: .2em; }
+.roster__name { font-size: .95rem; }
+
+/* ---- v18 選ぶ演出（めくる→決まる→盤を運ぶ→針→結果）。光や粒は足さない ---- */
+.draw__card { position: absolute; left: 0; top: 0; width: var(--s); height: var(--s); z-index: 3; background: #0d1517 center / cover no-repeat; transform-origin: 50% 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; pointer-events: none; will-change: transform, opacity; }
+.draw__fly { position: absolute; z-index: 1; border-radius: 50%; pointer-events: none; will-change: transform; background: radial-gradient(circle, #0a0a0b 0 2.2%, #fcef06 2.7% 17%, #0b0b0c 17.6% 19.2%, transparent 19.6%), repeating-radial-gradient(circle, #0b0b0c 0 1.1px, #1c1d1f 1.6px 2.4px); }
+.draw.is-breath .draw__box, .draw.is-breath .draw__disc { animation: v18breath 1.1s var(--ease) both; }
+.draw.is-breath .draw__glow { animation: v18tint 1.6s var(--ease) both; }
+@keyframes v18breath { 0% { transform: scale(1); } 26% { transform: scale(1.012); } 100% { transform: scale(1); } }
+@keyframes v18tint { 0% { opacity: .16; } 26% { opacity: .27; } 100% { opacity: .16; } }
+.draw.is-final .draw__t, .draw.is-final .draw__s, .draw.is-final .draw__l { animation: v18rise .9s var(--ease) both; }
+.draw.is-final .draw__s { animation-delay: .1s; }
+.draw.is-final .draw__l { animation-delay: .22s; }
+@keyframes v18rise { from { opacity: 0; transform: translateY(.7em); clip-path: inset(0 0 100% 0); } to { opacity: 1; transform: none; clip-path: inset(-30% -6% -40% -6%); } }
+.calm .draw__box, .calm .draw__disc, .calm .draw__glow, .calm .draw__t, .calm .draw__s, .calm .draw__l { animation: none !important; }
+@media (max-width: 899px) { /* モバイルは蓄音機を上に。結果の文字が出ても蓄音機が押し下げられない */
+  .draw.has-gl { display: flex; flex-direction: column; }
+  .draw.has-gl .draw__box { order: -1; margin: 0 0 14px; }
+}
