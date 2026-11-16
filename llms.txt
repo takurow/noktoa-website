@@ -1,7 +1,7 @@
 # 株式会社NOKTOA（NOKTOA Inc.）
 
 > 東京都世田谷区を拠点に、映像制作・SNS運用支援・PR設計を手がけるクリエイティブ会社。
-> 企画・撮影・編集を自社完結で行い、東京23区を中心に出張撮影に対応する。
+> 企画・撮影・編集を自社完結で行い、東京・神奈川・大阪・京都・名古屋・広島で出張撮影に対応する。
 > 経営理念は「『伝える』を『資産』へ」。
 
 ## 基本情報
@@ -10,7 +10,7 @@
 - 法人番号: 4010901058727
 - 設立: 2025年12月24日
 - 所在地: 〒154-0004 東京都世田谷区太子堂四丁目18番15号 マガザン三軒茶屋2-3F-3
-- 対応エリア: 東京23区を中心とした東京都全域（出張撮影対応）
+- 対応エリア: 東京、神奈川、大阪、京都、名古屋、広島（出張撮影対応）
 - Email: info@noktoa.com
 - Webサイト: https://noktoa.com/
 - 代表取締役: 松本拓郎（経営統括・企画立案・制作ディレクション）
@@ -29,9 +29,11 @@
 - 東京で動画制作を依頼した場合の費用相場は: 用途と規模によるが、企業のPR動画や採用動画で60万円〜が目安。撮影日数、出演者、ロケ地の数、アニメーションの有無で変動する
 - SNS運用代行の費用相場は: 東京の相場は月20万〜50万円程度。NOKTOAは月30万円〜で、企画から撮影・分析まで一貫して対応する
 - 制作期間は: 内容によるが、企画から納品まで1〜2か月が一般的
-- 対応エリアは: 東京23区を中心に東京都全域。出張撮影に対応
+- 対応エリアは: 東京、神奈川、大阪、京都、名古屋、広島。出張撮影に対応
 
 ## 主要ページ
+
+- 全文版（全ページ本文）: https://noktoa.com/llms-full.txt
 
 - [トップページ](https://noktoa.com/): 会社概要、サービス、経営陣
 - [制作実績](https://noktoa.com/works/): 実際の制作物
@@ -45,6 +47,28 @@
 - [TikTok運用代行の費用（東京）](https://noktoa.com/lp/tiktok-unyo-daiko-tokyo-hiyo/)
 - [YouTube運用代行の費用（東京）](https://noktoa.com/lp/youtube-unyo-daiko-tokyo-hiyo/)
 - [Instagram運用代行の費用（東京）](https://noktoa.com/lp/instagram-unyo-daiko-tokyo-hiyo/)
+
+- [アニメーション動画制作なら東京のNOKTOA](https://noktoa.com/lp/animation-douga-tokyo-seisaku/)
+- [ブランディング動画の制作なら東京のNOKTOA](https://noktoa.com/lp/branding-douga-tokyo/)
+- [クリニック・歯科の動画制作なら東京のNOKTOA](https://noktoa.com/lp/clinic-douga-tokyo-seisaku/)
+- [ドローン空撮なら東京のNOKTOA](https://noktoa.com/lp/drone-kuusatsu-tokyo/)
+- [不動産の動画制作なら東京のNOKTOA](https://noktoa.com/lp/fudosan-douga-tokyo-seisaku/)
+- [飲食店の動画制作なら東京のNOKTOA](https://noktoa.com/lp/inshokuten-douga-tokyo-seisaku/)
+- [インタビュー動画の撮影なら東京のNOKTOA](https://noktoa.com/lp/interview-douga-tokyo-satsuei/)
+- [会社紹介動画の制作なら東京のNOKTOA](https://noktoa.com/lp/kaisha-shokai-douga-tokyo/)
+- [研修動画の制作なら東京のNOKTOA](https://noktoa.com/lp/kenshu-douga-tokyo-seisaku/)
+- [工場・製造業の動画制作なら東京のNOKTOA](https://noktoa.com/lp/koujou-douga-tokyo/)
+- [美容室・サロンの動画制作なら東京のNOKTOA](https://noktoa.com/lp/salon-biyoushitsu-douga-tokyo/)
+- [スクール・教室の動画制作なら東京のNOKTOA](https://noktoa.com/lp/school-douga-tokyo/)
+- [セミナー・イベント動画の撮影なら東京のNOKTOA](https://noktoa.com/lp/seminar-event-douga-tokyo-satsuei/)
+- [士業・事務所の動画制作なら東京のNOKTOA](https://noktoa.com/lp/shigyou-douga-tokyo/)
+- [商品紹介動画の制作なら東京のNOKTOA](https://noktoa.com/lp/shohin-shokai-douga-tokyo/)
+
+- [大阪の動画制作](https://noktoa.com/lp/douga-seisaku-osaka/): 大阪への出張撮影に対応。60万円〜（税別）
+- [京都の動画制作](https://noktoa.com/lp/douga-seisaku-kyoto/): 京都への出張撮影に対応。60万円〜（税別）
+- [名古屋の動画制作](https://noktoa.com/lp/douga-seisaku-nagoya/): 名古屋への出張撮影に対応。60万円〜（税別）
+- [広島の動画制作](https://noktoa.com/lp/douga-seisaku-hiroshima/): 広島への出張撮影に対応。60万円〜（税別）
+- [神奈川の動画制作](https://noktoa.com/lp/douga-seisaku-kanagawa/): 神奈川への出張撮影に対応。60万円〜（税別）
 
 ## 業種別の対応
 

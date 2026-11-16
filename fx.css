@@ -44,9 +44,9 @@
 .story-line:last-child { margin-bottom: 0; }
 .story-line .ch { color: rgba(255, 255, 255, .14); transition: color .8s var(--ease); }
 .story-line .ch.on { color: #fff; }
-.story-line .ch.accent.on { color: var(--gold); }
+.story-line .ch.accent.on { color: var(--matcha-d); }
 .story.static .story-line .ch { color: #fff; }
-.story.static .story-line .ch.accent { color: var(--gold); }
+.story.static .story-line .ch.accent { color: var(--matcha-d); }
 
 /* ---- Brand Film: 角丸の映像がスクロールで画面いっぱいに広がる ---- */
 .film { position: relative; height: 260vh; height: 260svh; background: var(--ink); }
@@ -60,7 +60,7 @@
 
 /* ---- 共通セクション ---- */
 .sec { padding: clamp(120px, 17vw, 240px) 0; }
-.light { background: #fff; color: var(--text); }
+.light { background: var(--paper); color: var(--text); }
 .paper { background: var(--paper); color: var(--text); }
 .dark { background: var(--ink); color: var(--text-d); }
 .sec-head { margin-bottom: clamp(56px, 9vw, 120px); }
@@ -138,7 +138,7 @@
 .js .finale-copy .lead-d, .js .finale-copy .btn { opacity: clamp(0, calc(var(--fcopy, 0) * 2.8 - 1.4), 1); transform: translateY(calc((1 - clamp(0, calc(var(--fcopy, 0) * 2.8 - 1.4), 1)) * 18px)); }
 
 /* ---- Service index（LPOの内部リンク網。視覚的には隠す） ---- */
-.service-index { background: #fff; color: var(--text); }
+.service-index { background: var(--paper); color: var(--text); }
 .index-group-title { font-size: .8rem; font-weight: 600; }
 .index-list a { display: block; padding: 8px 0; }
 
@@ -188,7 +188,7 @@
 .reduce-motion .film-stick { position: relative; height: auto; padding: 100px 0; }
 
 /* 動きの切替ボタン（OSの「視差効果を減らす」を尊重しつつ、見る側が選べる） */
-.motion-toggle { position: absolute; left: 50%; top: calc(100vh - 78px); top: calc(100svh - 78px); transform: translateX(-50%); z-index: 6; min-height: 44px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(5, 5, 7, .55); color: #fff; font: 500 .82rem/1 var(--font); letter-spacing: .04em; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.motion-toggle { position: absolute; left: 50%; top: calc(100vh - 78px); top: calc(100svh - 78px); transform: translateX(-50%); z-index: 6; min-height: 44px; padding: 0 20px; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(var(--ink-rgb), .55); color: #fff; font: 500 .82rem/1 var(--font); letter-spacing: .04em; cursor: pointer; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
 .motion-toggle span { font-size: .7rem; margin-right: 4px; }
 .motion-toggle:hover { background: rgba(255, 255, 255, .14); }
 .motion-off { background: none; border: 0; padding: 0 4px; min-height: 32px; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; opacity: .85; }
@@ -209,4 +209,7 @@
 @media (prefers-reduced-motion: reduce) { .gate-ent::before, .gate-ent::after { animation: none; } }
 
 /* フィナーレ: 粒子の上でも文字が読めるよう、ごく淡い影を足す */
-.finale-copy .h1, .finale-copy .lead-d { text-shadow: 0 0 22px rgba(5, 5, 7, .9), 0 0 6px rgba(5, 5, 7, .7); }
+.finale-copy .h1, .finale-copy .lead-d { text-shadow: 0 0 22px rgba(var(--ink-rgb), .9), 0 0 6px rgba(var(--ink-rgb), .7); }
+
+/* 書体B: トップの強調語も明朝 */
+.story-line .ch.accent, .story-line .ch.accent.on { font-family: var(--mincho); font-weight: 700; }

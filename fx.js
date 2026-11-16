@@ -246,7 +246,7 @@
         '  vec2 c = gl_PointCoord-.5; float d = length(c)*2.; if(d > 1.) discard;',
         '  float core = 1. - smoothstep(0., .6, d); float halo = pow(1.-d, 2.4);',
         '  float a = (core*.9 + halo*.5)*vA;',
-        '  vec3 col = mix(vec3(1.), vec3(.79,.66,.42), vG);',
+        '  vec3 col = mix(vec3(1.), vec3(.663,.769,.498), vG);',
         '  gl_FragColor = vec4(col*a, a);',
         '}'
     ].join('\n');
