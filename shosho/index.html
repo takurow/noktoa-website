@@ -186,7 +186,10 @@ a.wl:hover{--b:1}
 .mx:hover .eq b,.mx.on .eq b{animation-play-state:running}
 @keyframes eq{to{height:100%}}
 .mxp{margin-top:12px;border-radius:14px;overflow:hidden;height:0;transition:height .8s var(--ease)}
-.mxp.on{height:60px}
+.mxp.on{height:60px;position:fixed;left:var(--pad);right:var(--pad);bottom:calc(var(--bar) + env(safe-area-inset-bottom) + 6px);z-index:31;max-width:720px;margin:0 auto;box-shadow:0 14px 40px -10px rgba(0,0,0,.55);animation:dock .9s var(--ease)}
+@keyframes dock{from{transform:translateY(140%);opacity:0}}
+body.mxon{padding-bottom:calc(var(--bar) + 76px + env(safe-area-inset-bottom))}
+@media(min-width:900px){.mxp.on{bottom:18px}body.mxon{padding-bottom:90px}}
 .mxp iframe{width:100%;height:60px;border:0;display:block}
 .mxl{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .mxl small{font-family:var(--serif);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
@@ -297,19 +300,6 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
 </div>
 
 <main class="main">
-  <section id="work">
-    <div class="head"><h2>Work with</h2></div>
-    <div class="wcap">Place</div>
-    <div class="wall place" id="place" aria-label="Places"><a class="wl k-serif" href="https://www.bulgarihotels.com/en_US/tokyo" target="_blank" rel="noopener noreferrer" aria-label="Bvlgari Hotel Tokyo (opens in a new tab)"><span class="m">BVLGARI</span><span class="s">Hotel Tokyo</span></a><a class="wl k-serif" href="https://www.fourseasons.com/tokyo/" target="_blank" rel="noopener noreferrer" aria-label="Four Seasons Hotel Tokyo (opens in a new tab)"><span class="m">FOUR SEASONS</span><span class="s">Hotel Tokyo</span></a><a class="wl k-wide" href="https://www.1hotels.com/tokyo" target="_blank" rel="noopener noreferrer" aria-label="1 Hotel Tokyo (opens in a new tab)"><span class="m">1 HOTEL</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/japan/andaz-tokyo-toranomon-hills/tyoaz" target="_blank" rel="noopener noreferrer" aria-label="Andaz Tokyo (opens in a new tab)"><span class="m">ANDAZ</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/japan/grand-hyatt-tokyo/tyogh" target="_blank" rel="noopener noreferrer" aria-label="Grand Hyatt Tokyo (opens in a new tab)"><span class="m">GRAND HYATT</span><span class="s">Tokyo</span></a><a class="wl k-serif" href="https://www.marriott.com/en-us/hotels/tyojw-jw-marriott-hotel-tokyo/overview/" target="_blank" rel="noopener noreferrer" aria-label="JW Marriott Tokyo (opens in a new tab)"><span class="m">JW MARRIOTT</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://jp.celavi.com/ja-jp" target="_blank" rel="noopener noreferrer" aria-label="Celavi Tokyo (opens in a new tab)"><span class="m">CELAVI</span><span class="s">Tokyo</span></a><span class="wl k-wide" role="img" aria-label="Raise Tokyo"><span class="m">RAISE</span><span class="s">Tokyo</span></span><a class="wl k-wide" href="https://ambtokyo.esteri.it/" target="_blank" rel="noopener noreferrer" aria-label="Embassy of Italy in Japan (opens in a new tab)"><span class="m">EMBASSY OF ITALY</span><span class="s">in Japan</span></a><a class="wl k-serif" href="https://www.tokyoamericanclub.org/" target="_blank" rel="noopener noreferrer" aria-label="Tokyo American Club (opens in a new tab)"><span class="m">TOKYO AMERICAN CLUB</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/philippines/grand-hyatt-manila/mangh" target="_blank" rel="noopener noreferrer" aria-label="Grand Hyatt Manila (opens in a new tab)"><span class="m">GRAND HYATT</span><span class="s">Manila</span></a><a class="wl k-wide" href="https://www.boatshow.jp/jibs/2026/" target="_blank" rel="noopener noreferrer" aria-label="Japan Boat Show (opens in a new tab)"><span class="m">JAPAN BOAT SHOW</span></a></div>
-    <div class="wcap">Brand</div>
-    <div class="wall last" id="brand" aria-label="Brands"><a class="wl k-wide" href="https://www.azimutyachts.com/" target="_blank" rel="noopener noreferrer" aria-label="Azimut (opens in a new tab)"><span class="m">AZIMUT</span><span class="s">Yachts</span></a><a class="wl k-db" href="https://www.dbaudio.com/" target="_blank" rel="noopener noreferrer" aria-label="d&amp;b audiotechnik (opens in a new tab)"><span class="m">d&amp;b</span><span class="s">audiotechnik</span></a><a class="wl k-serif" href="https://www.claseazul.com/" target="_blank" rel="noopener noreferrer" aria-label="Clase Azul (opens in a new tab)"><span class="m">CLASE AZUL</span><span class="s">Tequila</span></a><a class="wl k-wide" href="https://www.landrover.co.jp/" target="_blank" rel="noopener noreferrer" aria-label="Land Rover (opens in a new tab)"><span class="m">LAND ROVER</span></a><a class="wl k-serif" href="https://www.loropiana.com/" target="_blank" rel="noopener noreferrer" aria-label="Loro Piana (opens in a new tab)"><span class="m">LORO PIANA</span></a><a class="wl k-italic" href="https://www.lardini.it/" target="_blank" rel="noopener noreferrer" aria-label="Lardini (opens in a new tab)"><span class="m">Lardini</span><span class="s">Fashion</span></a></div>
-  </section>
-
-  <section id="sessions">
-    <div class="head"><h2>Sessions</h2><span class="lab">NOKTOA</span></div>
-    <div id="ytwrap"></div>
-  </section>
-
   <section id="radio">
     <div class="head"><h2>Radio</h2><span class="lab">Tsubaki FM</span></div>
     <div class="mx" id="mx" role="button" tabindex="0" aria-label="Play Connection on Mixcloud">
@@ -323,6 +313,19 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
     </div>
     <div class="mxp" id="mxp"></div>
     <a class="mxl" href="https://www.mixcloud.com/tsubakifm/connection-shima-shun-shosho-021126/" target="_blank" rel="noopener noreferrer"><small>Mixcloud</small><b>Open full show ↗</b></a>
+  </section>
+
+  <section id="work">
+    <div class="head"><h2>Work with</h2></div>
+    <div class="wcap">Place</div>
+    <div class="wall place" id="place" aria-label="Places"><a class="wl k-serif" href="https://www.bulgarihotels.com/en_US/tokyo" target="_blank" rel="noopener noreferrer" aria-label="Bvlgari Hotel Tokyo (opens in a new tab)"><span class="m">BVLGARI</span><span class="s">Hotel Tokyo</span></a><a class="wl k-serif" href="https://www.fourseasons.com/tokyo/" target="_blank" rel="noopener noreferrer" aria-label="Four Seasons Hotel Tokyo (opens in a new tab)"><span class="m">FOUR SEASONS</span><span class="s">Hotel Tokyo</span></a><a class="wl k-wide" href="https://www.1hotels.com/tokyo" target="_blank" rel="noopener noreferrer" aria-label="1 Hotel Tokyo (opens in a new tab)"><span class="m">1 HOTEL</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/japan/andaz-tokyo-toranomon-hills/tyoaz" target="_blank" rel="noopener noreferrer" aria-label="Andaz Tokyo (opens in a new tab)"><span class="m">ANDAZ</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/japan/grand-hyatt-tokyo/tyogh" target="_blank" rel="noopener noreferrer" aria-label="Grand Hyatt Tokyo (opens in a new tab)"><span class="m">GRAND HYATT</span><span class="s">Tokyo</span></a><a class="wl k-serif" href="https://www.marriott.com/en-us/hotels/tyojw-jw-marriott-hotel-tokyo/overview/" target="_blank" rel="noopener noreferrer" aria-label="JW Marriott Tokyo (opens in a new tab)"><span class="m">JW MARRIOTT</span><span class="s">Tokyo</span></a><a class="wl k-wide" href="https://jp.celavi.com/ja-jp" target="_blank" rel="noopener noreferrer" aria-label="Celavi Tokyo (opens in a new tab)"><span class="m">CELAVI</span><span class="s">Tokyo</span></a><span class="wl k-wide" role="img" aria-label="Raise Tokyo"><span class="m">RAISE</span><span class="s">Tokyo</span></span><a class="wl k-wide" href="https://ambtokyo.esteri.it/" target="_blank" rel="noopener noreferrer" aria-label="Embassy of Italy in Japan (opens in a new tab)"><span class="m">EMBASSY OF ITALY</span><span class="s">in Japan</span></a><a class="wl k-serif" href="https://www.tokyoamericanclub.org/" target="_blank" rel="noopener noreferrer" aria-label="Tokyo American Club (opens in a new tab)"><span class="m">TOKYO AMERICAN CLUB</span></a><a class="wl k-wide" href="https://www.hyatt.com/en-US/hotel/philippines/grand-hyatt-manila/mangh" target="_blank" rel="noopener noreferrer" aria-label="Grand Hyatt Manila (opens in a new tab)"><span class="m">GRAND HYATT</span><span class="s">Manila</span></a><a class="wl k-wide" href="https://www.boatshow.jp/jibs/2026/" target="_blank" rel="noopener noreferrer" aria-label="Japan Boat Show (opens in a new tab)"><span class="m">JAPAN BOAT SHOW</span></a></div>
+    <div class="wcap">Brand</div>
+    <div class="wall last" id="brand" aria-label="Brands"><a class="wl k-wide" href="https://www.azimutyachts.com/" target="_blank" rel="noopener noreferrer" aria-label="Azimut (opens in a new tab)"><span class="m">AZIMUT</span><span class="s">Yachts</span></a><a class="wl k-db" href="https://www.dbaudio.com/" target="_blank" rel="noopener noreferrer" aria-label="d&amp;b audiotechnik (opens in a new tab)"><span class="m">d&amp;b</span><span class="s">audiotechnik</span></a><a class="wl k-serif" href="https://www.claseazul.com/" target="_blank" rel="noopener noreferrer" aria-label="Clase Azul (opens in a new tab)"><span class="m">CLASE AZUL</span><span class="s">Tequila</span></a><a class="wl k-wide" href="https://www.landrover.co.jp/" target="_blank" rel="noopener noreferrer" aria-label="Land Rover (opens in a new tab)"><span class="m">LAND ROVER</span></a><a class="wl k-serif" href="https://www.loropiana.com/" target="_blank" rel="noopener noreferrer" aria-label="Loro Piana (opens in a new tab)"><span class="m">LORO PIANA</span></a><a class="wl k-italic" href="https://www.lardini.it/" target="_blank" rel="noopener noreferrer" aria-label="Lardini (opens in a new tab)"><span class="m">Lardini</span><span class="s">Fashion</span></a></div>
+  </section>
+
+  <section id="sessions">
+    <div class="head"><h2>Sessions</h2><span class="lab">NOKTOA</span></div>
+    <div id="ytwrap"></div>
   </section>
 
   <section id="ig">
@@ -614,7 +617,7 @@ if(location.hash&&window.top!==window){setTimeout(()=>{const t=$(location.hash);
 (()=>{const c=document.getElementById('mx'),p=document.getElementById('mxp');if(!c)return;
 const play=()=>{if(c.classList.contains('on'))return;c.classList.add('on');
 p.innerHTML='<iframe title="Connection — Shima Shun & ShoSho (Mixcloud)" allow="autoplay" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&autoplay=1&feed=%2Ftsubakifm%2Fconnection-shima-shun-shosho-021126%2F"></iframe>';
-requestAnimationFrame(()=>p.classList.add('on'));};
+p.classList.add('on');document.body.classList.add('mxon');};
 c.addEventListener('click',play);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});})();
 </script>
 </body>
