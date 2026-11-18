@@ -501,14 +501,17 @@ footer .mono{font-size:10px}
 
 <script>
 (()=>{
-const R=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduce=1/.test(location.search);
+const R=/[?&]reduce=1/.test(location.search);
 const SP=matchMedia('(max-width:860px)');
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const root=document.documentElement,volt={},wire=$('#wire'),cta=$('#spcta');
 const hv=$('#hv'),sv=$('#sv'),cv=$('#cv'),slit=$('#slit'),panel=$('#panel'),flow=$('#flow');
 const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const load=v=>{if(v.dataset.ok)return;v.dataset.ok=1;v.src=(SP.matches&&v.dataset.srcSp)||v.dataset.src;v.load()};
-const play=v=>{const p=v.play();p&&p.catch(()=>{})};
+const play=v=>{const p=v.play();p&&p.catch(()=>{wait.add(v)})};
+/* 省電力モード等で自動再生が止められたら、最初の操作で再生し直す */
+const wait=new Set(),kick=()=>{wait.forEach(v=>{const p=v.play();p&&p.then(()=>wait.delete(v)).catch(()=>{})})};
+['touchstart','scroll','click'].forEach(t=>addEventListener(t,kick,{passive:true}));
 
 /* 静止版：映像は読み込まず、ポスター画像のまま見せる */
 if(R){root.classList.add('reduce','on');$$('.f,.pw,.bus').forEach(e=>e.classList.add('v'));$$('.flow li').forEach(e=>e.classList.add('on'));
