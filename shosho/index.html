@@ -164,6 +164,34 @@ a.wl:hover{--b:1}
 .ycap small{font-family:var(--sans);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft);text-align:right;line-height:1.7}
 .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:3}
 
+
+/* RADIO（Mixcloud：押すまで読み込まない） */
+.mx{position:relative;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;padding:22px;border-radius:18px;background:#101010;color:#ece9e4;overflow:hidden;cursor:pointer;box-shadow:0 20px 50px -24px rgba(0,0,0,.55),0 2px 6px rgba(0,0,0,.18)}
+.mx::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 18% 50%,rgba(238,98,124,.16),transparent 42%),radial-gradient(circle at 90% 10%,rgba(255,255,255,.07),transparent 40%);pointer-events:none}
+.mx .disc{position:relative;width:clamp(92px,26vw,132px);aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#1b1b1b 0 1px,#0c0c0c 1px 3px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),0 10px 30px rgba(0,0,0,.6);animation:spin 6s linear infinite;animation-play-state:paused}
+.mx .disc::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 30deg,transparent 0 40deg,rgba(255,255,255,.12) 55deg,transparent 70deg 210deg,rgba(255,255,255,.08) 225deg,transparent 240deg)}
+.mx .disc::after{content:"S";position:absolute;inset:34%;border-radius:50%;background:#c4c4c4;color:#121212;display:grid;place-items:center;font-family:var(--serif);font-size:clamp(14px,4vw,20px)}
+.mx:hover .disc,.mx.on .disc{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.mx .meta{position:relative;min-width:0}
+.mx .k{font-family:var(--sans);font-size:9px;letter-spacing:.32em;text-transform:uppercase;opacity:.6}
+.mx .t{display:block;margin-top:8px;font-family:var(--serif);font-weight:300;font-size:clamp(26px,7vw,38px);line-height:1;letter-spacing:-.01em}
+.mx .w{display:block;margin-top:8px;font-family:var(--serif);font-size:14px;letter-spacing:.06em;opacity:.75}
+.mx .go{display:inline-flex;align-items:center;gap:10px;margin-top:16px;font-family:var(--serif);font-size:12px;letter-spacing:.24em;text-transform:uppercase}
+.mx .go i{width:34px;height:34px;border:1px solid rgba(255,255,255,.8);border-radius:50%;display:grid;place-items:center;font-style:normal;transition:transform .5s var(--ease),background .5s}
+.mx:hover .go i{transform:scale(1.1);background:rgba(255,255,255,.15)}
+.mx .eq{display:flex;gap:3px;align-items:flex-end;height:14px;margin-left:4px}
+.mx .eq b{width:2px;height:30%;background:currentColor;animation:eq 1s ease-in-out infinite alternate;animation-play-state:paused}
+.mx .eq b:nth-child(2){animation-delay:-.3s}.mx .eq b:nth-child(3){animation-delay:-.6s}.mx .eq b:nth-child(4){animation-delay:-.15s}
+.mx:hover .eq b,.mx.on .eq b{animation-play-state:running}
+@keyframes eq{to{height:100%}}
+.mxp{margin-top:12px;border-radius:14px;overflow:hidden;height:0;transition:height .8s var(--ease)}
+.mxp.on{height:60px}
+.mxp iframe{width:100%;height:60px;border:0;display:block}
+.mxl{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mxl small{font-family:var(--serif);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--soft)}
+.mxl b{font-family:var(--serif);font-weight:400;font-size:clamp(17px,4.6vw,21px)}
+
 /* INSTAGRAM：ここだけ横スクロール（サイズ統一） */
 .gal{margin:0 calc(var(--pad)*-1)}
 .posts{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);padding:4px var(--pad) 18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
@@ -280,6 +308,21 @@ else if(h.indexOf('mailto:')===0)gtag('event','mailto_click',{page:location.path
   <section id="sessions">
     <div class="head"><h2>Sessions</h2><span class="lab">NOKTOA</span></div>
     <div id="ytwrap"></div>
+  </section>
+
+  <section id="radio">
+    <div class="head"><h2>Radio</h2><span class="lab">Tsubaki FM</span></div>
+    <div class="mx" id="mx" role="button" tabindex="0" aria-label="Play Connection on Mixcloud">
+      <div class="disc" aria-hidden="true"></div>
+      <div class="meta">
+        <span class="k">Tsubaki FM — 02.11.26</span>
+        <b class="t">Connection</b>
+        <span class="w">Shima Shun &amp; ShoSho</span>
+        <span class="go"><i>▶</i>Listen<span class="eq" aria-hidden="true"><b></b><b></b><b></b><b></b></span></span>
+      </div>
+    </div>
+    <div class="mxp" id="mxp"></div>
+    <a class="mxl" href="https://www.mixcloud.com/tsubakifm/connection-shima-shun-shosho-021126/" target="_blank" rel="noopener noreferrer"><small>Mixcloud</small><b>Open full show ↗</b></a>
   </section>
 
   <section id="ig">
@@ -566,6 +609,13 @@ form.addEventListener('submit',async e=>{
 /* ボード用：アンカー位置へ */
 if(location.hash&&window.top!==window){setTimeout(()=>{const t=$(location.hash);t&&window.scrollTo({top:t.getBoundingClientRect().top+scrollY-(location.hash==='#top'?0:40),behavior:'instant'})},1400)}
 })();
+</script>
+<script>
+(()=>{const c=document.getElementById('mx'),p=document.getElementById('mxp');if(!c)return;
+const play=()=>{if(c.classList.contains('on'))return;c.classList.add('on');
+p.innerHTML='<iframe title="Connection — Shima Shun & ShoSho (Mixcloud)" allow="autoplay" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&autoplay=1&feed=%2Ftsubakifm%2Fconnection-shima-shun-shosho-021126%2F"></iframe>';
+requestAnimationFrame(()=>p.classList.add('on'));};
+c.addEventListener('click',play);c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();play();}});})();
 </script>
 </body>
 </html>
