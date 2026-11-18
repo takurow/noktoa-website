@@ -191,6 +191,27 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .co dt{color:var(--g)}
 @media (max-width:860px){.co{grid-template-columns:1fr;gap:28px}.co dl{grid-template-columns:6.5em 1fr}}
 #contact{padding:128px 0 112px}
+.cgrid{display:grid;grid-template-columns:1.35fr 1fr;gap:72px;margin-top:64px;align-items:start}
+.cf .mono,.cside .mono{display:block;color:var(--mist,#8a8984);margin-bottom:18px}
+.chips{border:0;padding:0;margin:0 0 26px;display:flex;flex-wrap:wrap;gap:10px}
+.chips legend{font-size:13px;margin-bottom:12px;opacity:.75}
+.chips input{position:absolute;opacity:0}
+.chips span{display:inline-block;padding:10px 18px;border:1px solid rgba(255,255,255,.28);border-radius:999px;font-size:14px;cursor:pointer;transition:.3s}
+.chips input:checked+span{background:var(--w);color:var(--k);border-color:var(--w)}
+.chips input:focus-visible+span{outline:2px solid var(--pos);outline-offset:2px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 28px}
+.fl{display:block;margin-bottom:22px}
+.fl span{display:block;font-size:13px;opacity:.75;margin-bottom:6px}
+.fl em{font-style:normal;font-size:11px;margin-left:8px;opacity:.7}
+.fl input,.fl textarea{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.3);color:inherit;font:inherit;font-size:16px;padding:10px 0;border-radius:0;transition:border-color .3s}
+.fl textarea{resize:vertical;min-height:110px}
+.fl input:focus,.fl textarea:focus{outline:0;border-color:var(--pos)}
+.fl .bad{border-color:var(--neg)}
+.cf button{margin-top:10px;display:inline-flex;gap:14px;align-items:center;background:var(--w);color:var(--k);border:0;font:inherit;font-weight:600;letter-spacing:.12em;padding:16px 34px;min-height:52px;cursor:pointer;transition:background .3s}
+.cf button:hover{background:var(--pos);color:#fff}
+.note{font-size:12px;opacity:.65;margin-top:14px;line-height:1.8}
+.ml{display:inline-block;font-family:var(--en);font-weight:700;font-size:clamp(22px,2.3vw,32px);letter-spacing:-.01em;border-bottom:2px solid var(--pos);padding-bottom:6px;word-break:break-all}
+.tl{display:inline-block;font-family:var(--en);font-size:17px;letter-spacing:.08em}
 .tel{display:block;position:relative;isolation:isolate;overflow:hidden;background:var(--w);margin-top:6vh;margin-left:-.5vw}
 .tel video{position:absolute;inset:0;filter:grayscale(1) invert(1) brightness(.7) contrast(3.6)}
 .tel span{display:block;position:relative;background:var(--k);color:#fff;mix-blend-mode:darken;font-family:var(--en);font-weight:700;font-size:clamp(40px,7.4vw,112px);letter-spacing:-.035em;line-height:1.02;white-space:nowrap;padding:.06em 0 .04em .5vw}
@@ -258,10 +279,12 @@ footer .mono{font-size:10px}
   .wk{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;gap:10px;margin-top:7vh}
   .wk figure{aspect-ratio:1/1}
   .wk figure:first-child{grid-row:auto;grid-column:1/3;aspect-ratio:4/3}
+  .cgrid{grid-template-columns:1fr;gap:56px;margin-top:40px}
+  .two{grid-template-columns:1fr}
   .tel{margin-left:0}
   .tel span{font-size:12.6vw;padding-left:0}
   footer{padding:28px 20px 96px 44px;flex-direction:column;gap:8px;align-items:flex-start}
-  .sp-cta{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--w);color:var(--k);transform:translateY(100%);transition:transform .5s var(--e)}
+  .sp-cta{display:grid;grid-template-columns:1.3fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--w);color:var(--k);transform:translateY(100%);transition:transform .5s var(--e)}
   .sp-cta.on{transform:none}
   .sp-cta a{text-align:center;padding:17px 0;font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.2em}
   .sp-cta a+a{border-left:1px solid var(--d)}
@@ -481,14 +504,33 @@ footer .mono{font-size:10px}
   <section id="contact">
     <div class="wrap">
       <div class="f"><span class="tag">Contact</span><h2>船の電気のことは<br>ご相談ください</h2></div>
-      <a class="tel" href="tel:09042214430" aria-label="電話 090-4221-4430">
-        <video id="cv" data-ph="差し替え予定" muted playsinline loop preload="none" aria-hidden="true"
-          poster="https://images.pexels.com/videos/5853030/pexels-photo-5853030.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          data-src="https://videos.pexels.com/video-files/5853030/5853030-hd_1366_720_30fps.mp4"
-          data-src-sp="https://videos.pexels.com/video-files/5853030/5853030-sd_960_506_30fps.mp4"></video>
-        <span>090-4221-4430</span>
-      </a>
-      <div class="cl"><a href="mailto:kurosaki@gs-boat.com">kurosaki@gs-boat.com</a></div>
+      <div class="cgrid">
+        <form class="cf f" id="cf" novalidate>
+          <span class="mono">01 — FORM</span>
+          <fieldset class="chips"><legend>ご相談の内容</legend>
+            <label><input type="radio" name="kind" value="電気工事" checked><span>電気工事</span></label>
+            <label><input type="radio" name="kind" value="Garmin製品"><span>Garmin製品</span></label>
+            <label><input type="radio" name="kind" value="修理・点検"><span>修理・点検</span></label>
+            <label><input type="radio" name="kind" value="その他"><span>その他</span></label>
+          </fieldset>
+          <div class="two">
+            <label class="fl"><span>お名前</span><input name="name" autocomplete="name" required></label>
+            <label class="fl"><span>メールアドレス</span><input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+            <label class="fl"><span>電話番号<em>任意</em></span><input name="tel" type="tel" autocomplete="tel" inputmode="tel"></label>
+            <label class="fl"><span>船の種類・名前<em>任意</em></span><input name="boat"></label>
+          </div>
+          <label class="fl"><span>ご相談内容</span><textarea name="msg" rows="4" required></textarea></label>
+          <button type="submit">送信する <i aria-hidden="true">→</i></button>
+          <p class="note" id="cfn" aria-live="polite">送信すると、入力した内容でメールが立ち上がります。</p>
+        </form>
+        <div class="cside f">
+          <span class="mono">02 — MAIL</span>
+          <a class="ml" href="mailto:kurosaki@gs-boat.com">kurosaki@gs-boat.com</a>
+          <span class="mono" style="margin-top:44px">03 — TEL</span>
+          <a class="tl" href="tel:09042214430">090-4221-4430</a>
+          <p class="note">作業中は出られないことがあります。メールやフォームのほうが確実です。</p>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -497,7 +539,7 @@ footer .mono{font-size:10px}
   <span class="mono">GOOD SPEED Co., Ltd.</span>
   <span class="mono">MARINE ELECTRIC ／ GARMIN AUTHORIZED DEALER</span>
 </footer>
-<div class="sp-cta" id="spcta"><a href="tel:09042214430">TEL</a><a href="mailto:kurosaki@gs-boat.com">MAIL</a></div>
+<div class="sp-cta" id="spcta"><a href="#contact">FORM</a><a href="mailto:kurosaki@gs-boat.com">MAIL</a><a href="tel:09042214430">TEL</a></div>
 
 <script>
 (()=>{
@@ -531,9 +573,18 @@ $$('.f,.pw,.bus,.row').forEach(e=>io.observe(e));
 let scrub=false;
 const vio=new IntersectionObserver(es=>es.forEach(e=>{const v=e.target;
   if(e.isIntersecting){load(v);if(!(v===sv&&scrub))play(v)}else if(v.dataset.ok)v.pause()}),{rootMargin:'60% 0px'});
-[hv,cv].forEach(v=>vio.observe(v));
+[hv,cv].filter(Boolean).forEach(v=>vio.observe(v));
 new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){load(sv);scrub=!SP.matches&&matchMedia('(hover:hover)').matches;if(!scrub)play(sv)}else sv.dataset.ok&&sv.pause()}),{rootMargin:'80% 0px'}).observe(slit);
 
+
+/* フォーム：入力内容をメールにして立ち上げる（送信サービス導入までの形） */
+const cf=$('#cf');cf&&cf.addEventListener('submit',ev=>{ev.preventDefault();let ok=true;
+  cf.querySelectorAll('[required]').forEach(el=>{const b=!el.value.trim()||(el.type==='email'&&!/^\S+@\S+\.\S+$/.test(el.value));el.classList.toggle('bad',b);if(b&&ok){ok=false;el.focus()}});
+  if(!ok){$('#cfn').textContent='未入力の項目があります。';return}
+  const d=Object.fromEntries(new FormData(cf));
+  const body=`お名前：${d.name}\nメール：${d.email}\n電話：${d.tel||'—'}\n船：${d.boat||'—'}\n\n${d.msg}`;
+  location.href='mailto:kurosaki@gs-boat.com?subject='+encodeURIComponent(`【HPより】${d.kind}のご相談`)+'&body='+encodeURIComponent(body);
+  $('#cfn').textContent='メールが立ち上がりました。そのまま送信してください。'});
 /* SERVICE：スイッチ */
 const rows=$$('.row'),figs=$$('.frame figure'),flb=$('#flb');let act=0,lock=0;
 const sw=i=>{if(i===act)return;act=i;rows.forEach((r,k)=>r.classList.toggle('on',k===i));figs.forEach((f,k)=>f.classList.toggle('on',k===i));
