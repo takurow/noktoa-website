@@ -83,7 +83,7 @@ section{position:relative}
 .chap .it p{color:#cfcdc6;max-width:30em}
 
 /* ⑥ garmin expand */
-.gx{height:300vh;border-top:1px solid var(--line)}
+.gx{height:240vh;border-top:1px solid var(--line)}
 .gx .st{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .gx .frame{position:absolute;inset:0;clip-path:inset(var(--iy,22%) var(--ix,28%) round var(--r,24px));will-change:clip-path}
 .gx .plot{position:absolute;inset:0;background:#05090b}
@@ -158,6 +158,15 @@ section{position:relative}
 .works p{margin-top:16px;font-size:13px;color:var(--mist)}
 .works p b{display:block;color:var(--ivory);font-weight:300;letter-spacing:.1em}
 
+.wl{list-style:none;margin-top:72px;border-top:1px solid var(--line)}
+.wl a{position:relative;display:grid;grid-template-columns:120px 1fr auto 40px;align-items:center;gap:24px;padding:36px 0;border-bottom:1px solid var(--line);min-height:44px}
+.wl a::after{content:"";position:absolute;left:0;bottom:-1px;height:1px;width:100%;background:var(--copper);transform:scaleX(0);transform-origin:left;transition:transform .9s var(--slow)}
+.wl a:hover::after,.wl a:focus-visible::after{transform:scaleX(1)}
+.wl .no{font-family:var(--en);font-size:11px;letter-spacing:.3em;color:var(--mist)}
+.wl b{font-weight:300;font-size:clamp(18px,2vw,24px);letter-spacing:.12em}
+.wl .meta{font-size:13px;color:var(--mist)}
+.wl i{font-style:normal;color:var(--mist);transition:transform .6s var(--slow),color .4s}
+.wl a:hover i{transform:translateX(6px);color:var(--copper)}
 /* ⑩ contact */
 .contact{text-align:center;border-top:1px solid var(--line)}
 .contact .st{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 20px}
@@ -207,10 +216,11 @@ footer small:last-child{text-align:right}
   .hero.on h1 span,.reduce .hero h1 span{letter-spacing:.32em}
   .hero .ph{left:20px;right:20px}
   .chap .grid{grid-template-columns:1fr;gap:0}
-  .chap .side{position:sticky;top:0;height:auto;padding:84px 0 24px;background:linear-gradient(var(--black) 82%,transparent);z-index:2}
+  .chap .side{position:relative;height:auto;padding:110px 0 0}
   .chap .side h2{font-size:20px}
-  .chap .side .count{margin-top:12px}
-  .chap .items{padding:10vh 0 20vh}
+  .chap .side .count{display:none}
+  .chap .items{padding:48px 0 60px}
+  .chap .side{padding-bottom:36px}
   .chap .it{min-height:46vh}
   .gx .hud .tr b{font-size:28px}
   .why{grid-template-columns:1fr}
@@ -221,7 +231,10 @@ footer small:last-child{text-align:right}
   .flow{grid-template-columns:1fr;gap:24px}
   .flow .side{position:relative;top:0}
   .flow ol{padding-left:32px}
-  .works{grid-template-columns:1fr}
+  .wl a{grid-template-columns:1fr auto;gap:6px 16px;padding:28px 0}
+  .wl .no{grid-column:1/-1}
+  .wl .meta{grid-column:1}
+  .wl i{grid-row:2/4;grid-column:2}
   .btn{min-width:240px}
   footer{grid-template-columns:1fr;gap:12px;text-align:center;padding-bottom:110px}
   footer small:last-child{text-align:center}
@@ -370,11 +383,12 @@ footer small:last-child{text-align:right}
   <section class="pad" id="works" style="border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="lead f"><p class="cap">Works</p><div class="rule"></div><h2>施工事例</h2></div>
-      <div class="works">
-        <a href="#contact" class="f"><div class="im"><div class="bg"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
-        <a href="#contact" class="f"><div class="im"><div class="bg" style="background-position:30% 60%"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
-        <a href="#contact" class="f"><div class="im"><div class="bg"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
-      </div>
+      <ol class="wl">
+        <li class="f"><a href="#contact"><span class="no">No.01</span><b>事例タイトル</b><span class="meta">艇種 ／ 作業内容</span><i aria-hidden="true">→</i></a></li>
+        <li class="f"><a href="#contact"><span class="no">No.02</span><b>事例タイトル</b><span class="meta">艇種 ／ 作業内容</span><i aria-hidden="true">→</i></a></li>
+        <li class="f"><a href="#contact"><span class="no">No.03</span><b>事例タイトル</b><span class="meta">艇種 ／ 作業内容</span><i aria-hidden="true">→</i></a></li>
+      </ol>
+      <p class="cap f" style="text-align:center;margin-top:40px">写真は準備中です</p>
     </div>
   </section>
 
@@ -428,7 +442,7 @@ const items=$$('.chap .it'),svcN=$('#svcN');
 const gx=$('#garmin'),gs=$('#gxSt').style;
 const ks=$$('.why .k');
 const flow=$('#flow ol'),steps=$$('#flow li');
-const ims=$$('.works .im');
+const ims=[];
 const spcta=$('#spcta');
 let sy=scrollY,vel=0,last=scrollY;
 
@@ -444,7 +458,7 @@ function frame(){
   veil.style.opacity=(1-clamp(hp*2.2+.0))*.55;
   heroIn.style.opacity=1-clamp((hp-.5)*2.6);
   heroIn.style.transform=`scale(${1-hp*.06})`;
-  GL.p=hp;GL.v=vel;
+  GL.p=hp*(innerWidth<860?.3:1);GL.v=vel;
 
   /* ④ */
   const mp=clamp(prog($('#manifest'))*1.25);
@@ -456,7 +470,7 @@ function frame(){
   items.forEach((it,i)=>it.classList.toggle('on',i===act));svcN.textContent='0'+(act+1);
 
   /* ⑥ */
-  const gp=prog(gx),e=clamp(gp/.55),ee=1-Math.pow(1-e,3);
+  const gp=prog(gx),e=clamp(gp/.5),ee=1-Math.pow(1-e,3);
   const sm=innerWidth<860;
   gs.setProperty('--iy',((sm?30:22)*(1-ee))+'%');
   gs.setProperty('--ix',((sm?12:28)*(1-ee))+'%');
