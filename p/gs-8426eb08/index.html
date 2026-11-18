@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 img,video{display:block;width:100%;height:100%;object-fit:cover}
 .wrap{max-width:1240px;margin:0 auto;padding:0 var(--pad)}
 .mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--g)}
-.bw{filter:grayscale(1) contrast(1.08)}
+.bw{filter:saturate(.92) contrast(1.05)}
 
 /* 画面左を走る一本の線（スクロール量） */
 #wire{position:fixed;left:28px;top:0;width:1px;height:100vh;background:var(--l);z-index:15;pointer-events:none}
@@ -58,7 +58,7 @@ section{padding:20vh 0;border-top:1px solid var(--l);position:relative}
 /* ───────── HERO ───────── */
 .hero{overflow:hidden;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 6vh;position:relative}
 .hero .hv{position:absolute;inset:0;background:#000}
-.hero .hv video{opacity:0;filter:grayscale(1) contrast(1.12) brightness(1.15)}
+.hero .hv video{opacity:0;filter:contrast(1.06) brightness(1.08)}
 .on .hero .hv video{opacity:1;animation:strike .9s steps(1,end) 1.55s both}
 .hero>*:not(.hv){position:relative}
 .hero .spec{position:absolute!important;top:96px;left:var(--pad);right:var(--pad);display:flex;justify-content:space-between}
@@ -86,7 +86,7 @@ section{padding:20vh 0;border-top:1px solid var(--l);position:relative}
 .slit{padding:0;border:0;height:270vh}
 .slit .stage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
 .slit .ap{position:absolute;inset:0;clip-path:inset(0 calc(50% - var(--o,0)*50%));will-change:clip-path}
-.slit .ap video{filter:grayscale(1) contrast(1.15) brightness(.62)}
+.slit .ap video{filter:contrast(1.06) brightness(.7)}
 .slit .w{position:absolute;left:50%;top:0;width:1px;height:100%;margin-left:-.5px;background:var(--pos);transform-origin:top;transform:scaleY(var(--dr,0));opacity:calc(1 - var(--o,0)*1.6)}
 .slit .copy{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;align-items:center}
 .slit .copy>div{padding:0 7vw 0 max(var(--pad),8vw)}
@@ -305,7 +305,6 @@ footer .mono{font-size:10px}
     <div class="brk" aria-hidden="true"><span class="a"></span><span class="s"><i></i></span><span class="c"></span></div>
     <div class="sub">
       <p>船の電気工事と、<br>Garmin航海機器の正規代理店。</p>
-      <p class="dmm" aria-hidden="true"><b id="volt">00.0</b>V DC</p>
     </div>
   </div>
 
@@ -474,7 +473,7 @@ footer .mono{font-size:10px}
 const R=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduce=1/.test(location.search);
 const SP=matchMedia('(max-width:860px)');
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const root=document.documentElement,volt=$('#volt'),wire=$('#wire'),cta=$('#spcta');
+const root=document.documentElement,volt={},wire=$('#wire'),cta=$('#spcta');
 const hv=$('#hv'),sv=$('#sv'),cv=$('#cv'),slit=$('#slit'),panel=$('#panel'),flow=$('#flow');
 const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
 const load=v=>{if(v.dataset.ok)return;v.dataset.ok=1;v.src=(SP.matches&&v.dataset.srcSp)||v.dataset.src;v.load()};
