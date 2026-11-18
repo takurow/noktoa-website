@@ -8,151 +8,226 @@
 <meta name="description" content="船の電気に特化した電気工事。Garmin航海機器の選定・取付・設定までを一貫して。">
 <style>
 :root{
-  --black:#0E0E0E; --black2:#161616; --ivory:#F2F1EC; --mist:#9B9890; --line:#2A2A28; --copper:#A8703F;
+  --black:#0E0E0E;--ivory:#F2F1EC;--mist:#9B9890;--line:#2A2A28;--copper:#A8703F;--dim:#3a3936;
   --en:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --ja:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
-  --ease:cubic-bezier(.22,.61,.36,1);
+  --ease:cubic-bezier(.22,.61,.36,1);--slow:cubic-bezier(.16,1,.3,1);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%}
 body{background:var(--black);color:var(--ivory);font-family:var(--ja);font-weight:300;font-size:15px;line-height:2;letter-spacing:.04em;
-  word-break:keep-all;line-break:strict;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+  word-break:keep-all;line-break:strict;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased;overflow-x:clip}
 a{color:inherit;text-decoration:none}
-.en{font-family:var(--en);font-weight:400;text-transform:uppercase}
 .cap{font-family:var(--en);font-size:11px;letter-spacing:.32em;color:var(--mist);text-transform:uppercase}
 .wrap{max-width:1280px;margin:0 auto;padding:0 40px}
 .rule{width:28px;height:2px;background:var(--copper);margin:28px auto}
 .rule.l{margin-left:0}
+:focus-visible{outline:1px solid var(--copper);outline-offset:4px}
 
-/* header */
-header{position:fixed;inset:0 0 auto;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
-  padding:24px 40px;transition:background .6s var(--ease),border-color .6s var(--ease);border-bottom:1px solid transparent}
-header.s{background:rgba(14,14,14,.92);border-color:var(--line);backdrop-filter:blur(6px)}
+/* ③ header + progress */
+header{position:fixed;inset:0 0 auto;z-index:50;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:24px 40px;
+  transition:background .6s var(--ease),padding .6s var(--ease)}
+header.s{background:rgba(14,14,14,.86);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:16px 40px}
 header nav{display:flex;gap:32px}
-header nav a,header .r a{font-family:var(--en);font-size:11px;letter-spacing:.3em;color:var(--mist);transition:color .3s}
+header nav a,header .r a{font-family:var(--en);font-size:11px;letter-spacing:.3em;color:var(--mist);transition:color .3s;text-transform:uppercase}
 header nav a:hover,header .r a:hover{color:var(--ivory)}
-.logo{font-family:var(--en);font-size:17px;letter-spacing:.42em;padding-left:.42em}
 header .r{text-align:right}
+.logo{font-family:var(--en);font-size:15px;letter-spacing:.42em;padding-left:.42em;opacity:0;transition:opacity .8s var(--ease)}
+header.s .logo,.reduce .logo{opacity:1}
+#prog{position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--copper);transform-origin:0 50%;transform:scaleX(0)}
 
-/* hero */
-.hero{height:100svh;min-height:620px;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;
-  background:radial-gradient(ellipse 60% 45% at 50% 42%,#14262b 0%,#0b1113 45%,var(--black) 80%)}
-.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,0) 55%,var(--black) 100%)}
-.hero .ph{position:absolute;left:40px;bottom:24px;font-family:Menlo,monospace;font-size:10px;color:#4a4a46;letter-spacing:.05em;z-index:2}
-.hero .in{position:relative;z-index:2;text-align:center;padding-bottom:16vh}
-.hero h1{font-family:var(--en);font-weight:400;font-size:clamp(34px,6.4vw,88px);letter-spacing:.42em;padding-left:.42em;line-height:1.1}
-.hero .sub{margin-top:26px}
+/* ① ② hero */
+.hero{height:200vh;position:relative}
+.hero .st{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;align-items:center;justify-content:center}
+#gl,.hero .fb{position:absolute;inset:0;width:100%;height:100%}
+.hero .fb{background:radial-gradient(ellipse 55% 40% at 50% 46%,#173840 0%,#0b1416 45%,var(--black) 78%);opacity:.0}
+.hero .veil{position:absolute;inset:0;background:var(--black);pointer-events:none}
+.hero .in{position:relative;z-index:2;text-align:center}
+.hero h1{font-family:var(--en);font-weight:300;font-size:clamp(26px,6vw,86px);line-height:1.1;white-space:nowrap}
+.hero h1 span{display:inline-block;opacity:0;filter:blur(8px);letter-spacing:1.1em;transition:opacity 1.6s var(--slow),filter 1.6s var(--slow),letter-spacing 2.6s var(--slow)}
+.hero.on h1 span{opacity:1;filter:none;letter-spacing:.42em}
+.hero .rule{transform:scaleX(0);transition:transform 1.2s var(--slow) 1.9s}
+.hero.on .rule{transform:scaleX(1)}
+.hero .sub{opacity:0;transition:opacity 1.2s var(--ease) 2.3s}
+.hero.on .sub{opacity:1}
+.hero .scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;font-family:var(--en);font-size:10px;letter-spacing:.32em;color:var(--mist);opacity:0;transition:opacity 1s 3s}
+.hero.on .scroll{opacity:1}
+.hero .scroll i{display:block;width:1px;height:40px;background:linear-gradient(var(--copper),transparent);margin:12px auto 0;animation:drip 2.4s var(--ease) infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero .ph{position:absolute;left:40px;bottom:24px;z-index:2;font:10px Menlo,monospace;color:#4a4a46}
 
-/* sections */
-section{border-top:1px solid var(--line)}
-.pad{padding:160px 0}
-.wrap.pad{padding:160px 40px}
+section{position:relative}
+.pad{padding:180px 0}
+
+/* ④ letter lighting */
+.manifest{height:240vh}
+.manifest .st{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
+.manifest h2{font-size:clamp(24px,3.6vw,46px);font-weight:300;letter-spacing:.14em;line-height:1.7}
+.manifest h2 span,.manifest p span{color:var(--dim);transition:color .5s var(--ease)}
+.manifest h2 span.lit{color:var(--ivory)}
+.manifest p{margin-top:36px;font-size:15px;line-height:2.1}
+.manifest p span.lit{color:#cfcdc6}
+
+/* ⑤ sticky chapter */
+.chap{border-top:1px solid var(--line)}
+.chap .grid{display:grid;grid-template-columns:5fr 7fr;gap:80px}
+.chap .side{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;justify-content:center}
+.chap .side h2{font-size:clamp(24px,2.8vw,36px);font-weight:300;letter-spacing:.14em;line-height:1.7;margin-top:8px}
+.chap .side .count{font-family:var(--en);font-size:12px;letter-spacing:.3em;color:var(--mist);margin-top:32px}
+.chap .side .count b{color:var(--copper);font-weight:400}
+.chap .items{padding:30vh 0}
+.chap .it{min-height:60vh;display:flex;flex-direction:column;justify-content:center;border-top:1px solid var(--line);opacity:.18;transition:opacity .7s var(--ease)}
+.chap .it.on{opacity:1}
+.chap .it .n{font-family:var(--en);font-size:12px;letter-spacing:.2em;color:var(--copper)}
+.chap .it h3{font-size:clamp(22px,2.4vw,30px);font-weight:300;letter-spacing:.14em;margin:14px 0}
+.chap .it p{color:#cfcdc6;max-width:30em}
+
+/* ⑥ garmin expand */
+.gx{height:300vh;border-top:1px solid var(--line)}
+.gx .st{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden}
+.gx .frame{position:absolute;inset:0;clip-path:inset(var(--iy,22%) var(--ix,28%) round var(--r,24px));will-change:clip-path}
+.gx .plot{position:absolute;inset:0;background:#05090b}
+.gx .plot svg{position:absolute;inset:0;width:100%;height:100%}
+.gx .hud{position:absolute;inset:0;pointer-events:none;opacity:var(--hud,0)}
+.gx .hud .tl{position:absolute;left:5%;top:12%;font-family:var(--en);font-size:11px;letter-spacing:.24em;color:#7fc4d2}
+.gx .hud .tr{position:absolute;right:5%;top:12%;text-align:right;font-family:var(--en);color:#d8f3f8}
+.gx .hud .tr b{display:block;font-size:clamp(28px,4vw,56px);font-weight:200;letter-spacing:.04em}
+.gx .hud .tr small{font-size:10px;letter-spacing:.3em;color:#7fc4d2}
+.gx .ph{position:absolute;left:20px;bottom:16px;font:10px Menlo,monospace;color:#3d5b62}
+.gx .copy{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:2;pointer-events:none;padding:0 24px}
+.gx .copy .a{opacity:var(--a1,1)}
+.gx .copy .b{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);padding:0 24px;opacity:var(--a2,0)}
+.gx h2{font-family:var(--en);font-weight:300;font-size:clamp(34px,6vw,84px);letter-spacing:.42em;padding-left:.42em}
+.gx h3{font-size:clamp(20px,2.4vw,30px);font-weight:300;letter-spacing:.14em;line-height:1.8;text-shadow:0 2px 24px rgba(0,0,0,.8)}
+.gx .copy .b{background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(5,9,11,.82),rgba(5,9,11,0) 72%);padding:80px 24px}
+.gx .b p{margin-top:18px;color:#d9d7d0;text-shadow:0 2px 18px rgba(0,0,0,.9)}
+
+/* ⑦ why */
+.why{display:grid;grid-template-columns:repeat(3,1fr);margin-top:72px;border-top:1px solid var(--line)}
+.why>div{padding:56px 40px 56px 0;border-bottom:1px solid var(--line)}
+.why>div+div{padding-left:40px;border-left:1px solid var(--line)}
+.why .k{font-family:var(--en);font-size:clamp(56px,7vw,104px);line-height:1;font-weight:100;letter-spacing:.02em;transition:font-weight .2s linear}
+.why h4{font-weight:300;font-size:18px;letter-spacing:.12em;margin:22px 0 10px}
+.why p{font-size:13.5px;color:var(--mist);line-height:1.95}
 .lead{text-align:center}
-.lead h2{font-size:clamp(22px,2.6vw,30px);font-weight:300;letter-spacing:.14em;line-height:1.8}
-.lead p{margin-top:26px;color:#cfcdc6}
+.lead h2{font-size:clamp(22px,2.6vw,32px);font-weight:300;letter-spacing:.14em;line-height:1.8}
 
-.svc{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:64px}
-.svc div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 28px}
-.svc .n{font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--copper)}
-.svc h3{font-weight:300;font-size:17px;letter-spacing:.12em;margin:14px 0 10px}
-.svc p{font-size:13px;color:var(--mist);line-height:1.9}
-
-/* garmin */
-.g-hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:640px}
-.g-hero .img{background:radial-gradient(ellipse at 40% 50%,#123039,#0a0f11 60%,#0b0b0b);position:relative}
-.g-hero .img span{position:absolute;left:20px;bottom:16px;font:10px Menlo,monospace;color:#4a4a46}
-.g-hero .txt{padding:120px 72px;display:flex;flex-direction:column;justify-content:center}
-.g-hero h2{font-family:var(--en);font-weight:400;font-size:clamp(30px,3.6vw,48px);letter-spacing:.32em;line-height:1.2}
-.g-hero h3{font-size:22px;font-weight:300;letter-spacing:.14em;margin-top:28px;line-height:1.8}
-.g-hero p{margin-top:20px;color:#cfcdc6}
-
-.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line)}
-.why div{padding:48px 36px 48px 0;border-bottom:1px solid var(--line)}
-.why div+div{padding-left:36px;border-left:1px solid var(--line)}
-.why .k{font-family:var(--en);font-size:44px;font-weight:300;letter-spacing:.06em;color:var(--ivory)}
-.why h4{font-weight:300;font-size:17px;letter-spacing:.12em;margin:10px 0}
-.why p{font-size:13px;color:var(--mist);line-height:1.9}
-
-.lineup{margin-top:120px}
+.lineup{margin-top:160px}
 .lineup table{width:100%;border-collapse:collapse;margin-top:32px}
-.lineup td{border-top:1px solid var(--line);padding:26px 0;vertical-align:top}
+.lineup tr{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.lineup tr.v{opacity:1;transform:none}
+.lineup td{border-top:1px solid var(--line);padding:28px 0;vertical-align:top}
 .lineup tr:last-child td{border-bottom:1px solid var(--line)}
-.lineup td:first-child{width:34%;font-family:var(--en);font-size:12px;letter-spacing:.3em}
+.lineup td:first-child{width:34%;font-family:var(--en);font-size:12px;letter-spacing:.3em;text-transform:uppercase}
 .lineup td:first-child small{display:block;font-family:var(--ja);font-size:12px;letter-spacing:.12em;color:var(--mist);text-transform:none;margin-top:4px}
 .lineup td:last-child{color:#cfcdc6;font-size:14px}
 
-.flow{margin-top:120px}
-.flow ol{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);margin-top:32px;border-top:1px solid var(--line)}
-.flow li{padding:32px 20px 32px 0;position:relative}
-.flow li::before{content:"";position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--copper);transition:width .9s var(--ease)}
-.flow li.v::before{width:28px}
+/* ⑧ timeline */
+.flow{margin-top:160px;display:grid;grid-template-columns:5fr 7fr;gap:80px}
+.flow .side{position:sticky;top:30vh;align-self:start}
+.flow ol{list-style:none;position:relative;padding-left:44px}
+.flow ol::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:1px;background:var(--line)}
+.flow .wire{position:absolute;left:6px;top:0;width:1px;height:100%;background:var(--copper);transform-origin:top;transform:scaleY(var(--p,0))}
+.flow .head{position:absolute;left:2px;top:calc(var(--p,0)*100%);width:9px;height:9px;border-radius:50%;background:var(--copper);box-shadow:0 0 14px 3px rgba(168,112,63,.55);transform:translateY(-50%)}
+.flow li{padding:44px 0;border-bottom:1px solid var(--line);opacity:.25;transition:opacity .6s var(--ease)}
+.flow li.on{opacity:1}
 .flow .n{font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--mist)}
-.flow h4{font-weight:300;font-size:16px;letter-spacing:.12em;margin:8px 0 6px}
-.flow p{font-size:12.5px;color:var(--mist);line-height:1.85}
+.flow li.on .n{color:var(--copper)}
+.flow h4{font-weight:300;font-size:20px;letter-spacing:.12em;margin:8px 0 6px}
+.flow p{font-size:13.5px;color:var(--mist)}
 
-.faq{margin-top:120px;max-width:860px}
+.faq{margin-top:160px;max-width:860px}
 .faq details{border-top:1px solid var(--line)}
 .faq details:last-child{border-bottom:1px solid var(--line)}
 .faq summary{list-style:none;cursor:pointer;padding:26px 40px 26px 0;position:relative;font-size:15px;letter-spacing:.08em;min-height:44px}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";position:absolute;right:4px;top:50%;width:12px;height:1px;background:var(--mist);box-shadow:none;transition:transform .4s var(--ease)}
-.faq summary::before{content:"";position:absolute;right:9.5px;top:calc(50% - 5.5px);width:1px;height:12px;background:var(--mist);transition:transform .4s var(--ease)}
+.faq summary::after,.faq summary::before{content:"";position:absolute;background:var(--mist);transition:transform .4s var(--ease)}
+.faq summary::after{right:4px;top:50%;width:12px;height:1px}
+.faq summary::before{right:9.5px;top:calc(50% - 5.5px);width:1px;height:12px}
 .faq details[open] summary::before{transform:scaleY(0)}
 .faq details p{padding:0 0 28px;color:#cfcdc6;font-size:14px}
 
-/* works */
-.works{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
-.works .im{aspect-ratio:4/5;background:linear-gradient(180deg,#1d1e1f,#0f0f0f);position:relative}
-.works .im span{position:absolute;left:14px;bottom:12px;font:10px Menlo,monospace;color:#4a4a46}
-.works p{margin-top:14px;font-size:13px;color:var(--mist)}
+/* ⑨ works */
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:72px}
+.works .im{aspect-ratio:4/5;position:relative;overflow:hidden;filter:grayscale(var(--g,1)) brightness(calc(.7 + (1 - var(--g,1))*.3));background:#111}
+.works .im .bg{position:absolute;inset:0;background:radial-gradient(circle at 60% 38%,#2d6a74 0%,#16302f 22%,#1a1b1c 50%,#0f0f0f 100%);transition:transform 1.4s var(--slow)}
+.works .im .glow{position:absolute;left:60%;top:38%;width:44%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.6);border-radius:50%;background:radial-gradient(circle,rgba(127,196,210,.55),transparent 65%);opacity:0;transition:opacity .8s var(--ease),transform 1.2s var(--slow)}
+.works a:hover .glow,.works a:focus-visible .glow{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.works a:hover .bg{transform:scale(1.04)}
+.works .im span{position:absolute;left:14px;bottom:12px;font:10px Menlo,monospace;color:#5a5a56}
+.works p{margin-top:16px;font-size:13px;color:var(--mist)}
 .works p b{display:block;color:var(--ivory);font-weight:300;letter-spacing:.1em}
 
-/* contact */
-.contact{text-align:center}
-.btns{display:flex;justify-content:center;gap:16px;margin-top:44px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-width:240px;min-height:56px;padding:0 40px;border:1px solid var(--ivory);
-  font-family:var(--en);font-size:11px;letter-spacing:.32em;transition:background .4s var(--ease),color .4s var(--ease)}
-.btn:hover,.btn:focus-visible{background:var(--ivory);color:var(--black);outline:none}
-.btn.g{border-color:var(--line);color:var(--mist)}
+/* ⑩ contact */
+.contact{text-align:center;border-top:1px solid var(--line)}
+.contact .st{min-height:100vh;min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 20px}
+.btns{display:flex;justify-content:center;gap:16px;margin-top:48px;flex-wrap:wrap}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;min-width:260px;min-height:58px;padding:0 40px;
+  font-family:var(--en);font-size:11px;letter-spacing:.32em;text-transform:uppercase;transition:color .5s var(--ease)}
+.btn svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.btn rect{fill:none;stroke:var(--ivory);stroke-width:1;stroke-dasharray:640;stroke-dashoffset:640;transition:stroke-dashoffset 1.8s var(--slow)}
+.btn.g rect{stroke:var(--mist)}
+.btn .t{position:relative;opacity:0;transition:opacity .8s var(--ease) 1.2s}
+.btns.v rect{stroke-dashoffset:0}.btns.v .t{opacity:1}
+.btn::before{content:"";position:absolute;inset:0;background:var(--ivory);transform:scaleY(0);transform-origin:bottom;transition:transform .5s var(--slow)}
+.btn:hover::before,.btn:focus-visible::before{transform:scaleY(1)}
+.btn:hover,.btn:focus-visible{color:var(--black);outline:none}
+.btn.g::before{background:var(--mist)}
 
 footer{border-top:1px solid var(--line);padding:56px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
-footer .logo{font-size:13px}
+footer .fl{font-family:var(--en);font-size:13px;letter-spacing:.42em;padding-left:.42em}
 footer small{font-family:var(--en);font-size:10px;letter-spacing:.24em;color:var(--mist)}
 footer small:last-child{text-align:right}
 
+.f{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.f.v{opacity:1;transform:none}
 .sp-cta{display:none}
-.f{opacity:0;transition:opacity .6s var(--ease)} .f.v{opacity:1}
-@media (prefers-reduced-motion:reduce){.f{opacity:1;transition:none}html{scroll-behavior:auto}}
-:focus-visible{outline:1px solid var(--copper);outline-offset:4px}
+
+/* reduce motion: everything static */
+.reduce .hero,.reduce .manifest,.reduce .gx{height:auto}
+.reduce .hero .st,.reduce .manifest .st,.reduce .gx .st{position:relative;height:100vh}
+.reduce .hero h1 span{opacity:1;filter:none;letter-spacing:.42em;transition:none}
+.reduce .hero .rule{transform:none}.reduce .hero .sub,.reduce .hero .scroll{opacity:1}
+.reduce .hero .veil{display:none}.reduce .hero .fb{opacity:1}
+.reduce .manifest h2 span,.reduce .manifest p span{color:var(--ivory)}
+.reduce .chap .it,.reduce .flow li{opacity:1}
+.reduce .gx .frame{clip-path:none}.reduce .gx .hud{opacity:1}.reduce .gx .copy .a{display:none}.reduce .gx .copy .b{opacity:1}
+.reduce .f,.reduce .lineup tr{opacity:1;transform:none}
+.reduce .btn rect{stroke-dashoffset:0}.reduce .btn .t{opacity:1}
+.reduce .works .im{filter:none}.reduce .why .k{font-weight:300}
+.reduce .flow .wire{transform:none}.reduce .flow .head{display:none}
 
 @media (max-width:860px){
   .wrap{padding:0 20px}
-  header{padding:18px 20px}
-  header{display:flex;justify-content:space-between}
+  header,header.s{display:flex;justify-content:space-between;padding:18px 20px}
   header nav{display:none}
-  .wrap.pad{padding:96px 20px}
-  .lineup tr:last-child td:first-child{border-bottom:0}
-  .logo{font-size:13px}
-  .pad{padding:96px 0}
-  .svc{grid-template-columns:1fr 1fr}
-  .svc div{padding:28px 16px}
-  .g-hero{grid-template-columns:1fr}
-  .g-hero .img{min-height:360px}
-  .g-hero .txt{padding:72px 20px}
+  .logo{font-size:12px}
+  .pad{padding:110px 0}
+  .hero h1{font-size:24px}
+  .hero.on h1 span,.reduce .hero h1 span{letter-spacing:.32em}
+  .hero .ph{left:20px;right:20px}
+  .chap .grid{grid-template-columns:1fr;gap:0}
+  .chap .side{position:sticky;top:0;height:auto;padding:84px 0 24px;background:linear-gradient(var(--black) 82%,transparent);z-index:2}
+  .chap .side h2{font-size:20px}
+  .chap .side .count{margin-top:12px}
+  .chap .items{padding:10vh 0 20vh}
+  .chap .it{min-height:46vh}
+  .gx .hud .tr b{font-size:28px}
   .why{grid-template-columns:1fr}
-  .why div,.why div+div{padding:36px 0;border-left:0}
-  .lineup td:first-child{width:auto;display:block;padding-bottom:0;border-top:1px solid var(--line)}
+  .why>div,.why>div+div{padding:40px 0;border-left:0}
+  .lineup td:first-child{width:auto;display:block;padding-bottom:0}
   .lineup td:last-child{display:block;border-top:0;padding-top:8px}
-  .flow ol{grid-template-columns:1fr}
-  .flow li{border-bottom:1px solid var(--line)}
+  .lineup tr:last-child td:first-child{border-bottom:0}
+  .flow{grid-template-columns:1fr;gap:24px}
+  .flow .side{position:relative;top:0}
+  .flow ol{padding-left:32px}
   .works{grid-template-columns:1fr}
+  .btn{min-width:240px}
   footer{grid-template-columns:1fr;gap:12px;text-align:center;padding-bottom:110px}
   footer small:last-child{text-align:center}
-  .hero .ph{left:20px;right:20px}
-  .hero h1{font-size:24px;letter-spacing:.32em;padding-left:.32em}
-  .lead h2{font-size:20px;letter-spacing:.1em}
-  .svc h3{font-size:15px;letter-spacing:.06em}
-  .sp-cta{display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:auto 0 0;z-index:30;background:rgba(14,14,14,.96);border-top:1px solid var(--line)}
+  .sp-cta{display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:auto 0 0;z-index:40;background:rgba(14,14,14,.94);border-top:1px solid var(--line);
+    transform:translateY(100%);transition:transform .6s var(--slow)}
+  .sp-cta.on{transform:none}
   .sp-cta a{min-height:56px;display:flex;align-items:center;justify-content:center;font-family:var(--en);font-size:11px;letter-spacing:.32em}
   .sp-cta a+a{border-left:1px solid var(--line)}
 }
@@ -161,68 +236,105 @@ footer small:last-child{text-align:right}
 <body>
 
 <header id="hd">
-  <nav aria-label="メイン">
-    <a href="#service">Service</a><a href="#garmin">Garmin</a><a href="#works">Works</a>
-  </nav>
+  <nav aria-label="メイン"><a href="#service">Service</a><a href="#garmin">Garmin</a><a href="#works">Works</a></nav>
   <a href="#top" class="logo">GOOD SPEED</a>
   <div class="r"><a href="#contact">Contact</a></div>
+  <i id="prog"></i>
 </header>
 
 <main id="top">
-  <div class="hero">
-    <div class="in">
-      <h1>GOOD SPEED</h1>
-      <div class="rule"></div>
-      <p class="cap sub">Marine Electric ／ Garmin</p>
+  <!-- ① ② HERO -->
+  <div class="hero" id="hero">
+    <div class="st">
+      <div class="fb"></div>
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <div class="veil" id="veil"></div>
+      <div class="in" id="heroIn">
+        <h1 aria-label="GOOD SPEED"><span>GOOD SPEED</span></h1>
+        <div class="rule"></div>
+        <p class="cap sub">Marine Electric ／ Garmin</p>
+      </div>
+      <div class="scroll">Scroll<i></i></div>
+      <span class="ph">HERO — 夜の操舵席・計器の光（実写差し替え予定）</span>
     </div>
-    <span class="ph">HERO PHOTO — 夜の操舵席・計器の光（実写・彩度−60%）差し替え予定</span>
   </div>
 
-  <section class="pad">
-    <div class="wrap lead f">
+  <!-- ④ MANIFEST -->
+  <section class="manifest" id="manifest">
+    <div class="st">
       <p class="cap">Philosophy</p>
       <div class="rule"></div>
-      <h2>船の電気を、静かに確かに。</h2>
-      <p>配線の一本から、航海機器の取付まで。<br>海の上で、止まらない電気をつくります。</p>
+      <h2 data-split>船の電気を、<br>静かに確かに。</h2>
+      <p data-split>配線の一本から、航海機器の取付まで。<br>海の上で、止まらない電気をつくります。</p>
     </div>
   </section>
 
-  <section class="pad" id="service">
+  <!-- ⑤ SERVICE -->
+  <section class="chap" id="service">
+    <div class="wrap grid">
+      <div class="side">
+        <p class="cap">Service</p>
+        <div class="rule l"></div>
+        <h2>船の電気だけを、<br>専門に。</h2>
+        <p class="count"><b id="svcN">01</b> / 04</p>
+      </div>
+      <div class="items">
+        <div class="it"><p class="n">01</p><h3>電装工事</h3><p>配線の引き直し、分電盤、バッテリーと充電系統まで。見えない場所こそ、丁寧に。</p></div>
+        <div class="it"><p class="n">02</p><h3>航海機器の取付</h3><p>魚群探知機、チャートプロッター、レーダー、オートパイロット。性能は取付で決まります。</p></div>
+        <div class="it"><p class="n">03</p><h3>修理・点検</h3><p>不具合の原因を探し、根本から直します。</p></div>
+        <div class="it"><p class="n">04</p><h3>艤装の相談</h3><p>新艇、中古艇の電装計画を、一緒に考えます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑥ GARMIN -->
+  <section class="gx" id="garmin">
+    <div class="st" id="gxSt">
+      <div class="frame" id="gxFrame">
+        <div class="plot">
+          <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <defs><radialGradient id="sea" cx="55%" cy="55%" r="75%"><stop offset="0" stop-color="#0d2a33"/><stop offset="1" stop-color="#04080a"/></radialGradient></defs>
+            <rect width="1600" height="900" fill="url(#sea)"/>
+            <g fill="none" stroke="#2f7f8f" stroke-opacity=".5" stroke-width="1.2">
+              <path d="M-50 640 C 220 560 380 700 620 600 S 1000 520 1250 600 1650 560 1700 580"/>
+              <path d="M-50 560 C 240 480 420 610 660 520 S 1020 440 1280 520 1650 480 1700 500" stroke-opacity=".38"/>
+              <path d="M-50 480 C 260 410 440 520 700 440 S 1040 370 1300 440 1650 400 1700 420" stroke-opacity=".28"/>
+              <path d="M-50 400 C 280 340 470 430 740 360 S 1060 300 1320 360 1650 330 1700 340" stroke-opacity=".2"/>
+            </g>
+            <path d="M-50 900 L-50 720 C 200 690 330 770 520 730 S 820 680 980 760 1300 800 1700 740 L1700 900Z" fill="#0f1a12"/>
+            <path d="M-50 720 C 200 690 330 770 520 730 S 820 680 980 760 1300 800 1700 740" fill="none" stroke="#c8a24a" stroke-opacity=".7" stroke-width="1.5"/>
+            <path d="M380 820 L 640 520 L 980 430 L 1260 300" fill="none" stroke="#e9f6f8" stroke-width="2" stroke-dasharray="10 10" id="route"/>
+            <circle cx="640" cy="520" r="5" fill="#e9f6f8"/><circle cx="980" cy="430" r="5" fill="#e9f6f8"/>
+            <g transform="translate(380 820) rotate(-40)"><path d="M0 -16 L9 12 L0 6 L-9 12Z" fill="#A8703F"/></g>
+            <g stroke="#2a4a52" stroke-width="1"><line x1="0" y1="450" x2="1600" y2="450" stroke-opacity=".25"/><line x1="800" y1="0" x2="800" y2="900" stroke-opacity=".25"/></g>
+          </svg>
+        </div>
+        <div class="hud">
+          <div class="tl">CHART ／ 35°31′N 139°41′E</div>
+          <div class="tr"><b>12.4</b><small>SOG KN</small></div>
+        </div>
+        <span class="ph">GARMIN — 実機の画面・取付写真に差し替え予定</span>
+      </div>
+      <div class="copy">
+        <div class="a"><p class="cap">Garmin Dealer</p><div class="rule"></div><h2>GARMIN</h2></div>
+        <div class="b"><h3>選ぶところから、<br>海で使えるところまで。</h3>
+          <p>Garmin製品の取扱代理店として、<br>選定、取付、配線、初期設定までを一貫して。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad">
     <div class="wrap">
-      <div class="lead f"><p class="cap">Service</p><div class="rule"></div><h2>船の電気だけを、専門に。</h2></div>
-      <div class="svc f">
-        <div><p class="n">01</p><h3>電装工事</h3><p>配線の引き直し、分電盤、バッテリーと充電系統まで。</p></div>
-        <div><p class="n">02</p><h3>航海機器の取付</h3><p>魚探、プロッター、レーダー、オートパイロット。</p></div>
-        <div><p class="n">03</p><h3>修理・点検</h3><p>不具合の原因を探し、根本から直します。</p></div>
-        <div><p class="n">04</p><h3>艤装の相談</h3><p>新艇、中古艇の電装計画を一緒に考えます。</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GARMIN -->
-  <section id="garmin">
-    <div class="g-hero">
-      <div class="img"><span>PHOTO — Garmin機器の取付後（計器の光だけ色を残す）</span></div>
-      <div class="txt f">
-        <p class="cap">Garmin Dealer</p>
-        <div class="rule l"></div>
-        <h2>GARMIN</h2>
-        <h3>選ぶところから、<br>海で使えるところまで。</h3>
-        <p>Garmin製品の取扱代理店として、機種の選定、取付、配線、初期設定までを一貫して請け負います。<br>買って終わりではなく、船の上で正しく動く状態でお渡しします。</p>
-      </div>
-    </div>
-
-    <div class="wrap pad">
-      <div class="lead f"><p class="cap">Why Good Speed</p><div class="rule"></div><h2>代理店であり、電気工事の専門家。</h2></div>
-      <div class="why f">
-        <div><p class="k">01</p><h4>船に合わせて選ぶ</h4><p>艇の大きさ、用途、既存の機器を見たうえで、必要な機種と組み合わせを提案します。</p></div>
-        <div><p class="k">02</p><h4>配線から取付まで</h4><p>電源の取り回し、振動子の位置、ケーブルの防水処理まで。性能は取付で決まります。</p></div>
-        <div><p class="k">03</p><h4>つないで、整える</h4><p>機器同士の連携と初期設定まで済ませ、使い方をご説明してからお渡しします。</p></div>
+      <div class="lead f"><p class="cap">Why Good Speed</p><div class="rule"></div><h2>代理店であり、<br>電気工事の専門家。</h2></div>
+      <!-- ⑦ -->
+      <div class="why">
+        <div class="f"><p class="k">01</p><h4>船に合わせて選ぶ</h4><p>艇の大きさ、用途、既存の機器を見たうえで、必要な機種と組み合わせを提案します。</p></div>
+        <div class="f"><p class="k">02</p><h4>配線から取付まで</h4><p>電源の取り回し、振動子の位置、ケーブルの防水処理まで。性能は取付で決まります。</p></div>
+        <div class="f"><p class="k">03</p><h4>つないで、整える</h4><p>機器同士の連携と初期設定まで済ませ、使い方をご説明してからお渡しします。</p></div>
       </div>
 
-      <div class="lineup f">
-        <p class="cap">Line Up</p>
-        <div class="rule l"></div>
+      <div class="lineup">
+        <p class="cap f">Line Up</p><div class="rule l"></div>
         <table>
           <tr><td>Chartplotter<small>チャートプロッター</small></td><td>航路と位置をひと目で。船の情報をまとめる中心になる機器です。</td></tr>
           <tr><td>Fishfinder / Sonar<small>魚群探知機・ソナー</small></td><td>海底の地形と魚影を、高い解像度で映します。</td></tr>
@@ -232,21 +344,21 @@ footer small:last-child{text-align:right}
         </table>
       </div>
 
-      <div class="flow">
-        <p class="cap">Flow</p>
-        <div class="rule l"></div>
+      <!-- ⑧ -->
+      <div class="flow" id="flow">
+        <div class="side f"><p class="cap">Flow</p><div class="rule l"></div><h2 style="font-size:clamp(22px,2.6vw,32px);font-weight:300;letter-spacing:.14em;line-height:1.8">ご相談から、<br>お渡しまで。</h2></div>
         <ol>
-          <li class="f"><p class="n">01</p><h4>ご相談</h4><p>使い方とご予算をうかがいます。</p></li>
-          <li class="f"><p class="n">02</p><h4>現地確認</h4><p>船を拝見し、配線と設置場所を確認します。</p></li>
-          <li class="f"><p class="n">03</p><h4>お見積り</h4><p>機器と工事を分けてご提示します。</p></li>
-          <li class="f"><p class="n">04</p><h4>取付・配線</h4><p>電源から防水処理まで施工します。</p></li>
-          <li class="f"><p class="n">05</p><h4>設定・お渡し</h4><p>連携と設定を済ませ、使い方をご説明します。</p></li>
+          <i class="wire"></i><i class="head"></i>
+          <li><p class="n">01</p><h4>ご相談</h4><p>使い方とご予算をうかがいます。</p></li>
+          <li><p class="n">02</p><h4>現地確認</h4><p>船を拝見し、配線と設置場所を確認します。</p></li>
+          <li><p class="n">03</p><h4>お見積り</h4><p>機器と工事を分けてご提示します。</p></li>
+          <li><p class="n">04</p><h4>取付・配線</h4><p>電源から防水処理まで施工します。</p></li>
+          <li><p class="n">05</p><h4>設定・お渡し</h4><p>連携と設定を済ませ、使い方をご説明します。</p></li>
         </ol>
       </div>
 
       <div class="faq f">
-        <p class="cap">Q &amp; A</p>
-        <div class="rule l"></div>
+        <p class="cap">Q &amp; A</p><div class="rule l"></div>
         <details><summary>機器の購入だけでもお願いできますか。</summary><p>可能です。ただし性能を引き出すには取付と配線が大切なため、工事までご一緒にお任せいただくことをおすすめしています。</p></details>
         <details><summary>他社製の機器でも相談できますか。</summary><p>はい。既存の機器と配線を確認したうえで、入れ替えるか、残して組み合わせるかをご提案します。</p></details>
         <details><summary>どの港まで来てもらえますか。</summary><p>対応エリアはお問い合わせの際にご確認ください。</p></details>
@@ -254,25 +366,26 @@ footer small:last-child{text-align:right}
     </div>
   </section>
 
-  <section class="pad" id="works">
+  <!-- ⑨ WORKS -->
+  <section class="pad" id="works" style="border-top:1px solid var(--line)">
     <div class="wrap">
       <div class="lead f"><p class="cap">Works</p><div class="rule"></div><h2>施工事例</h2></div>
-      <div class="works f">
-        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
-        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
-        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
+      <div class="works">
+        <a href="#contact" class="f"><div class="im"><div class="bg"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
+        <a href="#contact" class="f"><div class="im"><div class="bg" style="background-position:30% 60%"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
+        <a href="#contact" class="f"><div class="im"><div class="bg"></div><div class="glow"></div><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></a>
       </div>
     </div>
   </section>
 
-  <section class="pad" id="contact">
-    <div class="wrap contact f">
-      <p class="cap">Contact</p>
-      <div class="rule"></div>
-      <div class="lead"><h2>船の電気のことなら、まずご相談を。</h2></div>
-      <div class="btns">
-        <a class="btn" href="tel:09042214430">Tel 090-4221-4430</a>
-        <a class="btn g" href="mailto:kurosaki@gs-boat.com">Mail</a>
+  <!-- ⑩ CONTACT -->
+  <section class="contact" id="contact">
+    <div class="st">
+      <p class="cap f">Contact</p><div class="rule"></div>
+      <div class="lead f"><h2>船の電気のことなら、<br>まずご相談を。</h2></div>
+      <div class="btns" id="btns">
+        <a class="btn" href="tel:09042214430"><svg aria-hidden="true"><rect x=".5" y=".5" width="calc(100% - 1px)" height="calc(100% - 1px)" pathLength="640"/></svg><span class="t">Tel 090-4221-4430</span></a>
+        <a class="btn g" href="mailto:kurosaki@gs-boat.com"><svg aria-hidden="true"><rect x=".5" y=".5" width="calc(100% - 1px)" height="calc(100% - 1px)" pathLength="640"/></svg><span class="t">Mail</span></a>
       </div>
     </div>
   </section>
@@ -280,17 +393,135 @@ footer small:last-child{text-align:right}
 
 <footer>
   <small>GOOD SPEED Co., Ltd.</small>
-  <span class="logo">GOOD SPEED</span>
+  <span class="fl">GOOD SPEED</span>
   <small>Kawasaki, Kanagawa</small>
 </footer>
-
-<div class="sp-cta"><a href="tel:09042214430">Tel</a><a href="mailto:kurosaki@gs-boat.com">Mail</a></div>
+<div class="sp-cta" id="spcta"><a href="tel:09042214430">Tel</a><a href="mailto:kurosaki@gs-boat.com">Mail</a></div>
 
 <script>
-const hd=document.getElementById('hd');
-addEventListener('scroll',()=>hd.classList.toggle('s',scrollY>40),{passive:true});
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.15});
-document.querySelectorAll('.f').forEach(el=>io.observe(el));
+(()=>{
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduce=1/.test(location.search);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const clamp=(v,a=0,b=1)=>Math.min(b,Math.max(a,v));
+const hero=$('#hero');
+if(R){document.documentElement.classList.add('reduce');hero.classList.add('on');$$('.f,.lineup tr').forEach(e=>e.classList.add('v'));$('#btns').classList.add('v');return}
+
+/* ① intro */
+requestAnimationFrame(()=>setTimeout(()=>hero.classList.add('on'),150));
+
+/* split for ④ */
+$$('[data-split]').forEach(el=>{
+  el.innerHTML=el.innerHTML.split(/(<br>)/).map(s=>s==='<br>'?s:[...s].map(c=>`<span>${c}</span>`).join('')).join('');
+});
+const mChars=$$('#manifest [data-split] span');
+
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.2,rootMargin:'0px 0px -8% 0px'});
+$$('.f,.lineup tr,#btns').forEach(el=>io.observe(el));
+
+/* section progress helper: 0 when top hits viewport top, 1 when bottom hits viewport bottom */
+const prog=el=>{const r=el.getBoundingClientRect();return clamp(-r.top/(r.height-innerHeight))};
+const vis=el=>{const r=el.getBoundingClientRect();return clamp((innerHeight-r.top)/(innerHeight+r.height))};
+
+const hd=$('#hd'),bar=$('#prog'),veil=$('#veil'),heroIn=$('#heroIn');
+const items=$$('.chap .it'),svcN=$('#svcN');
+const gx=$('#garmin'),gs=$('#gxSt').style;
+const ks=$$('.why .k');
+const flow=$('#flow ol'),steps=$$('#flow li');
+const ims=$$('.works .im');
+const spcta=$('#spcta');
+let sy=scrollY,vel=0,last=scrollY;
+
+function frame(){
+  const y=scrollY;vel+= ((y-last)-vel)*.15;last=y;sy+=(y-sy)*.1;
+  const H=document.documentElement.scrollHeight-innerHeight;
+  bar.style.transform=`scaleX(${H>0?y/H:0})`;
+  hd.classList.toggle('s',y>innerHeight*.6);
+  spcta&&spcta.classList.toggle('on',y>innerHeight);
+
+  /* ② hero: veil lifts, light rises, title drifts back */
+  const hp=prog(hero);
+  veil.style.opacity=(1-clamp(hp*2.2+.0))*.55;
+  heroIn.style.opacity=1-clamp((hp-.5)*2.6);
+  heroIn.style.transform=`scale(${1-hp*.06})`;
+  GL.p=hp;GL.v=vel;
+
+  /* ④ */
+  const mp=clamp(prog($('#manifest'))*1.25);
+  const n=Math.floor(mp*mChars.length);
+  mChars.forEach((c,i)=>c.classList.toggle('lit',i<n));
+
+  /* ⑤ */
+  let act=0;items.forEach((it,i)=>{const r=it.getBoundingClientRect();if(r.top<innerHeight*.6)act=i});
+  items.forEach((it,i)=>it.classList.toggle('on',i===act));svcN.textContent='0'+(act+1);
+
+  /* ⑥ */
+  const gp=prog(gx),e=clamp(gp/.55),ee=1-Math.pow(1-e,3);
+  const sm=innerWidth<860;
+  gs.setProperty('--iy',((sm?30:22)*(1-ee))+'%');
+  gs.setProperty('--ix',((sm?12:28)*(1-ee))+'%');
+  gs.setProperty('--r',(24*(1-ee))+'px');
+  gs.setProperty('--a1',1-clamp((gp-.25)*4));
+  gs.setProperty('--a2',clamp((gp-.55)*4));
+  gs.setProperty('--hud',clamp((gp-.45)*3));
+
+  /* ⑦ weight grows */
+  ks.forEach(k=>{const p=vis(k);k.style.fontWeight=Math.round(clamp((p-.15)/.45)*4+1)*100});
+
+  /* ⑧ */
+  const r=flow.getBoundingClientRect();
+  const fp=clamp((innerHeight*.6-r.top)/r.height);
+  flow.style.setProperty('--p',fp.toFixed(4));
+  steps.forEach(s=>{const b=s.getBoundingClientRect();s.classList.toggle('on',b.top<innerHeight*.6)});
+
+  /* ⑨ */
+  ims.forEach(im=>{const p=vis(im);im.style.setProperty('--g',(1-clamp((p-.2)/.4)).toFixed(3))});
+  requestAnimationFrame(frame);
+}
+
+/* ② + 全面: WebGL instrument light */
+const GL={p:0,v:0};
+(function(){
+  const c=$('#gl');const gl=c.getContext('webgl',{antialias:false,alpha:false,powerPreference:'low-power'});
+  if(!gl){$('.hero .fb').style.opacity=1;return}
+  const vs='attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}';
+  const fs=`precision mediump float;uniform vec2 r;uniform float t,p,v;
+  float h(vec2 q){return fract(sin(dot(q,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 q){vec2 i=floor(q),f=fract(q);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  vec3 glow(vec2 uv,float sh){
+    vec2 c=vec2(.5,.47+sh);vec2 d=(uv-c)*vec2(r.x/r.y,1.);
+    float rad=length(d*vec2(.75,1.25));
+    float core=exp(-rad*rad*(9.-p*4.));
+    float wave=n(uv*vec2(3.,9.)+vec2(t*.04,t*.02))*.5+n(uv*vec2(9.,22.)-t*.05)*.25;
+    float lines=smoothstep(.985,1.,sin((uv.y+t*.004)*r.y*.9))*.02;
+    vec3 col=vec3(.05,.20,.23)*core*(.9+p*.7)+vec3(.03,.10,.12)*wave*core*1.6;
+    col+=vec3(.66,.44,.25)*exp(-pow((uv.y-(.47+sh))*28.,2.))*smoothstep(.45,0.,abs(uv.x-.5))*.10*(.4+p);
+    return col+lines*core;
+  }
+  void main(){vec2 uv=gl_FragCoord.xy/r;
+    float s=clamp(v*.0025,-.04,.04);
+    vec3 col=vec3(glow(uv,s).r,glow(uv,0.).g,glow(uv,-s).b);
+    col+= (h(uv*r+t)-.5)*.012;
+    col=max(col,0.)+vec3(.055);
+    gl_FragColor=vec4(col*(1.-smoothstep(.55,1.,length((uv-.5)*vec2(1.,1.3)))*.6),1.);}`;
+  const sh=(t,s)=>{const o=gl.createShader(t);gl.shaderSource(o,s);gl.compileShader(o);return o};
+  const pr=gl.createProgram();gl.attachShader(pr,sh(gl.VERTEX_SHADER,vs));gl.attachShader(pr,sh(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){$('.hero .fb').style.opacity=1;return}
+  gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const a=gl.getAttribLocation(pr,'a');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+  const U=k=>gl.getUniformLocation(pr,k),ur=U('r'),ut=U('t'),up=U('p'),uv=U('v');
+  const dpr=Math.min(devicePixelRatio,innerWidth<860?1:1.5);
+  const size=()=>{c.width=c.clientWidth*dpr*.6;c.height=c.clientHeight*dpr*.6;gl.viewport(0,0,c.width,c.height)};
+  size();addEventListener('resize',size);
+  let on=true;new IntersectionObserver(e=>on=e[0].isIntersecting).observe(c);
+  const t0=performance.now();let pv=0;
+  (function loop(){if(on&&!document.hidden){pv+=(GL.v-pv)*.12;
+    gl.uniform2f(ur,c.width,c.height);gl.uniform1f(ut,(performance.now()-t0)/1000);gl.uniform1f(up,GL.p);gl.uniform1f(uv,pv*dpr);
+    gl.drawArrays(gl.TRIANGLES,0,3);}requestAnimationFrame(loop)})();
+})();
+requestAnimationFrame(frame);
+})();
 </script>
 </body>
 </html>
