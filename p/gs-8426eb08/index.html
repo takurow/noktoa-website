@@ -12,7 +12,7 @@
 /* v0.6 「通電」— 写真と映像は、回路がつながったときにだけ点く。
    掲載メディアはすべて仮（data-ph="差し替え予定"）。Pexels / Unsplash のフリー素材を直リンク。 */
 :root{
-  --k:#0B0B0B;--w:#F4F3EF;--g:#8E8C86;--l:#262624;--d:#cfcdc7;
+  --k:#FAFAF8;--w:#111110;--g:#8A8883;--l:#E4E2DD;--d:#45443F; /* v1.3 白基調（サンローラン型）。暗いのは映像の中だけ */
   --pos:#C8302A;--neg:#E2B53A; /* 船のDC配線色：プラス=赤／マイナス=黄 */
   --en:"Helvetica Neue",Helvetica,Arial,sans-serif;
   --ja:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
@@ -35,7 +35,7 @@ img,video{display:block;width:100%;height:100%;object-fit:cover}
 #wire i{position:absolute;inset:0;background:var(--pos);transform-origin:top;transform:scaleY(var(--p,0))}
 #wire b{position:absolute;left:-3px;width:7px;height:7px;border-radius:50%;background:var(--pos);top:calc(var(--p,0)*100% - 3px)}
 
-header{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
+header{color:#fff;position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
 header .logo{font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.32em}
 header nav{display:flex;gap:28px;font-family:var(--en);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
 
@@ -111,11 +111,11 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .frame figure{position:absolute;inset:0}
 .frame figure img{opacity:0}
 .frame figure.on img{opacity:1;animation:strike 1.4s cubic-bezier(.4,0,.2,1) both}
-.frame .lb{position:absolute;left:18px;bottom:14px;z-index:2;color:var(--w)}
+.frame .lb{color:#fff!important;position:absolute;left:18px;bottom:14px;z-index:2;color:var(--w)}
 .frame .lb::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pos);margin-right:10px}
 
 /* ───────── GARMIN ───────── */
-#garmin{background:var(--w);color:var(--k);border:0;overflow-x:clip}
+#garmin{--k:#111110;--w:#F0EFEA;--d:#cfcdc7;background:var(--w);color:var(--k);border:0;overflow-x:clip}
 .gtop{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:end}
 .gtop h2{font-family:var(--en);font-weight:700;font-size:clamp(48px,8.4vw,128px);line-height:.9;letter-spacing:-.03em;margin-top:32px}
 .gtop h2 small{display:block;font-family:var(--ja);font-weight:600;font-size:clamp(20px,2.4vw,30px);letter-spacing:.12em;line-height:1.6;margin-top:22px}
@@ -182,7 +182,7 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .wkh p{font-size:14px;color:var(--d);max-width:26em}
 .wk{display:grid;grid-template-columns:1.62fr 1fr;grid-template-rows:1fr 1fr;gap:14px;margin-top:56px;height:min(52vh,520px)}
 .wk figure:first-child{grid-row:1/3}
-.wk figcaption{position:absolute;left:16px;bottom:12px;z-index:2;color:var(--w)}
+.wk figcaption{color:#fff!important;position:absolute;left:16px;bottom:12px;z-index:2;color:var(--w)}
 
 /* ───────── CONTACT：電話番号の文字の中で、海が動く ───────── */
 .co{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start}
@@ -317,6 +317,7 @@ footer .mono{font-size:10px}
 .reduce .bus .bb i,.reduce .tap .dp,.reduce .tap .ph{transform:none!important}
 .reduce .bus .bb::before,.reduce .bus .bb::after,.reduce .tap b,.reduce .tap .mono{opacity:1}
 .reduce .flow ol .fl{display:none}
+.dk{--k:#0B0B0B;--w:#F4F3EF;--l:#262624;--d:#cfcdc7;--g:#8E8C86;background:var(--k);color:var(--w)}
 </style>
 </head>
 <body>
@@ -329,7 +330,7 @@ footer .mono{font-size:10px}
 
 <main id="top">
   <!-- HERO：夜の係留艇。ブレーカーが入ると映像が点く -->
-  <div class="hero" id="hero">
+  <div class="hero dk" id="hero">
     <div class="hv" aria-hidden="true">
       <video id="hv" data-ph="差し替え予定" muted playsinline loop preload="auto"
         poster="https://images.pexels.com/videos/15270579/boarding-marine-navy-yacht-15270579.jpeg?auto=compress&cs=tinysrgb&w=1600"
