@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>GOOD SPEED — Marine Electric / Garmin</title>
+<meta name="description" content="船の電気に特化した電気工事。Garmin航海機器の選定・取付・設定までを一貫して。">
+<style>
+:root{
+  --black:#0E0E0E; --black2:#161616; --ivory:#F2F1EC; --mist:#9B9890; --line:#2A2A28; --copper:#A8703F;
+  --en:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ja:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--black);color:var(--ivory);font-family:var(--ja);font-weight:300;font-size:15px;line-height:2;letter-spacing:.04em;
+  word-break:keep-all;line-break:strict;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.en{font-family:var(--en);font-weight:400;text-transform:uppercase}
+.cap{font-family:var(--en);font-size:11px;letter-spacing:.32em;color:var(--mist);text-transform:uppercase}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+.rule{width:28px;height:2px;background:var(--copper);margin:28px auto}
+.rule.l{margin-left:0}
+
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:20;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:24px 40px;transition:background .6s var(--ease),border-color .6s var(--ease);border-bottom:1px solid transparent}
+header.s{background:rgba(14,14,14,.92);border-color:var(--line);backdrop-filter:blur(6px)}
+header nav{display:flex;gap:32px}
+header nav a,header .r a{font-family:var(--en);font-size:11px;letter-spacing:.3em;color:var(--mist);transition:color .3s}
+header nav a:hover,header .r a:hover{color:var(--ivory)}
+.logo{font-family:var(--en);font-size:17px;letter-spacing:.42em;padding-left:.42em}
+header .r{text-align:right}
+
+/* hero */
+.hero{height:100svh;min-height:620px;position:relative;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;
+  background:radial-gradient(ellipse 60% 45% at 50% 42%,#14262b 0%,#0b1113 45%,var(--black) 80%)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,14,14,0) 55%,var(--black) 100%)}
+.hero .ph{position:absolute;left:40px;bottom:24px;font-family:Menlo,monospace;font-size:10px;color:#4a4a46;letter-spacing:.05em;z-index:2}
+.hero .in{position:relative;z-index:2;text-align:center;padding-bottom:16vh}
+.hero h1{font-family:var(--en);font-weight:400;font-size:clamp(34px,6.4vw,88px);letter-spacing:.42em;padding-left:.42em;line-height:1.1}
+.hero .sub{margin-top:26px}
+
+/* sections */
+section{border-top:1px solid var(--line)}
+.pad{padding:160px 0}
+.wrap.pad{padding:160px 40px}
+.lead{text-align:center}
+.lead h2{font-size:clamp(22px,2.6vw,30px);font-weight:300;letter-spacing:.14em;line-height:1.8}
+.lead p{margin-top:26px;color:#cfcdc6}
+
+.svc{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:64px}
+.svc div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 28px}
+.svc .n{font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--copper)}
+.svc h3{font-weight:300;font-size:17px;letter-spacing:.12em;margin:14px 0 10px}
+.svc p{font-size:13px;color:var(--mist);line-height:1.9}
+
+/* garmin */
+.g-hero{display:grid;grid-template-columns:1.1fr 1fr;min-height:640px}
+.g-hero .img{background:radial-gradient(ellipse at 40% 50%,#123039,#0a0f11 60%,#0b0b0b);position:relative}
+.g-hero .img span{position:absolute;left:20px;bottom:16px;font:10px Menlo,monospace;color:#4a4a46}
+.g-hero .txt{padding:120px 72px;display:flex;flex-direction:column;justify-content:center}
+.g-hero h2{font-family:var(--en);font-weight:400;font-size:clamp(30px,3.6vw,48px);letter-spacing:.32em;line-height:1.2}
+.g-hero h3{font-size:22px;font-weight:300;letter-spacing:.14em;margin-top:28px;line-height:1.8}
+.g-hero p{margin-top:20px;color:#cfcdc6}
+
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line)}
+.why div{padding:48px 36px 48px 0;border-bottom:1px solid var(--line)}
+.why div+div{padding-left:36px;border-left:1px solid var(--line)}
+.why .k{font-family:var(--en);font-size:44px;font-weight:300;letter-spacing:.06em;color:var(--ivory)}
+.why h4{font-weight:300;font-size:17px;letter-spacing:.12em;margin:10px 0}
+.why p{font-size:13px;color:var(--mist);line-height:1.9}
+
+.lineup{margin-top:120px}
+.lineup table{width:100%;border-collapse:collapse;margin-top:32px}
+.lineup td{border-top:1px solid var(--line);padding:26px 0;vertical-align:top}
+.lineup tr:last-child td{border-bottom:1px solid var(--line)}
+.lineup td:first-child{width:34%;font-family:var(--en);font-size:12px;letter-spacing:.3em}
+.lineup td:first-child small{display:block;font-family:var(--ja);font-size:12px;letter-spacing:.12em;color:var(--mist);text-transform:none;margin-top:4px}
+.lineup td:last-child{color:#cfcdc6;font-size:14px}
+
+.flow{margin-top:120px}
+.flow ol{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);margin-top:32px;border-top:1px solid var(--line)}
+.flow li{padding:32px 20px 32px 0;position:relative}
+.flow li::before{content:"";position:absolute;top:-1px;left:0;width:0;height:1px;background:var(--copper);transition:width .9s var(--ease)}
+.flow li.v::before{width:28px}
+.flow .n{font-family:var(--en);font-size:11px;letter-spacing:.2em;color:var(--mist)}
+.flow h4{font-weight:300;font-size:16px;letter-spacing:.12em;margin:8px 0 6px}
+.flow p{font-size:12.5px;color:var(--mist);line-height:1.85}
+
+.faq{margin-top:120px;max-width:860px}
+.faq details{border-top:1px solid var(--line)}
+.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:26px 40px 26px 0;position:relative;font-size:15px;letter-spacing:.08em;min-height:44px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:4px;top:50%;width:12px;height:1px;background:var(--mist);box-shadow:none;transition:transform .4s var(--ease)}
+.faq summary::before{content:"";position:absolute;right:9.5px;top:calc(50% - 5.5px);width:1px;height:12px;background:var(--mist);transition:transform .4s var(--ease)}
+.faq details[open] summary::before{transform:scaleY(0)}
+.faq details p{padding:0 0 28px;color:#cfcdc6;font-size:14px}
+
+/* works */
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+.works .im{aspect-ratio:4/5;background:linear-gradient(180deg,#1d1e1f,#0f0f0f);position:relative}
+.works .im span{position:absolute;left:14px;bottom:12px;font:10px Menlo,monospace;color:#4a4a46}
+.works p{margin-top:14px;font-size:13px;color:var(--mist)}
+.works p b{display:block;color:var(--ivory);font-weight:300;letter-spacing:.1em}
+
+/* contact */
+.contact{text-align:center}
+.btns{display:flex;justify-content:center;gap:16px;margin-top:44px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-width:240px;min-height:56px;padding:0 40px;border:1px solid var(--ivory);
+  font-family:var(--en);font-size:11px;letter-spacing:.32em;transition:background .4s var(--ease),color .4s var(--ease)}
+.btn:hover,.btn:focus-visible{background:var(--ivory);color:var(--black);outline:none}
+.btn.g{border-color:var(--line);color:var(--mist)}
+
+footer{border-top:1px solid var(--line);padding:56px 40px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+footer .logo{font-size:13px}
+footer small{font-family:var(--en);font-size:10px;letter-spacing:.24em;color:var(--mist)}
+footer small:last-child{text-align:right}
+
+.sp-cta{display:none}
+.f{opacity:0;transition:opacity .6s var(--ease)} .f.v{opacity:1}
+@media (prefers-reduced-motion:reduce){.f{opacity:1;transition:none}html{scroll-behavior:auto}}
+:focus-visible{outline:1px solid var(--copper);outline-offset:4px}
+
+@media (max-width:860px){
+  .wrap{padding:0 20px}
+  header{padding:18px 20px}
+  header{display:flex;justify-content:space-between}
+  header nav{display:none}
+  .wrap.pad{padding:96px 20px}
+  .lineup tr:last-child td:first-child{border-bottom:0}
+  .logo{font-size:13px}
+  .pad{padding:96px 0}
+  .svc{grid-template-columns:1fr 1fr}
+  .svc div{padding:28px 16px}
+  .g-hero{grid-template-columns:1fr}
+  .g-hero .img{min-height:360px}
+  .g-hero .txt{padding:72px 20px}
+  .why{grid-template-columns:1fr}
+  .why div,.why div+div{padding:36px 0;border-left:0}
+  .lineup td:first-child{width:auto;display:block;padding-bottom:0;border-top:1px solid var(--line)}
+  .lineup td:last-child{display:block;border-top:0;padding-top:8px}
+  .flow ol{grid-template-columns:1fr}
+  .flow li{border-bottom:1px solid var(--line)}
+  .works{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;gap:12px;text-align:center;padding-bottom:110px}
+  footer small:last-child{text-align:center}
+  .hero .ph{left:20px;right:20px}
+  .hero h1{font-size:24px;letter-spacing:.32em;padding-left:.32em}
+  .lead h2{font-size:20px;letter-spacing:.1em}
+  .svc h3{font-size:15px;letter-spacing:.06em}
+  .sp-cta{display:grid;grid-template-columns:1fr 1fr;position:fixed;inset:auto 0 0;z-index:30;background:rgba(14,14,14,.96);border-top:1px solid var(--line)}
+  .sp-cta a{min-height:56px;display:flex;align-items:center;justify-content:center;font-family:var(--en);font-size:11px;letter-spacing:.32em}
+  .sp-cta a+a{border-left:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <nav aria-label="メイン">
+    <a href="#service">Service</a><a href="#garmin">Garmin</a><a href="#works">Works</a>
+  </nav>
+  <a href="#top" class="logo">GOOD SPEED</a>
+  <div class="r"><a href="#contact">Contact</a></div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="in">
+      <h1>GOOD SPEED</h1>
+      <div class="rule"></div>
+      <p class="cap sub">Marine Electric ／ Garmin</p>
+    </div>
+    <span class="ph">HERO PHOTO — 夜の操舵席・計器の光（実写・彩度−60%）差し替え予定</span>
+  </div>
+
+  <section class="pad">
+    <div class="wrap lead f">
+      <p class="cap">Philosophy</p>
+      <div class="rule"></div>
+      <h2>船の電気を、静かに確かに。</h2>
+      <p>配線の一本から、航海機器の取付まで。<br>海の上で、止まらない電気をつくります。</p>
+    </div>
+  </section>
+
+  <section class="pad" id="service">
+    <div class="wrap">
+      <div class="lead f"><p class="cap">Service</p><div class="rule"></div><h2>船の電気だけを、専門に。</h2></div>
+      <div class="svc f">
+        <div><p class="n">01</p><h3>電装工事</h3><p>配線の引き直し、分電盤、バッテリーと充電系統まで。</p></div>
+        <div><p class="n">02</p><h3>航海機器の取付</h3><p>魚探、プロッター、レーダー、オートパイロット。</p></div>
+        <div><p class="n">03</p><h3>修理・点検</h3><p>不具合の原因を探し、根本から直します。</p></div>
+        <div><p class="n">04</p><h3>艤装の相談</h3><p>新艇、中古艇の電装計画を一緒に考えます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GARMIN -->
+  <section id="garmin">
+    <div class="g-hero">
+      <div class="img"><span>PHOTO — Garmin機器の取付後（計器の光だけ色を残す）</span></div>
+      <div class="txt f">
+        <p class="cap">Garmin Dealer</p>
+        <div class="rule l"></div>
+        <h2>GARMIN</h2>
+        <h3>選ぶところから、<br>海で使えるところまで。</h3>
+        <p>Garmin製品の取扱代理店として、機種の選定、取付、配線、初期設定までを一貫して請け負います。<br>買って終わりではなく、船の上で正しく動く状態でお渡しします。</p>
+      </div>
+    </div>
+
+    <div class="wrap pad">
+      <div class="lead f"><p class="cap">Why Good Speed</p><div class="rule"></div><h2>代理店であり、電気工事の専門家。</h2></div>
+      <div class="why f">
+        <div><p class="k">01</p><h4>船に合わせて選ぶ</h4><p>艇の大きさ、用途、既存の機器を見たうえで、必要な機種と組み合わせを提案します。</p></div>
+        <div><p class="k">02</p><h4>配線から取付まで</h4><p>電源の取り回し、振動子の位置、ケーブルの防水処理まで。性能は取付で決まります。</p></div>
+        <div><p class="k">03</p><h4>つないで、整える</h4><p>機器同士の連携と初期設定まで済ませ、使い方をご説明してからお渡しします。</p></div>
+      </div>
+
+      <div class="lineup f">
+        <p class="cap">Line Up</p>
+        <div class="rule l"></div>
+        <table>
+          <tr><td>Chartplotter<small>チャートプロッター</small></td><td>航路と位置をひと目で。船の情報をまとめる中心になる機器です。</td></tr>
+          <tr><td>Fishfinder / Sonar<small>魚群探知機・ソナー</small></td><td>海底の地形と魚影を、高い解像度で映します。</td></tr>
+          <tr><td>Radar<small>レーダー</small></td><td>夜間や霧の中でも、周囲の船と障害物を捉えます。</td></tr>
+          <tr><td>Autopilot<small>オートパイロット</small></td><td>長い航行の負担を減らし、針路を正確に保ちます。</td></tr>
+          <tr><td>Instruments / VHF<small>計器・無線</small></td><td>エンジン情報、風、水深などの計器と、無線機の導入も承ります。</td></tr>
+        </table>
+      </div>
+
+      <div class="flow">
+        <p class="cap">Flow</p>
+        <div class="rule l"></div>
+        <ol>
+          <li class="f"><p class="n">01</p><h4>ご相談</h4><p>使い方とご予算をうかがいます。</p></li>
+          <li class="f"><p class="n">02</p><h4>現地確認</h4><p>船を拝見し、配線と設置場所を確認します。</p></li>
+          <li class="f"><p class="n">03</p><h4>お見積り</h4><p>機器と工事を分けてご提示します。</p></li>
+          <li class="f"><p class="n">04</p><h4>取付・配線</h4><p>電源から防水処理まで施工します。</p></li>
+          <li class="f"><p class="n">05</p><h4>設定・お渡し</h4><p>連携と設定を済ませ、使い方をご説明します。</p></li>
+        </ol>
+      </div>
+
+      <div class="faq f">
+        <p class="cap">Q &amp; A</p>
+        <div class="rule l"></div>
+        <details><summary>機器の購入だけでもお願いできますか。</summary><p>可能です。ただし性能を引き出すには取付と配線が大切なため、工事までご一緒にお任せいただくことをおすすめしています。</p></details>
+        <details><summary>他社製の機器でも相談できますか。</summary><p>はい。既存の機器と配線を確認したうえで、入れ替えるか、残して組み合わせるかをご提案します。</p></details>
+        <details><summary>どの港まで来てもらえますか。</summary><p>対応エリアはお問い合わせの際にご確認ください。</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad" id="works">
+    <div class="wrap">
+      <div class="lead f"><p class="cap">Works</p><div class="rule"></div><h2>施工事例</h2></div>
+      <div class="works f">
+        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
+        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
+        <div><div class="im"><span>PHOTO</span></div><p><b>事例タイトル</b>艇種 ／ 作業内容</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pad" id="contact">
+    <div class="wrap contact f">
+      <p class="cap">Contact</p>
+      <div class="rule"></div>
+      <div class="lead"><h2>船の電気のことなら、まずご相談を。</h2></div>
+      <div class="btns">
+        <a class="btn" href="tel:09042214430">Tel 090-4221-4430</a>
+        <a class="btn g" href="mailto:kurosaki@gs-boat.com">Mail</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <small>GOOD SPEED Co., Ltd.</small>
+  <span class="logo">GOOD SPEED</span>
+  <small>Kawasaki, Kanagawa</small>
+</footer>
+
+<div class="sp-cta"><a href="tel:09042214430">Tel</a><a href="mailto:kurosaki@gs-boat.com">Mail</a></div>
+
+<script>
+const hd=document.getElementById('hd');
+addEventListener('scroll',()=>hd.classList.toggle('s',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.f').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
