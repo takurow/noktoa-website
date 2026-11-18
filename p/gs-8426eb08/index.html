@@ -266,6 +266,14 @@ footer .mono{font-size:10px}
 
 /* 動きを減らす設定／?reduce=1：すべて止めて、読める静止ページに */
 .reduce{scroll-behavior:auto}
+
+/* リンクのない写真は主張させず、地に溶かす */
+#service img.bw,.flow img.bw,#works img.bw{filter:saturate(.85) contrast(1.02) brightness(.58)}
+.frame,.row figure,.flow figure,#works figure{background:transparent!important;border:0!important;
+  -webkit-mask-image:radial-gradient(ellipse 75% 72% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 75% 72% at 50% 50%,#000 30%,transparent 100%)}
+.slit .ap video{filter:contrast(1.02) brightness(.5)}
+.slit .ap{-webkit-mask-image:linear-gradient(#0000,#000 18%,#000 82%,#0000);mask-image:linear-gradient(#0000,#000 18%,#000 82%,#0000)}
+#works figcaption{display:none}
 .reduce *{transition:none!important;animation:none!important}
 .reduce .f{opacity:1;transform:none}
 .reduce .pw>img,.reduce .pw>video,.reduce .hero .hv video,.reduce .frame figure.on img,.reduce .tap .ph img{opacity:1}
