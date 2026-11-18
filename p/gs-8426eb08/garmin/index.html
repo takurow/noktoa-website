@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Garmin 取扱製品 — GOOD SPEED</title>
+<meta name="description" content="Garmin正規代理店 GOOD SPEED の取扱製品。プロッター、魚群探知機、レーダー、オートパイロットを、選定から取付・配線・初期設定まで一貫して。">
+<link rel="preconnect" href="https://www.garmin.co.jp" crossorigin>
+<style>
+/* DRAFT 2026-11-19 ─ ガーミンジャパン確認前の下書き。公開しない。
+   枠（ヘッダー・フッター・色・書体）はトップ /p/gs-8426eb08/ v0.6「通電」と共通。
+   Garmin のロゴ・製品画像・製品名は公式サイトから借用（data-src-official に出典ページ）。一覧は official_assets.md。 */
+:root{
+  --k:#0B0B0B;--w:#F4F3EF;--g:#8E8C86;--l:#262624;--d:#cfcdc7;
+  --pos:#C8302A;--neg:#E2B53A;
+  --en:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  --ja:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",sans-serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --e:cubic-bezier(.16,1,.3,1);
+  --pad:56px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--k);color:var(--w);font-family:var(--ja);font-weight:400;font-size:15px;line-height:2;letter-spacing:.04em;
+  word-break:keep-all;line-break:strict;overflow-wrap:anywhere;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1240px;margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--g)}
+
+#wire{position:fixed;left:28px;top:0;width:1px;height:100vh;background:var(--l);z-index:15;pointer-events:none}
+#wire i{position:absolute;inset:0;background:var(--pos);transform-origin:top;transform:scaleY(var(--p,0))}
+#wire b{position:absolute;left:-3px;width:7px;height:7px;border-radius:50%;background:var(--pos);top:calc(var(--p,0)*100% - 3px)}
+
+header{position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
+header .logo{font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.32em}
+header nav{display:flex;gap:28px;font-family:var(--en);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+
+.tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--en);font-weight:700;font-size:11px;letter-spacing:.28em;line-height:1.6;text-transform:uppercase}
+.tag::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pos)}
+.tag.n::before{background:var(--neg)}
+h2{font-weight:600;font-size:clamp(24px,2.8vw,36px);line-height:1.5;letter-spacing:.06em;margin:20px 0 0}
+
+.f{opacity:0;transform:translateY(12px);transition:opacity .9s var(--e),transform .9s var(--e)}
+.f.v{opacity:1;transform:none}
+
+section{padding:104px 0;border-top:1px solid var(--l);position:relative}
+
+/* ───────── 見出し（黒） ───────── */
+.top{padding:150px 0 72px}
+.top .bc{display:flex;gap:10px;align-items:center}
+.top .bc a{border-bottom:1px solid var(--l)}
+.top .g{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:end;margin-top:40px}
+.top h1{font-weight:600;font-size:clamp(30px,4vw,52px);line-height:1.45;letter-spacing:.06em;margin-top:22px}
+.top p{color:var(--d);max-width:30em}
+
+/* ───────── 取扱製品（白）。Garmin公式の見せ方：白地・黒文字・製品は白背景の切り抜き ───────── */
+#products{background:var(--w);color:var(--k);border:0;padding:72px 0 104px}
+.gh{display:flex;justify-content:space-between;align-items:center;gap:24px;padding-bottom:26px;border-bottom:1px solid var(--k)}
+.gh .lg{display:flex;align-items:center;gap:22px}
+.gh .lg img{display:block;height:22px;width:auto}
+.gh .lg span{font-size:13px;font-weight:600;letter-spacing:.12em;padding-left:22px;border-left:1px solid #b9b7b0;line-height:1.7}
+.gh .mono{color:#5a5852;text-align:right;line-height:1.7}
+.cnav{display:flex;flex-wrap:wrap;gap:8px 28px;padding:18px 0;border-bottom:1px solid var(--d);font-size:13px;font-weight:600;letter-spacing:.08em}
+.cnav a{border-bottom:1px solid transparent;transition:border-color .3s}
+.cnav a:hover{border-color:var(--k)}
+.cat{display:grid;grid-template-columns:200px 1fr;gap:40px;padding:44px 0 0;scroll-margin-top:70px}
+.cat+.cat{margin-top:44px;border-top:1px solid var(--d)}
+.cat h3{font-size:19px;font-weight:600;letter-spacing:.1em;line-height:1.6}
+.cat .mono{color:#6b6963;display:block;line-height:1.6;margin-bottom:6px}
+.cat .ct p{font-size:13px;line-height:1.9;color:#3b3a36;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pc{background:#fff;border:1px solid #e3e1db;display:flex;flex-direction:column;transition:border-color .3s}
+.pc:hover{border-color:#9d9b95}
+.pc .im{display:flex;align-items:center;justify-content:center;height:176px;padding:14px 20px 0}
+.pc .im img{display:block;width:150px;height:150px;object-fit:contain}
+.pc .tx{padding:8px 20px 18px;display:flex;flex-direction:column;flex:1}
+.pc h4{font-family:var(--en),var(--ja);font-weight:700;font-size:16px;line-height:1.5;letter-spacing:.01em}
+.pc .sp{font-size:13px;line-height:1.8;color:#3b3a36;margin-top:6px}
+.pc .pr{font-size:12px;line-height:1.7;color:#3b3a36;margin-top:auto;padding-top:14px}
+.pc .pr b{font-weight:600;color:var(--k)}
+.pc .ac{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid #e3e1db}
+.pc .ask{font-size:13px;font-weight:600;letter-spacing:.06em;display:inline-flex;align-items:center;gap:8px}
+.pc .ask::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--pos);flex:none}
+.pc .ask:hover{text-decoration:underline;text-underline-offset:4px}
+.pc .of{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:#6b6963;white-space:nowrap}
+.pc .of:hover{color:var(--k)}
+.src{margin-top:52px;padding-top:20px;border-top:1px solid var(--d);font-size:12px;line-height:1.9;color:#5a5852}
+.src a{border-bottom:1px solid #b9b7b0}
+
+/* ───────── 取付工事セット ───────── */
+.kit{display:grid;grid-template-columns:1fr 1.25fr;gap:72px;align-items:start}
+.kit .side p{color:var(--d);font-size:14px;margin-top:22px;max-width:25em}
+.kit dl{border-top:1px solid var(--l)}
+.kit dl div{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--l)}
+.kit dt{font-weight:600;letter-spacing:.08em}
+.kit dd{font-size:14px;color:var(--d)}
+.kit .est{display:flex;align-items:center;gap:14px;margin-top:26px;font-size:14px}
+.kit .est i{display:block;width:36px;height:1.6px;background:var(--pos);position:relative;flex:none}
+.kit .est i::after{content:"";position:absolute;left:32px;top:0;width:36px;height:1.6px;background:var(--neg)}
+.kit .est span{padding-left:36px}
+
+/* ───────── FAQ ───────── */
+.faqw{display:grid;grid-template-columns:1fr 1.25fr;gap:72px;align-items:start}
+.faq details{border-bottom:1px solid var(--l)}
+.faq details:first-child{border-top:1px solid var(--l)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 0;font-weight:600;letter-spacing:.06em;display:flex;justify-content:space-between;gap:24px;line-height:1.8}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--g)}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 0 24px;color:var(--d);font-size:14px}
+
+/* ───────── CONTACT ───────── */
+#contact{padding:112px 0 104px}
+#sel{display:none;margin-top:26px;font-size:14px;padding:12px 16px;border:1px solid var(--l);width:fit-content;max-width:100%}
+#sel.on{display:block}
+#sel b{font-family:var(--en),var(--ja);font-weight:700;letter-spacing:.02em}
+.tel{display:inline-block;font-family:var(--en);font-weight:700;font-size:clamp(40px,7vw,96px);letter-spacing:-.03em;line-height:1.05;margin-top:34px;white-space:nowrap}
+.cl{display:flex;gap:40px;align-items:baseline;margin-top:30px;flex-wrap:wrap}
+.cl a{font-family:var(--en);font-size:13px;letter-spacing:.2em;border-bottom:1px solid var(--w);padding-bottom:6px;text-transform:uppercase;transition:border-color .3s}
+.cl a:hover{border-color:var(--pos)}
+
+footer{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;padding:32px var(--pad);border-top:1px solid var(--l);flex-wrap:wrap}
+footer .mono{font-size:10px;line-height:1.9}
+footer .tm{flex-basis:100%;font-family:var(--ja);letter-spacing:.04em}
+.sp-cta{display:none}
+
+@media (max-width:1040px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:860px){
+  :root{--pad:24px}
+  .wrap{padding:0 24px 0 44px}
+  header{padding:18px 20px 18px 44px}
+  header nav{display:none}
+  #wire{left:18px}
+  section{padding:72px 0}
+  .top{padding:104px 0 52px}
+  .top .g,.kit,.faqw{grid-template-columns:1fr;gap:26px}
+  .top .g{margin-top:28px}
+  #products{padding:48px 0 72px}
+  .gh{flex-direction:column;align-items:flex-start;gap:14px;padding-bottom:20px}
+  .gh .lg{gap:16px}
+  .gh .lg img{height:18px}
+  .gh .lg span{padding-left:16px;font-size:12px}
+  .gh .mono{text-align:left}
+  .cnav{gap:6px 20px}
+  .cat{grid-template-columns:1fr;gap:18px;padding-top:32px}
+  .cat+.cat{margin-top:32px}
+  .grid{grid-template-columns:1fr;gap:10px}
+  /* スマホは横並びの一覧。画像は小さく */
+  .pc{flex-direction:row}
+  .pc .im{flex:0 0 92px;height:auto;padding:14px 0 14px 12px;align-items:flex-start}
+  .pc .im img{width:80px;height:80px}
+  .pc .tx{padding:14px 14px 14px 12px;min-width:0}
+  .pc h4{font-size:15px}
+  .pc .ac{flex-wrap:wrap;gap:6px 12px}
+  .kit dl div{grid-template-columns:1fr;gap:2px;padding:18px 0}
+  #contact{padding:80px 0 72px}
+  .tel{font-size:11.6vw}
+  footer{padding:28px 20px 96px 44px;flex-direction:column;gap:8px}
+  .sp-cta{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--w);color:var(--k);border-top:1px solid var(--d);transform:translateY(100%);transition:transform .5s var(--e)}
+  .sp-cta.on{transform:none}
+  .sp-cta a{text-align:center;padding:17px 0;font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.2em}
+  .sp-cta a+a{border-left:1px solid var(--d)}
+}
+
+/* 動きを減らす設定／?reduce=1：すべて止めて静止ページに */
+.reduce{scroll-behavior:auto}
+.reduce *{transition:none!important;animation:none!important}
+.reduce .f{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important;animation:none!important}
+  .f{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="wire" aria-hidden="true"><i></i><b></b></div>
+
+<header>
+  <!-- 公開時の href は /p/gs-8426eb08/ （トップ）。下書きでは相対で ../ -->
+  <a href="../" class="logo">GOOD SPEED</a>
+  <nav aria-label="メイン"><a href="#products">Products</a><a href="#install">Install</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
+</header>
+
+<main id="top">
+  <div class="top">
+    <div class="wrap">
+      <div class="bc mono"><a href="../">GOOD SPEED</a><span>／</span><span>GARMIN</span></div>
+      <div class="g">
+        <div class="f"><span class="tag">Authorized Dealer</span><h1>Garmin製品の<br>販売と取付</h1></div>
+        <p class="f">GOOD SPEEDはGarminの正規代理店です。<br>機器の選定から、取付、配線、初期設定まで。<br>船の電気工事の会社が、一貫してお引き受けします。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 取扱製品：製品名・特長・画像は Garmin Japan 公式サイトより（2026-11-19 確認） -->
+  <section id="products">
+    <div class="wrap">
+      <div class="gh">
+        <div class="lg">
+          <img src="garmin-logo.svg" width="153" height="22" alt="Garmin" data-src-official="https://www.garmin.co.jp/products/onthewater/">
+          <span>正規代理店<br>GOOD SPEED株式会社</span>
+        </div>
+        <span class="mono">取扱製品（抜粋）<br>掲載外の機種もご相談ください</span>
+      </div>
+      <nav class="cnav" aria-label="製品カテゴリ">
+        <a href="#c-plotter">プロッター</a><a href="#c-sonar">魚群探知機・ソナー</a><a href="#c-radar">レーダー</a><a href="#c-pilot">オートパイロット・計器</a>
+      </nav>
+
+      <div class="cat" id="c-plotter">
+        <div class="ct"><span class="mono">CHARTPLOTTERS</span><h3>プロッター</h3><p>海図、ソナー、レーダーをひとつの画面に。</p></div>
+        <div class="grid">
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="ECHOMAP UHD2 52cv" src="https://www.garmin.co.jp/m/jp/g/products/echomap-52cv-cf-lg.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/echomap-uhd2/"></div>
+            <div class="tx">
+              <h4>ECHOMAP UHD2 52cv</h4>
+              <p class="sp">キー操作の5インチ。<br>CHIRP従来型と<wbr>ClearVüに対応。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="ECHOMAP UHD2 52cv">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/echomap-uhd2/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="ECHOMAP UHD2 92sv" src="https://www.garmin.co.jp/m/jp/g/products/010-02687-00-1_1.png" data-src-official="https://www.garmin.co.jp/products/onthewater/echomap-uhd2-92sv-gt56/"></div>
+            <div class="tx">
+              <h4>ECHOMAP UHD2 92sv</h4>
+              <p class="sp">キーアシスト付き<wbr>タッチスクリーン。<br>従来型、ClearVü、<wbr>SideVüに対応。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="ECHOMAP UHD2 92sv">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/echomap-uhd2-92sv-gt56/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="ECHOMAP Ultra 2 12インチ" src="https://www.garmin.co.jp/m/jp/g/products/010-02881-00_1_1_1.png" data-src-official="https://www.garmin.co.jp/products/onthewater/echomap-ultra2-122sv-apac/"></div>
+            <div class="tx">
+              <h4>ECHOMAP Ultra 2 12"</h4>
+              <p class="sp">12インチのタッチスクリーン。<br>LiveScopeソナー対応、<wbr>マルチバンドGPS。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="ECHOMAP Ultra 2 12インチ">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/echomap-ultra2-122sv-apac/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="GPSMAP 723" src="https://www.garmin.co.jp/m/jp/g/products/gpsmap-723-cf-xl_1.png" data-src-official="https://www.garmin.co.jp/products/onthewater/gpsmap-723/"></div>
+            <div class="tx">
+              <h4>GPSMAP 723</h4>
+              <p class="sp">高解像度の7インチ<wbr>タッチスクリーン。<br>Garminの<wbr>マリンシステムと連携。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="GPSMAP 723">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gpsmap-723/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="GPSMAP 1523xsv" src="https://www.garmin.co.jp/m/jp/g/products/gpsmap-1523xsv-cf-lg_1.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/gpsmap-1523xsv/"></div>
+            <div class="tx">
+              <h4>GPSMAP 1523xsv</h4>
+              <p class="sp">15インチのウルトラワイド。<br>ソナーを内蔵。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="GPSMAP 1523xsv">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gpsmap-1523xsv/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cat" id="c-sonar">
+        <div class="ct"><span class="mono">SONAR ／ TRANSDUCERS</span><h3>魚群探知機・ソナー</h3><p>振動子の位置と向きで、映りが変わります。</p></div>
+        <div class="grid">
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="Striker Vivid 7sv" src="https://www.garmin.co.jp/m/jp/g/products/striker-vivid-7sv-cf-lg_1.png" data-src-official="https://www.garmin.co.jp/products/onthewater/striker-vivid-7sv/"></div>
+            <div class="tx">
+              <h4>Striker Vivid 7sv</h4>
+              <p class="sp">GPS付きの魚群探知機。<br>CHIRP従来型、ClearVü、<wbr>SideVüに対応。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="Striker Vivid 7sv">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/striker-vivid-7sv/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="LiveScope Plus System" src="https://www.garmin.co.jp/m/jp/g/products/livescope-plus-system-lvs34-cf-lg_1.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/livescope-plus-system/"></div>
+            <div class="tx">
+              <h4>LiveScope™ Plus System</h4>
+              <p class="sp">リアルタイムソナー。<br>フォワード、ダウン、<wbr>パースペクティブの各モード。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="LiveScope Plus System">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/livescope-plus-system/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="Garmin GT56UHD-TM" src="https://www.garmin.co.jp/m/jp/g/products/garmin-gt36uhd-tm-cf-xl_1.png" data-src-official="https://www.garmin.co.jp/products/onthewater/gt56uhd-tm/"></div>
+            <div class="tx">
+              <h4>Garmin GT56UHD-TM</h4>
+              <p class="sp">オールインワンの振動子。<br>超高解像度ClearVü、<wbr>SideVüと広帯域CHIRP。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="Garmin GT56UHD-TM">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gt56uhd-tm/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cat" id="c-radar">
+        <div class="ct"><span class="mono">RADAR</span><h3>レーダー</h3><p>設置の高さと電源の取り方から計画します。</p></div>
+        <div class="grid">
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="GMR 18 HD3 レドーム" src="https://www.garmin.co.jp/m/jp/g/products/010-02843-00_1.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/gmr-18-hd3/"></div>
+            <div class="tx">
+              <h4>GMR 18 HD3 レドーム</h4>
+              <p class="sp">18インチのドームレーダー。<br>出力4kW、最大レンジ36海里。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="GMR 18 HD3 レドーム">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gmr-18-hd3/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="GMR 18 xHD3" src="https://www.garmin.co.jp/m/jp/g/products/gmr-18-xhd3-cf-lg_1.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/gmr-18xhd3/"></div>
+            <div class="tx">
+              <h4>GMR 18 xHD3</h4>
+              <p class="sp">出力4kW、最大レンジ48海里。<br>スキャンの平均化技術を搭載。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="GMR 18 xHD3">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gmr-18xhd3/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cat" id="c-pilot">
+        <div class="ct"><span class="mono">AUTOPILOT ／ INSTRUMENTS</span><h3>オートパイロット・計器</h3><p>操舵の方式と、いまの機器を確認してから決めます。</p></div>
+        <div class="grid">
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="Reactor 40油圧式コアパック（SmartPump v2搭載）" src="https://www.garmin.co.jp/m/jp/g/products/010-02794-01.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/reactor-40-hydraulic-corepack-with-smartpump-v2/"></div>
+            <div class="tx">
+              <h4>Reactor™&nbsp;40<wbr>油圧式コアパック<br>（SmartPump&nbsp;v2搭載）</h4>
+              <p class="sp">油圧操舵のボート向け。<br>ソリッドステート<wbr>9軸AHRSを搭載。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="Reactor 40油圧式コアパック（SmartPump v2搭載）">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/reactor-40-hydraulic-corepack-with-smartpump-v2/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+          <article class="pc f">
+            <div class="im"><img loading="lazy" decoding="async" width="150" height="150" alt="GMI 40" src="https://www.garmin.co.jp/m/jp/g/products/gmi-40-cf-lg_1.jpg" data-src-official="https://www.garmin.co.jp/products/onthewater/gmi-400/"></div>
+            <div class="tx">
+              <h4>GMI 40</h4>
+              <p class="sp">4.3インチの<wbr>タッチスクリーン計器。<br>NMEA 2000®に対応。</p>
+              <p class="pr"><b>価格はお問い合わせください</b></p>
+              <div class="ac"><a class="ask" href="#contact" data-model="GMI 40">この機種で相談する</a><a class="of" href="https://www.garmin.co.jp/products/onthewater/gmi-400/" target="_blank" rel="noopener">公式ページ ↗</a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <p class="src">製品名、特長、画像は、<wbr><a href="https://www.garmin.co.jp/products/onthewater/" target="_blank" rel="noopener">Garmin&nbsp;Japan公式サイト</a>の<wbr>掲載内容にもとづきます<wbr>（2026年11月19日確認）。<br>公式サイトに<wbr>希望小売価格の掲載がない機種は、<wbr>お見積りでご案内します。<br>仕様は予告なく変わることがあります。<wbr>最新の情報は、<wbr>各製品の公式ページをご覧ください。</p>
+    </div>
+  </section>
+
+  <!-- 取付工事セット -->
+  <section id="install">
+    <div class="wrap">
+      <div class="kit">
+        <div class="side f">
+          <span class="tag">Install</span><h2>取付工事セット</h2>
+          <p>機器の性能は、取付と配線で決まります。<br>購入と工事をまとめてお任せいただけます。</p>
+        </div>
+        <div class="f">
+          <dl>
+            <div><dt>選定</dt><dd>艇の大きさ、用途、いまの機器を見て、機種と組み合わせを決めます。</dd></div>
+            <div><dt>取付</dt><dd>本体、振動子、アンテナを、艇に合わせて設置します。</dd></div>
+            <div><dt>配線</dt><dd>電源とヒューズ、機器同士の接続、ケーブルの防水処理まで。</dd></div>
+            <div><dt>初期設定</dt><dd>機器の連携と設定を済ませ、使い方をご説明してお渡しします。</dd></div>
+          </dl>
+          <p class="est"><i aria-hidden="true"></i><span>費用は艇と機器で変わるため、<wbr>現地を確認してお見積りします。</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="faqw">
+        <div class="f"><span class="tag n">FAQ</span><h2>よくあるご質問</h2></div>
+        <div class="faq f">
+          <details><summary>価格を知りたいのですが。</summary><p>機種と工事の内容をうかがい、機器と工事を分けてお見積りします。お電話かメールでご連絡ください。</p></details>
+          <details><summary>機器の購入だけでもお願いできますか。</summary><p>可能です。ただし性能を引き出すには取付と配線が大切なため、工事までご一緒にお任せいただくことをおすすめしています。</p></details>
+          <details><summary>保証や修理の窓口はどこになりますか。</summary><p>当社でご購入いただいた機器は、当社が窓口となってご相談をお受けします。保証の内容と期間は、Garminの保証規定に準じます。</p></details>
+          <details><summary>ここに載っていない機種も頼めますか。</summary><p>はい。掲載は一部です。ご希望の機種をお知らせいただければ、取り扱いを確認してお返事します。</p></details>
+          <details><summary>いま付いている機器と<wbr>組み合わせられますか。</summary><p>既存の機器と配線を確認したうえで、入れ替えるか、残して組み合わせるかをご提案します。</p></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="f"><span class="tag">Contact</span><h2>機種が決まっていなくても<br>ご相談ください</h2></div>
+      <p id="sel" aria-live="polite">ご相談の機種：<b id="selm"></b></p>
+      <div><a class="tel" href="tel:09042214430" aria-label="電話 090-4221-4430">090-4221-4430</a></div>
+      <div class="cl"><a id="mail" href="mailto:kurosaki@gs-boat.com">kurosaki@gs-boat.com</a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="mono">GOOD SPEED Co., Ltd.</span>
+  <span class="mono">MARINE ELECTRIC ／ GARMIN AUTHORIZED DEALER</span>
+  <span class="mono tm">Garmin、Garminロゴおよび各製品名は、<wbr>Garmin&nbsp;Ltd.または<wbr>その子会社の商標です。</span>
+</footer>
+<div class="sp-cta" id="spcta"><a href="tel:09042214430">TEL</a><a id="mail2" href="mailto:kurosaki@gs-boat.com">MAIL</a></div>
+
+<script>
+(()=>{
+const R=matchMedia('(prefers-reduced-motion: reduce)').matches||/[?&]reduce=1/.test(location.search);
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const root=document.documentElement,wire=$('#wire'),cta=$('#spcta');
+
+/* 「この機種で相談する」：機種名を問い合わせ欄とメールの件名に渡す */
+const sel=$('#sel'),selm=$('#selm'),MAIL='mailto:kurosaki@gs-boat.com';
+$$('.ask').forEach(a=>a.addEventListener('click',()=>{const m=a.dataset.model;
+  selm.textContent='Garmin '+m.replace(/^Garmin /,'');sel.classList.add('on');
+  const h=MAIL+'?subject='+encodeURIComponent('Garmin '+m.replace(/^Garmin /,'')+' の相談');
+  $('#mail').href=h;$('#mail2').href=h}));
+
+if(R){root.classList.add('reduce');$$('.f').forEach(e=>e.classList.add('v'));cta.classList.add('on');return}
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');io.unobserve(e.target)}}),{threshold:.12});
+$$('.f').forEach(e=>io.observe(e));
+
+let tk=0;
+const tick=()=>{tk=0;const y=scrollY,vh=innerHeight,m=root.scrollHeight-vh;
+  wire.style.setProperty('--p',m>0?y/m:0);cta.classList.toggle('on',y>vh*.4)};
+addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(tick)},{passive:true});
+addEventListener('resize',()=>{if(!tk)tk=requestAnimationFrame(tick)});
+tick();
+})();
+</script>
+</body>
+</html>

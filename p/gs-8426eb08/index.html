@@ -47,8 +47,8 @@ h2{font-weight:600;font-size:clamp(28px,4vw,52px);line-height:1.45;letter-spacin
 /* 通電：消えていた写真が、蛍光灯のように点く */
 .pw{position:relative;overflow:hidden;background:#131312}
 .pw>img,.pw>video{opacity:.1}
-.pw.v>img,.pw.v>video{opacity:1;animation:strike .85s steps(1,end) var(--dl,0s) both}
-@keyframes strike{0%{opacity:.1}10%{opacity:.8}17%{opacity:.14}30%{opacity:.62}37%{opacity:.2}52%{opacity:1}60%{opacity:.72}68%,100%{opacity:1}}
+.pw.v>img,.pw.v>video{opacity:1;animation:strike 1.8s cubic-bezier(.4,0,.2,1) var(--dl,0s) both}
+@keyframes strike{0%{opacity:.1}100%{opacity:1}}
 
 .f{opacity:0;transform:translateY(16px);transition:opacity 1.1s var(--e),transform 1.1s var(--e)}
 .f.v{opacity:1;transform:none}
@@ -59,7 +59,7 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .hero{overflow:hidden;min-height:86svh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 6vh;position:relative}
 .hero .hv{position:absolute;inset:0;background:#000}
 .hero .hv video{opacity:0;filter:contrast(1.06) brightness(1.08)}
-.on .hero .hv video{opacity:1;animation:strike .9s steps(1,end) 1.55s both}
+.on .hero .hv video{opacity:1;animation:strike 2.2s cubic-bezier(.4,0,.2,1) 1.55s both}
 .hero>*:not(.hv){position:relative}
 .hero .spec{position:absolute!important;top:96px;left:var(--pad);right:var(--pad);display:flex;justify-content:space-between}
 .hero h1{font-family:var(--en);font-weight:700;font-size:clamp(56px,13.4vw,210px);line-height:.86;letter-spacing:-.035em;padding:0 var(--pad) 0 52px;white-space:nowrap}
@@ -110,7 +110,7 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .frame{position:sticky;top:22vh;height:auto;aspect-ratio:4/3;background:#131312;overflow:hidden}
 .frame figure{position:absolute;inset:0}
 .frame figure img{opacity:0}
-.frame figure.on img{opacity:1;animation:strike .8s steps(1,end) both}
+.frame figure.on img{opacity:1;animation:strike 1.4s cubic-bezier(.4,0,.2,1) both}
 .frame .lb{position:absolute;left:18px;bottom:14px;z-index:2;color:var(--w)}
 .frame .lb::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--pos);margin-right:10px}
 
@@ -133,11 +133,13 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .tap{--dl:calc(.5s + var(--i)*.16s)}
 .tap .dp{display:block;width:1.4px;height:46px;background:var(--k);margin:0 auto;transform-origin:top;transform:scaleY(0);transition:transform .5s var(--e) var(--dl)}
 .bus.v .tap .dp{transform:none}
-.tap .ph{aspect-ratio:10/17;overflow:hidden;background:#1a1a19;position:relative;transform:translateY(calc(18px + var(--i)*9px));transition:transform 1.2s var(--e) calc(var(--dl) + .25s)}
+.tap .ph{aspect-ratio:1/1;overflow:hidden;background:#fff;position:relative;transform:translateY(calc(18px + var(--i)*9px));transition:transform 1.2s var(--e) calc(var(--dl) + .25s)}
 .tap:nth-child(even) .ph{transform:translateY(calc(40px - var(--i)*6px))}
 .bus.v .tap .ph{transform:none}
-.tap .ph img{position:absolute;top:0;left:calc(var(--i)*-100% - var(--i)*14px);width:calc(500% + 56px);max-width:none;opacity:.1}
-.bus.v .tap .ph img{opacity:1;animation:strike .85s steps(1,end) calc(var(--dl) + .25s) both}
+.tap .ph img{position:absolute;inset:12%;width:76%;height:76%;object-fit:contain;opacity:.1;transition:transform .8s var(--e)}
+.tap{display:block;color:inherit;text-decoration:none}
+.tap:hover .ph img{transform:scale(1.05)}
+.bus.v .tap .ph img{opacity:1;animation:strike 1.8s cubic-bezier(.4,0,.2,1) calc(var(--dl) + .25s) both}
 .tap b{display:block;font-weight:600;font-size:15px;letter-spacing:.08em;margin-top:16px;line-height:1.6}
 .tap .mono{color:#6b6963;display:block;line-height:1.6}
 .tap b,.tap .mono{opacity:0;transition:opacity .8s calc(var(--dl) + .5s)}
@@ -145,6 +147,7 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .bus .pwr{display:flex;align-items:center;gap:10px;margin-top:30px}
 .bus .pwr i{display:block;width:44px;height:1.6px;background:var(--pos)}.bus .pwr i+i{background:var(--neg);margin-left:-4px}
 .bus .pwr .mono{color:#5a5852}
+.gmore{display:inline-block;border-bottom:1px solid var(--k);padding:10px 0;font-weight:600;letter-spacing:.1em;color:inherit;text-decoration:none;min-height:44px}
 .gpts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:12vh;border-top:1px solid var(--d)}
 .gpts div{padding:28px 28px 0 0}
 .gpts div+div{padding-left:28px;border-left:1px solid var(--d)}
@@ -238,12 +241,12 @@ footer .mono{font-size:10px}
   .bus .bb::before,.bus .bb::after{left:-8px;width:20px;height:10px;top:-10px}
   .bus .bb::after{top:auto;bottom:-10px;right:auto}
   .taps{grid-template-columns:1fr;gap:10px}
-  .tap{display:grid;grid-template-columns:26px 1fr;align-items:center;position:relative}
-  .tap .dp{width:26px;height:1.4px;margin:0;transform-origin:left;transform:scaleX(0)}
-  .tap .ph,.tap:nth-child(even) .ph{aspect-ratio:auto;height:104px;transform:translateX(calc(14px + var(--i)*5px))}
-  .tap .ph img{left:0;width:100%;top:calc(var(--i)*-100% - var(--i)*10px);height:calc(500% + 40px)}
-  .tap b{position:absolute;left:26px;bottom:24px;margin:0;color:var(--w);background:var(--k);font-size:14px;padding:1px 10px 0}
-  .tap .mono{position:absolute;left:26px;bottom:6px;color:var(--d);background:var(--k);font-size:10px;padding:1px 10px}
+  .tap{display:grid;grid-template-columns:26px 92px 1fr;grid-template-rows:auto auto;align-content:center;column-gap:16px;align-items:center;position:relative}
+  .tap .dp{grid-row:1/3;width:26px;height:1.4px;margin:0;transform-origin:left;transform:scaleX(0)}
+  .tap .ph,.tap:nth-child(even) .ph{grid-row:1/3;aspect-ratio:1/1;height:auto;transform:translateX(calc(14px + var(--i)*5px))}
+  .tap .ph img{inset:10%;width:80%;height:80%;top:10%;left:10%}
+  .tap b{grid-column:3;align-self:end;margin:0;font-size:15px}
+  .tap .mono{grid-column:3;align-self:start;font-size:10px}
   .bus.v .tap b,.bus.v .tap .mono{transform:none}
   .gpts{grid-template-columns:1fr}
   .gpts div,.gpts div+div{padding:24px 0;border-left:0;border-bottom:1px solid var(--d)}
@@ -400,14 +403,16 @@ footer .mono{font-size:10px}
         <div class="cap"><span class="mono">NMEA 2000 — 機器は一本の幹線でつながる</span><span class="mono">BACKBONE ／ DROP ／ 12V</span></div>
         <div class="bb" aria-hidden="true"><i></i></div>
         <div class="taps">
-          <div class="tap" style="--i:0"><i class="dp"></i><div class="ph"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="操舵席（イメージ）" src="https://images.pexels.com/photos/6263742/pexels-photo-6263742.jpeg?auto=compress&cs=tinysrgb&w=1600"></div><b>プロッター</b><span class="mono">CHARTPLOTTER</span></div>
-          <div class="tap" style="--i:1"><i class="dp"></i><div class="ph"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/6263742/pexels-photo-6263742.jpeg?auto=compress&cs=tinysrgb&w=1600"></div><b>魚群探知機</b><span class="mono">SONAR</span></div>
-          <div class="tap" style="--i:2"><i class="dp"></i><div class="ph"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/6263742/pexels-photo-6263742.jpeg?auto=compress&cs=tinysrgb&w=1600"></div><b>レーダー</b><span class="mono">RADAR</span></div>
-          <div class="tap" style="--i:3"><i class="dp"></i><div class="ph"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/6263742/pexels-photo-6263742.jpeg?auto=compress&cs=tinysrgb&w=1600"></div><b>オートパイロット</b><span class="mono">AUTOPILOT</span></div>
-          <div class="tap" style="--i:4"><i class="dp"></i><div class="ph"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/6263742/pexels-photo-6263742.jpeg?auto=compress&cs=tinysrgb&w=1600"></div><b>計器・無線</b><span class="mono">INSTRUMENTS ／ VHF</span></div>
+          <a class="tap" style="--i:0" href="garmin/#c-plotter"><i class="dp"></i><div class="ph"><img loading="lazy" decoding="async" alt="Garmin ECHOMAP UHD2" src="https://www.garmin.co.jp/m/jp/g/products/echomap-52cv-cf-lg.jpg"></div><b>プロッター</b><span class="mono">CHARTPLOTTER →</span></a>
+          <a class="tap" style="--i:1" href="garmin/#c-sonar"><i class="dp"></i><div class="ph"><img loading="lazy" decoding="async" alt="Garmin LiveScope Plus" src="https://www.garmin.co.jp/m/jp/g/products/livescope-plus-system-lvs34-cf-lg_1.jpg"></div><b>魚群探知機・ソナー</b><span class="mono">SONAR →</span></a>
+          <a class="tap" style="--i:2" href="garmin/#c-radar"><i class="dp"></i><div class="ph"><img loading="lazy" decoding="async" alt="Garmin GMR 18 xHD3" src="https://www.garmin.co.jp/m/jp/g/products/gmr-18-xhd3-cf-lg_1.jpg"></div><b>レーダー</b><span class="mono">RADAR →</span></a>
+          <a class="tap" style="--i:3" href="garmin/#c-pilot"><i class="dp"></i><div class="ph"><img loading="lazy" decoding="async" alt="Garmin Reactor 40" src="https://www.garmin.co.jp/m/jp/g/products/010-02794-01.jpg"></div><b>オートパイロット</b><span class="mono">AUTOPILOT →</span></a>
+          <a class="tap" style="--i:4" href="garmin/#c-pilot"><i class="dp"></i><div class="ph"><img loading="lazy" decoding="async" alt="Garmin GMI 40" src="https://www.garmin.co.jp/m/jp/g/products/gmi-40-cf-lg_1.jpg"></div><b>計器</b><span class="mono">INSTRUMENTS →</span></a>
         </div>
         <div class="pwr" aria-hidden="true"><i></i><i></i><span class="mono">POWER 12V ／ FUSE 3A</span></div>
       </div>
+
+      <p class="f" style="margin-top:40px"><a class="gmore" href="garmin/">取扱製品を見る →</a></p>
 
       <div class="gpts">
         <div class="f"><span class="mono">SELECT</span><h4>船に合わせて選ぶ</h4><p>艇の大きさ、用途、既存の機器を見て、機種と組み合わせを決めます。</p></div>
