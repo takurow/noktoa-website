@@ -567,3 +567,53 @@ document.querySelectorAll(".redact").forEach(b => b.addEventListener("click", ()
     });
   });
 })();
+
+/* 2026-11-25 「Rapper, Lyricist」を解読するように現し、Yearsの年号を回して出す。横には動かさない */
+(() => {
+  const calm = () => document.documentElement.classList.contains("calm") || matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const GLY = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*+=<>/\\|";
+  function decode(el, text, dur, glyphs) {
+    if (calm()) { el.textContent = text; return; }
+    const chars = [...text], n = chars.length, t0 = performance.now();
+    el.textContent = "";
+    const spans = chars.map((c, i) => {
+      const s = document.createElement("span"); s.className = "dc"; s.style.setProperty("--i", i);
+      s.textContent = c === " " ? " " : c; el.appendChild(s); return s;
+    });
+    (function tick(now) {
+      const k = (now - t0) / dur;
+      spans.forEach((s, i) => {
+        const c = chars[i]; if (c === " " || c === ",") { s.textContent = c === " " ? " " : c; return; }
+        const at = i / n;
+        if (k > at + .25) { s.textContent = c; s.classList.add("is-set"); }
+        else if (k > at - .05) s.textContent = glyphs[(Math.random() * glyphs.length) | 0];
+        else s.textContent = " ";
+      });
+      if (k < 1.3) requestAnimationFrame(tick);
+    })(t0);
+  }
+  // 1) 入口の肩書き
+  const lead = document.querySelector(".pro__lead");
+  if (lead) {
+    const text = lead.textContent.trim();
+    lead.setAttribute("aria-label", text);
+    const run = () => decode(lead, text, 1600, GLY);
+    const go = () => { run(); setInterval(() => { if (!document.hidden && scrollY < innerHeight * .5) run(); }, 9000); };
+    document.readyState === "complete" ? setTimeout(go, 600) : addEventListener("load", () => setTimeout(go, 600));
+  }
+  // 2) Years：年号は数字が回って止まり、出来事は上から順に
+  const rows = document.querySelectorAll(".tl__row");
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    io.unobserve(e.target);
+    const y = e.target.querySelector(".tl__yr");
+    if (y && !y.dataset.done) { y.dataset.done = 1; const t = y.firstChild && y.firstChild.nodeType === 3 ? y.firstChild : null; if (t) { const span = document.createElement("span"); span.className = "tl__num"; span.textContent = t.textContent; y.replaceChild(span, t); decode(span, t.textContent, 900, "0123456789"); } }
+  }), { rootMargin: "0px 0px -15% 0px" });
+  rows.forEach(r => io.observe(r));
+  // 3) Years：左の縦線がスクロールに合わせて伸びる
+  const tl = document.getElementById("tl");
+  if (tl) {
+    const upd = () => { const r = tl.getBoundingClientRect(); const p = Math.min(1, Math.max(0, (innerHeight * .6 - r.top) / r.height)); tl.style.setProperty("--tlp", p.toFixed(3)); };
+    addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); upd();
+  }
+})();

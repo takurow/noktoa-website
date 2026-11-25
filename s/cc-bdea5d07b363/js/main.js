@@ -241,7 +241,7 @@
     const want = p > .4 && p < .999;
     if (want !== videoOn) { videoOn = want; want ? proVideo.play().catch(() => {}) : proVideo.pause(); }
     // 携帯は目が画面の中ほどに来るよう、ロゴを少し左下に置く（最初から固定。横には動かさない）
-    if (glc) glc.render(p, v, t, videoOn, VW < 720 ? [-.04, -.20] : [.17, -.01], VW < 720 ? .7 : .84);
+    if (glc) glc.render(p, v, t, videoOn, [0, 0], VW < 720 ? .7 : .84);
   }
   function renderCreed(p) {
     if (!cre.sec) return; // 2026-11-25 信条の章は外した
