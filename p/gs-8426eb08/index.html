@@ -37,6 +37,9 @@ img,video{display:block;width:100%;height:100%;object-fit:cover}
 
 header{color:#fff;position:fixed;inset:0 0 auto;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:22px var(--pad);mix-blend-mode:difference}
 header .logo{font-family:var(--en);font-weight:700;font-size:13px;letter-spacing:.32em}
+header{transition:transform .55s cubic-bezier(.2,.7,.2,1),background-color .35s,color .35s}
+header.hide{transform:translateY(-101%)}
+header.solid{mix-blend-mode:normal;color:#111110;background:rgba(250,250,248,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 1px 0 #E4E2DD}
 header nav{display:flex;gap:28px;font-family:var(--en);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
 
 .tag{display:inline-flex;align-items:center;gap:10px;font-family:var(--en);font-weight:700;font-size:11px;letter-spacing:.28em;line-height:1.6;text-transform:uppercase}
@@ -182,6 +185,11 @@ section{padding:128px 0;border-top:1px solid var(--l);position:relative}
 .wkh p{font-size:14px;color:var(--d);max-width:26em}
 .wk{display:grid;grid-template-columns:1.62fr 1fr;grid-template-rows:1fr 1fr;gap:14px;margin-top:56px;height:min(52vh,520px)}
 .wk figure:first-child{grid-row:1/3}
+.sc{display:grid;grid-template-columns:repeat(3,1fr);gap:0 48px;margin-top:56px;border-top:1px solid var(--l)}
+.sc>div{padding:28px 0 4px}
+.sc dt{display:flex;flex-direction:column;gap:8px;font-size:15px;font-weight:500;letter-spacing:.12em;margin-bottom:14px}
+.sc dt .mono{font-size:10px;letter-spacing:.24em;color:var(--g)}
+.sc dd{font-size:14px;line-height:2;color:var(--d);word-break:keep-all;overflow-wrap:anywhere}
 .wk figcaption{color:#fff!important;position:absolute;left:16px;bottom:12px;z-index:2;color:var(--w)}
 
 /* ───────── CONTACT：電話番号の文字の中で、海が動く ───────── */
@@ -276,6 +284,8 @@ footer .mono{font-size:10px}
   .flow ol{padding-left:30px}
   .flow li::before{left:-30px}
   .wkh{flex-direction:column;align-items:flex-start;gap:20px}
+  .sc{grid-template-columns:1fr;margin-top:36px}
+  .sc>div{padding:22px 0;border-bottom:1px solid var(--l)}
   .wk{grid-template-columns:1fr 1fr;grid-template-rows:auto;height:auto;gap:10px;margin-top:7vh}
   .wk figure{aspect-ratio:1/1}
   .wk figure:first-child{grid-row:auto;grid-column:1/3;aspect-ratio:4/3}
@@ -293,10 +303,10 @@ footer .mono{font-size:10px}
 /* 動きを減らす設定／?reduce=1：すべて止めて、読める静止ページに */
 .reduce{scroll-behavior:auto}
 
-/* リンクのない写真は主張させず、地に溶かす */
-#service img.bw,.flow img.bw,#works img.bw{filter:saturate(.85) contrast(1.02) brightness(.58)}
-.frame,.row figure,.flow figure,#works figure{background:transparent!important;border:0!important;
-  -webkit-mask-image:radial-gradient(ellipse 75% 72% at 50% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 75% 72% at 50% 50%,#000 30%,transparent 100%)}
+/* 写真は角を立てて素直に見せる（白基調・2026-11-26） */
+#service img.bw,.flow img.bw,#works img.bw{filter:saturate(.9) contrast(1.04)}
+.frame .lb{text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.frame,.row figure,.flow figure,#works figure{background:transparent!important;border:0!important}
 .slit .ap video{filter:contrast(1.02) brightness(.5)}
 .slit .ap{-webkit-mask-image:linear-gradient(#0000,#000 18%,#000 82%,#0000);mask-image:linear-gradient(#0000,#000 18%,#000 82%,#0000)}
 #works figcaption{display:none}
@@ -329,7 +339,7 @@ footer .mono{font-size:10px}
 
 <header>
   <a href="#top" class="logo">GOOD SPEED</a>
-  <nav aria-label="メイン"><a href="#service">Service</a><a href="#garmin">Garmin</a><a href="#works">Works</a><a href="#company">Company</a><a href="#contact">Contact</a></nav>
+  <nav aria-label="メイン"><a href="#service">Service</a><a href="#garmin">Garmin</a><a href="#works">Scope</a><a href="#company">Company</a><a href="#contact">Contact</a></nav>
 </header>
 
 <main id="top">
@@ -394,7 +404,7 @@ footer .mono{font-size:10px}
           <div class="row" data-i="2">
             <span class="sw" aria-hidden="true"></span>
             <div>
-              <figure class="pw"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="バッテリーをテスターで測る（イメージ）" src="https://images.unsplash.com/photo-1777042510267-2c0543a0d715?auto=format&fit=crop&w=900&q=70"></figure>
+              <figure class="pw"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="テスターで配線を測る（イメージ）" src="https://images.pexels.com/photos/34054464/pexels-photo-34054464.jpeg?auto=compress&cs=tinysrgb&w=900"></figure>
               <span class="mono">TEST ／ REPAIR</span><h3>修理・点検</h3>
               <p>テスターで原因を突き止めて、根本から修理します。</p>
             </div>
@@ -411,7 +421,7 @@ footer .mono{font-size:10px}
         <div class="frame" aria-hidden="true">
           <figure class="on"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.unsplash.com/photo-1758101755915-462eddc23f57?auto=format&fit=crop&w=1400&q=72"></figure>
           <figure><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/videos/3772101/pexels-photo-3772101.jpeg?auto=compress&cs=tinysrgb&w=1400"></figure>
-          <figure><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.unsplash.com/photo-1777042510267-2c0543a0d715?auto=format&fit=crop&w=1400&q=72"></figure>
+          <figure><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/34054464/pexels-photo-34054464.jpeg?auto=compress&cs=tinysrgb&w=1400"></figure>
           <figure><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="" src="https://images.pexels.com/photos/3582761/pexels-photo-3582761.jpeg?auto=compress&cs=tinysrgb&w=1400"></figure>
           <span class="mono lb" id="flb">DC POWER — ON</span>
         </div>
@@ -477,13 +487,18 @@ footer .mono{font-size:10px}
     </div>
   </section>
 
-  <!-- WORKS：施工写真が届くまでの仮の絵 -->
+  <!-- SCOPE：施工写真がそろうまでは、対応できる範囲を示す（2026-11-26） -->
   <section id="works">
     <div class="wrap">
       <div class="wkh f">
-        <div><span class="tag">Works</span><h2>施工事例</h2></div>
-        <p>施工写真は撮影が済み次第掲載します。現在の写真はイメージです。</p>
+        <div><span class="tag">Scope</span><h2>対応できる<br>電気と機器</h2></div>
+        <p>新しく付ける工事から、<wbr>今ある配線の<wbr>手直しや<wbr>故障の修理まで。<wbr>他社製の機器も、<wbr>まずは<wbr>ご相談ください。</p>
       </div>
+      <dl class="sc f">
+        <div><dt><span class="mono">POWER</span>電源</dt><dd>12Vと24Vの<wbr>電源まわり。<wbr>バッテリーや<wbr>充電系統、<wbr>分電盤、<wbr>配線の引き直しまで</dd></div>
+        <div><dt><span class="mono">EQUIPMENT</span>機器</dt><dd>プロッター、<wbr>魚群探知機とソナー、<wbr>レーダー、<wbr>オートパイロット、<wbr>各種の計器</dd></div>
+        <div><dt><span class="mono">WORK</span>作業</dt><dd>新しく付ける工事と<wbr>入れ替え、<wbr>修理と点検、<wbr>新艇や中古艇の<wbr>電装計画</dd></div>
+      </dl>
       <div class="wk">
         <figure class="pw" style="--dl:0s"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="夜のマリーナ（イメージ）" src="https://images.unsplash.com/photo-1442850355782-eb200ba4c44f?auto=format&fit=crop&w=1600&q=72"><figcaption class="mono">IMAGE</figcaption></figure>
         <figure class="pw" style="--dl:.18s"><img class="bw" data-ph="差し替え予定" loading="lazy" decoding="async" alt="操舵席（イメージ）" src="https://images.pexels.com/photos/8356431/pexels-photo-8356431.jpeg?auto=compress&cs=tinysrgb&w=1000"><figcaption class="mono">IMAGE</figcaption></figure>
@@ -624,6 +639,12 @@ tick();
   const t=cl(st)*(sv.duration-.15);
   if(Math.abs(sv.currentTime-t)>.04){if(!sv.paused)sv.pause();sv.currentTime=t}})();
 })();
+</script>
+<script>/* ヘッダー：本文と重ならないよう、下へ送ると隠れ、戻すと出る（2026-11-26） */
+(()=>{const h=document.querySelector('header');let ly=scrollY,t=0;
+function u(){t=0;const y=scrollY,top=innerHeight*.85;h.classList.toggle('solid',y>top);
+if(y<=top)h.classList.remove('hide');else if(y>ly+4)h.classList.add('hide');else if(y<ly-4)h.classList.remove('hide');ly=y}
+addEventListener('scroll',()=>{if(!t)t=requestAnimationFrame(u)},{passive:true});u()})();
 </script>
 </body>
 </html>
