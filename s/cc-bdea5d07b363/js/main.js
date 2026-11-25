@@ -202,6 +202,7 @@
   function measure() {
     VW = innerWidth; VH = innerHeight;
     [pro, cre].forEach(s => {
+      if (!s.sec) return;
       const r = s.sec.getBoundingClientRect();
       s.top = r.top + scrollY; s.h = s.sec.offsetHeight; s.sh = s.stage.clientHeight || VH;
     });
@@ -235,14 +236,15 @@
     story.style.transform = `translateY(${(-22 * s1).toFixed(1)}px)`;
     vert.style.opacity = foot.style.opacity = 1 - seg(p, .02, .08);
     const c = seg(p, .86, .92) * (1 - seg(p, .975, 1));
-    cap.style.opacity = c;
-    cap.style.setProperty("--capy", `${((1 - seg(p, .86, .92)) * 20).toFixed(1)}px`);
+    if (cap) cap.style.opacity = c;
+    if (cap) cap.style.setProperty("--capy", `${((1 - seg(p, .86, .92)) * 20).toFixed(1)}px`);
     const want = p > .4 && p < .999;
     if (want !== videoOn) { videoOn = want; want ? proVideo.play().catch(() => {}) : proVideo.pause(); }
     // 携帯は目が画面の中ほどに来るよう、ロゴを少し左下に置く（最初から固定。横には動かさない）
     if (glc) glc.render(p, v, t, videoOn, VW < 720 ? [-.04, -.20] : [.17, -.01], VW < 720 ? .7 : .84);
   }
   function renderCreed(p) {
+    if (!cre.sec) return; // 2026-11-25 信条の章は外した
     chars.forEach((cs, i) => {
       const a = .06 + i * .2, b = a + .22, n = cs.length;
       cs.forEach((el, j) => {

@@ -1077,3 +1077,10 @@ a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
   .release__title { font-size: clamp(40px, 12vw, 56px); }
   .release .release__links { grid-template-columns: 1fr; }
 }
+
+/* 2026-11-25 言葉を外して重く（本人「ワードは不必要・シンプルに重厚感」）
+   見出しは細い手書き調をやめ、新曲の題名と同じ古典の書体で大きく。章の間をゆったり、線は細く */
+.ch-head__ja { font-family: "Baskerville", "Big Caslon", "Libre Baskerville", "Times New Roman", serif; font-weight: 400; font-size: clamp(48px, 7vw, 112px); letter-spacing: .01em; line-height: .95; }
+.chapter { padding-top: clamp(120px, 18vh, 220px); padding-bottom: clamp(120px, 18vh, 220px); }
+.chapter + .chapter { border-top: 1px solid var(--line); }
+.pro__lead { font-family: "Baskerville", "Big Caslon", "Libre Baskerville", "Times New Roman", serif; letter-spacing: .08em; }
