@@ -15,7 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@300..900&family=Klee+One:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
-<link rel="stylesheet" href="css/style.css?v=0f131347">
+<link rel="stylesheet" href="css/style.css?v=f905c26f">
 <link rel="preload" as="image" href="assets/img/logo_icon.webp">
 <script>
   // JSが動く環境だけ入口と演出を有効にする。OSの「視差効果を減らす」と ?reduce=1 は最初から「動きなし」
@@ -80,6 +80,30 @@
       <div class="pro__cap" id="pro-cap">
         <p class="pro__year">Hiroshima</p>
         <p class="pro__capja">Hiroshima, Japan</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 新曲 KILL’EM ALL（2026-11-27）。MVのURLが決まったら data-mv の1か所を差し替える -->
+  <section class="release" id="new" aria-labelledby="h-new">
+    <div class="release__in">
+      <figure class="release__cover rv"><img src="assets/img/kiremo_jacket_1200.webp" alt="KILL’EM ALL のジャケット。赤地に、縞模様の頭が二つに割れかけた猫のような何か" width="1200" height="1200" loading="lazy" decoding="async"></figure>
+      <div class="release__body">
+        <p class="release__label rv">New Single　<time datetime="2026-11-27">2026.11.27</time></p>
+        <h2 class="release__title rv" id="h-new">KILL’EM ALL</h2>
+        <p class="release__ja rv">きれもー</p>
+        <p class="release__one rv">今宵も、平常運転。</p>
+        <a class="release__mv rv" id="release-mv" data-mv href="https://www.youtube.com/@chillcatthebastet9592" target="_blank" rel="noopener" aria-label="KILL’EM ALL のミュージックビデオをYouTubeで見る">
+          <img src="assets/img/kiremo_mv_poster.webp" alt="" width="1280" height="720" loading="lazy" decoding="async"><i aria-hidden="true"></i><span class="release__mvl">Music Video</span>
+        </a>
+        <ul class="links release__links rv">
+            <li><a href="https://open.spotify.com/artist/1ISGu4AMrhb7CzN9yb1Bsz" target="_blank" rel="noopener"><span class="links__name">Spotify</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+            <li><a href="https://music.apple.com/jp/artist/chillcat-the-bastet/1415408096" target="_blank" rel="noopener"><span class="links__name">Apple Music</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+            <li><a href="https://music.youtube.com/channel/UCbqcOG8WIGUnDRUVE2wFXmA" target="_blank" rel="noopener"><span class="links__name">YouTube Music</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+            <li><a href="https://music.line.me/webapp/artist/mi0000000019f3ec9a" target="_blank" rel="noopener"><span class="links__name">LINE MUSIC</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+            <li><a href="https://www.amazon.co.jp/music/player/artists/B07FRNH2Q3/chillcat-the-bastet" target="_blank" rel="noopener"><span class="links__name">Amazon Music</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+            <li><a href="https://www.tunecore.co.jp/artists/chillcatthebastet" target="_blank" rel="noopener"><span class="links__name">ほかの配信先</span><span class="links__id">Listen<svg class="ar" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M7 13 13 7M8 7h5v5"/></svg></span></a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -403,6 +427,7 @@
   <nav class="menu__inner" aria-label="章">
     <ol class="menu__list">
       <li><a href="#top" data-close><span class="menu__en">Start</span></a></li>
+      <li><a href="#new" data-close><span class="menu__en">New</span></a></li>
       <li><a href="#profile" data-close><span class="menu__en">Profile</span></a></li>
       <li><a href="#names" data-close><span class="menu__en">Name</span></a></li>
       <li><a href="#roots" data-close><span class="menu__en">Hiroshima</span></a></li>
@@ -430,6 +455,7 @@
   <div class="news__inner">
     <h2 class="news__title" id="news-title">News</h2>
     <ul class="news__list">
+      <li><time datetime="2026-11-27">2026.11.27</time><p><a href="#new" data-close>「KILL’EM ALL」配信とMV公開</a></p></li>
       <li><time datetime="2026-09-12">2026.09.12</time><p>Miiakiis「Love Protocol」配信</p></li>
       <li><time datetime="2026-07-29">2026.07.29</time><p>Miiakiis「Taigii」配信</p></li>
       <li><time datetime="2026-04-23">2026.04.23</time><p>「Doot (feat. AMI)」配信</p></li>

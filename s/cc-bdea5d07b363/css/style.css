@@ -1045,3 +1045,35 @@ a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
 .draw__l { min-height: 64px; margin-top: 16px; }
 .draw__s { height: 1.9em; min-height: 0; line-height: 1.9; overflow: hidden; }
 @media (max-width: 719px) { .draw__s { height: 3.8em; } }
+/* v21 制作クレジットは小さく静かに */
+.ft__by { gap: 10px; font-size: 10.5px; }
+.ft__by img { height: 30px; opacity: .6; }
+.ft__by:hover img { opacity: .9; }
+
+/* 新曲 KILL’EM ALL（2026-11-27）
+   地はサイトと同じ黒。赤はジャケットの絵と、細い線・日付だけに使う（「赤すぎ」2026-11-25 本人）*/
+.release { --red: #e2221c; background: var(--black); color: var(--paper); padding: clamp(88px, 14vh, 160px) var(--gutter); border-top: 1px solid rgba(226, 34, 28, .5); }
+.release__in { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.release__cover { margin: 0; }
+.release__cover img { display: block; width: 100%; height: auto; box-shadow: 0 40px 120px rgba(226, 34, 28, .14); }
+.release__label { font-family: var(--f-mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--paper-3); margin: 0; }
+.release__label time { color: var(--red); }
+.release__title { font-family: "Baskerville", "Big Caslon", "Libre Baskerville", "Times New Roman", serif; font-weight: 400; font-size: clamp(44px, 5.4vw, 84px); line-height: 1; letter-spacing: .02em; margin: .3em 0 .2em; white-space: nowrap; }
+.release__ja { font-family: var(--f-min); letter-spacing: .3em; color: var(--paper-3); margin: 0; }
+.release__one { font-family: var(--f-min); font-size: clamp(17px, 1.5vw, 21px); letter-spacing: .2em; color: var(--paper-2); margin: 2.2em 0 0; }
+.release__mv { position: relative; display: block; margin-top: 2.4em; aspect-ratio: 16 / 9; overflow: hidden; background: #000; }
+.release__mv img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.release__mv i { position: absolute; inset: 0; margin: auto; width: 64px; height: 64px; border-radius: 50%; border: 1px solid rgba(236, 235, 228, .75); transition: background .5s var(--ease); }
+.release__mv i::after { content: ""; position: absolute; left: 26px; top: 21px; border: 11px solid transparent; border-left: 17px solid var(--paper); border-right: 0; }
+.release__mvl { position: absolute; left: 14px; bottom: 12px; font-family: var(--f-mono); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-2); }
+.release__mv:hover img { transform: scale(1.03); }
+.release__mv:hover i { background: rgba(0, 0, 0, .35); }
+.release__mv:focus-visible { outline: 2px solid var(--yellow); outline-offset: 4px; }
+.release .release__links { margin-top: 2em; grid-template-columns: 1fr 1fr; column-gap: 32px; }
+.release .release__links a { min-height: 56px; }
+.release .links__name { font-size: clamp(1.05rem, 1.6vw, 1.4rem); white-space: nowrap; }
+@media (max-width: 760px) {
+  .release__in { grid-template-columns: 1fr; gap: 36px; }
+  .release__title { font-size: clamp(40px, 12vw, 56px); }
+  .release .release__links { grid-template-columns: 1fr; }
+}
