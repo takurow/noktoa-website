@@ -546,3 +546,24 @@
 
 /* 伏せ字：押すと（または近づくと）読める */
 document.querySelectorAll(".redact").forEach(b => b.addEventListener("click", () => b.classList.toggle("is-open")));
+
+/* 2026-11-25 華やかに：見出しと新曲の題名を一文字ずつ立ち上げる（横には動かさない）。
+   文字を span に分けるだけで、出す合図は既存の .rv.is-in を使う */
+(() => {
+  const targets = document.querySelectorAll(".ch-head__ja, .release__title");
+  targets.forEach(h => {
+    if (h.dataset.split) return;
+    h.dataset.split = "1";
+    const text = h.textContent;
+    h.setAttribute("aria-label", text);
+    h.textContent = "";
+    [...text].forEach((c, i) => {
+      const s = document.createElement("span");
+      s.className = "fx-ch";
+      s.setAttribute("aria-hidden", "true");
+      s.style.setProperty("--i", i);
+      s.textContent = c === " " ? " " : c;
+      h.appendChild(s);
+    });
+  });
+})();
