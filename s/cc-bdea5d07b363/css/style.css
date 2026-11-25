@@ -1098,7 +1098,7 @@ a:hover .ar path, .btn:hover .ar path { transform: translate(1.4px, -1.4px); }
 .release__cover::before { content: ""; position: absolute; inset: 6%; background: radial-gradient(closest-side, rgba(226, 34, 28, .55), rgba(226, 34, 28, 0)); filter: blur(40px); opacity: 0; animation: fxBreath 6s ease-in-out infinite; z-index: -1; }
 .release__cover.is-in::before { opacity: 1; transition: opacity 2s var(--ease) .8s; }
 .release__cover.rv { transform: none; clip-path: circle(0% at 69% 47%); transition: clip-path 1.9s cubic-bezier(.7, 0, .2, 1), opacity .6s; }
-.release__cover.rv.is-in { clip-path: circle(75% at 69% 47%); }
+.release__cover.rv.is-in { clip-path: circle(150% at 69% 47%); }
 .release__cover img { transform: scale(1.12); transition: transform 2.6s var(--ease) .2s; }
 .release__cover.is-in img { transform: scale(1); }
 @keyframes fxBreath { 0%, 100% { transform: scale(.94); opacity: .55; } 50% { transform: scale(1.06); opacity: 1; } }
