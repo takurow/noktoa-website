@@ -1,0 +1,85 @@
+/* 白ベース試作（コーポレートトンマナv1：ミスト地・グラファイト文字・シリウス補助・抹茶差し色） */
+:root{
+  --ink:#f1f5f3; --ink-2:#e7ecea; --ink-rgb:241,245,243;
+  --paper:#ffffff;
+  --text:#434343; --text-2:#85817a;
+  --text-d:#434343; --text-d2:#85817a;
+  --line-l:#d6dbd9; --line-d:rgba(67,67,67,.14);
+  --matcha-d:#2b4421; --matcha-d-rgb:43,68,33;
+}
+html,body{background:var(--ink);color:var(--text)}
+.site-header .logo img,.hd img,.gate-logo,.phero-fallback,.foot img{filter:invert(.74)}
+.phero-copy .display,.finale-copy .h1,.dark h1,.dark h2,.dark h3{color:var(--text-d)!important}
+.phero-kicker,.phero-cue{color:rgba(67,67,67,.62)!important}
+.phero-cue i{background:rgba(67,67,67,.22)}.phero-cue i::after{background:#434343}
+#gate{background:var(--ink)!important;color:var(--text)}
+.gate-ent,.gate-tap,.gate-quiet{color:#434343!important;border-color:rgba(67,67,67,.3)!important}
+.hnav a{color:#434343}
+/* AUTO */
+.phero-kicker { color: rgba(67, 67, 67, .62); }
+.phero-cue { color: rgba(67, 67, 67, .62); }
+.phero-cue i { background: rgba(67, 67, 67, .22); }
+.phero-cue i::after { background: #434343; }
+.phero-copy .display { color: #434343; }
+.hero-sub { color: rgba(67, 67, 67, .84); }
+.story-line .ch { color: rgba(67, 67, 67, .14); }
+.story-line .ch.on { color: #434343; }
+.story.static .story-line .ch { color: #434343; }
+.film-cap { color: rgba(67, 67, 67, .8); }
+.finale-copy .h1 { color: #434343; }
+.fbrand .co { color: #434343; }
+.fbrand a { color: #434343; text-decoration-color: rgba(67, 67, 67, .3); }
+.fnav a:hover { color: #434343; }
+/* 動きの切替ボタン（OSの「視差効果を減らす」を尊重しつつ、見る側が選べる） */
+.motion-toggle { border: 1px solid rgba(67, 67, 67, .35); color: #434343; }
+.motion-toggle:hover { background: rgba(67, 67, 67, .14); }
+.gate-ent { border: 1px solid rgba(67, 67, 67, .7); color: #434343; }
+.gate-ent::before, .gate-ent::after { border: 1px solid rgba(67, 67, 67, .7); }
+.gate-ent:active { background: #434343; }
+.gate-tap { color: rgba(67, 67, 67, .62); }
+.gate-quiet { color: rgba(67, 67, 67, .5); }
+.site-header::after { background: rgba(67, 67, 67, .7); }
+.breadcrumb a:hover { color: #434343; }
+.breadcrumb span { color: rgba(67, 67, 67, .3); }
+.breadcrumb .current { color: rgba(67, 67, 67, .86); }
+.hero h1 { color: #434343; }
+.ghost { color: #434343; }
+.ghost:hover { background: rgba(67, 67, 67, .1); }
+.trust b { color: #434343; }
+.band .band-cap p { color: #434343; }
+.final-cta h2, .final h2 { color: #434343; }
+.foot-related .t { color: rgba(67, 67, 67, .5); }
+.foot a:hover { color: #434343; }
+.foot-brand .co { color: #434343; }
+.foot-brand a { color: #434343; text-decoration-color: rgba(67, 67, 67, .3); }
+.sticky-cta { border-top: 1px solid rgba(67, 67, 67, .08); }
+.field input, .field textarea, .field select { background: #434343; }
+.relay textarea { background: #434343; }
+.works-lead h1 { color: #434343; }
+.case-tag { color: rgba(67, 67, 67, .78); }
+.works-main .case h2 { color: #434343; }
+.fact dd { color: #434343; }
+.media-list li span:first-child { color: #434343; }
+.works-main .works-cta h2 { color: #434343; }
+/* ---- ヘッダー（全ページ同じ） ---- */
+.site-header { border-bottom: 1px solid rgba(67, 67, 67, .06); }
+.hnav a { color: rgba(67, 67, 67, .72); }
+.hnav a:hover, .hnav a[aria-current="page"] { color: #434343; }
+.scrub-line h2 { color: #434343; }
+.scrub-tc { color: rgba(67, 67, 67, .86); }
+.scrub-ruler { background: repeating-linear-gradient(90deg, rgba(67, 67, 67, .34) 0 1px, transparent 1px 8px) center / 100% 6px no-repeat; }
+.scrub-ruler::before { background: rgba(67, 67, 67, .16); }
+.scrub-hint { color: rgba(67, 67, 67, .5); }
+.scrub-line p { color: rgba(67, 67, 67, .82); }
+.scrub-copy .label { color: rgba(67, 67, 67, .8); }
+#theater { color: #434343; }
+.theater-close { background: rgba(67, 67, 67, .12); color: #434343; }
+.theater-close:hover { background: rgba(67, 67, 67, .22); }
+.theater-cap { color: rgba(67, 67, 67, .7); }
+.figs .h1 { color: #434343; }
+.fig-n b { color: #434343; }
+.fig-n i { color: #434343; }
+.link { color: var(--text); }
+.fbrand img, .flogo img { filter: invert(.74); }
+/* 案件カードは先方ブランドの濃色のまま */
+.cs-panel { --ink:#0e0e0e; --ink-rgb:14,14,14; --text-d:#f1f5f3; --text-d2:#b9b7b2; --line-d:rgba(255,255,255,.16); --matcha-d:#a3b39b; }
